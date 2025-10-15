@@ -25,6 +25,8 @@ matchMedia(mediaQueryString)
 - `mediaQueryString`
   - : A string specifying the media query to parse into a {{domxref("MediaQueryList")}}.
 
+    Just like in CSS, any [media feature](/en-US/docs/Web/CSS/@media#media_features) must be wrapped in parentheses inside the expression. For example: `matchMedia("(width <= 600px)")` or `matchMedia("(orientation: landscape)")` work, whereas `matchMedia("width < 600px")` or `matchMedia("orientation: landscape")` do not. Keywords for media types (`all`, `print`, `screen`) and logical operators (`and`, `or`, `not`, `only`) do not need to be wrapped in parentheses.
+
 ### Return value
 
 A new {{domxref("MediaQueryList")}} object for the media query. Use this object's
@@ -42,13 +44,13 @@ property, which will be `true` if the document meets the media query's
 requirements.
 
 If you need to be kept aware of whether or not the document matches the media query at
-all times, you can instead watch for the {{domxref("MediaQueryList.change_event",
-  "change")}} event to be delivered to the object. There's [a good example of this](/en-US/docs/Web/API/Window/devicePixelRatio#monitoring_screen_resolution_or_zoom_level_changes)
+all times, you can instead watch for the {{domxref("MediaQueryList.change_event", "change")}} event to be delivered to the object.
+There's [a good example of this](/en-US/docs/Web/API/Window/devicePixelRatio#monitoring_screen_resolution_or_zoom_level_changes)
 in the article on {{domxref("Window.devicePixelRatio")}}.
 
 ## Examples
 
-This example runs the media query `(max-width: 600px)` and displays the
+This example runs the media query `(width <= 600px)` and displays the
 value of the resulting `MediaQueryList`'s `matches` property in a
 {{HTMLElement("span")}}; as a result, the output will say "true" if the viewport is less
 than or equal to 600 pixels wide, and will say "false" if the window is wider than that.
@@ -56,16 +58,12 @@ than or equal to 600 pixels wide, and will say "false" if the window is wider th
 ### JavaScript
 
 ```js
-let mql = window.matchMedia("(max-width: 600px)");
+let mql = window.matchMedia("(width <= 600px)");
 
 document.querySelector(".mq-value").innerText = mql.matches;
 ```
 
-The JavaScript code passes the media query to match into {{domxref("Window.matchMedia",
-  "matchMedia()")}} to compile it, then sets the `<span>`'s
-{{domxref("HTMLElement.innerText", "innerText")}} to the value of the results'
-{{domxref("MediaQueryList.matches", "matches")}} property, so that it indicates whether or
-not the document matches the media query at the moment the page was loaded.
+The JavaScript code passes the media query to match into `matchMedia()` to compile it, then sets the `<span>`'s {{domxref("HTMLElement.innerText", "innerText")}} to the value of the results' {{domxref("MediaQueryList.matches", "matches")}} property, so that it indicates whether or not the document matches the media query at the moment the page was loaded.
 
 ### HTML
 
@@ -78,12 +76,12 @@ A simple `<span>` to receive the output.
 ```css hidden
 .mq-value {
   font:
-    18px arial,
+    18px "Arial",
     sans-serif;
   font-weight: bold;
-  color: #88f;
+  color: #8888ff;
   padding: 0.4em;
-  border: 1px solid #dde;
+  border: 1px solid #ddddee;
 }
 ```
 

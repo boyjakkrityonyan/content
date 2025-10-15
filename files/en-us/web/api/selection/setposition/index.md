@@ -10,7 +10,8 @@ browser-compat: api.Selection.setPosition
 
 The **`Selection.setPosition()`** method collapses the current selection to a single point. The document is not modified. If the content is focused and editable, the caret will blink there.
 
-> **Note:** This method is an alias for the {{domxref("Selection.collapse()")}} method.
+> [!NOTE]
+> This method is an alias for the {{domxref("Selection.collapse()")}} method.
 
 ## Syntax
 
@@ -24,7 +25,7 @@ setPosition(node, offset)
 - `node`
   - : The caret location will be within this node. This value can also be set to
     `null` — if `null` is specified, the method will behave like
-    {{domxref("Selection.removeAllRanges()")}}, i.e. all ranges will be removed from the
+    {{domxref("Selection.removeAllRanges()")}}, i.e., all ranges will be removed from the
     selection.
 - `offset` {{optional_inline}}
   - : The offset in `node` to which the selection will be collapsed. If not

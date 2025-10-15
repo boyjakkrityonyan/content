@@ -4,7 +4,7 @@
     "title": "Front matter schema",
     "type": "object",
     "additionalProperties": false,
-    "required": ["title", "slug"],
+    "required": ["title", "slug", "page-type"],
     "properties": {
       "title": {
         "title": "Title",
@@ -13,20 +13,36 @@
         "maxLength": 120
       },
       "short-title": {
-        "title": "Short Title",
+        "title": "Short title",
         "description": "To be used in sidebars",
         "type": "string",
         "maxLength": 60
       },
       "slug": {
-        "title": "slug",
+        "title": "Slug",
         "description": "URL path of the page",
         "type": "string"
       },
       "page-type": {
-        "title": "Page Type",
+        "title": "Page type",
         "description": "Type of the page",
         "type": "string"
+      },
+      "sidebar": {
+        "title": "Sidebar navigation",
+        "description": "Sidebar navigation(s) to show, defined as YAML in /files/en-us/sidebars",
+        "type": ["array", "string"],
+        "items": {
+          "type": "string",
+          "enum": [
+            "mediasidebar",
+            "urlsidebar",
+            "xmlsidebar",
+            "xpathsidebar",
+            "xsltsidebar",
+            "exsltsidebar"
+          ]
+        }
       },
       "status": {
         "title": "Status",
@@ -39,7 +55,7 @@
         }
       },
       "browser-compat": {
-        "title": "Browser Compatibility",
+        "title": "Browser compatibility",
         "description": "Browser compatibility location",
         "type": ["array", "string"]
       },
@@ -72,7 +88,32 @@
       },
       {
         "if": {
-          "properties": { "slug": { "type": "string", "pattern": "^Learn/" } }
+          "properties": {
+            "slug": { "type": "string", "pattern": "^Learn_web_development/" }
+          }
+        },
+        "then": {
+          "properties": {
+            "page-type": {
+              "enum": [
+                "guide",
+                "landing-page",
+                "learn-topic",
+                "learn-module",
+                "learn-module-chapter",
+                "learn-module-assessment",
+                "learn-faq"
+              ]
+            }
+          }
+        },
+        "else": false
+      },
+      {
+        "if": {
+          "properties": {
+            "slug": { "type": "string", "pattern": "^Learn_web_development/" }
+          }
         },
         "then": {
           "properties": {
@@ -117,7 +158,12 @@
         "then": {
           "properties": {
             "page-type": {
-              "enum": ["guide", "landing-page", "firefox-release-notes"]
+              "enum": [
+                "guide",
+                "landing-page",
+                "firefox-release-notes",
+                "firefox-release-notes-active"
+              ]
             }
           }
         },
@@ -195,13 +241,10 @@
                 "guide",
                 "landing-page",
                 "web-api-overview",
-                "web-api-global-function",
-                "web-api-global-property",
                 "web-api-interface",
                 "web-api-constructor",
                 "web-api-instance-method",
                 "web-api-instance-property",
-                "web-api-instance-event",
                 "web-api-static-method",
                 "web-api-static-property",
                 "web-api-event",
@@ -278,13 +321,41 @@
       {
         "if": {
           "properties": {
-            "slug": { "type": "string", "pattern": "^Web/Manifest/" }
+            "slug": {
+              "type": "string",
+              "pattern": "^Web/Progressive_web_apps/Manifest/"
+            }
           }
         },
         "then": {
           "properties": {
             "page-type": {
               "enum": ["guide", "landing-page", "web-manifest-member"]
+            }
+          }
+        },
+        "else": false
+      },
+      {
+        "if": {
+          "properties": {
+            "slug": { "type": "string", "pattern": "^WebAssembly/" }
+          }
+        },
+        "then": {
+          "properties": {
+            "page-type": {
+              "enum": [
+                "guide",
+                "landing-page",
+                "webassembly-function",
+                "webassembly-constructor",
+                "webassembly-interface",
+                "webassembly-instance-property",
+                "webassembly-instance-method",
+                "webassembly-static-method",
+                "webassembly-instruction"
+              ]
             }
           }
         },
@@ -304,7 +375,8 @@
                 "landing-page",
                 "webdriver-command",
                 "webdriver-capability",
-                "webdriver-error"
+                "webdriver-error",
+                "reference"
               ]
             }
           }
@@ -316,7 +388,7 @@
           "properties": {
             "slug": {
               "type": "string",
-              "pattern": "^Web/HTTP/Headers/Content-Security-Policy/"
+              "pattern": "^Web/HTTP/Reference/Headers/Content-Security-Policy/"
             }
           }
         },
@@ -330,7 +402,7 @@
           "properties": {
             "slug": {
               "type": "string",
-              "pattern": "^Web/HTTP/Headers/Permissions-Policy/"
+              "pattern": "^Web/HTTP/Reference/Headers/Permissions-Policy/"
             }
           }
         },
@@ -346,7 +418,7 @@
           "properties": {
             "slug": {
               "type": "string",
-              "pattern": "^Web/HTTP/Headers/"
+              "pattern": "^Web/HTTP/Reference/Headers/"
             }
           }
         },
@@ -358,7 +430,10 @@
       {
         "if": {
           "properties": {
-            "slug": { "type": "string", "pattern": "^Web/HTTP/Methods/" }
+            "slug": {
+              "type": "string",
+              "pattern": "^Web/HTTP/Reference/Methods/"
+            }
           }
         },
         "then": {
@@ -369,7 +444,10 @@
       {
         "if": {
           "properties": {
-            "slug": { "type": "string", "pattern": "^Web/HTTP/Status/" }
+            "slug": {
+              "type": "string",
+              "pattern": "^Web/HTTP/Reference/Status/"
+            }
           }
         },
         "then": {
@@ -380,7 +458,10 @@
       {
         "if": {
           "properties": {
-            "slug": { "type": "string", "pattern": "^Web/MathML/Element/" }
+            "slug": {
+              "type": "string",
+              "pattern": "^Web/MathML/Reference/Element/"
+            }
           }
         },
         "then": {
@@ -393,7 +474,7 @@
           "properties": {
             "slug": {
               "type": "string",
-              "pattern": "^Web/MathML/Global_attributes/"
+              "pattern": "^Web/MathML/Reference/Global_attributes/"
             }
           }
         },
@@ -407,7 +488,7 @@
           "properties": {
             "slug": {
               "type": "string",
-              "pattern": "^Web/Accessibility/ARIA/Attributes/"
+              "pattern": "^Web/Accessibility/ARIA/Reference/Attributes/"
             }
           }
         },
@@ -421,7 +502,7 @@
           "properties": {
             "slug": {
               "type": "string",
-              "pattern": "^Web/Accessibility/ARIA/Roles/"
+              "pattern": "^Web/Accessibility/ARIA/Reference/Roles/"
             }
           }
         },
@@ -433,11 +514,29 @@
       {
         "if": {
           "properties": {
-            "slug": { "type": "string", "pattern": "^Web/HTTP/CORS/Errors/" }
+            "slug": {
+              "type": "string",
+              "pattern": "^Web/HTTP/Guides/CORS/Errors/"
+            }
           }
         },
         "then": {
           "properties": { "page-type": { "enum": ["http-cors-error"] } }
+        },
+        "else": false
+      },
+      {
+        "if": {
+          "properties": {
+            "slug": { "type": "string", "pattern": "^Web/URI" }
+          }
+        },
+        "then": {
+          "properties": {
+            "page-type": {
+              "enum": ["guide", "landing-page", "uri-scheme", "uri-component"]
+            }
+          }
         },
         "else": false
       },
@@ -453,6 +552,7 @@
               "enum": [
                 "guide",
                 "landing-page",
+                "listing-page",
                 "how-to",
                 "tutorial",
                 "tutorial-chapter"
@@ -465,7 +565,7 @@
       {
         "if": {
           "properties": {
-            "slug": { "type": "string", "pattern": "^Web/XPath" }
+            "slug": { "type": "string", "pattern": "^Web/XML/XPath" }
           }
         },
         "then": {
@@ -480,7 +580,7 @@
       {
         "if": {
           "properties": {
-            "slug": { "type": "string", "pattern": "^Web/EXSLT" }
+            "slug": { "type": "string", "pattern": "^Web/XML/EXSLT" }
           }
         },
         "then": {
@@ -495,7 +595,7 @@
       {
         "if": {
           "properties": {
-            "slug": { "type": "string", "pattern": "^Web/XSLT" }
+            "slug": { "type": "string", "pattern": "^Web/XML/XSLT" }
           }
         },
         "then": {
@@ -516,6 +616,7 @@
     "page-type",
     "status",
     "browser-compat",
-    "spec-urls"
+    "spec-urls",
+    "sidebar"
   ]
 }

@@ -6,12 +6,13 @@ page-type: web-api-instance-property
 browser-compat: api.MouseEvent.movementY
 ---
 
-{{APIRef("UI Events")}}
+{{APIRef("Pointer Lock API")}}
 
 The **`movementY`** read-only property of the {{domxref("MouseEvent")}} interface provides the difference in the Y coordinate of the mouse pointer between the given event and the previous {{domxref("Element/mousemove_event", "mousemove")}} event.
 In other words, the value of the property is computed like this: `currentEvent.movementY = currentEvent.screenY - previousEvent.screenY`.
 
-> **Warning:** Browsers [use different units for `movementY` and {{domxref("MouseEvent.screenY", "screenY")}}](https://github.com/w3c/pointerlock/issues/42) than what the specification defines. Depending on the browser and operating system, the `movementY` units may be a physical pixel, a logical pixel, or a CSS pixel.
+> [!WARNING]
+> Browsers [use different units for `movementY` and `screenY`](https://github.com/w3c/pointerlock/issues/42) than what the specification defines. Depending on the browser and operating system, the `movementY` units may be a physical pixel, a logical pixel, or a CSS pixel. You may want to avoid the movement properties, and instead calculate the delta between the current client values ({{domxref("MouseEvent.screenX", "screenX")}}, {{domxref("MouseEvent.screenY", "screenY")}}) and the previous client values.
 
 ## Value
 
@@ -30,11 +31,12 @@ This example logs the amount of mouse movement using {{domxref("MouseEvent.movem
 ### JavaScript
 
 ```js
+const log = document.getElementById("log");
+
 function logMovement(event) {
   log.innerText = `movement: ${event.movementX}, ${event.movementY}\n${log.innerText}`;
 }
 
-const log = document.getElementById("log");
 document.addEventListener("mousemove", logMovement);
 ```
 

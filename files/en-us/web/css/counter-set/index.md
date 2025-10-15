@@ -3,15 +3,72 @@ title: counter-set
 slug: Web/CSS/counter-set
 page-type: css-property
 browser-compat: css.properties.counter-set
+sidebar: cssref
 ---
 
-{{CSSRef}}
+The **`counter-set`** [CSS](/en-US/docs/Web/CSS) property sets [CSS counters](/en-US/docs/Web/CSS/CSS_counter_styles/Using_CSS_counters) on the element to the given values.
 
-The **`counter-set`** [CSS](/en-US/docs/Web/CSS) property sets a [CSS counter](/en-US/docs/Web/CSS/CSS_counter_styles/Using_CSS_counters) to a given value. It manipulates the value of existing counters, and will only create new counters if there isn't already a counter of the given name on the element.
+If the counters don't exist the `counter-set` property creates a new counter for each named counter in the list of space-separated counter and value pairs. However, to create a new counter it is recommended to use the {{cssxref("counter-reset")}} CSS property.
 
-{{EmbedInteractiveExample("pages/css/counter-set.html")}}
+If a named counter in the list is missing a value, the value of the counter will be set to `0`.
 
-> **Note:** The counter's value can be incremented or decremented using the {{cssxref("counter-increment")}} CSS property.
+{{InteractiveExample("CSS Demo: counter-set")}}
+
+```css interactive-example-choice
+counter-set: none;
+```
+
+```css interactive-example-choice
+counter-set: chapter-count 0;
+```
+
+```css interactive-example-choice
+counter-set: chapter-count;
+```
+
+```css interactive-example-choice
+counter-set: chapter-count 5;
+```
+
+```css interactive-example-choice
+counter-set: chapter-count -5;
+```
+
+```html interactive-example
+<section class="default-example" id="default-example">
+  <div class="transition-all" id="chapters">
+    <h1>Alice's Adventures in Wonderland</h1>
+    <h2>Down the Rabbit-Hole</h2>
+    <h2 id="example-element">The Pool of Tears</h2>
+    <h2>A Caucus-Race and a Long Tale</h2>
+    <h2>The Rabbit Sends in a Little Bill</h2>
+  </div>
+</section>
+```
+
+```css interactive-example
+#default-example {
+  text-align: left;
+  counter-set: chapter-count;
+}
+
+#example-element {
+  background-color: #37077c;
+  color: white;
+}
+
+h2 {
+  counter-increment: chapter-count;
+  font-size: 1em;
+}
+
+h2::before {
+  content: "Chapter " counter(chapter-count) ": ";
+}
+```
+
+> [!NOTE]
+> The counter's value can be incremented or decremented using the {{cssxref("counter-increment")}} CSS property.
 
 ## Syntax
 
@@ -46,7 +103,7 @@ The `counter-set` property is specified as either one of the following:
 - {{cssxref("custom-ident", "&lt;custom-ident&gt;")}}
   - : The name of the counter to set.
 - {{cssxref("&lt;integer&gt;")}}
-  - : The value to set the counter to on each occurrence of the element. Defaults to `0` if not specified. If there isn't currently a counter of the given name on the element, the element will create a new counter of the given name with a starting value of 0 (though it may then immediately set or increment that value to something different).
+  - : The value to set the counter to on each occurrence of the element. Defaults to `0` if not specified. If there isn't currently a counter of the given name on the element, the element will create a new counter of the given name with a starting value of `0` (though it may then immediately set or increment that value to something different).
 - `none`
   - : No counter set is to be performed. This can be used to override a `counter-set` defined in a less specific rule.
 
@@ -86,3 +143,5 @@ h1 {
 - {{cssxref("@counter-style")}}
 - {{cssxref("counter", "counter()")}} and {{cssxref("counters", "counters()")}} functions
 - {{cssxref("content")}} property
+- [CSS lists and counters](/en-US/docs/Web/CSS/CSS_lists) module
+- [CSS counter styles](/en-US/docs/Web/CSS/CSS_counter_styles) module

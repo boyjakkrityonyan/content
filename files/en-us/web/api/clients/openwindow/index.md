@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.Clients.openWindow
 ---
 
-{{APIRef("Service Workers API")}}
+{{APIRef("Service Workers API")}}{{AvailableInWorkers("service")}}
 
 The **`openWindow()`** method of the {{domxref("Clients")}}
 interface creates a new top level browsing context and loads a given URL. If the calling
@@ -36,8 +36,7 @@ openWindow(url)
 ### Return value
 
 A {{jsxref("Promise")}} that resolves to a {{domxref("WindowClient")}} object if the
-URL is from the same origin as the service worker or a {{Glossary("null", "null
-  value")}} otherwise.
+URL is from the same origin as the service worker or a {{Glossary("null", "null value")}} otherwise.
 
 ### Exceptions
 
@@ -71,17 +70,18 @@ self.addEventListener("notificationclick", (e) => {
   // Get all the Window clients
   e.waitUntil(
     clients.matchAll({ type: "window" }).then((clientsArr) => {
-      // If a Window tab matching the targeted URL already exists, focus that;
-      const hadWindowToFocus = clientsArr.some((windowClient) =>
-        windowClient.url === e.notification.data.url
-          ? (windowClient.focus(), true)
-          : false,
+      const windowToFocus = clientsArr.find(
+        (windowClient) => windowClient.url === e.notification.data.url,
       );
-      // Otherwise, open a new tab to the applicable URL and focus it.
-      if (!hadWindowToFocus)
+      if (windowToFocus) {
+        // If a Window tab matching the targeted URL already exists, focus that;
+        windowToFocus.focus();
+      } else {
+        // Otherwise, open a new tab to the applicable URL and focus it.
         clients
           .openWindow(e.notification.data.url)
           .then((windowClient) => (windowClient ? windowClient.focus() : null));
+      }
     }),
   );
 });

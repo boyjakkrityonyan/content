@@ -16,10 +16,10 @@ This event is not cancelable and does not bubble.
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("ended", (event) => {});
+```js-nolint
+addEventListener("ended", (event) => { })
 
-onended = (event) => {};
+onended = (event) => { }
 ```
 
 ## Event type
@@ -33,7 +33,10 @@ A generic {{domxref("Event")}}.
 - There is no more data left to send.
 - The user revoked the permissions needed for the data to be sent.
 - The hardware generating the source data has been removed or ejected.
-- A remote peer has permanently stopped sending data; pausing media _does not_ generate an `ended` event.
+- A remote peer has permanently stopped sending data.
+- The only case where the track ends but the `ended` event is not fired is when calling {{domxref("MediaStreamTrack.stop")}}.
+
+Pausing media _does not_ generate an `ended` event.
 
 ## Examples
 

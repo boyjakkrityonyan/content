@@ -1,17 +1,44 @@
 ---
-title: ":only-of-type"
+title: :only-of-type
 slug: Web/CSS/:only-of-type
 page-type: css-pseudo-class
 browser-compat: css.selectors.only-of-type
+sidebar: cssref
 ---
 
-{{CSSRef}}
+The **`:only-of-type`** [CSS](/en-US/docs/Web/CSS) [pseudo-class](/en-US/docs/Web/CSS/Pseudo-classes) represents an element that has no siblings of the same type (tag name).
 
-The **`:only-of-type`** CSS [pseudo-class](/en-US/docs/Web/CSS/Pseudo-classes) represents an element that has no siblings of the same type.
+{{InteractiveExample("CSS Demo: :only-of-type", "tabbed-shorter")}}
 
-{{EmbedInteractiveExample("pages/tabbed/pseudo-class-only-of-type.html", "tabbed-shorter")}}
+```css interactive-example
+a:only-of-type {
+  color: fuchsia;
+}
 
-> **Note:** As originally defined, the selected element had to have a parent. Beginning with Selectors Level 4, this is no longer required.
+dd:only-of-type {
+  background-color: bisque;
+}
+```
+
+```html interactive-example
+<p>
+  To find out more about <b>QUIC</b>, check <a href="#">RFC 9000</a> and
+  <a href="#">RFC 9114</a>.
+</p>
+
+<dl>
+  <dt>Published</dt>
+  <dd>2021</dd>
+  <dd>2022</dd>
+</dl>
+
+<p>Details about <b>QPACK</b> can be found in <a href="#">RFC 9204</a>.</p>
+
+<dl>
+  <dt>Published</dt>
+  <dd>2022</dd>
+</dl>
+```
 
 ## Syntax
 

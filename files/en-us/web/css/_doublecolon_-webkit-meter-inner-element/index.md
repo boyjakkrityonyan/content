@@ -1,13 +1,14 @@
 ---
-title: "::-webkit-meter-inner-element"
+title: ::-webkit-meter-inner-element
 slug: Web/CSS/::-webkit-meter-inner-element
 page-type: css-pseudo-element
 status:
   - non-standard
 browser-compat: css.selectors.-webkit-meter-inner-element
+sidebar: cssref
 ---
 
-{{CSSRef}}{{Non-standard_header}}
+{{Non-standard_header}}
 
 **`::-webkit-meter-inner-element`** is a proprietary WebKit CSS pseudo-element for selecting and applying styles to the outer containing element of a {{htmlelement("meter")}} element. Additional markup to render the meter element as read-only.
 
@@ -19,10 +20,6 @@ browser-compat: css.selectors.-webkit-meter-inner-element
 }
 ```
 
-## Specifications
-
-Not part of any standard.
-
 ## Examples
 
 This will only work in WebKit and Blink-based browsers, such as Safari, Chrome, and Chromium-based versions of Edge.
@@ -30,27 +27,54 @@ This will only work in WebKit and Blink-based browsers, such as Safari, Chrome, 
 ### HTML
 
 ```html
-<meter min="0" max="10" value="6">Score out of 10</meter>
+Normal: <meter min="0" max="10" value="6">Score 6/10</meter>
+<br />
+Styled: <meter id="styled" min="0" max="10" value="6">Score 6/10</meter>
 ```
 
 ### CSS
 
 ```css
-meter {
-  /* Reset the default appearance for -webkit- only */
+body {
+  font-family: monospace;
+}
+
+.safari meter {
+  /* Reset the default appearance for Safari only */
+  /* .safari class is added via JavaScript */
   -webkit-appearance: none;
 }
 
-meter::-webkit-meter-inner-element {
+#styled::-webkit-meter-inner-element {
   -webkit-appearance: inherit;
   box-sizing: inherit;
-  border: 1px solid #aaa;
+  border: 1px dashed #aaaaaa;
+}
+```
+
+### JavaScript
+
+```js
+// Safari requires <meter> elements to have an `appearance` of `none` for custom styling
+// using `::-webkit-meter-*` selectors, but `appearance: none` breaks rendering on Chrome.
+// Therefore, we must check if the browser is Safari-based.
+
+const is_safari =
+  navigator.userAgent.includes("AppleWebKit/") &&
+  !navigator.userAgent.includes("Chrome/");
+
+if (is_safari) {
+  document.body.classList.add("safari");
 }
 ```
 
 ### Result
 
 {{ EmbedLiveSample('Examples') }}
+
+## Specifications
+
+Not part of any standard.
 
 ## Browser compatibility
 

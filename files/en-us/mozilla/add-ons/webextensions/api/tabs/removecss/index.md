@@ -3,13 +3,13 @@ title: tabs.removeCSS()
 slug: Mozilla/Add-ons/WebExtensions/API/tabs/removeCSS
 page-type: webextension-api-function
 browser-compat: webextensions.api.tabs.removeCSS
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Removes from a page CSS which was previously injected by a call to {{WebExtAPIRef("tabs.insertCSS()")}}.
 
-> **Note:** When using Manifest V3 or higher, use {{WebExtAPIRef("scripting.insertCSS()")}} and {{WebExtAPIRef("scripting.removeCSS()")}} to insert and remove CSS.
+> [!NOTE]
+> When using Manifest V3 or higher, use {{WebExtAPIRef("scripting.insertCSS()")}} and {{WebExtAPIRef("scripting.removeCSS()")}} to insert and remove CSS.
 
 This is an asynchronous function that returns a [`Promise`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 
@@ -27,9 +27,7 @@ let removing = browser.tabs.removeCSS(
 - `tabId` {{optional_inline}}
   - : `integer`. The ID of the tab from which to remove the CSS. Defaults to the active tab of the current window.
 - `details`
-
   - : An object describing the CSS to remove from the page. It contains the following properties:
-
     - `allFrames` {{optional_inline}}
       - : `boolean`. If `true`, the code will be removed from all frames of the current page. If it is `false`, code is only removed from the top frame. Defaults to `false`.
     - `code` {{optional_inline}}
@@ -73,7 +71,8 @@ browser.browserAction.onClicked.addListener(() => {
 
 {{Compat}}
 
-> **Note:** This API is based on Chromium's [`chrome.tabs`](https://developer.chrome.com/docs/extensions/reference/tabs/#method-insertCSS) API. This documentation is derived from [`tabs.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/tabs.json) in the Chromium code.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.tabs`](https://developer.chrome.com/docs/extensions/reference/api/tabs#method-insertCSS) API. This documentation is derived from [`tabs.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/tabs.json) in the Chromium code.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

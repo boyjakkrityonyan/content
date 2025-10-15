@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.Clients.matchAll
 ---
 
-{{APIRef("Service Workers API")}}
+{{APIRef("Service Workers API")}}{{AvailableInWorkers("service")}}
 
 The **`matchAll()`** method of the {{domxref("Clients")}}
 interface returns a {{jsxref("Promise")}} for a list of service worker
@@ -25,10 +25,8 @@ matchAll(options)
 ### Parameters
 
 - `options` {{optional_inline}}
-
   - : An options object allowing you to set options for the matching operation. Available
     options are:
-
     - `includeUncontrolled`
       - : A boolean value — if set to
         `true`, the matching operation will return all service worker clients

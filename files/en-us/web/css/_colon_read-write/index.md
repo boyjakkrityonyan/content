@@ -1,15 +1,45 @@
 ---
-title: ":read-write"
+title: :read-write
 slug: Web/CSS/:read-write
 page-type: css-pseudo-class
 browser-compat: css.selectors.read-write
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **`:read-write`** [CSS](/en-US/docs/Web/CSS) [pseudo-class](/en-US/docs/Web/CSS/Pseudo-classes) represents an element (such as `input` or `textarea`) that is editable by the user.
 
-{{EmbedInteractiveExample("pages/tabbed/pseudo-class-read-write.html", "tabbed-shorter")}}
+{{InteractiveExample("CSS Demo: :read-write", "tabbed-shorter")}}
+
+```css interactive-example
+label,
+input[type="submit"] {
+  display: block;
+  margin-top: 1em;
+}
+
+*:read-write {
+  background-color: ivory;
+  border: 2px solid darkorange;
+  border-radius: 5px;
+}
+```
+
+```html interactive-example
+<p>Please fill in your details:</p>
+
+<form>
+  <label for="email">Email Address:</label>
+  <input id="email" name="email" type="email" value="test@example.com" />
+
+  <label for="note">Short note about yourself:</label>
+  <textarea id="note" name="note">Don't be shy</textarea>
+
+  <label for="pic">Your picture:</label>
+  <input id="pic" name="pic" type="file" />
+
+  <input type="submit" value="Submit form" />
+</form>
+```
 
 ## Syntax
 
@@ -21,36 +51,92 @@ The **`:read-write`** [CSS](/en-US/docs/Web/CSS) [pseudo-class](/en-US/docs/Web/
 
 ## Examples
 
-### Confirming form information in read-only/read-write controls
+### Confirming form details using read-only controls
 
-One use of `readonly` form controls is to allow the user to check and verify information that they may have entered in an earlier form (for example, shipping details), while still being able to submit the information along with the rest of the form. We do just this in the example below.
+You can use [`readonly`](/en-US/docs/Web/HTML/Reference/Attributes/readonly) form controls when you want a user to verify information they entered earlier, which you want to submit with new data in read-write controls.
+In the example below, the {{cssxref(":read-only")}} pseudo-class is used to make the {{htmlelement("textarea")}} (a user's address) look like a regular paragraph. The `:read-write` pseudo-class provides a way to highlight the editable `<textarea>` (the delivery instructions):
 
-The `:read-only` pseudo-class is used to remove all the styling that makes the inputs look like clickable fields, making them look more like read-only paragraphs. The `:read-write` pseudo-class on the other hand is used to provide some nicer styling to the editable `<textarea>`.
-
-```css
-input:-moz-read-only,
-textarea:-moz-read-only,
-input:read-only,
-textarea:read-only {
-  border: 0;
-  box-shadow: none;
-  background-color: white;
+```css hidden
+body {
+  font-family: "Josefin Sans", sans-serif;
+  margin: 10px auto;
 }
 
-textarea:-moz-read-write,
+legend {
+  color: white;
+  background: black;
+  padding: 5px 10px;
+}
+
+fieldset > div {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button,
+label,
+textarea {
+  display: block;
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 5px;
+  height: 30px;
+}
+
+textarea {
+  width: 50%;
+}
+
+textarea {
+  height: 70px;
+  resize: none;
+}
+
+label {
+  width: 40%;
+}
+```
+
+```css
+textarea:read-only {
+  border: 0;
+}
+
 textarea:read-write {
-  box-shadow: inset 1px 1px 3px #ccc;
+  box-shadow: inset 1px 1px 3px #cccccc;
   border-radius: 5px;
 }
 ```
 
-You can find the full source code at [readonly-confirmation.html](https://github.com/mdn/learning-area/blob/main/html/forms/pseudo-classes/readonly-confirmation.html); this renders like so:
+```html
+<form>
+  <fieldset>
+    <legend>Confirm details</legend>
+    <div>
+      <label for="address">Address:</label>
+      <textarea id="address" name="address" readonly>
+123 Choco Mountain,
+Awesome Ridge,
+CA</textarea
+      >
+    </div>
+    <div>
+      <label for="instructions">Delivery instructions</label>
+      <textarea id="instructions" name="instructions"></textarea>
+    </div>
+  </fieldset>
+  <button type="submit">Confirm</button>
+</form>
+```
 
-{{EmbedGHLiveSample("learning-area/html/forms/pseudo-classes/readonly-confirmation.html", '100%', 660)}}
+{{embedlivesample("confirming_form_details_using_read-only_controls", , "300")}}
 
 ### Styling read-write non-form controls
 
-This selector doesn't just select {{htmlElement("input")}}/{{htmlElement("textarea")}} elements — it will select _any_ element that can be edited by the user, such as a {{htmlelement("p")}} element with [`contenteditable`](/en-US/docs/Web/HTML/Global_attributes#contenteditable) set on it.
+This selector doesn't just select {{htmlElement("input")}}/{{htmlElement("textarea")}} elements — it will select _any_ element that can be edited by the user, such as a {{htmlelement("p")}} element with [`contenteditable`](/en-US/docs/Web/HTML/Reference/Global_attributes/contenteditable) set on it.
 
 ```html
 <p contenteditable>This paragraph is editable; it is read-write.</p>
@@ -59,6 +145,10 @@ This selector doesn't just select {{htmlElement("input")}}/{{htmlElement("textar
 ```
 
 ```css
+body {
+  font-family: sans-serif;
+}
+
 p {
   font-size: 150%;
   padding: 5px;
@@ -75,7 +165,7 @@ p:read-write {
 }
 ```
 
-{{EmbedLiveSample('Styling_read-write_non-form_controls', '100%', 400)}}
+{{EmbedLiveSample('Styling_read-write_non-form_controls')}}
 
 ## Specifications
 
@@ -88,4 +178,4 @@ p:read-write {
 ## See also
 
 - {{cssxref(":read-only")}}
-- HTML [`contenteditable`](/en-US/docs/Web/HTML/Global_attributes#contenteditable) attribute
+- HTML [`contenteditable`](/en-US/docs/Web/HTML/Reference/Global_attributes/contenteditable) attribute

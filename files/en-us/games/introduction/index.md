@@ -2,11 +2,10 @@
 title: Introduction to game development for the Web
 slug: Games/Introduction
 page-type: guide
+sidebar: games
 ---
 
-{{GamesSidebar}}
-
-The modern web has quickly become a viable platform not only for creating stunning, high quality games, but also for distributing those games.
+The modern web has quickly become a viable platform not only for creating stunning, high quality games, but also for distributing those games. This article introduces you to the advantages of using the Web as a game platform, and the technologies that make it possible.
 
 The range of games that can be created is on par with desktop and native OS counterparts. With modern Web technologies and a recent browser, it's entirely possible to make stunning, top-notch games for the Web. And we're not talking about simple card games or multiplayer social games that have in the olden days been done using Flash®. We're talking about 3D action shooters, RPGs, and more. Thanks to massive performance improvements in [JavaScript](/en-US/docs/Web/JavaScript) just-in-time compiler technology and new APIs, you can build games that run in the browser (or on [HTML5](/en-US/docs/Glossary/HTML5)-powered devices) without making compromises.
 
@@ -95,13 +94,15 @@ As a game developer, whether you're an individual or a large game studio, you wa
 
 For the tech folks, let's dig into the APIs the Web brings to the table that cater to game developers. Here's a thorough list to give you a taste of what the Web can do for you:
 
+- [Fetch API](/en-US/docs/Web/API/Fetch_API)
+  - : Send and receive any kind of data you want from a Web server like downloading new game levels and artwork to transmitting non-real-time game status information back and forth.
 - [Full Screen API](/en-US/docs/Web/API/Fullscreen_API)
   - : This simple API lets your game take over the entire screen, thereby immersing the player in action.
 - [Gamepad API](/en-US/docs/Web/API/Gamepad_API/Using_the_Gamepad_API)
   - : If you want your users to be able to use gamepads or other game controllers to work your game, you'll need this API.
 - [HTML](/en-US/docs/Web/HTML) and [CSS](/en-US/docs/Web/CSS)
   - : Together, these two technologies let you build, style, and lay out your game's user interface. Part of HTML is the {{HTMLElement("canvas")}} element, which provides one way to do 2D graphics.
-- [HTML audio](/en-US/docs/Web/HTML/Element/audio)
+- [HTML audio](/en-US/docs/Web/HTML/Reference/Elements/audio)
   - : The {{HTMLElement("audio")}} element lets you easily play simple sound effects and music. If your needs are more involved, check out the [Web Audio API](/en-US/docs/Web/API/Web_Audio_API) for real audio processing power!
 - [IndexedDB](/en-US/docs/Web/API/IndexedDB_API)
   - : A powerful data storage API for maintaining user data on their own computer or device. A great way to save game state and other information locally so it doesn't have to be downloaded every time it's needed. Also useful to help make your game playable even when the user isn't connected to the Web (such as when they're stuck on an airplane for hours on end).
@@ -123,5 +124,3 @@ For the tech folks, let's dig into the APIs the Web brings to the table that cat
   - : The WebSocket API lets you connect your app or site to a server to transmit data back and forth in real-time. Perfect for multiplayer gaming action, chat services, and so forth.
 - [Web Workers](/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)
   - : Workers give you the ability to spawn background threads running their own JavaScript code, to take advantage of modern, multicore processors.
-- [XMLHttpRequest](/en-US/docs/Web/API/XMLHttpRequest) and [File API](/en-US/docs/Web/API/File_and_Directory_Entries_API)
-  - : The combination of XMLHttpRequest and the File API lets you send and receive any kind of data you want (don't let the "XML" throw you!) from a Web server. This is a great way to do anything from downloading new game levels and artwork to transmitting non-real-time game status information back and forth.

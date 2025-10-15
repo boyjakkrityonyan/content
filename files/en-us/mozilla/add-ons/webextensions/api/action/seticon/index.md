@@ -3,13 +3,13 @@ title: action.setIcon()
 slug: Mozilla/Add-ons/WebExtensions/API/action/setIcon
 page-type: webextension-api-function
 browser-compat: webextensions.api.action.setIcon
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Sets the icon for the browser action.
 
-> **Note:** This API is available in Manifest V3 or higher.
+> [!NOTE]
+> This API is available in Manifest V3 or higher.
 
 You can specify a single icon as either the path to an image file or a {{WebExtAPIRef('action.ImageDataType')}} object.
 
@@ -30,12 +30,9 @@ let settingIcon = browser.action.setIcon(
 ### Parameters
 
 - `details`
-
-  - : `object`. An object containing either `imageData` or `path` properties, and optionally a `tabId` property.
-
+  - : `object`. An object containing the `imageData` or `path` property and, optionally, either or both of the `tabId` and `windowId` properties.
     - `imageData` {{optional_inline}}
-
-      - : `{{WebExtAPIRef('action.ImageDataType')}}` or `object`. This is either a single `ImageData` object or a dictionary object.
+      - : {{WebExtAPIRef('action.ImageDataType')}} or `object`. This is either a single `ImageData` object or a dictionary object.
 
         Use a dictionary object to specify multiple `ImageData` objects in different sizes, so the icon does not have to be scaled for a device with a different pixel density. If `imageData` is a dictionary, the value of each property is an `ImageData` object, and its name is its size, like this:
 
@@ -51,7 +48,6 @@ let settingIcon = browser.action.setIcon(
         The browser will choose the image to use depending on the screen's pixel density. See [Choosing icon sizes](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_action#choosing_icon_sizes) for more information on this.
 
     - `path` {{optional_inline}}
-
       - : `string` or `object`. This is either a relative path to an icon file or it is a dictionary object.
 
         Use a dictionary object to specify multiple icon files in different sizes, so the icon does not have to be scaled for a device with a different pixel density. If `path` is a dictionary, the value of each property is a relative path, and its name is its size, like this:
@@ -156,7 +152,8 @@ browser.action.onClicked.addListener((tab) => {
 
 {{Compat}}
 
-> **Note:** This API is based on Chromium's [`chrome.action`](https://developer.chrome.com/docs/extensions/reference/action/#method-setIcon) API. This documentation is derived from [`browser_action.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/browser_action.json) in the Chromium code.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.action`](https://developer.chrome.com/docs/extensions/reference/api/action#method-setIcon) API. This documentation is derived from [`browser_action.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/browser_action.json) in the Chromium code.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

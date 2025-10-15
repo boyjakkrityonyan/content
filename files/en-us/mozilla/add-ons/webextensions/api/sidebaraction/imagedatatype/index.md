@@ -3,9 +3,8 @@ title: sidebarAction.ImageDataType
 slug: Mozilla/Add-ons/WebExtensions/API/sidebarAction/ImageDataType
 page-type: webextension-api-type
 browser-compat: webextensions.api.sidebarAction.ImageDataType
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Pixel data for an image. Must be an [`ImageData`](/en-US/docs/Web/API/ImageData) object (for example, from a {{htmlelement("canvas")}} element).
 
@@ -13,13 +12,14 @@ Pixel data for an image. Must be an [`ImageData`](/en-US/docs/Web/API/ImageData)
 
 An [`ImageData`](/en-US/docs/Web/API/ImageData) object.
 
+{{WebExtExamples}}
+
 ## Browser compatibility
 
 {{Compat}}
 
-{{WebExtExamples}}
-
-> **Note:** This API is based on Opera's [`chrome.sidebarAction`](https://dev.opera.com/extensions/sidebar-action-api/) API.
+> [!NOTE]
+> This API is based on Opera's [`chrome.sidebarAction`](https://help.opera.com/en/extensions/sidebar-action-api/) API.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

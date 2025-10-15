@@ -5,9 +5,9 @@ page-type: web-api-interface
 browser-compat: api.XSLTProcessor
 ---
 
-{{APIRef("XSLT")}}
+{{APIRef("DOM")}}
 
-An **`XSLTProcessor`** applies an [XSLT](/en-US/docs/Web/XSLT) stylesheet transformation to an XML document to
+An **`XSLTProcessor`** applies an [XSLT](/en-US/docs/Web/XML/XSLT) stylesheet transformation to an XML document to
 produce a new XML document as output. It has methods to load the XSLT stylesheet, to
 manipulate `<xsl:param>` parameter values, and to apply the
 transformation to documents.
@@ -21,7 +21,7 @@ transformation to documents.
 
 - {{domxref("XSLTProcessor.importStylesheet()")}}
   - : Imports the XSLT stylesheet.
-    If the given node is a document node, you can pass in a full XSL Transform or a [literal result element transform](https://www.w3.org/TR/xslt/#result-element-stylesheet);
+    If the given node is a document node, you can pass in a full XSL Transform or a [literal result element transform](https://www.w3.org/TR/xslt-30/#literal-result-element);
     otherwise, it must be an `<xsl:stylesheet>` or `<xsl:transform>` element.
 - {{domxref("XSLTProcessor.transformToFragment()")}}
   - : Transforms the node source by applying the XSLT stylesheet imported using the {{domxref("XSLTProcessor.importStylesheet()")}} function.
@@ -50,22 +50,26 @@ _This are no properties for this interface._
 ### Instantiating an `XSLTProcessor`
 
 ```js
-const xsltProcessor = new XSLTProcessor();
+async function init() {
+  const parser = new DOMParser();
+  const xsltProcessor = new XSLTProcessor();
 
-// Load the xsl file using synchronous (third param is set to false) XMLHttpRequest
-const myXMLHTTPRequest = new XMLHttpRequest();
-myXMLHTTPRequest.open("GET", "example.xsl", false);
-myXMLHTTPRequest.send(null);
+  // Load the XSLT file, example1.xsl
+  const xslResponse = await fetch("example1.xsl");
+  const xslText = await xslResponse.text();
+  const xslStylesheet = parser.parseFromString(xslText, "application/xml");
+  xsltProcessor.importStylesheet(xslStylesheet);
 
-const xslRef = myXMLHTTPRequest.responseXML;
-
-// Finally import the .xsl
-xsltProcessor.importStylesheet(xslRef);
+  // process the file
+  // …
+}
 ```
 
-For the actual transformation, `XSLTProcessor` requires an XML document, which is used in conjunction with the imported XSL file to produce the final result. The XML document can be a separate XML file loaded as shown in figure 1, or it can be part of the existing page. To process part of a page's DOM, it is necessary to first create an XML document in memory. Assuming that the DOM to be processed is contained by an element with the id `example`, that DOM can be "cloned" using the in-memory XML document's {{domxref('Document.importNode()')}} method. {{domxref('Document.importNode()')}} allows transferring a DOM fragment between documents, in this case from an HTML document to an XML document. The first parameter references the DOM node to clone. By making the second parameter "true", it will clone all descendants as well (a deep clone). The cloned DOM can then be easily inserted into the XML document using {{domxref('Node.appendChild()')}}, as shown in figure 2.
-
 ### Creating an XML document based on part of a document's DOM
+
+For the actual transformation, `XSLTProcessor` requires an XML document, which is used in conjunction with the imported XSL file to produce the final result. The XML document can be a separate XML file loaded using {{domxref("Window/fetch", "fetch()")}}, or it can be part of the existing page.
+
+To process part of a page's DOM, it is necessary to first create an XML document in memory. Assuming that the DOM to be processed is contained by an element with the id `example`, that DOM can be "cloned" using the in-memory XML document's {{domxref('Document.importNode()')}} method. {{domxref('Document.importNode()')}} allows transferring a DOM fragment between documents, in this case from an HTML document to an XML document. The first parameter references the DOM node to clone. By making the second parameter "true", it will clone all descendants as well (a deep clone). The cloned DOM can then be inserted into the XML document using {{domxref('Node.appendChild()')}}, as shown below.
 
 ```js
 // Create a new XML document in memory
@@ -88,7 +92,7 @@ You can use the {{domxref("DOMParser")}} to create an XML document from a string
 
 ```js
 const parser = new DOMParser();
-const doc = parser.parseFromString(aStr, "text/xml");
+const doc = parser.parseFromString(str, "text/xml");
 ```
 
 ### Performing the transformation
@@ -99,7 +103,7 @@ const fragment = xsltProcessor.transformToFragment(xmlRef, document);
 
 ### Basic Example
 
-The basic example will load an XML file and apply a XSL transformation on it. These are the same files used in the [Generating HTML](/en-US/docs/Web/API/XSLTProcessor/Generating_HTML) example. The XML file describes an article and the XSL file formats the information for display.
+The basic example will load an XML file and apply a XSL transformation on it. These are the same files used in the [Generating HTML](/en-US/docs/Web/XML/XSLT/Guides/Transforming_XML_with_XSLT#generating_html) example. The XML file describes an article and the XSL file formats the information for display.
 
 #### XML
 
@@ -185,43 +189,38 @@ The basic example will load an XML file and apply a XSL transformation on it. Th
 </xsl:stylesheet>
 ```
 
-The example loads using synchronous {{domxref("XMLHTTPRequest")}} both the .xsl (`xslStylesheet`) and the .xml (`xmlDoc`) files into memory. The .xsl file is then imported (`xsltProcessor.importStylesheet(xslStylesheet)`) and the transformation run (`xsltProcessor.transformToFragment(xmlDoc, document)`). This allows fetching of data after the page has been loaded, without initiating a fresh page load.
+The example loads both the .xsl (`xslStylesheet`) and the .xml (`xmlDoc`) files into memory. The .xsl file is then imported (`xsltProcessor.importStylesheet(xslStylesheet)`) and the transformation run (`xsltProcessor.transformToFragment(xmlDoc, document)`). This allows fetching of data after the page has been loaded, without initiating a fresh page load.
 
 #### JavaScript
 
 ```js
-let xslStylesheet;
-const xsltProcessor = new XSLTProcessor();
-let myDOM;
+async function init() {
+  const parser = new DOMParser();
+  const xsltProcessor = new XSLTProcessor();
 
-let xmlDoc;
-
-function Init() {
-  // Load the xslt file, example1.xsl
-  let myXMLHTTPRequest = new XMLHttpRequest();
-  myXMLHTTPRequest.open("GET", "example1.xsl", false);
-  myXMLHTTPRequest.send(null);
-
-  xslStylesheet = myXMLHTTPRequest.responseXML;
+  // Load the XSLT file, example1.xsl
+  const xslResponse = await fetch("example1.xsl");
+  const xslText = await xslResponse.text();
+  const xslStylesheet = parser.parseFromString(xslText, "application/xml");
   xsltProcessor.importStylesheet(xslStylesheet);
 
   // Load the XML file, example1.xml
-  myXMLHTTPRequest = new XMLHttpRequest();
-  myXMLHTTPRequest.open("GET", "example1.xml", false);
-  myXMLHTTPRequest.send(null);
-
-  xmlDoc = myXMLHTTPRequest.responseXML;
+  const xmlResponse = await fetch("example1.xml");
+  const xmlText = await xmlResponse.text();
+  const xmlDoc = parser.parseFromString(xmlText, "application/xml");
 
   const fragment = xsltProcessor.transformToFragment(xmlDoc, document);
-  myDOM = fragment;
+
   document.getElementById("example").textContent = "";
   document.getElementById("example").appendChild(fragment);
 }
+
+init();
 ```
 
 ### Advanced example
 
-This advanced example sorts several divs based on their content. The example allows sorting the content multiple times, alternating between ascending and descending order. The JavaScript loads the .xsl file only on the first sort and sets the `xslloaded` variable to true once it has finished loading the file. Using the {{domxref("XSLTProcessor.getParameter()")}} method, the code can figure whether to sort in ascending or descending order. It defaults to ascending if the parameter is empty (the first time the sorting happens, as there is no value for it in the XSLT file). The sorting value is set using {{domxref("XSLTProcessor.setParameter()")}}.
+This advanced example sorts several divs based on their content. The example allows sorting the content multiple times, alternating between ascending and descending order. The JavaScript loads the .xsl file only on the first sort and sets the `xslLoaded` variable to true once it has finished loading the file. Using the {{domxref("XSLTProcessor.getParameter()")}} method, the code can figure whether to sort in ascending or descending order. It defaults to ascending if the parameter is empty (the first time the sorting happens, as there is no value for it in the XSLT file). The sorting value is set using {{domxref("XSLTProcessor.setParameter()")}}.
 
 The XSLT file has a parameter called `myOrder` that JavaScript sets to change the sorting method. The `xsl:sort` element's order attribute can access the value of the parameter using `$myOrder`. However, the value needs to be an XPATH expression and not a string, so `{$myOrder}` is used. Using {} evaluates the content as an XPath expression.
 
@@ -248,21 +247,20 @@ Once the transformation is complete, the result is appended to the document, as 
 
 ```js
 let xslRef;
-let xslloaded = false;
+let xslLoaded = false;
+const parser = new DOMParser();
 const xsltProcessor = new XSLTProcessor();
 let myDOM;
 
 let xmlRef = document.implementation.createDocument("", "", null);
 
-function sort() {
-  if (!xslloaded) {
-    const p = new XMLHttpRequest();
-    p.open("GET", "example2.xsl", false);
-    p.send(null);
-
-    xslRef = p.responseXML;
+async function sort() {
+  if (!xslLoaded) {
+    const response = await fetch("example2.xsl");
+    const xslText = await response.text();
+    xslRef = parser.parseFromString(xslText, "application/xml");
     xsltProcessor.importStylesheet(xslRef);
-    xslloaded = true;
+    xslLoaded = true;
   }
 
   // Create a new XML document in memory
@@ -330,7 +328,5 @@ function sort() {
 
 ## See also
 
-- [XSLT](/en-US/docs/Web/XSLT)
-- [What kind of language is XSLT?](https://developer.ibm.com/technologies/web-development/) at [IBM developer](https://developer.ibm.com/)
-- [XSLT Tutorial](https://www.zvon.org/xxl/XSLTutorial/Books/Book1/index.html) at [zvon.org](https://www.zvon.org/)
-- [XPath Tutorial](https://www.zvon.org/xxl/XPathTutorial/General/examples.html) at [zvon.org](https://www.zvon.org/)
+- [XSLT](/en-US/docs/Web/XML/XSLT)
+- [Transforming with XSLT](/en-US/docs/Web/XML/XSLT/Guides/Transforming_XML_with_XSLT)

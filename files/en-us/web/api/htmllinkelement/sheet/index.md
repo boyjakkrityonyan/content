@@ -8,7 +8,7 @@ browser-compat: api.HTMLLinkElement.sheet
 
 {{APIRef("HTML DOM")}}
 
-The read-only **`sheet`** property of the {{domxref("HTMLLinkElement")}} interface
+The **`sheet`** read-only property of the {{domxref("HTMLLinkElement")}} interface
 contains the stylesheet associated with that element.
 
 A stylesheet is associated to an `HTMLLinkElement` if `rel="stylesheet"` is used with `<link>`.
@@ -20,12 +20,7 @@ A {{DOMxRef("StyleSheet")}} object, or `null` if none is associated with the ele
 ## Examples
 
 ```html
-<html>
-  <header>
-    <link rel="stylesheet" href="styles.css" />
-    …
-  </header>
-</html>
+<link rel="stylesheet" href="styles.css" />
 ```
 
 The `sheet` property of the `HTMLLinkElement` object will return the {{domxref("StyleSheet")}} object describing `styles.css`.

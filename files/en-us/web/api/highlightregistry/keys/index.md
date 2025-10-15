@@ -3,13 +3,11 @@ title: "HighlightRegistry: keys() method"
 short-title: keys()
 slug: Web/API/HighlightRegistry/keys
 page-type: web-api-instance-method
-status:
-  - experimental
 browser-compat: api.HighlightRegistry.keys
 spec-urls: https://tc39.es/ecma262/multipage/keyed-collections.html#sec-map.prototype.keys
 ---
 
-{{APIRef("CSS Custom Highlight API")}}{{SeeCompatTable}}
+{{APIRef("CSS Custom Highlight API")}}
 
 The **`keys()`** method of the {{domxref("HighlightRegistry")}} interface returns a new [Iterator](/en-US/docs/Web/JavaScript/Guide/Iterators_and_generators) object that contains the keys for each `Highlight` object in the `HighlightRegistry` object in insertion order.
 
@@ -20,6 +18,10 @@ The **`keys()`** method of the {{domxref("HighlightRegistry")}} interface return
 ```js-nolint
 keys()
 ```
+
+### Parameters
+
+None.
 
 ### Return value
 

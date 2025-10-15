@@ -6,9 +6,9 @@ page-type: web-api-instance-method
 browser-compat: api.ElementInternals.checkValidity
 ---
 
-{{APIRef("DOM")}}
+{{APIRef("Web Components")}}
 
-The **`checkValidity()`** method of the {{domxref("ElementInternals")}} interface checks if the element meets any [constraint validation](/en-US/docs/Web/HTML/Constraint_validation) rules applied to it.
+The **`checkValidity()`** method of the {{domxref("ElementInternals")}} interface checks if the element meets any [constraint validation](/en-US/docs/Web/HTML/Guides/Constraint_validation) rules applied to it.
 
 If `checkValidity` returns `false` then a cancelable [invalid event](/en-US/docs/Web/API/HTMLInputElement/invalid_event) is fired on the element.
 

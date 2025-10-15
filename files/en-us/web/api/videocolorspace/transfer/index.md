@@ -6,7 +6,7 @@ page-type: web-api-instance-property
 browser-compat: api.VideoColorSpace.transfer
 ---
 
-{{DefaultAPISidebar("WebCodecs API")}}
+{{APIRef("WebCodecs API")}}{{AvailableInWorkers("window_and_dedicated")}}
 
 The **`transfer`** read-only property of the {{domxref("VideoColorSpace")}} interface returns the opto-electronic transfer characteristics of the video.
 
@@ -20,6 +20,12 @@ A string containing one of the following values:
   - : Transfer characteristics used by BT.601 NTSC.
 - `"iec61966-2-1"`
   - : Transfer characteristics used by sRGBA.
+- `"linear"`
+  - : Transfer characteristics used by linear RGB.
+- `"pq"`
+  - : Transfer characteristics used by BT.2100 PQ.
+- `"hlg"`
+  - : Transfer characteristics used by BT.2100 HLG.
 
 ## Examples
 

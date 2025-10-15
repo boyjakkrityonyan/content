@@ -11,19 +11,12 @@ browser-compat: api.RTCPeerConnection.removeStream
 
 {{APIRef("WebRTC")}}{{Deprecated_Header}}{{Non-standard_Header}}
 
-The
-**`RTCPeerConnection.removeStream()`** method removes a
-{{domxref("MediaStream")}} as a local source of audio or video. If the negotiation
-already happened, a new one will be needed for the remote peer to be able to use it.
-Because this method has been deprecated, you should instead use
-{{domxref("RTCPeerConnection.removeTrack", "removeTrack()")}} if your target browser
-versions have implemented it.
+The **`removeStream()`** method of the {{domxref("RTCPeerConnection")}} interface removes a {{domxref("MediaStream")}} as a local source of audio or video.
+If the negotiation already happened, a new one will be needed for the remote peer to be able to use it.
+Because this method has been deprecated, you should instead use {{domxref("RTCPeerConnection.removeTrack", "removeTrack()")}} if your target browser versions have implemented it.
 
-If the {{domxref("RTCPeerConnection.signalingState", "signalingState")}} is set to
-`"closed"`, an `InvalidStateError` is raised. If the
-{{domxref("RTCPeerConnection.signalingState", "signalingState")}} is set to
-`"stable"`, the event {{DOMxRef("RTCPeerConnection/negotiationneeded_event", "negotiationneeded")}} is sent on the
-{{domxref("RTCPeerConnection")}}.
+If the {{domxref("RTCPeerConnection.signalingState", "signalingState")}} is set to `"closed"`, an `InvalidStateError` is raised.
+If the {{domxref("RTCPeerConnection.signalingState", "signalingState")}} is set to `"stable"`, the event {{DOMxRef("RTCPeerConnection/negotiationneeded_event", "negotiationneeded")}} is sent on the {{domxref("RTCPeerConnection")}}.
 
 ## Syntax
 
@@ -50,14 +43,10 @@ navigator.getUserMedia({ video: true }, (stream) => {
   videoStream = stream;
   pc.addStream(stream);
 });
-document.getElementById("closeButton").addEventListener(
-  "click",
-  (event) => {
-    pc.removeStream(videoStream);
-    pc.close();
-  },
-  false,
-);
+document.getElementById("closeButton").addEventListener("click", (event) => {
+  pc.removeStream(videoStream);
+  pc.close();
+});
 ```
 
 ## Browser compatibility

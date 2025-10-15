@@ -3,9 +3,8 @@ title: management.getAll()
 slug: Mozilla/Add-ons/WebExtensions/API/management/getAll
 page-type: webextension-api-function
 browser-compat: webextensions.api.management.getAll
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Retrieves an array of {{WebExtAPIRef("management.ExtensionInfo", "ExtensionInfo")}} objects, one for each installed add-on.
 
@@ -29,10 +28,6 @@ None.
 
 A [`Promise`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that will be fulfilled with an array of {{WebExtAPIRef("management.ExtensionInfo", "ExtensionInfo")}} objects, one for each installed add-on.
 
-## Browser compatibility
-
-{{Compat}}
-
 ## Examples
 
 Log the name of all installed add-ons:
@@ -52,7 +47,12 @@ gettingAll.then(gotAll);
 
 {{WebExtExamples}}
 
-> **Note:** This API is based on Chromium's [`chrome.management`](https://developer.chrome.com/docs/extensions/reference/management/#method-getAll) API. This documentation is derived from [`management.json`](https://chromium.googlesource.com/chromium/src/+/master/extensions/common/api/management.json) in the Chromium code.
+## Browser compatibility
+
+{{Compat}}
+
+> [!NOTE]
+> This API is based on Chromium's [`chrome.management`](https://developer.chrome.com/docs/extensions/reference/api/management#method-getAll) API. This documentation is derived from [`management.json`](https://chromium.googlesource.com/chromium/src/+/master/extensions/common/api/management.json) in the Chromium code.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

@@ -8,7 +8,7 @@ status:
 browser-compat: api.ServiceWorkerGlobalScope.backgroundfetchfail_event
 ---
 
-{{APIRef("Background Fetch API")}}{{SeeCompatTable}}
+{{APIRef("Background Fetch API")}}{{SeeCompatTable}}{{SecureContext_Header}}{{AvailableInWorkers("service")}}
 
 The **`backgroundfetchfail`** event of the {{domxref("ServiceWorkerGlobalScope")}} interface is fired when a [background fetch](/en-US/docs/Web/API/Background_Fetch_API) operation has failed: that is, when at least one network request in the fetch has failed to complete successfully.
 
@@ -18,10 +18,10 @@ This event is not cancelable and does not bubble.
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("backgroundfetchfail", (event) => {});
+```js-nolint
+addEventListener("backgroundfetchfail", (event) => { })
 
-onbackgroundfetchfail = (event) => {};
+onbackgroundfetchfail = (event) => { }
 ```
 
 ## Event type

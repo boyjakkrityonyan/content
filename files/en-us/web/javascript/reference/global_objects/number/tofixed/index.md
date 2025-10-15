@@ -1,15 +1,30 @@
 ---
 title: Number.prototype.toFixed()
+short-title: toFixed()
 slug: Web/JavaScript/Reference/Global_Objects/Number/toFixed
 page-type: javascript-instance-method
 browser-compat: javascript.builtins.Number.toFixed
+sidebar: jsref
 ---
 
-{{JSRef}}
+The **`toFixed()`** method of {{jsxref("Number")}} values returns a string representing this number using [fixed-point notation](https://en.wikipedia.org/wiki/Fixed-point_arithmetic) with the specified number of decimal places.
 
-The **`toFixed()`** method of {{jsxref("Number")}} values formats this number using fixed-point notation.
+{{InteractiveExample("JavaScript Demo: Number.toFixed()")}}
 
-{{EmbedInteractiveExample("pages/js/number-tofixed.html")}}
+```js interactive-example
+function financial(x) {
+  return Number.parseFloat(x).toFixed(2);
+}
+
+console.log(financial(123.456));
+// Expected output: "123.46"
+
+console.log(financial(0.004));
+// Expected output: "0.00"
+
+console.log(financial("1.23e+5"));
+// Expected output: "123000.00"
+```
 
 ## Syntax
 
@@ -25,7 +40,7 @@ toFixed(digits)
 
 ### Return value
 
-A string representing the given number using fixed-point notation.
+A string representing the given number using fixed-point notation. Scientific notation is used if the number's magnitude (ignoring sign) is greater than or equal to 10<sup>21</sup> (same return value as {{jsxref("Number.prototype.toString()")}}).
 
 ### Exceptions
 
@@ -36,9 +51,9 @@ A string representing the given number using fixed-point notation.
 
 ## Description
 
-The `toFixed()` method returns a string representation of `numObj` that does not use exponential notation and has exactly `digits` digits after the decimal place. The number is rounded if necessary, and the fractional part is padded with zeros if necessary so that it has the specified length.
+The `toFixed()` method returns a string representation of a number without using [exponential notation](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toExponential) and with exactly `digits` digits after the decimal point. The number is rounded if necessary, and the fractional part is padded with zeros if necessary so that it has the specified length.
 
-If the absolute value of `numObj` is greater or equal to 10<sup>21</sup>, this method uses the same algorithm as {{jsxref("Number.prototype.toString()")}} and returns a string in exponential notation. `toFixed()` returns `"Infinity"`, `"NaN"`, or `"-Infinity"` if the value of `numObj` is non-finite.
+If the absolute value of the number is greater or equal to 10<sup>21</sup>, this method uses the same algorithm as {{jsxref("Number.prototype.toString()")}} and returns a string in exponential notation. `toFixed()` returns `"Infinity"`, `"NaN"`, or `"-Infinity"` if the value of the number is non-finite.
 
 The output of `toFixed()` may be more precise than [`toString()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toString) for some values, because `toString()` only prints enough significant digits to distinguish the number from adjacent number values. For example:
 
@@ -74,7 +89,7 @@ numObj.toFixed(6); // '12345.678900'; additional zeros
 // it rounds up as it's less than Number.EPSILON away from 2.45.
 // This literal actually encodes the same number value as 2.45
 
-(6.02 * 10 ** 23).toFixed(50); // 6.019999999999999e+23; large numbers still use exponential notation
+(6.02 * 10 ** 23).toFixed(50); // '6.019999999999999e+23'; large numbers still use exponential notation
 ```
 
 ### Using toFixed() with negative numbers
@@ -82,7 +97,7 @@ numObj.toFixed(6); // '12345.678900'; additional zeros
 Because member access has higher [precedence](/en-US/docs/Web/JavaScript/Reference/Operators/Operator_precedence) than unary minus, you need to group the negative number expression to get a string.
 
 ```js-nolint
--2.34.toFixed(1); // -2.3, a number
+-2.34.toFixed(1); // -2.3; a number
 (-2.34).toFixed(1); // '-2.3'
 ```
 

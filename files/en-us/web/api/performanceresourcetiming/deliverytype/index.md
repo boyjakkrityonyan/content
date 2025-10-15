@@ -8,20 +8,20 @@ status:
 browser-compat: api.PerformanceResourceTiming.deliveryType
 ---
 
-{{APIRef("Performance API")}}{{SeeCompatTable}}
+{{APIRef("Performance API")}}{{AvailableInWorkers}}{{SeeCompatTable}}
 
-The **`deliveryType`** read-only property is a string indicating how the resource was delivered — for example, indicating whether the resource was delivered from the cache.
+The **`deliveryType`** read-only property is a string indicating how the resource was delivered — for example from the cache or from a navigational prefetch.
 
 ## Value
 
-The `deliveryType` property can have the following values:.
+A string, which can be one of the following values:
 
-- `cache`
-  - : If the resource was retrieved from the cache
+- `"cache"`
+  - : The resource was retrieved from the cache.
+- `"navigational-prefetch"` {{experimental_inline}} {{non-standard_inline}}
+  - : The resource was retrieved from a prefetched response stored in an in-memory cache via the [Speculation Rules API](/en-US/docs/Web/API/Speculation_Rules_API).
 - `""` (empty string)
-  - : If none of the other defined delivery types
-
-This set of delivery types is expected to be expanded in the future — for example, to indicate preloaded resources and to indicate prefetched navigation requests.
+  - : Returned if none of the above delivery types apply.
 
 ## Examples
 
@@ -33,9 +33,9 @@ The following example uses a {{domxref("PerformanceObserver")}} to notify of new
 
 ```js
 const observer = new PerformanceObserver((list) => {
-  const cachedResources = list.getEntries().filter((entry) => {
-    return entry.deliveryType === "cache";
-  });
+  const cachedResources = list
+    .getEntries()
+    .filter((entry) => entry.deliveryType === "cache");
   console.log(cachedResources);
 });
 
@@ -45,9 +45,9 @@ observer.observe({ type: "resource", buffered: true });
 The following example uses {{domxref("Performance.getEntriesByType()")}}, which only shows `resource` performance entries present in the browser's performance timeline at the time you call the method.
 
 ```js
-const scripts = performance.getEntriesByType("resource").filter((entry) => {
-  return entry.deliveryType === "cache";
-});
+const scripts = performance
+  .getEntriesByType("resource")
+  .filter((entry) => entry.deliveryType === "cache");
 console.log(scripts);
 ```
 

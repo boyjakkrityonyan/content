@@ -3,9 +3,8 @@ title: "Wildcard: ."
 slug: Web/JavaScript/Reference/Regular_expressions/Wildcard
 page-type: javascript-language-feature
 browser-compat: javascript.regular_expressions.wildcard
+sidebar: jssidebar
 ---
-
-{{jsSidebar}}
 
 A **wildcard** matches all characters except line terminators. It also matches line terminators if the `s` flag is set.
 
@@ -81,7 +80,8 @@ catch (e)
 `); // "try\n  doSomething();\ncatch (e)\n  console.log(e);"
 ````
 
-> **Warning:** These examples are for demonstration only. If you want to parse Markdown, use a dedicated Markdown parser because there are many edge cases to consider.
+> [!WARNING]
+> These examples are for demonstration only. If you want to parse Markdown, use a dedicated Markdown parser because there are many edge cases to consider.
 
 ## Specifications
 

@@ -1,10 +1,10 @@
 ---
 title: How to research a technology
+short-title: Research a technology
 slug: MDN/Writing_guidelines/Howto/Research_technology
 page-type: mdn-writing-guide
+sidebar: mdnsidebar
 ---
-
-{{MDNSidebar}}
 
 This article gives you some handy information about approaching how to document technologies.
 
@@ -25,7 +25,7 @@ Useful resources for writing any documentation include:
 
 1. The [How-to guides](/en-US/docs/MDN/Writing_guidelines/Howto) for MDN Web Docs: You're already here, but it's good to browse through all the articles and familiarize yourself with our writing style, the different types of pages and what sections are included in them, and the different ways we include different parts of the page (like specifications and browser compatibility).
 2. The latest specification: Different standards bodies create specifications for technologies that are documented on MDN Web Docs. For example, [TC39](https://tc39.es/) for JavaScript, the [WHATWG](https://whatwg.org/) for HTML, and the [W3C](https://www.w3.org/) for CSS, XML, and some Web APIs. Specifications are linked to from reference pages on MDN Web Docs (check the "Specifications" section). Alternatively, you can usually do a web search. Always work from the latest, most up-to-date specification.
-3. The latest modern web browsers: These should be experimental/alpha builds such as [Firefox Nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly), [Chrome Canary](https://www.google.com/intl/en/chrome/canary/), or [Safari Technology Preview](https://webkit.org/downloads/) that are more likely to support the features you are documenting. This is especially pertinent if you are documenting a feature that is "upcoming".
+3. The latest modern web browsers: These should be experimental/alpha builds such as [Firefox Nightly](https://www.firefox.com/en-US/channel/desktop/#nightly), [Chrome Canary](https://www.google.com/intl/en/chrome/canary/), or [Safari Technology Preview](https://webkit.org/downloads/) that are more likely to support the features you are documenting. This is especially pertinent if you are documenting a feature that is "upcoming".
 4. Demos/blog posts/other info: Find as much info as you can. If you are updating a technology because it has changed, ensure that the resources you are using to learn are not out of date. This is why the first two points above are important.
 
 It can also be wise to try and find someone to help answer questions. This can be the specification authors or the engineers who implement browser features.
@@ -39,13 +39,14 @@ This can feel a little alien to start, but the more you do it the more you get u
 - [How to read web specs part I – or: WebVR, how do you work?](https://surma.dev/things/reading-specs/) talks through reading the WebVR spec specifically, but is a great introduction to reading Web API specs.
 - [How to read web specs part IIa – or: ECMAScript Symbols](https://surma.dev/things/reading-specs-2/) the second part to the link above contains information on understanding the ECMAScript specification which outlines the JavaScript language
 
-In addition, we have the [Information contained in a WebIDL file](/en-US/docs/MDN/Writing_guidelines/Howto/Write_an_API_reference/Information_contained_in_a_WebIDL_file) guide, which can really help when reading Web API specs.
+In addition, we have the [Information contained in a WebIDL file](/en-US/docs/MDN/Writing_guidelines/Howto/Write_an_api_reference/Information_contained_in_a_WebIDL_file) guide, which can really help when reading Web API specs.
 
 ## Exploring the feature
 
 You will return to writing code examples or building demos many times through the course of documenting a technology, but it is very useful to start by spending time familiarizing yourself with how the technology works. This is a really valuable exercise because it gives you a good understanding of what the use cases are (_why_ a developer would use this technology) and help with creating some code examples at the same time.
 
-> **Note:** If the specification has been recently updated so that, say, a method is now defined differently, but the old method still works in browsers, you will often have to document both in the same place so that the old and new methods are covered.
+> [!NOTE]
+> If the specification has been recently updated so that, say, a method is now defined differently, but the old method still works in browsers, you will often have to document both in the same place so that the old and new methods are covered.
 > If you need help, refer to demos you have found, or ask an engineering contact.
 
 ## Creating the list of pages to write or update
@@ -54,7 +55,7 @@ The different pages that you need to write from scratch or update varies dependi
 
 ### Sidebars
 
-It's possible that the sidebar of the pages you write will also need to be defined or updated. To find out if this is needed and how to do it, check out the [sidebar guide](/en-US/docs/MDN/Writing_guidelines/Howto/Write_an_API_reference/Sidebars).
+It's possible that the sidebar of the pages you write will also need to be defined or updated. To find out if this is needed and how to do it, check out the [sidebar guide](/en-US/docs/MDN/Writing_guidelines/Howto/Write_an_api_reference/Sidebars).
 
 ### Code examples
 
@@ -80,7 +81,6 @@ You can then expand on it with more details, adding each interface and it's memb
 
 - Web_Audio_API
 - AudioContext
-
   - AudioContext.currentTime
   - AudioContext.destination
   - AudioContext.listener
@@ -90,7 +90,6 @@ You can then expand on it with more details, adding each interface and it's memb
   - ...
 
 - AudioNode
-
   - AudioNode.context
   - AudioNode.numberOfInputs
   - AudioNode.numberOfOutputs
@@ -100,7 +99,6 @@ You can then expand on it with more details, adding each interface and it's memb
 
 - AudioParam
 - Events (update list)
-
   - start
   - end
   - …

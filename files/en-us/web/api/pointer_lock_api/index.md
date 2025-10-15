@@ -2,7 +2,10 @@
 title: Pointer Lock API
 slug: Web/API/Pointer_Lock_API
 page-type: web-api-overview
-browser-compat: api.Element.requestPointerLock
+browser-compat:
+  - api.Document.exitPointerLock
+  - api.Element.requestPointerLock
+spec-urls: https://w3c.github.io/pointerlock/
 ---
 
 {{DefaultAPISidebar("Pointer Lock API")}}
@@ -15,7 +18,7 @@ Pointer lock lets you access mouse events even when the cursor goes past the bou
 
 ## Basic concepts
 
-Pointer lock is related to [mouse capture](/en-US/docs/Web/API/Element/setCapture). Mouse capture provides continued delivery of events to a target element while a mouse is being dragged, but it stops when the mouse button is released. Pointer lock is different from mouse capture in the following ways:
+Pointer lock is related to [pointer capture](/en-US/docs/Web/API/Pointer_events#pointer_capture). Pointer capture provides continued delivery of events to a target element while a mouse is being dragged, but it stops when the mouse button is released. Pointer lock is different from pointer capture in the following ways:
 
 - It is persistent: Pointer lock does not release the mouse until an explicit API call is made or the user uses a specific release gesture.
 - It is not limited by browser or screen boundaries.
@@ -36,7 +39,8 @@ canvas.addEventListener("click", async () => {
 });
 ```
 
-> **Note:** If a user has exited pointer lock via the [default unlock gesture](https://w3c.github.io/pointerlock/#dfn-default-unlock-gesture), or pointer lock has not previously been entered for this document, an event generated as a result of an [engagement gesture](https://w3c.github.io/pointerlock/#dfn-engagement-gesture) must be received by the document before [`requestPointerLock`](https://w3c.github.io/pointerlock/#dom-element-requestpointerlock) will succeed. (from <https://w3c.github.io/pointerlock/#extensions-to-the-element-interface>)
+> [!NOTE]
+> If a user has exited pointer lock via the [default unlock gesture](https://w3c.github.io/pointerlock/#dfn-default-unlock-gesture), or pointer lock has not previously been entered for this document, an event generated as a result of an [engagement gesture](https://w3c.github.io/pointerlock/#dfn-engagement-gesture) must be received by the document before [`requestPointerLock`](https://w3c.github.io/pointerlock/#dom-element-requestpointerlock) will succeed. (from <https://w3c.github.io/pointerlock/#extensions-to-the-element-interface>)
 
 Operating systems enable mouse acceleration by default, which is useful when you sometimes want slow precise movement (think about you might use a graphics package), but also want to move great distances with a faster mouse movement (think about scrolling, and selecting several files). For some first-person perspective games however, raw mouse input data is preferred for controlling camera rotation — where the same distance movement, fast or slow, results in the same rotation. This results in a better gaming experience and higher accuracy, according to professional gamers.
 
@@ -109,7 +113,7 @@ document.exitPointerLock();
 When the Pointer lock state changes—for example, when calling {{domxref("Element.requestPointerLock","requestPointerLock()")}} or {{domxref("Document.exitPointerLock","exitPointerLock()")}}, the user pressing the ESC key, etc.—the {{domxref("Document/pointerlockchange_event", "pointerlockchange")}} event is dispatched to the `document`. This is a simple event containing no extra data.
 
 ```js
-document.addEventListener("pointerlockchange", lockChangeAlert, false);
+document.addEventListener("pointerlockchange", lockChangeAlert);
 
 function lockChangeAlert() {
   if (document.pointerLockElement === canvas) {
@@ -127,7 +131,7 @@ function lockChangeAlert() {
 When there is an error caused by calling {{domxref("Element.requestPointerLock","requestPointerLock()")}} or {{domxref("Document.exitPointerLock","exitPointerLock()")}}, the {{domxref("Document/pointerlockerror_event", "pointerlockerror")}} event is dispatched to the `document`. This is a simple event containing no extra data.
 
 ```js
-document.addEventListener("pointerlockerror", lockError, false);
+document.addEventListener("pointerlockerror", lockError);
 
 function lockError(e) {
   alert("Pointer lock failed");
@@ -150,7 +154,7 @@ When the mouse is unlocked, the system cursor can exit and re-enter the browser 
 
 ## Simple example walkthrough
 
-We've written a [pointer lock demo](https://mdn.github.io/dom-examples/pointer-lock/) ([see source code](https://github.com/mdn/dom-examples/tree/main/pointer-lock)) to show you how to use it to set up a simple control system. This demo uses JavaScript to draw a ball on top of an {{ htmlelement("canvas") }} element. When you click the canvas, pointer lock is then used to remove the mouse pointer and allow you to move the ball directly using the mouse. Let's see how this works.
+We've written a [pointer lock demo](https://mdn.github.io/dom-examples/pointer-lock/) ([see source code](https://github.com/mdn/dom-examples/tree/main/pointer-lock)) to show you how to use it to set up a simple control system. This demo uses JavaScript to draw a ball on top of a {{ htmlelement("canvas") }} element. When you click the canvas, pointer lock is then used to remove the mouse pointer and allow you to move the ball directly using the mouse. Let's see how this works.
 
 We set initial x and y positions on the canvas:
 
@@ -171,12 +175,13 @@ canvas.addEventListener("click", async () => {
 });
 ```
 
-> **Note:** The above snippet works in browsers that don't support the promise version of `requestPointerLock()`. See [Handling promise and non-promise versions of requestPointerLock()](#handling_promise_and_non-promise_versions_of_requestpointerlock) for an explanation.
+> [!NOTE]
+> The above snippet works in browsers that don't support the promise version of `requestPointerLock()`. See [Handling promise and non-promise versions of requestPointerLock()](#handling_promise_and_non-promise_versions_of_requestpointerlock) for an explanation.
 
 Now for the dedicated pointer lock event listener: `pointerlockchange`. When this occurs, we run a function called `lockChangeAlert()` to handle the change.
 
 ```js
-document.addEventListener("pointerlockchange", lockChangeAlert, false);
+document.addEventListener("pointerlockchange", lockChangeAlert);
 ```
 
 This function checks the `pointerLockElement` property to see if it is our canvas. If so, it attached an event listener to handle the mouse movements with the `updatePosition()` function. If not, it removes the event listener again.
@@ -185,15 +190,15 @@ This function checks the `pointerLockElement` property to see if it is our canva
 function lockChangeAlert() {
   if (document.pointerLockElement === canvas) {
     console.log("The pointer lock status is now locked");
-    document.addEventListener("mousemove", updatePosition, false);
+    document.addEventListener("mousemove", updatePosition);
   } else {
     console.log("The pointer lock status is now unlocked");
-    document.removeEventListener("mousemove", updatePosition, false);
+    document.removeEventListener("mousemove", updatePosition);
   }
 }
 ```
 
-The `updatePosition()` function updates the position of the ball on the canvas (`x` and `y`), and also includes `if ()` statements to check whether the ball has gone off the edges of the canvas. If so, it makes the ball wrap around to the opposite edge. It also includes a check whether a [`requestAnimationFrame()`](/en-US/docs/Web/API/window/requestAnimationFrame) call has previously been made, and if so, calls it again as required, and calls the `canvasDraw()` function that updates the canvas scene. A tracker is also set up to write out the X and Y values to the screen, for reference.
+The `updatePosition()` function updates the position of the ball on the canvas (`x` and `y`), and also includes `if ()` statements to check whether the ball has gone off the edges of the canvas. If so, it makes the ball wrap around to the opposite edge. It also includes a check whether a [`requestAnimationFrame()`](/en-US/docs/Web/API/Window/requestAnimationFrame) call has previously been made, and if so, calls it again as required, and calls the `canvasDraw()` function that updates the canvas scene. A tracker is also set up to write out the X and Y values to the screen, for reference.
 
 ```js
 const tracker = document.getElementById("tracker");
@@ -216,12 +221,10 @@ function updatePosition(e) {
   }
   tracker.textContent = `X position: ${x}, Y position: ${y}`;
 
-  if (!animation) {
-    animation = requestAnimationFrame(() => {
-      animation = null;
-      canvasDraw();
-    });
-  }
+  animation ??= requestAnimationFrame(() => {
+    animation = null;
+    canvasDraw();
+  });
 }
 ```
 
@@ -231,7 +234,7 @@ The `canvasDraw()` function draws the ball in the current `x` and `y` positions:
 function canvasDraw() {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#f00";
+  ctx.fillStyle = "red";
   ctx.beginPath();
   ctx.arc(x, y, RADIUS, 0, degToRad(360), true);
   ctx.fill();

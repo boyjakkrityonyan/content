@@ -6,30 +6,34 @@ page-type: web-api-instance-method
 browser-compat: api.MessagePort.postMessage
 ---
 
-{{APIRef("HTML DOM")}}
+{{APIRef("Channel Messaging API")}} {{AvailableInWorkers}}
 
 The **`postMessage()`** method of the
 {{domxref("MessagePort")}} interface sends a message from the port, and optionally,
 transfers ownership of objects to other browsing contexts.
 
-{{AvailableInWorkers}}
-
 ## Syntax
 
 ```js-nolint
 postMessage(message)
-postMessage(message, options)
 postMessage(message, transfer)
+postMessage(message, options)
 ```
 
 ### Parameters
 
 - `message`
   - : The message you want to send through the channel. This can be of any basic data type. Multiple data items can be sent as an array.
-- `options` {{optional_inline}}
-  - : An optional object containing a `transfer` field with an [array](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) of [transferable objects](/en-US/docs/Web/API/Web_Workers_API/Transferable_objects) to transfer ownership of. The ownership of these objects is given to the destination side and they are no longer usable on the sending side.
+
+    > [!NOTE]
+    > Execution contexts that can message each other may not be in the same [agent cluster](/en-US/docs/Web/JavaScript/Reference/Execution_model#agent_clusters_and_memory_sharing), and therefore cannot share memory. {{jsxref("SharedArrayBuffer")}} objects, or buffer views backed by one, cannot be posted across agent clusters. Trying to do so will generate a {{domxref("BroadcastChannel/messageerror_event", "messageerror")}} event containing a `DataCloneError` {{domxref("DOMException")}} on the receiving end.
+
 - `transfer` {{optional_inline}}
-  - : An optional [array](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) of [transferable objects](/en-US/docs/Web/API/Web_Workers_API/Transferable_objects) to transfer ownership of. The ownership of these objects is given to the destination side and they are no longer usable on the sending side.
+  - : An optional [array](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) of [transferable objects](/en-US/docs/Web/API/Web_Workers_API/Transferable_objects) to transfer ownership of. The ownership of these objects is given to the destination side and they are no longer usable on the sending side. These transferable objects should be attached to the message; otherwise they would be moved but not actually accessible on the receiving end.
+- `options` {{optional_inline}}
+  - : An optional object containing the following properties:
+    - `transfer` {{optional_inline}}
+      - : Has the same meaning as the `transfer` parameter.
 
 ### Return value
 
@@ -53,7 +57,7 @@ const para = document.querySelector("p");
 const ifr = document.querySelector("iframe");
 const otherWindow = ifr.contentWindow;
 
-ifr.addEventListener("load", iframeLoaded, false);
+ifr.addEventListener("load", iframeLoaded);
 
 function iframeLoaded() {
   otherWindow.postMessage("Transferring message port", "*", [channel.port2]);

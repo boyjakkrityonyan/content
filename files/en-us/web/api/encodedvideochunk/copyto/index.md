@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.EncodedVideoChunk.copyTo
 ---
 
-{{APIRef("WebCodecs API")}}
+{{APIRef("WebCodecs API")}}{{AvailableInWorkers("window_and_dedicated")}}
 
 The **`copyTo()`** method of the {{domxref("EncodedVideoChunk")}} interface copies the encoded chunk of video data.
 
@@ -36,7 +36,7 @@ const init = {
   timestamp: 23000000,
   duration: 2000000,
 };
-chunk = EncodedVideoChunk(init);
+const chunk = new EncodedVideoChunk(init);
 
 chunk.copyTo(newBuffer);
 ```

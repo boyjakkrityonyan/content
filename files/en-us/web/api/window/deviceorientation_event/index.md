@@ -6,7 +6,7 @@ page-type: web-api-event
 browser-compat: api.Window.deviceorientation_event
 ---
 
-{{APIRef}}
+{{APIRef("Device Orientation Events")}}{{securecontext_header}}
 
 The **`deviceorientation`** event is fired when fresh data is available from an orientation sensor about the current orientation of the device as compared to the Earth coordinate frame. This data is gathered from a magnetometer inside the device.
 
@@ -18,10 +18,10 @@ This event is not cancelable and does not bubble.
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("deviceorientation", (event) => {});
+```js-nolint
+addEventListener("deviceorientation", (event) => { })
 
-ondeviceorientation = (event) => {};
+ondeviceorientation = (event) => { }
 ```
 
 ## Event type
@@ -62,9 +62,9 @@ if (window.DeviceOrientationEvent) {
   );
 }
 
-const handleOrientationEvent = (frontToBack, leftToRight, rotateDegrees) => {
+function handleOrientationEvent(frontToBack, leftToRight, rotateDegrees) {
   // do something amazing
-};
+}
 ```
 
 ## Specifications

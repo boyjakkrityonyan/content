@@ -2,7 +2,11 @@
 title: Touch events
 slug: Web/API/Touch_events
 page-type: web-api-overview
-browser-compat: api.Touch
+browser-compat:
+  - api.Touch
+  - api.TouchEvent
+  - api.TouchList
+spec-urls: https://w3c.github.io/touch-events/
 ---
 
 {{DefaultAPISidebar("Touch Events")}}
@@ -33,43 +37,43 @@ Touch events are similar to mouse events except they support simultaneous touche
 
 This example tracks multiple touchpoints at a time, allowing the user to draw in a {{HTMLElement("canvas")}} with more than one finger at a time. It will only work on a browser that supports touch events.
 
-> **Note:** The text below uses the term "finger" when describing the contact with the surface, but it could, of course, also be a stylus or other contact method.
+> [!NOTE]
+> The text below uses the term "finger" when describing the contact with the surface, but it could, of course, also be a stylus or other contact method.
 
 ### Create a canvas
 
 ```html
-<canvas id="canvas" width="600" height="600" style="border:solid black 1px;">
+<canvas id="canvas" width="600" height="600">
   Your browser does not support canvas element.
 </canvas>
 <br />
 Log:
-<pre id="log" style="border: 1px solid #ccc;"></pre>
+<pre id="log"></pre>
 ```
 
 ```css
+#canvas {
+  border: 1px solid black;
+}
+
 #log {
   height: 200px;
   width: 600px;
   overflow: scroll;
+  border: 1px solid #cccccc;
 }
 ```
 
 ### Setting up the event handlers
 
-When the page loads, the `startup()` function shown below will be called.
-This sets up all the event listeners for our {{HTMLElement("canvas")}} element so we can handle the touch events as they occur.
+The code sets up all the event listeners for our {{HTMLElement("canvas")}} element so we can handle the touch events as they occur.
 
 ```js
-function startup() {
-  const el = document.getElementById("canvas");
-  el.addEventListener("touchstart", handleStart);
-  el.addEventListener("touchend", handleEnd);
-  el.addEventListener("touchcancel", handleCancel);
-  el.addEventListener("touchmove", handleMove);
-  log("Initialized.");
-}
-
-document.addEventListener("DOMContentLoaded", startup);
+const el = document.getElementById("canvas");
+el.addEventListener("touchstart", handleStart);
+el.addEventListener("touchend", handleEnd);
+el.addEventListener("touchcancel", handleCancel);
+el.addEventListener("touchmove", handleMove);
 ```
 
 #### Tracking new touches
@@ -91,12 +95,13 @@ function handleStart(evt) {
   const touches = evt.changedTouches;
 
   for (let i = 0; i < touches.length; i++) {
+    const touch = touches[i];
     log(`touchstart: ${i}.`);
-    ongoingTouches.push(copyTouch(touches[i]));
-    const color = colorForTouch(touches[i]);
-    log(`color of touch with id ${touches[i].identifier} = ${color}`);
+    ongoingTouches.push(copyTouch(touch));
+    const color = colorForTouch(touch);
+    log(`color of touch with id ${touch.identifier} = ${color}`);
     ctx.beginPath();
-    ctx.arc(touches[i].pageX, touches[i].pageY, 4, 0, 2 * Math.PI, false); // a circle at the start
+    ctx.arc(touch.pageX, touch.pageY, 4, 0, 2 * Math.PI, false); // a circle at the start
     ctx.fillStyle = color;
     ctx.fill();
   }
@@ -118,9 +123,9 @@ function handleMove(evt) {
   const ctx = el.getContext("2d");
   const touches = evt.changedTouches;
 
-  for (let i = 0; i < touches.length; i++) {
-    const color = colorForTouch(touches[i]);
-    const idx = ongoingTouchIndexById(touches[i].identifier);
+  for (const touch of touches) {
+    const color = colorForTouch(touch);
+    const idx = ongoingTouchIndexById(touch.identifier);
 
     if (idx >= 0) {
       log(`continuing touch ${idx}`);
@@ -129,13 +134,13 @@ function handleMove(evt) {
         `ctx.moveTo( ${ongoingTouches[idx].pageX}, ${ongoingTouches[idx].pageY} );`,
       );
       ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
-      log(`ctx.lineTo( ${touches[i].pageX}, ${touches[i].pageY} );`);
-      ctx.lineTo(touches[i].pageX, touches[i].pageY);
+      log(`ctx.lineTo( ${touch.pageX}, ${touch.pageY} );`);
+      ctx.lineTo(touch.pageX, touch.pageY);
       ctx.lineWidth = 4;
       ctx.strokeStyle = color;
       ctx.stroke();
 
-      ongoingTouches.splice(idx, 1, copyTouch(touches[i])); // swap in the new touch record
+      ongoingTouches.splice(idx, 1, copyTouch(touch)); // swap in the new touch record
     } else {
       log("can't figure out which touch to continue");
     }
@@ -161,17 +166,17 @@ function handleEnd(evt) {
   const ctx = el.getContext("2d");
   const touches = evt.changedTouches;
 
-  for (let i = 0; i < touches.length; i++) {
-    const color = colorForTouch(touches[i]);
-    let idx = ongoingTouchIndexById(touches[i].identifier);
+  for (const touch of touches) {
+    const color = colorForTouch(touch);
+    let idx = ongoingTouchIndexById(touch.identifier);
 
     if (idx >= 0) {
       ctx.lineWidth = 4;
       ctx.fillStyle = color;
       ctx.beginPath();
       ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
-      ctx.lineTo(touches[i].pageX, touches[i].pageY);
-      ctx.fillRect(touches[i].pageX - 4, touches[i].pageY - 4, 8, 8); // and a square at the end
+      ctx.lineTo(touch.pageX, touch.pageY);
+      ctx.fillRect(touch.pageX - 4, touch.pageY - 4, 8, 8); // and a square at the end
       ongoingTouches.splice(idx, 1); // remove it; we're done
     } else {
       log("can't figure out which touch to end");
@@ -192,7 +197,7 @@ function handleCancel(evt) {
   log("touchcancel.");
   const touches = evt.changedTouches;
 
-  for (let i = 0; i < touches.length; i++) {
+  for (const touch of touches) {
     let idx = ongoingTouchIndexById(touches[i].identifier);
     ongoingTouches.splice(idx, 1); // remove it; we're done
   }
@@ -224,7 +229,7 @@ function colorForTouch(touch) {
 ```
 
 The result from this function is a string that can be used when calling {{HTMLElement("canvas")}} functions to set drawing colors.
-For example, for a {{domxref("Touch.identifier")}} value of 10, the resulting string is "#a31".
+For example, for a {{domxref("Touch.identifier")}} value of 10, the resulting string is "#aa3311".
 
 #### Copying a touch object
 
@@ -268,7 +273,8 @@ You can test this example on mobile devices by touching the box below.
 
 {{EmbedLiveSample('Example','100%', 900)}}
 
-> **Note:** More generally, the example will work on platforms that provide touch events.
+> [!NOTE]
+> More generally, the example will work on platforms that provide touch events.
 > You can test this on desktop platforms that can simulate such events:
 >
 > - On Firefox enable "touch simulation" in [Responsive Design Mode](https://firefox-source-docs.mozilla.org/devtools-user/responsive_design_mode/index.html#toggling-responsive-design-mode) (you may need to reload the page).

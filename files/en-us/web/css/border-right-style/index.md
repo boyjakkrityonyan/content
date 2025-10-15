@@ -3,15 +3,62 @@ title: border-right-style
 slug: Web/CSS/border-right-style
 page-type: css-property
 browser-compat: css.properties.border-right-style
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **`border-right-style`** [CSS](/en-US/docs/Web/CSS) property sets the line style of an element's right {{cssxref("border")}}.
 
-{{EmbedInteractiveExample("pages/css/border-right-style.html")}}
+{{InteractiveExample("CSS Demo: border-right-style")}}
 
-> **Note:** The specification doesn't define how borders of different styles connect in the corners.
+```css interactive-example-choice
+border-right-style: none;
+```
+
+```css interactive-example-choice
+border-right-style: dotted;
+```
+
+```css interactive-example-choice
+border-right-style: dashed;
+```
+
+```css interactive-example-choice
+border-right-style: solid;
+```
+
+```css interactive-example-choice
+border-right-style: groove;
+```
+
+```css interactive-example-choice
+border-right-style: inset;
+```
+
+```html interactive-example
+<section id="default-example">
+  <div class="transition-all" id="example-element">
+    This is a box with a border around it.
+  </div>
+</section>
+```
+
+```css interactive-example
+#example-element {
+  background-color: #eeeeee;
+  color: black;
+  border: 0.75em solid;
+  padding: 0.75em;
+  width: 80%;
+  height: 100px;
+}
+
+body {
+  background-color: white;
+}
+```
+
+> [!NOTE]
+> The specification doesn't define how borders of different styles connect in the corners.
 
 ## Syntax
 

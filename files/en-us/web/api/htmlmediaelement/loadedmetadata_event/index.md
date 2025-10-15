@@ -14,10 +14,10 @@ The `loadedmetadata` event is fired when the metadata has been loaded.
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("loadedmetadata", (event) => {});
+```js-nolint
+addEventListener("loadedmetadata", (event) => { })
 
-onloadedmetadata = (event) => {};
+onloadedmetadata = (event) => { }
 ```
 
 ## Event type
@@ -67,7 +67,6 @@ video.onloadedmetadata = (event) => {
 - The HTMLMediaElement {{domxref("HTMLMediaElement.seeking_event", 'seeking')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.seeked_event", 'seeked')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.ended_event", 'ended')}} event
-- The HTMLMediaElement {{domxref("HTMLMediaElement.loadedmetadata_event", 'loadedmetadata')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.loadeddata_event", 'loadeddata')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.canplay_event", 'canplay')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.canplaythrough_event", 'canplaythrough')}} event

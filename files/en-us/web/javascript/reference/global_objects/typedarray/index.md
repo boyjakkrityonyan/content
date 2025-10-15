@@ -3,9 +3,8 @@ title: TypedArray
 slug: Web/JavaScript/Reference/Global_Objects/TypedArray
 page-type: javascript-class
 browser-compat: javascript.builtins.TypedArray
+sidebar: jsref
 ---
-
-{{JSRef}}
 
 A **_TypedArray_** object describes an array-like view of an
 underlying [binary data buffer](/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer).
@@ -15,13 +14,11 @@ different global properties, whose values are typed array constructors for speci
 element types, listed below. On the following pages you will find common properties and
 methods that can be used with any typed array containing elements of any type.
 
-{{EmbedInteractiveExample("pages/js/typedarray-constructor.html")}}
-
 ## Description
 
 The `TypedArray` constructor (often referred to as `%TypedArray%` to indicate its "intrinsicness", since it does not correspond to any global exposed to a JavaScript program) serves as the common superclass of all `TypedArray` subclasses. Think about `%TypedArray%` as an "abstract class" providing a common interface of utility methods for all typed array subclasses. This constructor is not directly exposed: there is no global `TypedArray` property. It is only accessible through `Object.getPrototypeOf(Int8Array)` and similar.
 
-When creating an instance of a `TypedArray` subclass (e.g. `Int8Array`), an array buffer is created internally in memory or, if an `ArrayBuffer` object is given as constructor argument, that `ArrayBuffer` is used instead. The buffer address is saved as an internal property of the instance and all the methods of `%TypedArray%.prototype` will set and get values based on that array buffer address.
+When creating an instance of a `TypedArray` subclass (e.g., `Int8Array`), an array buffer is created internally in memory or, if an `ArrayBuffer` object is given as constructor argument, that `ArrayBuffer` is used instead. The buffer address is saved as an internal property of the instance and all the methods of `%TypedArray%.prototype` will set and get values based on that array buffer address.
 
 ### TypedArray objects
 
@@ -34,6 +31,7 @@ When creating an instance of a `TypedArray` subclass (e.g. `Int8Array`), an arra
 | {{jsxref("Uint16Array")}}       | 0 to 65535                            | 2             | `unsigned short`      |
 | {{jsxref("Int32Array")}}        | -2147483648 to 2147483647             | 4             | `long`                |
 | {{jsxref("Uint32Array")}}       | 0 to 4294967295                       | 4             | `unsigned long`       |
+| {{jsxref("Float16Array")}}      | `-65504` to `65504`                   | 2             | N/A                   |
 | {{jsxref("Float32Array")}}      | `-3.4e38` to `3.4e38`                 | 4             | `unrestricted float`  |
 | {{jsxref("Float64Array")}}      | `-1.8e308` to `1.8e308`               | 8             | `unrestricted double` |
 | {{jsxref("BigInt64Array")}}     | -2<sup>63</sup> to 2<sup>63</sup> - 1 | 8             | `bigint`              |
@@ -45,7 +43,7 @@ All typed arrays operate on `ArrayBuffer`s, where you can observe the exact byte
 
 - Unsigned integer arrays (`Uint8Array`, `Uint16Array`, `Uint32Array`, and `BigUint64Array`) store the number directly in binary.
 - Signed integer arrays (`Int8Array`, `Int16Array`, `Int32Array`, and `BigInt64Array`) store the number using [two's complement](https://en.wikipedia.org/wiki/Two's_complement).
-- Floating-point arrays (`Float32Array` and `Float64Array`) store the number using [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) floating-point format. The [`Number`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#number_encoding) reference has more information about the exact format. JavaScript numbers use double precision floating point format by default, which is the same as `Float64Array`. `Float32Array` uses 23 (instead of 52) bits for the mantissa and 8 (instead of 11) bits for the exponent. Note that the spec requires all {{jsxref("NaN")}} values to use the same bit encoding, but the exact bit pattern is implementation-dependent.
+- Floating-point arrays (`Float16Array`, `Float32Array`, and `Float64Array`) store the number using [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) floating-point format. The [`Number`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#number_encoding) reference has more information about the exact format. JavaScript numbers use double precision floating point format by default, which is the same as `Float64Array`. `Float32Array` uses 23 (instead of 52) bits for the mantissa and 8 (instead of 11) bits for the exponent. `Float16Array` uses 10 bits for the mantissa and 5 bits for the exponent. Note that the spec requires all {{jsxref("NaN")}} values to use the same bit encoding, but the exact bit pattern is implementation-dependent.
 - `Uint8ClampedArray` is a special case. It stores the number in binary like `Uint8Array` does, but when you store a number outside the range, it _clamps_ the number to the range 0 to 255 by mathematical value, instead of truncating the most significant bits.
 
 All typed arrays except `Int8Array`, `Uint8Array`, and `Uint8ClampedArray` store each element using multiple bytes. These bytes can either be ordered from most significant to least significant (big-endian) or from least significant to most significant (little-endian). See [Endianness](/en-US/docs/Glossary/Endianness) for more explanation. Typed arrays always use the platform's native byte order. If you want to specify the endianness when writing and reading from buffers, you should use a {{jsxref("DataView")}} instead.
@@ -54,7 +52,7 @@ When writing to these typed arrays, values that are outside the representable ra
 
 - All integer arrays (except `Uint8ClampedArray`) use [fixed-width number conversion](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#fixed-width_number_conversion), which first truncates the decimal part of the number and then takes the lowest bits.
 - `Uint8ClampedArray` first clamps the number to the range 0 to 255 (values greater than 255 become 255 and values less than 0 become 0). It then _rounds_ (instead of flooring) the result to the nearest integer, with half-to-even; meaning if the number is exactly between two integers, it rounds to the nearest even integer. For example, `0.5` becomes `0`, `1.5` becomes `2`, and `2.5` becomes `2`.
-- `Float32Array` performs a "round to even" to convert 64-bit floating point numbers to 32-bit. This is the same algorithm as provided by {{jsxref("Math.fround()")}}.
+- `Float16Array` and `Float32Array` perform a "round to even" to convert 64-bit floating point numbers to 32-bit and 16-bit. This is the same algorithm as provided by {{jsxref("Math.fround()")}} and {{jsxref("Math.f16round()")}}.
 
 ### Behavior when viewing a resizable buffer
 
@@ -151,7 +149,8 @@ new TypedArray(buffer, byteOffset, length)
 
 Where `TypedArray` is a constructor for one of the concrete types.
 
-> **Note:** All `TypedArray` subclasses' constructors can only be constructed with [`new`](/en-US/docs/Web/JavaScript/Reference/Operators/new). Attempting to call one without `new` throws a {{jsxref("TypeError")}}.
+> [!NOTE]
+> All `TypedArray` subclasses' constructors can only be constructed with [`new`](/en-US/docs/Web/JavaScript/Reference/Operators/new). Attempting to call one without `new` throws a {{jsxref("TypeError")}}.
 
 ### Parameters
 
@@ -183,7 +182,7 @@ All `TypeArray` subclass constructors operate in the same way. They would all th
 
 These properties are defined on the `TypedArray` constructor object and are thus shared by all `TypedArray` subclass constructors.
 
-- {{jsxref("TypedArray/@@species", "TypedArray[@@species]")}}
+- [`TypedArray[Symbol.species]`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/Symbol.species)
   - : The constructor function used to create derived objects.
 
 All `TypedArray` subclasses also have the following static properties:
@@ -214,8 +213,8 @@ These properties are defined on `TypedArray.prototype` and shared by all `TypedA
   - : The constructor function that created the instance object. `TypedArray.prototype.constructor` is the hidden `TypedArray` constructor function, but each typed array subclass also defines its own `constructor` property.
 - {{jsxref("TypedArray.prototype.length")}}
   - : Returns the number of elements held in the typed array.
-- `TypedArray.prototype[@@toStringTag]`
-  - : The initial value of the [`TypedArray.prototype[@@toStringTag]`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) property is a getter that returns the same string as the typed array constructor's name. It returns `undefined` if the `this` value is not one of the typed array subclasses. This property is used in {{jsxref("Object.prototype.toString()")}}. However, because `TypedArray` also has its own [`toString()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/toString) method, this property is not used unless you call [`Object.prototype.toString.call()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) with a typed array as `thisArg`.
+- `TypedArray.prototype[Symbol.toStringTag]`
+  - : The initial value of the [`TypedArray.prototype[Symbol.toStringTag]`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) property is a getter that returns the same string as the typed array constructor's name. It returns `undefined` if the `this` value is not one of the typed array subclasses. This property is used in {{jsxref("Object.prototype.toString()")}}. However, because `TypedArray` also has its own [`toString()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/toString) method, this property is not used unless you call [`Object.prototype.toString.call()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) with a typed array as `thisArg`.
 
 All `TypedArray` subclasses also have the following instance properties:
 
@@ -233,7 +232,7 @@ These methods are defined on the `TypedArray` prototype object and are thus shar
 - {{jsxref("TypedArray.prototype.entries()")}}
   - : Returns a new _array iterator_ object that contains the key/value pairs for each index in the array. See also {{jsxref("Array.prototype.entries()")}}.
 - {{jsxref("TypedArray.prototype.every()")}}
-  - : Tests whether all elements in the array pass the test provided by a function. See also {{jsxref("Array.prototype.every()")}}.
+  - : Returns `false` if it finds one element in the array that does not satisfy the provided testing function. Otherwise, it returns `true`. See also {{jsxref("Array.prototype.every()")}}.
 - {{jsxref("TypedArray.prototype.fill()")}}
   - : Fills all the elements of an array from a start index to an end index with a static value. See also {{jsxref("Array.prototype.fill()")}}.
 - {{jsxref("TypedArray.prototype.filter()")}}
@@ -271,7 +270,7 @@ These methods are defined on the `TypedArray` prototype object and are thus shar
 - {{jsxref("TypedArray.prototype.slice()")}}
   - : Extracts a section of an array and returns a new array. See also {{jsxref("Array.prototype.slice()")}}.
 - {{jsxref("TypedArray.prototype.some()")}}
-  - : Returns `true` if at least one element in this array satisfies the provided testing function. See also {{jsxref("Array.prototype.some()")}}.
+  - : Returns `true` if it finds one element in the array that satisfies the provided testing function. Otherwise, it returns `false`. See also {{jsxref("Array.prototype.some()")}}.
 - {{jsxref("TypedArray.prototype.sort()")}}
   - : Sorts the elements of an array in place and returns the array. See also {{jsxref("Array.prototype.sort()")}}.
 - {{jsxref("TypedArray.prototype.subarray()")}}
@@ -288,7 +287,7 @@ These methods are defined on the `TypedArray` prototype object and are thus shar
   - : Returns a new _array iterator_ object that contains the values for each index in the array. See also {{jsxref("Array.prototype.values()")}}.
 - {{jsxref("TypedArray.prototype.with()")}}
   - : Returns a new array with the element at the given index replaced with the given value, without modifying the original array.
-- [`TypedArray.prototype[@@iterator]()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/@@iterator)
+- [`TypedArray.prototype[Symbol.iterator]()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/Symbol.iterator)
   - : Returns a new _array iterator_ object that contains the values for each index in the array.
 
 ## Examples

@@ -10,15 +10,17 @@ browser-compat: api.IDBTransaction.error_event
 
 The `error` event is fired on `IDBTransaction` when a request returns an error and the event bubbles up to the transaction object.
 
-> **Note:** To handle all the ways a transaction can fail, consider listening for the {{domxref("IDBTransaction.abort_event", "abort")}} event instead.
+> [!NOTE]
+> To handle all the ways a transaction can fail, consider listening for the {{domxref("IDBTransaction.abort_event", "abort")}} event instead.
 
 ## Syntax
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("error", (event) => {});
-onerror = (event) => {};
+```js-nolint
+addEventListener("error", (event) => { })
+
+onerror = (event) => { }
 ```
 
 ## Event type
@@ -29,7 +31,7 @@ A generic {{domxref("Event")}}.
 
 This event bubbles to {{domxref("IDBDatabase")}}. The `event.target` property refers to the {{domxref('IDBTransaction')}} object that bubbles up.
 
-For more information, see [Event bubbling and capture](/en-US/docs/Learn/JavaScript/Building_blocks/Events#event_bubbling_and_capture).
+For more information, see [Event bubbling](/en-US/docs/Learn_web_development/Core/Scripting/Event_bubbling).
 
 ## Examples
 
@@ -61,10 +63,6 @@ dBOpenRequest.onsuccess = (event) => {
   // open a read/write db transaction, ready for adding the data
   const transaction = db.transaction(["toDoList"], "readwrite");
 
-  transaction.addEventListener("error", () => {
-    console.log(`Error adding new item: ${newItem.taskTitle}`);
-  });
-
   const objectStore = transaction.objectStore("toDoList");
   const newItem = {
     taskTitle: "my task",
@@ -74,6 +72,10 @@ dBOpenRequest.onsuccess = (event) => {
     month: "January",
     year: 2020,
   };
+
+  transaction.addEventListener("error", () => {
+    console.log(`Error adding new item: ${newItem.taskTitle}`);
+  });
 
   const objectStoreRequest = objectStore.add(newItem);
 };
@@ -107,10 +109,6 @@ dBOpenRequest.onsuccess = (event) => {
   // open a read/write db transaction, ready for adding the data
   const transaction = db.transaction(["toDoList"], "readwrite");
 
-  transaction.onerror = () => {
-    console.log(`Error adding new item: ${newItem.taskTitle}`);
-  };
-
   const objectStore = transaction.objectStore("toDoList");
   const newItem = {
     taskTitle: "my task",
@@ -121,9 +119,17 @@ dBOpenRequest.onsuccess = (event) => {
     year: 2020,
   };
 
+  transaction.onerror = () => {
+    console.log(`Error adding new item: ${newItem.taskTitle}`);
+  };
+
   const objectStoreRequest = objectStore.add(newItem);
 };
 ```
+
+## Specifications
+
+{{Specifications}}
 
 ## Browser compatibility
 

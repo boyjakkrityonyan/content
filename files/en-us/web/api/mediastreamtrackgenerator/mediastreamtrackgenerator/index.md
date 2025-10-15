@@ -21,14 +21,14 @@ new MediaStreamTrackGenerator(options)
 
 ### Parameters
 
-- `options`
+- `options` {{Experimental_Inline}} {{Non-standard_Inline}}
   - : An object containing the property `kind`, which is one of the following strings:
     - `"audio"`
       - : Specifies that the stream accepts {{domxref("AudioTrack")}} objects.
     - `"video"`
       - : Specifies that the stream accepts {{domxref("VideoTrack")}} objects.
 
-## Exceptions
+### Exceptions
 
 - {{jsxref("TypeError")}}
   - : Thrown if `init.kind` is not `"video"` or `"audio"`.
@@ -51,4 +51,4 @@ const trackGenerator = new MediaStreamTrackGenerator({ kind: "video" });
 
 ## See also
 
-- [Insertable streams for MediaStreamTrack](https://web.dev/mediastreamtrack-insertable-media-processing/)
+- [Insertable streams for MediaStreamTrack](https://developer.chrome.com/docs/capabilities/web-apis/mediastreamtrack-insertable-media-processing)

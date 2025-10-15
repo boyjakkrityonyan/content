@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.CanvasRenderingContext2D.strokeText
 ---
 
-{{APIRef}}
+{{APIRef("Canvas API")}}
 
 The {{domxref("CanvasRenderingContext2D")}} method
 **`strokeText()`**, part of the Canvas 2D API, strokes — that
@@ -20,7 +20,8 @@ subsequent {{domxref("CanvasRenderingContext2D.fill()", "fill()")}} or
 {{domxref("CanvasRenderingContext2D.stroke()", "stroke()")}} calls will have no effect
 on it.
 
-> **Note:** Use the {{domxref('CanvasRenderingContext2D.fillText()', 'fillText()')}} method to
+> [!NOTE]
+> Use the {{domxref('CanvasRenderingContext2D.fillText()', 'fillText()')}} method to
 > fill the text characters rather than having just their outlines drawn.
 
 ## Syntax

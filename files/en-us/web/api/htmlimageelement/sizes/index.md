@@ -10,7 +10,7 @@ browser-compat: api.HTMLImageElement.sizes
 
 The {{domxref("HTMLImageElement")}} property
 **`sizes`** allows you to specify the layout width of the
-image for each of a list of media conditions. This provides the ability to
+[image](/en-US/docs/Web/HTML/Reference/Elements/img) for each of a list of media conditions. This provides the ability to
 automatically select among different images—even images of different orientations or
 aspect ratios—as the document state changes to match different media
 conditions.
@@ -21,32 +21,12 @@ by [media queries](/en-US/docs/Web/CSS/CSS_media_queries).
 ## Value
 
 A string containing a comma-separated list of source size descriptors
-followed by an optional fallback size. Each **source size descriptor** is
+followed by an optional fallback size. Each source size descriptor is
 comprised of a media condition, then at least one whitespace character, then the
-**source size value** to use for the image when the media condition
+source size value to use for the image when the media condition
 evaluates to `true`.
-
-### Media conditions
-
-Each source size descriptor consists of a media condition as defined by the media
-queries standard. Because a source size descriptor is used to specify the width to use
-for the image during layout of the page, the media condition is typically (but not
-necessarily) based entirely on width information. See
-[Using media queries, Syntax](/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries#syntax) for
-details on how to construct a media condition.
-
-### Source size values
-
-The source size value is a [CSS length](/en-US/docs/Web/CSS/length). It may
-be specified using font-relative units (such as `em` or `ex`),
-absolute units (such as `px` or `cm`), or the `vw`
-unit, which lets you specify the width as a percentage of the viewport width
-(`1vw` being 1% of the viewport width).
-
-> **Note:** The source size value must _not_ be specified as a
-> percentage of the container size; that is, lengths such as `50%` or
-> `100%` are not allowed, as there would be uncertainty as to what the
-> specified value is a percentage of.
+You can use the value `auto` to replace the whole list of sizes or the first entry in the list.
+For more information about the syntax of the `sizes` attribute, see [`<img>`](/en-US/docs/Web/HTML/Reference/Elements/img#sizes).
 
 ## Examples
 
@@ -58,8 +38,8 @@ versions of the image are also available, with their widths specified. The brows
 all of this information and selects an image and width that best meets the specified
 values.
 
-How exactly the images are used may depend upon the browser and what the pixel density
-of the user's display is.
+How exactly the images are used may depend upon the browser and the pixel density
+of the user's display.
 
 Buttons at the bottom of the example let you actually modify the `sizes`
 property slightly, switching the largest of the three widths for the image between 40em
@@ -82,9 +62,9 @@ and 50em.
       new-york-skyline-4by3.jpg 1961w,
       new-york-skyline-tall.jpg 1060w
     "
-    sizes="((min-width: 50em) and (max-width: 60em)) 50em,
-              ((min-width: 30em) and (max-width: 50em)) 30em,
-              (max-width: 30em) 20em"
+    sizes="(50em <= width <= 60em) 50em,
+              (30em <= width < 50em) 30em,
+              (width < 30em) 20em"
     alt="The New York City skyline on a beautiful day, with the One World Trade Center building in the middle." />
   <p>
     Then there's even more amazing stuff to say down here. Can you believe it? I
@@ -108,17 +88,17 @@ article {
   padding: 1.5em;
   font:
     16px "Open Sans",
-    Verdana,
-    Arial,
-    Helvetica,
+    "Verdana",
+    "Helvetica",
+    "Arial",
     sans-serif;
 }
 
 article img {
   display: block;
   max-width: 100%;
-  border: 1px solid #888;
-  box-shadow: 0 0.5em 0.3em #888;
+  border: 1px solid #888888;
+  box-shadow: 0 0.5em 0.3em #888888;
   margin-bottom: 1.25em;
 }
 ```
@@ -126,9 +106,8 @@ article img {
 #### JavaScript
 
 The JavaScript code handles the two buttons that let you toggle the third width option
-between 40em and 50em; this is done by handling the {{domxref("Element.click_event",
-  "click")}} event, using the JavaScript string object method {{jsxref("String.replace",
-  "replace()")}} to replace the relevant portion of the `sizes` string.
+between 40em and 50em; this is done by handling the {{domxref("Element.click_event", "click")}}
+event, using the JavaScript string {{jsxref("String.replace", "replace()")}} method to replace the relevant portion of the `sizes` string.
 
 ```js
 const image = document.querySelector("article img");
@@ -164,5 +143,6 @@ The page is best {{LiveSampleLink('Selecting an image to fit window width', 'vie
 
 - [Media queries](/en-US/docs/Web/CSS/CSS_media_queries)
 - [Using media queries](/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries)
-- [Images in HTML](/en-US/docs/Learn/HTML/Multimedia_and_embedding/Images_in_HTML)
-- [Responsive images](/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
+- [HTML images](/en-US/docs/Learn_web_development/Core/Structuring_content/HTML_images)
+- [Responsive images](/en-US/docs/Web/HTML/Guides/Responsive_images)
+- [Using the `srcset` and `sizes` attributes](/en-US/docs/Web/HTML/Reference/Elements/img#using_the_srcset_and_sizes_attributes)

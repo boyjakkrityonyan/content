@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.WritableStreamDefaultController.error
 ---
 
-{{APIRef("Streams")}}
+{{APIRef("Streams")}}{{AvailableInWorkers}}
 
 The **`error()`** method of the
 {{domxref("WritableStreamDefaultController")}} interface causes any future interactions
@@ -49,13 +49,13 @@ const writableStream = new WritableStream({
     controller.error("My error is broken");
   },
   write(chunk, controller) {
-    // ...
+    // …
   },
   close(controller) {
-    // ...
+    // …
   },
   abort(err) {
-    // ...
+    // …
   },
 });
 ```

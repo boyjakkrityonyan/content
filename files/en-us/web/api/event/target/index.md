@@ -6,7 +6,7 @@ page-type: web-api-instance-property
 browser-compat: api.Event.target
 ---
 
-{{ApiRef("DOM")}}
+{{APIRef("DOM")}}{{AvailableInWorkers}}
 
 The read-only **`target`** property of the
 {{domxref("Event")}} interface is a reference to the object onto which the event was
@@ -34,13 +34,13 @@ ul.appendChild(li2);
 
 function hide(evt) {
   // evt.target refers to the clicked <li> element
-  // This is different than evt.currentTarget, which would refer to the parent <ul> in this context
+  // This is different from evt.currentTarget, which would refer to the parent <ul> in this context
   evt.target.style.visibility = "hidden";
 }
 
 // Attach the listener to the list
 // It will fire when each <li> is clicked
-ul.addEventListener("click", hide, false);
+ul.addEventListener("click", hide);
 ```
 
 ## Specifications
@@ -53,4 +53,4 @@ ul.addEventListener("click", hide, false);
 
 ## See also
 
-- [Comparison of Event Targets](/en-US/docs/Web/API/Event/Comparison_of_Event_Targets)
+- [Learn: Event bubbling](/en-US/docs/Learn_web_development/Core/Scripting/Event_bubbling)

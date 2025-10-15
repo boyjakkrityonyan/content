@@ -3,19 +3,15 @@ title: browserSettings.ftpProtocolEnabled
 slug: Mozilla/Add-ons/WebExtensions/API/browserSettings/ftpProtocolEnabled
 page-type: webextension-api-property
 browser-compat: webextensions.api.browserSettings.ftpProtocolEnabled
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 A {{WebExtAPIRef("types.BrowserSetting", "BrowserSetting")}} object that determines whether the FTP protocol is enabled in the browser.
 
 The underlying value is a boolean.
 
-> **Note:** From Firefox version 88 this setting is read-only.
-
-## Browser compatibility
-
-{{Compat}}
+> [!NOTE]
+> From Firefox version 88 this setting is read-only.
 
 ## Examples
 
@@ -37,3 +33,7 @@ browser.browserAction.onClicked.addListener(() => {
 ```
 
 {{WebExtExamples}}
+
+## Browser compatibility
+
+{{Compat}}

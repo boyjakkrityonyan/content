@@ -5,7 +5,7 @@ page-type: web-api-interface
 browser-compat: api.ReadableStreamDefaultController
 ---
 
-{{APIRef("Streams")}}
+{{APIRef("Streams")}}{{AvailableInWorkers}}
 
 The **`ReadableStreamDefaultController`** interface of the [Streams API](/en-US/docs/Web/API/Streams_API) represents a controller allowing control of a {{domxref("ReadableStream")}}'s state and internal queue. Default controllers are for streams that are not byte streams.
 
@@ -31,7 +31,7 @@ None. `ReadableStreamDefaultController` instances are created automatically duri
 
 In the following simple example, a custom `ReadableStream` is created using a constructor (see our [Simple random stream example](https://mdn.github.io/dom-examples/streams/simple-random-stream/) for the full code). The `start()` function generates a random string of text every second and enqueues it into the stream. A `cancel()` function is also provided to stop the generation if {{domxref("ReadableStream.cancel()")}} is called for any reason.
 
-Note that a {{domxref("ReadableStreamDefaultController")}} object is provided as the parameter of the `start()` and `pull()` functions.
+Note that a `ReadableStreamDefaultController` object is provided as the parameter of the `start()` and `pull()` functions.
 
 When a button is pressed, the generation is stopped, the stream is closed using {{domxref("ReadableStreamDefaultController.close()")}}, and another function is run, which reads the data back out of the stream.
 
@@ -81,5 +81,4 @@ const stream = new ReadableStream({
 - [Streams API concepts](/en-US/docs/Web/API/Streams_API)
 - [Using readable streams](/en-US/docs/Web/API/Streams_API/Using_readable_streams)
 - {{domxref("ReadableStream")}}
-- [WHATWG Stream Visualizer](https://whatwg-stream-visualizer.glitch.me/), for a basic visualization of readable, writable, and transform streams.
-- [Web-streams-polyfill](https://github.com/MattiasBuelens/web-streams-polyfill) or [sd-streams](https://github.com/stardazed/sd-streams) - polyfills
+- [Web-streams-polyfill](https://github.com/MattiasBuelens/web-streams-polyfill)

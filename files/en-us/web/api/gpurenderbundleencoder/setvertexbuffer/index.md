@@ -3,17 +3,16 @@ title: "GPURenderBundleEncoder: setVertexBuffer() method"
 short-title: setVertexBuffer()
 slug: Web/API/GPURenderBundleEncoder/setVertexBuffer
 page-type: web-api-instance-method
-status:
-  - experimental
 browser-compat: api.GPURenderBundleEncoder.setVertexBuffer
 ---
 
-{{APIRef("WebGPU API")}}{{SeeCompatTable}}
+{{APIRef("WebGPU API")}}{{SecureContext_Header}}{{AvailableInWorkers}}
 
 The **`setVertexBuffer()`** method of the
 {{domxref("GPURenderBundleEncoder")}} interface sets or unsets the current {{domxref("GPUBuffer")}} for the given slot that will provide vertex data for subsequent drawing commands.
 
-> **Note:** This method is functionally identical to its equivalent on {{domxref("GPURenderPassEncoder")}} — {{domxref("GPURenderPassEncoder.setVertexBuffer", "setVertexBuffer()")}}.
+> [!NOTE]
+> This method is functionally identical to its equivalent on {{domxref("GPURenderPassEncoder")}} — {{domxref("GPURenderPassEncoder.setVertexBuffer", "setVertexBuffer()")}}.
 
 ## Syntax
 
@@ -50,9 +49,7 @@ The following criteria must be met when calling **`setVertexBuffer()`**, otherwi
 ### Set vertex buffer
 
 ```js
-function recordRenderPass(
-  passEncoder: GPURenderBundleEncoder | GPURenderPassEncoder // TypeScript
-) {
+function recordRenderPass(passEncoder) {
   if (settings.dynamicOffsets) {
     passEncoder.setPipeline(dynamicPipeline);
   } else {
@@ -73,7 +70,7 @@ function recordRenderPass(
 }
 ```
 
-The above snippet is taken from the WebGPU Samples [Animometer example](https://webgpu.github.io/webgpu-samples/samples/animometer).
+The above snippet is taken from the WebGPU Samples [Animometer example](https://webgpu.github.io/webgpu-samples/samples/animometer/).
 
 ### Unset vertex buffer
 

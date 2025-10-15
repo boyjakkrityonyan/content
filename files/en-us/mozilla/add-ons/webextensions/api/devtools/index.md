@@ -3,15 +3,15 @@ title: devtools
 slug: Mozilla/Add-ons/WebExtensions/API/devtools
 page-type: webextension-api
 browser-compat: webextensions.api.devtools
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar}}
 
 Enables extensions to interact with the browser's {{Glossary("Developer Tools")}}. You use this API to create Developer Tools pages, interact with the window that is being inspected, inspect the page network usage.
 
 To use this API, you must specify the [`devtools_page`](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/devtools_page) manifest key. The use of this manifest key triggers [an install-time permission warning about devtools](https://support.mozilla.org/en-US/kb/permission-request-messages-firefox-extensions#w_extend-developer-tools-to-access-your-data-in-open-tabs). To avoid an install-time permission warning, mark the feature as optional by listing the `"devtools"` permission in the [`optional_permissions`](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/optional_permissions) manifest key.
 
-> NOTE: The "devtools" optional permission is only supported by Firefox and not Chrome ([Chromium issue 1143015](https://crbug.com/1143015)).
+> [!NOTE]
+> The "devtools" optional permission is only supported by Firefox and not Chrome ([Chromium issue 1143015](https://crbug.com/1143015)).
 
 ## Properties
 
@@ -26,7 +26,8 @@ To use this API, you must specify the [`devtools_page`](/en-US/docs/Mozilla/Add-
 
 {{Compat}}
 
-> **Note:** This API is based on Chromium's [`chrome.devtools`](https://developer.chrome.com/docs/extensions/mv2/devtools/) API.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.devtools`](https://developer.chrome.com/docs/extensions/mv2/devtools/) API.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

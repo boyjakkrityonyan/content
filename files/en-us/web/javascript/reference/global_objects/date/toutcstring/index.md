@@ -1,15 +1,22 @@
 ---
 title: Date.prototype.toUTCString()
+short-title: toUTCString()
 slug: Web/JavaScript/Reference/Global_Objects/Date/toUTCString
 page-type: javascript-instance-method
 browser-compat: javascript.builtins.Date.toUTCString
+sidebar: jsref
 ---
-
-{{JSRef}}
 
 The **`toUTCString()`** method of {{jsxref("Date")}} instances returns a string representing this date in the [RFC 7231](https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.1.1) format, with negative years allowed. The timezone is always UTC. `toGMTString()` is an alias of this method.
 
-{{EmbedInteractiveExample("pages/js/date-toutcstring.html", "shorter")}}
+{{InteractiveExample("JavaScript Demo: Date.prototype.toUTCString()", "shorter")}}
+
+```js interactive-example
+const event = new Date("14 Jun 2017 00:00:00 PDT");
+
+console.log(event.toUTCString());
+// Expected output: "Wed, 14 Jun 2017 07:00:00 GMT"
+```
 
 ## Syntax
 
@@ -27,15 +34,15 @@ A string representing the given date using the UTC time zone (see description fo
 
 ## Description
 
-The value returned by `toUTCString()` is a string in the form `Www, dd Mmm yyyy hh:mm:ss GMT`, where:
+The value returned by `toUTCString()` is a string in the form `Www, dd Mmm yyyy HH:mm:ss GMT`, where:
 
 | Format String | Description                                                  |
 | ------------- | ------------------------------------------------------------ |
-| `Www`         | Day of week, as three letters (e.g. `Sun`, `Mon`)            |
+| `Www`         | Day of week, as three letters (e.g., `Sun`, `Mon`)           |
 | `dd`          | Day of month, as two digits with leading zero if required    |
-| `Mmm`         | Month, as three letters (e.g. `Jan`, `Feb`)                  |
+| `Mmm`         | Month, as three letters (e.g., `Jan`, `Feb`)                 |
 | `yyyy`        | Year, as four or more digits with leading zeroes if required |
-| `hh`          | Hour, as two digits with leading zero if required            |
+| `HH`          | Hour, as two digits with leading zero if required            |
 | `mm`          | Minute, as two digits with leading zero if required          |
 | `ss`          | Seconds, as two digits with leading zero if required         |
 

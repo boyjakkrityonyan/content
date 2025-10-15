@@ -25,6 +25,9 @@ _This interface also inherits properties defined on its parent interface, {{domx
   - : Returns a double that represents the ever-increasing context time of the audio block being processed. It is equal to the {{domxref("BaseAudioContext.currentTime", "currentTime")}} property of the {{domxref("BaseAudioContext")}} the worklet belongs to.
 - {{domxref("AudioWorkletGlobalScope.sampleRate", "sampleRate")}} {{ReadOnlyInline}}
   - : Returns a float that represents the sample rate of the associated {{domxref("BaseAudioContext")}}.
+- {{domxref("AudioWorkletGlobalScope.port", "port")}} {{ReadOnlyInline}} {{experimental_inline}}
+  - : Returns a {{domxref("MessagePort")}} for custom, asynchronous communication between code in the main thread and the global scope of an audio worklet.
+    This allows for custom messages, such as sending and receiving control data or global settings.
 
 ## Instance methods
 
@@ -71,7 +74,7 @@ console.log(usefulVariable);
 registerProcessor("test-processor", TestProcessor);
 ```
 
-Next, in our main scripts file we'll load the processor, create an instance of {{domxref("AudioWorkletNode")}} — passing the name of the processor to it — and connect the node to an audio graph. We should see the output of {{domxref("console.log()")}} calls in the console:
+Next, in our main scripts file we'll load the processor, create an instance of {{domxref("AudioWorkletNode")}} — passing the name of the processor to it — and connect the node to an audio graph. We should see the output of {{domxref("console/log_static", "console.log()")}} calls in the console:
 
 ```js
 const audioContext = new AudioContext();

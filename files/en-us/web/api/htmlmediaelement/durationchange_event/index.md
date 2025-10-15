@@ -14,10 +14,10 @@ The `durationchange` event is fired when the `duration` attribute has been updat
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("durationchange", (event) => {});
+```js-nolint
+addEventListener("durationchange", (event) => { })
 
-ondurationchange = (event) => {};
+ondurationchange = (event) => { }
 ```
 
 ## Event type
@@ -67,7 +67,6 @@ video.ondurationchange = (event) => {
 - The HTMLMediaElement {{domxref("HTMLMediaElement.loadeddata_event", 'loadeddata')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.canplay_event", 'canplay')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.canplaythrough_event", 'canplaythrough')}} event
-- The HTMLMediaElement {{domxref("HTMLMediaElement.durationchange_event", 'durationchange')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.timeupdate_event", 'timeupdate')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.play_event", 'play')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.pause_event", 'pause')}} event

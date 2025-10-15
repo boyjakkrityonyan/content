@@ -6,9 +6,9 @@ page-type: web-api-event
 browser-compat: api.FileReader.abort_event
 ---
 
-{{APIRef}}
+{{APIRef("File API")}}{{AvailableInWorkers}}
 
-The `abort` event is fired when a read has been aborted: for instance because the program called {{domxref("FileReader.abort()")}}.
+The **`abort`** event of the {{domxref("FileReader")}} interface is fired when a read has been aborted: for instance because the program called {{domxref("FileReader.abort()")}}.
 
 This event is not cancelable and does not bubble.
 
@@ -16,10 +16,10 @@ This event is not cancelable and does not bubble.
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("abort", (event) => {});
+```js-nolint
+addEventListener("abort", (event) => { })
 
-onabort = (event) => {};
+onabort = (event) => { }
 ```
 
 ## Event type

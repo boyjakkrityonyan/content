@@ -8,7 +8,7 @@ status:
 browser-compat: api.ServiceWorkerGlobalScope.backgroundfetchabort_event
 ---
 
-{{APIRef("Background Fetch API")}}{{SeeCompatTable}}
+{{APIRef("Background Fetch API")}}{{SeeCompatTable}}{{SecureContext_Header}}{{AvailableInWorkers("service")}}
 
 The **`backgroundfetchabort`** event of the {{domxref("ServiceWorkerGlobalScope")}} interface is fired when the user or the app itself cancels a [background fetch](/en-US/docs/Web/API/Background_Fetch_API) operation.
 
@@ -18,10 +18,10 @@ This event is not cancelable and does not bubble.
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("backgroundfetchabort", (event) => {});
+```js-nolint
+addEventListener("backgroundfetchabort", (event) => { })
 
-onbackgroundfetchabort = (event) => {};
+onbackgroundfetchabort = (event) => { }
 ```
 
 ## Event type

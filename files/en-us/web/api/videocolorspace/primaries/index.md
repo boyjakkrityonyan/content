@@ -6,7 +6,7 @@ page-type: web-api-instance-property
 browser-compat: api.VideoColorSpace.primaries
 ---
 
-{{DefaultAPISidebar("WebCodecs API")}}
+{{APIRef("WebCodecs API")}}{{AvailableInWorkers("window_and_dedicated")}}
 
 The **`primaries`** read-only property of the {{domxref("VideoColorSpace")}} interface returns the color {{glossary("gamut")}} of the video.
 
@@ -20,6 +20,8 @@ A string containing one of the following values:
   - : Color primaries used by BT.601 PAL.
 - `"smpte170m"`
   - : Color primaries used by BT.601 NTSC.
+- `"bt2020"`
+  - : Color primaries used by BT.2020 and BT.2100.
 
 ## Examples
 

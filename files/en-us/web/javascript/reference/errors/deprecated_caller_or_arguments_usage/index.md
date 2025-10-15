@@ -1,14 +1,13 @@
 ---
-title: "ReferenceError: deprecated caller or arguments usage"
+title: "TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed"
 slug: Web/JavaScript/Reference/Errors/Deprecated_caller_or_arguments_usage
 page-type: javascript-error
+sidebar: jssidebar
 ---
 
-{{jsSidebar("Errors")}}
-
 The JavaScript [strict mode](/en-US/docs/Web/JavaScript/Reference/Strict_mode)-only exception
-"deprecated caller or arguments usage" occurs when the
-deprecated {{jsxref("Function.prototype.caller")}} or {{jsxref("Function.prototype.arguments")}} properties
+"'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them" occurs when the
+deprecated {{jsxref("Functions/arguments/callee", "arguments.callee")}}, {{jsxref("Function.prototype.caller")}}, or {{jsxref("Function.prototype.arguments")}} properties
 are used.
 
 ## Message
@@ -24,8 +23,8 @@ TypeError: 'arguments', 'callee', and 'caller' cannot be accessed in this contex
 
 ## What went wrong?
 
-In [strict mode](/en-US/docs/Web/JavaScript/Reference/Strict_mode), the
-{{jsxref("Function.prototype.caller")}} or {{jsxref("Function.prototype.arguments")}} properties are used
+In [strict mode](/en-US/docs/Web/JavaScript/Reference/Strict_mode), the {{jsxref("Functions/arguments/callee", "arguments.callee")}},
+{{jsxref("Function.prototype.caller")}}, or {{jsxref("Function.prototype.arguments")}} properties are used
 and shouldn't be. They are deprecated, because they leak the function caller, are
 non-standard, hard to optimize and potentially a performance-harmful feature.
 
@@ -43,9 +42,8 @@ are deprecated (see the reference articles for more information).
 function myFunc() {
   if (myFunc.caller === null) {
     return "The function was called from the top!";
-  } else {
-    return `This function's caller was ${myFunc.caller}`;
   }
+  return `This function's caller was ${myFunc.caller}`;
 }
 
 myFunc();

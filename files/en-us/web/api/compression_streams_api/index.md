@@ -5,11 +5,19 @@ page-type: web-api-overview
 browser-compat: api.CompressionStream
 ---
 
-{{DefaultAPISidebar("Compression Streams API")}}
+{{DefaultAPISidebar("Compression Streams API")}}{{AvailableInWorkers}}
 
 The **Compression Streams API** provides a JavaScript API for compressing and decompressing streams of data using the gzip or deflate formats.
 
 Built in compression means that JavaScript applications will not need to include a compression library, which makes the download size of the application smaller.
+
+The Fetch API's {{domxref("Response")}} can be used to convert streams to:
+
+- {{jsxref("ArrayBuffer")}}
+- {{domxref("Blob")}}
+- {{jsxref("Uint8Array")}}
+- {{jsxref("String")}}
+- JSON
 
 ## Interfaces
 

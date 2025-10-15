@@ -3,9 +3,8 @@ title: history.search()
 slug: Mozilla/Add-ons/WebExtensions/API/history/search
 page-type: webextension-api-function
 browser-compat: webextensions.api.history.search
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Searches the browser's history for {{WebExtAPIRef("history.HistoryItem")}} objects matching the given criteria.
 
@@ -22,11 +21,8 @@ let searching = browser.history.search(
 ### Parameters
 
 - `query`
-
   - : An object which indicates what to look for in the browser's history. This object has the following fields:
-
     - `text`
-
       - : `string`. Search history items by URL and title. The string is split up into separate search terms at space boundaries. Each search term is matched case-insensitively against the history item's URL and title. The history item will be returned if all search terms match.
 
         For example, consider this item:
@@ -114,7 +110,8 @@ browser.history
 
 {{Compat}}
 
-> **Note:** This API is based on Chromium's [`chrome.history`](https://developer.chrome.com/docs/extensions/reference/history/#method-search) API. This documentation is derived from [`history.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/history.json) in the Chromium code.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.history`](https://developer.chrome.com/docs/extensions/reference/api/history#method-search) API. This documentation is derived from [`history.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/history.json) in the Chromium code.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

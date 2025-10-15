@@ -1,21 +1,35 @@
 ---
 title: Symbol.search
+short-title: search
 slug: Web/JavaScript/Reference/Global_Objects/Symbol/search
 page-type: javascript-static-data-property
 browser-compat: javascript.builtins.Symbol.search
+sidebar: jsref
 ---
 
-{{JSRef}}
+The **`Symbol.search`** static data property represents the [well-known symbol](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol#well-known_symbols) `Symbol.search`. The {{jsxref("String.prototype.search()")}} method looks up this symbol on its first argument for the method that returns the index within a string that matches the current object.
 
-The **`Symbol.search`** static data property represents the [well-known symbol](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol#well-known_symbols) `@@search`. The {{jsxref("String.prototype.search()")}} method looks up this symbol on its first argument for the method that returns the index within a string that matches the current object.
+For more information, see [`RegExp.prototype[Symbol.search]()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/Symbol.search) and {{jsxref("String.prototype.search()")}}.
 
-For more information, see [`RegExp.prototype[@@search]()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/@@search) and {{jsxref("String.prototype.search()")}}.
+{{InteractiveExample("JavaScript Demo: Symbol.search")}}
 
-{{EmbedInteractiveExample("pages/js/symbol-search.html")}}
+```js interactive-example
+class Search1 {
+  constructor(value) {
+    this.value = value;
+  }
+  [Symbol.search](string) {
+    return string.indexOf(this.value);
+  }
+}
+
+console.log("foobar".search(new Search1("bar")));
+// Expected output: 3
+```
 
 ## Value
 
-The well-known symbol `@@search`.
+The well-known symbol `Symbol.search`.
 
 {{js_property_attributes(0, 0, 0)}}
 
@@ -24,7 +38,7 @@ The well-known symbol `@@search`.
 ### Custom string search
 
 ```js
-class caseInsensitiveSearch {
+class CaseInsensitiveSearch {
   constructor(value) {
     this.value = value.toLowerCase();
   }
@@ -33,7 +47,7 @@ class caseInsensitiveSearch {
   }
 }
 
-console.log("foobar".search(new caseInsensitiveSearch("BaR"))); // 3
+console.log("foobar".search(new CaseInsensitiveSearch("BaR"))); // 3
 ```
 
 ## Specifications
@@ -52,4 +66,4 @@ console.log("foobar".search(new caseInsensitiveSearch("BaR"))); // 3
 - {{jsxref("Symbol.replace")}}
 - {{jsxref("Symbol.split")}}
 - {{jsxref("String.prototype.search()")}}
-- [`RegExp.prototype[@@search]()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/@@search)
+- [`RegExp.prototype[Symbol.search]()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/Symbol.search)

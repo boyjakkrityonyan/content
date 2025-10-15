@@ -36,10 +36,10 @@ See the [Obtaining a StyleSheet](#obtaining_a_stylesheet) section for the variou
 _Inherits properties from its parent, {{domxref("StyleSheet")}}._
 
 - {{domxref("CSSStyleSheet.cssRules")}} {{ReadOnlyInline}}
-
   - : Returns a live {{domxref("CSSRuleList")}} which maintains an up-to-date list of the {{domxref("CSSRule")}} objects that comprise the stylesheet.
 
-    > **Note:** In some browsers, if a stylesheet is loaded from a different domain, accessing `cssRules` results in a `SecurityError`.
+    > [!NOTE]
+    > In some browsers, if a stylesheet is loaded from a different domain, accessing `cssRules` results in a `SecurityError`.
 
 - {{domxref("CSSStyleSheet.ownerRule")}} {{ReadOnlyInline}}
   - : If this stylesheet is imported into the document using an {{cssxref("@import")}} rule, the `ownerRule` property returns the corresponding {{domxref("CSSImportRule")}}; otherwise, this property's value is `null`.
@@ -69,7 +69,6 @@ _These properties are legacy properties as introduced by Microsoft; these are ma
 _These methods are legacy methods as introduced by Microsoft; these are maintained for compatibility with existing sites._
 
 - {{domxref("CSSStyleSheet.addRule", "addRule()")}} {{Deprecated_Inline}}
-
   - : Adds a new rule to the stylesheet given the selector to which the style applies and the style block to apply to the matching elements.
 
     This differs from {{domxref("CSSStyleSheet.insertRule", "insertRule()")}}, which takes the textual representation of the entire rule as a single string.
@@ -143,6 +142,15 @@ A (possibly incomplete) list of ways a stylesheet can be associated with a docum
       <td>
         {{domxref("ProcessingInstruction.sheet", ".sheet")}}
       </td>
+    </tr>
+    <tr>
+      <td>
+        JavaScript <a href="/en-US/docs/Web/JavaScript/Reference/Statements/import/with"><code>import ... with { type: "css" }</code></a>
+      </td>
+      <td>No</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>N/A</td>
     </tr>
     <tr>
       <td>HTTP Link Header</td>

@@ -16,10 +16,10 @@ This event is not cancelable and does not bubble.
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("stalled", (event) => {});
+```js-nolint
+addEventListener("stalled", (event) => { })
 
-onstalled = (event) => {};
+onstalled = (event) => { }
 ```
 
 ## Event type
@@ -77,7 +77,6 @@ video.onstalled = (event) => {
 - The HTMLMediaElement {{domxref("HTMLMediaElement.volumechange_event", 'volumechange')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.suspend_event", 'suspend')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.emptied_event", 'emptied')}} event
-- The HTMLMediaElement {{domxref("HTMLMediaElement.stalled_event", 'stalled')}} event
 
 ## See also
 

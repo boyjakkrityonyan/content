@@ -20,25 +20,23 @@ This example demonstrates using pointer events' various event types ({{domxref("
 
 The application uses {{HTMLElement("div")}} to define three different touch target areas.
 
-```html
-<style>
-  div {
-    margin: 0em;
-    padding: 2em;
-  }
-  #target1 {
-    background: white;
-    border: 1px solid black;
-  }
-  #target2 {
-    background: white;
-    border: 1px solid black;
-  }
-  #target3 {
-    background: white;
-    border: 1px solid black;
-  }
-</style>
+```css
+div {
+  margin: 0em;
+  padding: 2em;
+}
+#target1 {
+  background: white;
+  border: 1px solid black;
+}
+#target2 {
+  background: white;
+  border: 1px solid black;
+}
+#target3 {
+  background: white;
+  border: 1px solid black;
+}
 ```
 
 ### Global state
@@ -74,11 +72,9 @@ function setHandlers(name) {
   el.onpointerleave = pointerupHandler;
 }
 
-function init() {
-  setHandlers("target1");
-  setHandlers("target2");
-  setHandlers("target3");
-}
+setHandlers("target1");
+setHandlers("target2");
+setHandlers("target3");
 ```
 
 ### Pointer down
@@ -109,7 +105,7 @@ In this application, a pointer move is represented by the target's border being 
 ```js
 function pointermoveHandler(ev) {
   // Note: if the user makes more than one "simultaneous" touch, most browsers
-  // fire at least one pointermove event and some will fire several pointermoves.
+  // fire at least one pointermove event and some will fire several pointermove events.
   //
   // This function sets the target element's border to "dashed" to visually
   // indicate the target received a move event.
@@ -147,17 +143,21 @@ The application uses {{HTMLElement("div")}} elements for the touch areas and pro
 To prevent the browser's default touch behavior from overriding this application's pointer handling, the {{cssxref("touch-action")}} property is applied to the {{HTMLElement("body")}} element.
 
 ```html
-<body onload="init();" style="touch-action:none">
-  <div id="target1">Tap, Hold or Swipe me 1</div>
-  <div id="target2">Tap, Hold or Swipe me 2</div>
-  <div id="target3">Tap, Hold or Swipe me 3</div>
+<div id="target1">Tap, Hold or Swipe me 1</div>
+<div id="target2">Tap, Hold or Swipe me 2</div>
+<div id="target3">Tap, Hold or Swipe me 3</div>
 
-  <!-- UI for logging/debugging -->
-  <button id="log" onclick="enableLog(event);">Start/Stop event logging</button>
-  <button id="clearlog" onclick="clearLog(event);">Clear the log</button>
-  <p></p>
-  <output></output>
-</body>
+<!-- UI for logging/debugging -->
+<button id="log">Start/Stop event logging</button>
+<button id="clear-log">Clear the log</button>
+<p></p>
+<output></output>
+```
+
+```css
+body {
+  touch-action: none; /* Prevent default touch behavior */
+}
 ```
 
 ### Miscellaneous functions
@@ -234,11 +234,14 @@ function updateBackground(ev) {
 
 #### Event logging
 
-These functions are used send to event activity to the application window (to support debugging and learning about the event flow).
+These functions are used to send event activity to the application window (to support debugging and learning about the event flow).
 
 ```js
 // Log events flag
 let logEvents = false;
+
+document.getElementById("log").addEventListener("click", enableLog);
+document.getElementById("clear-log").addEventListener("click", clearLog);
 
 function enableLog(ev) {
   logEvents = !logEvents;
@@ -246,16 +249,15 @@ function enableLog(ev) {
 
 function log(name, ev) {
   const o = document.getElementsByTagName("output")[0];
-  const s =
-    `${name}:<br>` +
-    `  pointerID   = ${ev.pointerId}<br>` +
-    `  pointerType = ${ev.pointerType}<br>` +
-    `  isPrimary   = ${ev.isPrimary}`;
-  o.innerHTML += `${s}<br>`;
+  o.innerText += `${name}:
+  pointerID   = ${ev.pointerId}
+  pointerType = ${ev.pointerType}
+  isPrimary   = ${ev.isPrimary}
+`;
 }
 
 function clearLog(event) {
   const o = document.getElementsByTagName("output")[0];
-  o.innerHTML = "";
+  o.textContent = "";
 }
 ```

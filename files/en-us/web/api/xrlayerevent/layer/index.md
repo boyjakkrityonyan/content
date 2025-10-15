@@ -8,7 +8,7 @@ status:
 browser-compat: api.XRLayerEvent.layer
 ---
 
-{{APIRef("WebXR Device API")}}{{SeeCompatTable}}
+{{APIRef("WebXR Device API")}}{{SeeCompatTable}}{{SecureContext_Header}}
 
 The **`layer`** property of the {{domxref("XRLayerEvent")}} interface is a reference to the {{domxref("XRLayer")}} which generated the event.
 
@@ -24,7 +24,7 @@ In this example, the `layer` property is used to obtain the {{domxref("XRLayer")
 
 ```js
 myLayer.addEventListener("redraw", (e) => {
-  if (typeof e.layer === "XRQuadLayer") {
+  if (e.layer instanceof XRQuadLayer) {
     // redraw quad layer
   }
 });

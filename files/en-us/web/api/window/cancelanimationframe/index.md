@@ -31,16 +31,7 @@ None ({{jsxref("undefined")}}).
 ## Examples
 
 ```js
-const requestAnimationFrame =
-  window.requestAnimationFrame ||
-  window.mozRequestAnimationFrame ||
-  window.webkitRequestAnimationFrame ||
-  window.msRequestAnimationFrame;
-
-const cancelAnimationFrame =
-  window.cancelAnimationFrame || window.mozCancelAnimationFrame;
-
-const start = Date.now();
+const start = document.timeline.currentTime;
 
 let myReq;
 
@@ -67,4 +58,5 @@ cancelAnimationFrame(myReq);
 
 ## See also
 
-- {{domxref("window.requestAnimationFrame()")}}
+- {{domxref("Window.requestAnimationFrame()")}}
+- {{domxref("DedicatedWorkerGlobalScope.cancelAnimationFrame()")}}

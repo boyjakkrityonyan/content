@@ -5,19 +5,18 @@ page-type: web-api-interface
 browser-compat: api.FileSystemSyncAccessHandle
 ---
 
-{{securecontext_header}}{{APIRef("File System API")}}
+{{securecontext_header}}{{APIRef("File System API")}}{{AvailableInWorkers("dedicated")}}
 
 The **`FileSystemSyncAccessHandle`** interface of the {{domxref("File System API", "File System API", "", "nocode")}} represents a synchronous handle to a file system entry.
 
 This class is only accessible inside dedicated [Web Workers](/en-US/docs/Web/API/Web_Workers_API) (so that its methods do not block execution on the main thread) for files within the [origin private file system](/en-US/docs/Web/API/File_System_API/Origin_private_file_system), which is not visible to end-users.
 
-As a result, its methods are not subject to the same security checks as methods running on files within the user-visible file system, and so are much more performant. This makes them suitable for significant, large-scale file updates such as [SQLite](https://www.sqlite.org/wasm) database modifications.
+As a result, its methods are not subject to the same security checks as methods running on files within the user-visible file system, and so are much more performant. This makes them suitable for significant, large-scale file updates such as [SQLite](https://sqlite.org/wasm) database modifications.
 
 The interface is accessed through the {{domxref('FileSystemFileHandle.createSyncAccessHandle()')}} method.
 
-{{InheritanceDiagram}}
-
-> **Note:** In earlier versions of the spec, {{domxref("FileSystemSyncAccessHandle.close()", "close()")}}, {{domxref("FileSystemSyncAccessHandle.flush()", "flush()")}}, {{domxref("FileSystemSyncAccessHandle.getSize()", "getSize()")}}, and {{domxref("FileSystemSyncAccessHandle.truncate()", "truncate()")}} were wrongly specified as asynchronous methods, and older versions of some browsers implement them in this way. However, all current browsers that support these methods implement them as synchronous methods.
+> [!NOTE]
+> In earlier versions of the spec, {{domxref("FileSystemSyncAccessHandle.close()", "close()")}}, {{domxref("FileSystemSyncAccessHandle.flush()", "flush()")}}, {{domxref("FileSystemSyncAccessHandle.getSize()", "getSize()")}}, and {{domxref("FileSystemSyncAccessHandle.truncate()", "truncate()")}} were wrongly specified as asynchronous methods, and older versions of some browsers implement them in this way. However, all current browsers that support these methods implement them as synchronous methods.
 
 ## Instance properties
 
@@ -89,4 +88,4 @@ onmessage = async (e) => {
 ## See also
 
 - [File System API](/en-US/docs/Web/API/File_System_API)
-- [The File System Access API: simplifying access to local files](https://web.dev/file-system-access/)
+- [The File System Access API: simplifying access to local files](https://developer.chrome.com/docs/capabilities/web-apis/file-system-access)

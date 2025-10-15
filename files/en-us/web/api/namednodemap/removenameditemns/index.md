@@ -8,21 +8,21 @@ browser-compat: api.NamedNodeMap.removeNamedItemNS
 
 {{APIRef("DOM")}}
 
-The **`removedNamedItemNS()`** method of the {{domxref("NamedNodeMap")}} interface
+The **`removeNamedItemNS()`** method of the {{domxref("NamedNodeMap")}} interface
 removes the {{domxref("Attr")}} corresponding to the given namespace and local name from the map.
 
 ## Syntax
 
 ```js-nolint
-removeNamedItem(namespace, localName)
+removeNamedItemNS(namespace, localName)
 ```
 
 ### Parameters
 
 - `namespace`
-
   - : The namespace of the attribute to remove from the map
-    > **Warning:** `namespace` is the URI of the namespace, not the prefix.
+    > [!WARNING]
+    > `namespace` is the URI of the namespace, not the prefix.
 
 - `localName`
   - : The local name of the attribute to remove from the map.
@@ -66,7 +66,7 @@ pre.textContent = result;
 
 {{EmbedLiveSample("Example", "100%", 120)}}
 
-## Specification
+## Specifications
 
 {{Specifications}}
 

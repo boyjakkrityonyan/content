@@ -8,7 +8,7 @@ status:
 browser-compat: api.ServiceWorkerGlobalScope.backgroundfetchclick_event
 ---
 
-{{APIRef("Background Fetch API")}}{{SeeCompatTable}}
+{{APIRef("Background Fetch API")}}{{SeeCompatTable}}{{SecureContext_Header}}{{AvailableInWorkers("service")}}
 
 The **`backgroundfetchclick`** event of the {{domxref("ServiceWorkerGlobalScope")}} interface is fired when the user clicks on the UI that the browser provides to show the user the progress of the [background fetch](/en-US/docs/Web/API/Background_Fetch_API) operation.
 
@@ -18,10 +18,10 @@ This event is not cancelable and does not bubble.
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("backgroundfetchclick", (event) => {});
+```js-nolint
+addEventListener("backgroundfetchclick", (event) => { })
 
-onbackgroundfetchclick = (event) => {};
+onbackgroundfetchclick = (event) => { }
 ```
 
 ## Event type

@@ -3,19 +3,36 @@ title: Property accessors
 slug: Web/JavaScript/Reference/Operators/Property_accessors
 page-type: javascript-operator
 browser-compat: javascript.operators.property_accessors
+sidebar: jssidebar
 ---
-
-{{jsSidebar("Operators")}}
 
 **Property accessors** provide access to an object's properties by using the dot notation or the bracket notation.
 
-{{EmbedInteractiveExample("pages/js/expressions-propertyaccessors.html", "taller")}}
+{{InteractiveExample("JavaScript Demo: Property accessors", "taller")}}
+
+```js interactive-example
+const person1 = {};
+person1["firstName"] = "Mario";
+person1["lastName"] = "Rossi";
+
+console.log(person1.firstName);
+// Expected output: "Mario"
+
+const person2 = {
+  firstName: "John",
+  lastName: "Doe",
+};
+
+console.log(person2["lastName"]);
+// Expected output: "Doe"
+```
 
 ## Syntax
 
 ```js-nolint
 object.propertyName
 object[expression]
+object.#privateProperty
 ```
 
 ## Description
@@ -41,7 +58,7 @@ console.log(object.$1); // 'foo'
 
 ```js-nolint example-bad
 const object = {};
-object.1 = 'bar'; // SyntaxError
+object.1 = "bar"; // SyntaxError
 console.log(object.1); // SyntaxError
 ```
 
@@ -66,6 +83,8 @@ If you use a method for a numeric literal, and the numeric literal has no expone
 77.0.toExponential();
 // because 77. === 77.0, no ambiguity
 ```
+
+In addition, [private elements](/en-US/docs/Web/JavaScript/Reference/Classes/Private_elements) can only be accessed using dot notation within the class that defines them.
 
 ### Bracket notation
 
@@ -100,7 +119,7 @@ Obj[key]; // evaluates to Obj["name"], and returns "Michel"
 Obj[getKey()]; // evaluates to Obj["name"], and returns "Michel"
 ```
 
-However, beware of using square brackets to access properties whose names are given by external input. This may make your code susceptible to [object injection attacks](https://github.com/nodesecurity/eslint-plugin-security/blob/main/docs/the-dangers-of-square-bracket-notation.md).
+However, beware of using square brackets to access properties whose names are given by external input. This may make your code susceptible to [object injection attacks](https://github.com/eslint-community/eslint-plugin-security/blob/main/docs/the-dangers-of-square-bracket-notation.md).
 
 ### Property names
 

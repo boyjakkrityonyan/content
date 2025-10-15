@@ -2,9 +2,8 @@
 title: Web performance
 slug: Glossary/Web_performance
 page-type: glossary-definition
+sidebar: glossarysidebar
 ---
-
-{{GlossarySidebar}}
 
 **Web performance** is the objective time from when a request for content is made until the requested content is displayed in the user's browser, objective render times, and the subjective user experience of load time and runtime.
 
@@ -12,5 +11,6 @@ Objectively, it is measurable time, in milliseconds, it takes for the web page o
 
 ## See also
 
-- [Learn about web performance](/en-US/docs/Learn/Performance)
-- [Perceived performance](/en-US/docs/Glossary/Perceived_performance)
+- [Web performance](/en-US/docs/Web/Performance) guides
+- Related glossary terms:
+  - {{Glossary("Perceived performance")}}

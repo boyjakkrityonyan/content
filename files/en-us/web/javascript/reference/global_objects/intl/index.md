@@ -3,9 +3,8 @@ title: Intl
 slug: Web/JavaScript/Reference/Global_Objects/Intl
 page-type: javascript-namespace
 browser-compat: javascript.builtins.Intl
+sidebar: jsref
 ---
-
-{{JSRef}}
 
 The **`Intl`** namespace object contains several constructors as well as functionality common to the internationalization constructors and other language sensitive functions. Collectively, they comprise the ECMAScript Internationalization API, which provides language sensitive string comparison, number formatting, date and time formatting, and more.
 
@@ -31,7 +30,7 @@ A locale identifier is a string that consists of:
 2. A script subtag with 4 letters {{optional_inline}}
 3. A region subtag with either 2 letters or 3 digits {{optional_inline}}
 4. One or more variant subtags (all of which must be unique), each with either 5–8 alphanumerals or a digit followed by 3 alphanumerals {{optional_inline}}
-5. One or more BCP 47 extension sequences {{optional_inline}}
+5. One or more {{glossary("BCP 47 language tag", "BCP 47")}} extension sequences {{optional_inline}}
 6. A private-use extension sequence {{optional_inline}}
 
 Each subtag and sequence are separated by hyphens. Locale identifiers are case-insensitive {{Glossary("ASCII")}}. However, it's conventional to use title case (the first letter is capitalized, successive letters are lower case) for script subtags, upper case for region subtags, and lower case for everything else. For example:
@@ -46,11 +45,10 @@ Subtags identifying languages, scripts, regions (including countries), and (rare
 BCP 47 extension sequences consist of a single digit or letter (other than `"x"`) and one or more two- to eight-letter or digit subtags separated by hyphens. Only one sequence is permitted for each digit or letter: `"de-a-foo-a-foo"` is invalid. BCP 47 extension subtags are defined in the [Unicode CLDR Project](https://github.com/unicode-org/cldr/tree/main/common/bcp47). Currently only two extensions have defined semantics:
 
 - The `"u"` (Unicode) extension can be used to request additional customization of `Intl` API objects. Examples:
-
   - `"de-DE-u-co-phonebk"`: Use the phonebook variant of the German sort order, which interprets umlauted vowels as corresponding character pairs: ä → ae, ö → oe, ü → ue.
   - `"th-TH-u-nu-thai"`: Use Thai digits (๐, ๑, ๒, ๓, ๔, ๕, ๖, ๗, ๘, ๙) in number formatting.
   - `"ja-JP-u-ca-japanese"`: Use the Japanese calendar in date and time formatting, so that 2013 is expressed as the year 25 of the Heisei period, or 平成 25.
-  - `"en-GB-u-ca-islamic"`: use British English with the Islamic (Hijri) calendar, where the Gregorian date 14 October, 2017 is the Hijri date 24 Muharram, 1439.
+  - `"en-GB-u-ca-islamic-umalqura"`: use British English with the Umm al-Qura (Hijri) calendar, where the Gregorian date 14 October, 2017 is the Hijri date 24 Muharram, 1439.
 
 - The `"t"` (transformed) extension indicates transformed content: for example, text that was translated from another locale. No `Intl` functionality currently considers the `"t"` extension. However, this extension sometimes contains a nested locale (with no extensions): for example, the transformed extension in `"de-t-en"` contains the locale identifier for English. If a nested locale is present, it must be a valid locale identifier. For example, because `"en-emodeng-emodeng"` is invalid (because it contains a duplicate `emodeng` variant subtag), `"de-t-en-emodeng-emodeng"` is also invalid.
 
@@ -76,7 +74,7 @@ If the selected locale identifier had a Unicode extension sequence, that extensi
   - : Constructor for objects that enable language-sensitive date and time formatting.
 - {{jsxref("Intl.DisplayNames")}}
   - : Constructor for objects that enable the consistent translation of language, region and script display names.
-- {{jsxref("Intl.DurationFormat")}} {{experimental_inline}}
+- {{jsxref("Intl.DurationFormat")}}
   - : Constructor for objects that enable locale-sensitive duration formatting.
 - {{jsxref("Intl.ListFormat")}}
   - : Constructor for objects that enable language-sensitive list formatting.
@@ -90,8 +88,8 @@ If the selected locale identifier had a Unicode extension sequence, that extensi
   - : Constructor for objects that enable language-sensitive relative time formatting.
 - {{jsxref("Intl.Segmenter")}}
   - : Constructor for objects that enable locale-sensitive text segmentation.
-- `Intl[@@toStringTag]`
-  - : The initial value of the [`@@toStringTag`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) property is the string `"Intl"`. This property is used in {{jsxref("Object.prototype.toString()")}}.
+- `Intl[Symbol.toStringTag]`
+  - : The initial value of the [`[Symbol.toStringTag]`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) property is the string `"Intl"`. This property is used in {{jsxref("Object.prototype.toString()")}}.
 
 ## Static methods
 
@@ -123,6 +121,24 @@ log("en-US"); // 5/24/2012 26,254.39
 log("de-DE"); // 24.5.2012 26.254,39
 ```
 
+### Using the browser's preferred language
+
+Instead of passing a hardcoded locale name to the `Intl` methods, you can use the user's preferred language provided by {{domxref("navigator.language")}}:
+
+```js
+const date = new Date("2012-05-24");
+
+const formattedDate = new Intl.DateTimeFormat(navigator.language).format(date);
+```
+
+Alternatively, the {{domxref("navigator.languages")}} property provides a sorted list of the user's preferred languages. This list can be passed directly to the `Intl` constructors to implement preference-based fallback selection of locales. The [locale negotiation](#locale_identification_and_negotiation) process is used to pick the most appropriate locale available:
+
+```js
+const count = 26254.39;
+
+const formattedCount = new Intl.NumberFormat(navigator.languages).format(count);
+```
+
 ## Specifications
 
 {{Specifications}}
@@ -133,9 +149,7 @@ log("de-DE"); // 24.5.2012 26.254,39
 
 ## See also
 
-- {{jsxref("String.prototype.localeCompare()")}}
-- {{jsxref("Number.prototype.toLocaleString()")}}
-- {{jsxref("Date.prototype.toLocaleString()")}}
-- {{jsxref("Date.prototype.toLocaleDateString()")}}
-- {{jsxref("Date.prototype.toLocaleTimeString()")}}
+- {{domxref("Keyboard.getLayoutMap()")}}
+- {{domxref("navigator.language")}}
+- {{domxref("navigator.languages")}}
 - [The ECMAScript Internationalization API](https://norbertlindenberg.com/2012/12/ecmascript-internationalization-api/index.html) by Norbert Lindenberg (2012)

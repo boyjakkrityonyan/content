@@ -6,16 +6,17 @@ page-type: web-api-instance-method
 browser-compat: api.FileReader.readAsDataURL
 ---
 
-{{APIRef("File API")}}
+{{APIRef("File API")}}{{AvailableInWorkers}}
 
-The `readAsDataURL` method is used to read the contents of the specified
+The **`readAsDataURL()`** method of the {{domxref("FileReader")}} interface is used to read the contents of the specified
 {{domxref("Blob")}} or {{domxref("File")}}. When the read operation is finished, the
-{{domxref("FileReader.readyState","readyState")}} becomes `DONE`, and the
-{{domxref("FileReader/loadend_event", "loadend")}} is triggered. At that time, the
-{{domxref("FileReader.result","result")}} attribute contains the data as a [data: URL](/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs) representing the
+{{domxref("FileReader.readyState","readyState")}} property becomes `DONE`, and the
+{{domxref("FileReader/loadend_event", "loadend")}} event is triggered. At that time, the
+{{domxref("FileReader.result","result")}} attribute contains the data as a [data: URL](/en-US/docs/Web/URI/Reference/Schemes/data) representing the
 file's data as a base64 encoded string.
 
-> **Note:** The blob's {{domxref("FileReader.result","result")}} cannot be
+> [!NOTE]
+> The blob's {{domxref("FileReader.result","result")}} cannot be
 > directly decoded as Base64 without first removing the Data-URL declaration preceding
 > the Base64-encoded data. To retrieve only the Base64 encoded string, first
 > remove `data:*/*;base64,` from the result.
@@ -42,26 +43,26 @@ None ({{jsxref("undefined")}}).
 #### HTML
 
 ```html
-<input type="file" onchange="previewFile()" /><br />
+<input type="file" /><br />
 <img src="" height="200" alt="Image preview" />
 ```
 
 #### JavaScript
 
 ```js
+const preview = document.querySelector("img");
+const fileInput = document.querySelector("input[type=file]");
+
+fileInput.addEventListener("change", previewFile);
+
 function previewFile() {
-  const preview = document.querySelector("img");
-  const file = document.querySelector("input[type=file]").files[0];
+  const file = fileInput.files[0];
   const reader = new FileReader();
 
-  reader.addEventListener(
-    "load",
-    () => {
-      // convert image file to base64 string
-      preview.src = reader.result;
-    },
-    false,
-  );
+  reader.addEventListener("load", () => {
+    // convert image file to base64 string
+    preview.src = reader.result;
+  });
 
   if (file) {
     reader.readAsDataURL(file);
@@ -91,20 +92,16 @@ function previewFiles() {
 
   function readAndPreview(file) {
     // Make sure `file.name` matches our extensions criteria
-    if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+    if (/\.(?:jpe?g|png|gif)$/i.test(file.name)) {
       const reader = new FileReader();
 
-      reader.addEventListener(
-        "load",
-        () => {
-          const image = new Image();
-          image.height = 100;
-          image.title = file.name;
-          image.src = reader.result;
-          preview.appendChild(image);
-        },
-        false,
-      );
+      reader.addEventListener("load", () => {
+        const image = new Image();
+        image.height = 100;
+        image.title = file.name;
+        image.src = reader.result;
+        preview.appendChild(image);
+      });
 
       reader.readAsDataURL(file);
     }

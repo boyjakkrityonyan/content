@@ -5,7 +5,7 @@ page-type: web-api-interface
 browser-compat: api.Report
 ---
 
-{{APIRef("Reporting API")}}
+{{APIRef("Reporting API")}}{{AvailableInWorkers}}
 
 The `Report` interface of the [Reporting API](/en-US/docs/Web/API/Reporting_API) represents a single report.
 
@@ -13,14 +13,14 @@ Reports can be accessed in a number of ways:
 
 - Via the {{domxref("ReportingObserver.takeRecords()")}} method — this returns all reports in an observer's report queue, and then empties the queue.
 - Via the `reports` parameter of the callback function passed into the [`ReportingObserver()`](/en-US/docs/Web/API/ReportingObserver/ReportingObserver) constructor upon creation of a new observer instance. This contains the list of reports currently contained in the observer's report queue.
-- By sending requests to the endpoints defined via the {{httpheader("Report-To")}} HTTP header.
+- By sending requests to the endpoints defined via the {{httpheader("Reporting-Endpoints")}} HTTP header.
 
 ## Instance properties
 
 - {{domxref("Report.body")}} {{ReadOnlyInline}}
   - : The body of the report, which is a `ReportBody` object containing the detailed report information.
 - {{domxref("Report.type")}} {{ReadOnlyInline}}
-  - : The type of report generated, e.g. `deprecation` or `intervention`.
+  - : The type of report generated, e.g., `deprecation` or `intervention`.
 - {{domxref("Report.url")}} {{ReadOnlyInline}}
   - : The URL of the document that generated the report.
 
@@ -98,3 +98,4 @@ The `reports` parameter contains an array of all the reports in the observer's r
 ## See also
 
 - [Reporting API](/en-US/docs/Web/API/Reporting_API)
+- {{httpheader("Report-To")}} HTTP header

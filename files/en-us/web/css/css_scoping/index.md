@@ -3,9 +3,8 @@ title: CSS scoping
 slug: Web/CSS/CSS_scoping
 page-type: css-module
 spec-urls: https://drafts.csswg.org/css-scoping/
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **CSS scoping** module defines the CSS scoping and encapsulation mechanisms, focusing on the [Shadow DOM](/en-US/docs/Web/API/Web_components/Using_shadow_DOM) [scoping](https://css.oddbird.net/scope/) mechanism.
 
@@ -30,19 +29,15 @@ Sometimes it's useful to be able to style a host from inside the shadow tree con
 ## Guides
 
 - [Web components](/en-US/docs/Web/API/Web_components)
-
   - : An introduction to the different technologies used to create reusable web components — custom elements whose functionality is encapsulated away from the rest of your code.
 
 - [Using shadow DOM](/en-US/docs/Web/API/Web_components/Using_shadow_DOM)
-
   - : Shadow DOM fundamentals, including attaching a shadow DOM to an element, adding to the shadow DOM tree, and styling.
 
 - [Using templates and slots](/en-US/docs/Web/API/Web_components/Using_templates_and_slots)
-
   - : Defining reusable HTML structure using {{htmlelement("template")}} and {{htmlelement("slot")}} elements, and using that structure inside web components.
 
 - [Using custom elements](/en-US/docs/Web/API/Web_components/Using_custom_elements)
-
   - : Introduction to the Custom Elements API, the JavaScript API used to create custom elements that encapsulate functionality.
 
 ## Related concepts
@@ -52,7 +47,7 @@ Sometimes it's useful to be able to style a host from inside the shadow tree con
 
 - HTML {{HTMLElement("template")}} element
 - HTML {{HTMLElement("slot")}} element
-- HTML [`slot`](/en-US/docs/Web/HTML/Global_attributes/slot) attribute
+- HTML [`slot`](/en-US/docs/Web/HTML/Reference/Global_attributes/slot) attribute
 
 - {{Glossary("Shadow tree")}} glossary term
 - {{Glossary("DOM")}} glossary term
@@ -69,7 +64,8 @@ Sometimes it's useful to be able to style a host from inside the shadow tree con
   - {{DOMxRef("HTMLTemplateElement")}} interface
   - {{DOMxRef("ShadowRoot")}} interface
 
-> **Note:** Despite the name, the {{CSSXref(":scope")}} pseudo-class, which represents elements that are a reference point (or scope) for selectors to match against, is defined in the [CSS pseudo-classes](/en-US/docs/Web/CSS/CSS_pseudo-classes) module. It is otherwise unrelated to the CSS scoping module, which is focused on scoping as it pertains to the Shadow DOM scoping mechanism.
+> [!NOTE]
+> Despite the name, the {{CSSXref(":scope")}} pseudo-class, which represents elements that are a reference point (or scope) for selectors to match against, is defined in the [Selectors](/en-US/docs/Web/CSS/CSS_selectors) module. It is otherwise unrelated to the CSS scoping module, which is focused on scoping as it pertains to the Shadow DOM scoping mechanism.
 
 ## Specifications
 
@@ -82,4 +78,4 @@ Sometimes it's useful to be able to style a host from inside the shadow tree con
 - [CSS namespaces](/en-US/docs/Web/CSS/CSS_namespaces) module
 - [CSS shadow-parts](/en-US/docs/Web/CSS/CSS_shadow_parts) module
 - [Template, slot, and shadow](https://web.dev/learn/html/template/) on web.dev (2023)
-- [Custom element best practices](https://web.dev/custom-elements-best-practices/) on web.dev (2019)
+- [Custom element best practices](https://web.dev/articles/custom-elements-best-practices) on web.dev (2019)

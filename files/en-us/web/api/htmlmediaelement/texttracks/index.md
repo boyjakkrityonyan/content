@@ -15,8 +15,8 @@ objects representing the media element's text tracks, in the same order as in
 the list of text tracks.
 
 You can detect when tracks are added to and removed from an
-[`<audio>`](/en-US/docs/Web/HTML/Element/audio) or
-[`<video>`](/en-US/docs/Web/HTML/Element/video) element
+[`<audio>`](/en-US/docs/Web/HTML/Reference/Elements/audio) or
+[`<video>`](/en-US/docs/Web/HTML/Reference/Elements/video) element
 using the `addtrack` and `removetrack` events. However, these
 events aren't sent directly to the media element itself. Instead, they're sent to the
 track list object of the [`HTMLMediaElement`](/en-US/docs/Web/API/HTMLMediaElement)
@@ -32,7 +32,7 @@ more about watching for changes to a media element's track list.
 
 ## Value
 
-A {{DOMxRef("TextTrackList")}} object representing the list of text tracks included in the media element. The list of tracks can be accessed using `textTracks[n]` to get the n-th text track from the object's list of text tracks, or using the `textTracks`.[`getTrackById()`](/en-US/docs/Web/API/TextTrackList/getTrackById)
+A {{DOMxRef("TextTrackList")}} object representing the list of text tracks included in the media element. The list of tracks can be accessed using `textTracks[n]` to get the n-th text track from the object's list of text tracks, or using the [`textTracks.getTrackById()`](/en-US/docs/Web/API/TextTrackList/getTrackById)
 method.
 
 Each track is represented by a {{DOMxRef("TextTrack")}} object which provides
@@ -41,8 +41,8 @@ information about the track.
 ## Examples
 
 We start with a
-[`<video>`](/en-US/docs/Web/HTML/Element/video) that has
-several [`<track>`](/en-US/docs/Web/HTML/Element/track)
+[`<video>`](/en-US/docs/Web/HTML/Reference/Elements/video) that has
+several [`<track>`](/en-US/docs/Web/HTML/Reference/Elements/track)
 children
 
 ```html

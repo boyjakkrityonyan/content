@@ -6,9 +6,9 @@ page-type: web-api-event
 browser-compat: api.MessagePort.message_event
 ---
 
-{{APIRef}}
+{{APIRef("Channel Messaging API")}} {{AvailableInWorkers}}
 
-The `message` event is fired on a {{domxref('MessagePort')}} object when a message arrives on that channel.
+The **`message`** event is fired on a {{domxref('MessagePort')}} object when a message arrives on that channel.
 
 This event is not cancellable and does not bubble.
 
@@ -16,10 +16,10 @@ This event is not cancellable and does not bubble.
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("message", (event) => {});
+```js-nolint
+addEventListener("message", (event) => { })
 
-onmessage = (event) => {};
+onmessage = (event) => { }
 ```
 
 ## Event type
@@ -41,11 +41,11 @@ _This interface also inherits properties from its parent, {{domxref("Event")}}._
 - {{domxref("MessageEvent.source")}} {{ReadOnlyInline}}
   - : A `MessageEventSource` (which can be a {{glossary("WindowProxy")}}, {{domxref("MessagePort")}}, or {{domxref("ServiceWorker")}} object) representing the message emitter.
 - {{domxref("MessageEvent.ports")}} {{ReadOnlyInline}}
-  - : An array of {{domxref("MessagePort")}} objects representing the ports associated with the channel the message is being sent through (where appropriate, e.g. in channel messaging or when sending a message to a shared worker).
+  - : An array containing all {{domxref("MessagePort")}} objects sent with the message, in order.
 
 ## Examples
 
-Suppose a script creates a [`MessageChannel`](/en-US/docs/Web/API/MessageChannel) and sends one of the ports to a different browsing context, such as another [`<iframe>`](/en-US/docs/Web/HTML/Element/iframe), using code like this:
+Suppose a script creates a [`MessageChannel`](/en-US/docs/Web/API/MessageChannel) and sends one of the ports to a different browsing context, such as another [`<iframe>`](/en-US/docs/Web/HTML/Reference/Elements/iframe), using code like this:
 
 ```js
 const channel = new MessageChannel();
@@ -63,7 +63,7 @@ channelMessageButton.addEventListener("click", () => {
 targetFrame.postMessage("init", targetOrigin, [channel.port2]);
 ```
 
-The target can receive the port and start listening for messages on it using code like this:
+The target can receive the port and start listening for messages and message errors on it using code like this:
 
 ```js
 window.addEventListener("message", (event) => {
@@ -71,6 +71,10 @@ window.addEventListener("message", (event) => {
 
   myPort.addEventListener("message", (event) => {
     received.textContent = event.data;
+  });
+
+  myPort.addEventListener("messageerror", (event) => {
+    console.error(event.data);
   });
 
   myPort.start();
@@ -85,6 +89,10 @@ window.addEventListener("message", (event) => {
 
   myPort.onmessage = (event) => {
     received.textContent = event.data;
+  };
+
+  myPort.onmessageerror = (event) => {
+    console.error(event.data);
   };
 });
 ```

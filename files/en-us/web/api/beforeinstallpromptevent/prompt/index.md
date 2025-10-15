@@ -31,7 +31,6 @@ None.
 A {{jsxref("Promise")}} resolving to an object containing the following properties:
 
 - `outcome` {{experimental_inline}} {{non-standard_inline}}
-
   - : A string indicating whether the user chose to install the app or not. It must be one of the following values:
     - `"accepted"`: The user installed the app.
     - `"dismissed"`: The user did not install the app.
@@ -50,4 +49,4 @@ See the [example for the `BeforeInstallPromptEvent` interface](/en-US/docs/Web/A
 ## See also
 
 - [Making PWAs installable](/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable)
-- [How to provide your own in-app install experience](https://web.dev/customize-install/) on web.dev (2021)
+- [How to provide your own in-app install experience](https://web.dev/articles/customize-install) on web.dev (2021)

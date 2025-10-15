@@ -31,13 +31,17 @@ It has the following members:
   - : A Boolean indicating if the canvas contains an alpha channel.
     If `false`, the backdrop is always opaque, which can speed up drawing of transparent content and images.
 - `colorSpace` {{optional_inline}}
-  - : Specifies the color space of the rendering context. Possible values are:
+  - : Indicates the color space of the rendering context. Possible values are:
     - `srgb`: denotes the [sRGB color space](https://en.wikipedia.org/wiki/SRGB)
     - `display-p3`: denotes the [display-p3 color space](https://en.wikipedia.org/wiki/DCI-P3)
+- `colorType` {{optional_inline}}
+  - : Indicates the color type of the rendering context. Possible values are:
+    - `"unorm8"` denotes the color channels to 8 bit unsigned values. This is the default value.
+    - `"float16"` denotes the color channels to 16-bit floating-point values.
 - `desynchronized` {{optional_inline}}
   - : A Boolean indicating the user agent reduced the latency by desynchronizing the canvas paint cycle from the event loop.
 - `willReadFrequently` {{optional_inline}}
-  - : A Boolean indicating whether or not this canvas uses software acceleration (instead of hardware acceleration) to support frequent read-back operations via{{domxref("CanvasRenderingContext2D.getImageData", "getImageData()")}}.
+  - : A Boolean indicating whether or not this canvas uses software acceleration (instead of hardware acceleration) to support frequent read-back operations via {{domxref("CanvasRenderingContext2D.getImageData", "getImageData()")}}.
 
 ## Examples
 

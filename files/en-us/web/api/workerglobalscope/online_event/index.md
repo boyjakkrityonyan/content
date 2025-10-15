@@ -6,7 +6,7 @@ page-type: web-api-event
 browser-compat: api.WorkerGlobalScope.online_event
 ---
 
-{{APIRef("Web Workers API")}}
+{{APIRef("Web Workers API")}}{{AvailableInWorkers("worker")}}
 
 The **`online`** event of the {{domxref("WorkerGlobalScope")}} fires when the device reconnects to the internet.
 
@@ -14,10 +14,10 @@ The **`online`** event of the {{domxref("WorkerGlobalScope")}} fires when the de
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("online", (event) => {});
+```js-nolint
+addEventListener("online", (event) => { })
 
-ononline = (event) => {};
+ononline = (event) => { }
 ```
 
 ## Event type

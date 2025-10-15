@@ -2,12 +2,10 @@
 title: ViewTimeline
 slug: Web/API/ViewTimeline
 page-type: web-api-interface
-status:
-  - experimental
 browser-compat: api.ViewTimeline
 ---
 
-{{APIRef("Web Animations")}}{{SeeCompatTable}}
+{{APIRef("Web Animations")}}
 
 The **`ViewTimeline`** interface of the {{domxref("Web Animations API", "Web Animations API", "", "nocode")}} represents a view progress timeline (see [CSS scroll-driven animations](/en-US/docs/Web/CSS/CSS_scroll-driven_animations) for more details).
 
@@ -17,18 +15,18 @@ Pass a `ViewTimeline` instance to the {{domxref("Animation.Animation", "Animatio
 
 ## Constructor
 
-- {{domxref("ViewTimeline.ViewTimeline", "ViewTimeline()")}} {{Experimental_Inline}}
+- {{domxref("ViewTimeline.ViewTimeline", "ViewTimeline()")}}
   - : Creates a new `ViewTimeline` object instance.
 
 ## Instance properties
 
 _This interface also inherits the properties of its parent, {{domxref("ScrollTimeline")}}._
 
-- {{domxref("ViewTimeline.subject", "subject")}} {{ReadOnlyInline}} {{Experimental_Inline}}
+- {{domxref("ViewTimeline.subject", "subject")}} {{ReadOnlyInline}}
   - : Returns a reference to the subject element whose visibility within its nearest ancestor scrollable element (scroller) is driving the progress of the timeline and therefore the animation.
-- {{domxref("ViewTimeline.startOffset", "startOffset")}} {{ReadOnlyInline}} {{Experimental_Inline}}
+- {{domxref("ViewTimeline.startOffset", "startOffset")}} {{ReadOnlyInline}}
   - : Returns a {{domxref("CSSNumericValue")}} representing the starting (0% progress) scroll position of the timeline as an offset from the start of the overflowing section of content in the scroller.
-- {{domxref("ViewTimeline.endOffset", "endOffset")}} {{ReadOnlyInline}} {{Experimental_Inline}}
+- {{domxref("ViewTimeline.endOffset", "endOffset")}} {{ReadOnlyInline}}
   - : Returns a {{domxref("CSSNumericValue")}} representing the ending (100% progress) scroll position of the timeline as an offset from the start of the overflowing section of content in the scroller.
 
 ## Instance methods
@@ -58,7 +56,7 @@ The HTML for the example is shown below.
   </p>
 
   <p>
-    Dolor sed viverra ipsum nunc aliquet. Sed sed risus pretium quam vulputate
+    Dolor sed viverra ipsum nunc aliquet. Sed risus pretium quam vulputate
     dignissim. Tortor aliquam nulla facilisi cras. A erat nam at lectus urna
     duis convallis convallis. Nibh ipsum consequat nisl vel pretium lectus.
     Sagittis aliquam malesuada bibendum arcu vitae elementum. Malesuada bibendum
@@ -109,7 +107,7 @@ The CSS for the example looks like this:
 p,
 h1,
 div {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Helvetica", "Arial", sans-serif;
 }
 
 h1 {
@@ -124,7 +122,7 @@ p {
 
 #### JavaScript
 
-In the JavaScript, we grab references to the `subject` and `output` `<div>`s, then create a new {{domxref("ViewTimeline")}}, associating it with the `subject` element to specify that the timeline progress is based on this element's visibility through its scrolling ancestor, setting a `block` axis, and setting `inset` values to adjust the position of the box in which the subject is deemed to be visible.
+In the JavaScript, we grab references to the `subject` and `output` `<div>`s, then create a new `ViewTimeline`, associating it with the `subject` element to specify that the timeline progress is based on this element's visibility through its scrolling ancestor, setting a `block` axis, and setting `inset` values to adjust the position of the box in which the subject is deemed to be visible.
 
 We then animate the `subject` element with the Web Animations API. Last of all, we display the `subject`, `startOffset`, and `endOffset` values in the `output` element.
 

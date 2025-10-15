@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.WritableStream.close
 ---
 
-{{APIRef("Streams")}}
+{{APIRef("Streams")}}{{AvailableInWorkers}}
 
 The **`close()`** method of the {{domxref("WritableStream")}} interface closes the associated stream. All chunks written before this method is called are sent before the returned promise is fulfilled.
 
@@ -64,7 +64,7 @@ function sendMessage(message, writableStream) {
   // defaultWriter is of type WritableStreamDefaultWriter
   const defaultWriter = writableStream.getWriter();
   const encoder = new TextEncoder();
-  const encoded = encoder.encode(message, { stream: true });
+  const encoded = encoder.encode(message);
   encoded.forEach((chunk) => {
     defaultWriter.ready
       .then(() => {

@@ -8,7 +8,7 @@ status:
 browser-compat: api.BackgroundFetchRegistration.progress_event
 ---
 
-{{APIRef("Background Fetch API")}}{{SeeCompatTable}}
+{{APIRef("Background Fetch API")}}{{SeeCompatTable}}{{AvailableInWorkers}}
 
 The **`progress`** event of the {{domxref("BackgroundFetchRegistration")}} interface thrown when the associated background fetch progresses.
 
@@ -21,10 +21,11 @@ Practically, this event is fired when any of the following properties will retur
 
 ## Syntax
 
-Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set the `onprogress` event property on the relevant {{domxref("BackgroundFetchRegistration")}} object.
+Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
 ```js-nolint
 addEventListener("progress", (event) => { })
+
 onprogress = (event) => { }
 ```
 

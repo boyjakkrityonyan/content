@@ -8,7 +8,7 @@ status:
 browser-compat: api.XRSession.requestAnimationFrame
 ---
 
-{{APIRef("WebXR Device API")}}{{SeeCompatTable}}
+{{APIRef("WebXR Device API")}}{{SeeCompatTable}}{{SecureContext_Header}}
 
 The {{domxref("XRSession")}}
 method **`requestAnimationFrame()`**, much like the
@@ -26,7 +26,8 @@ any animation updates needed.
 You can cancel a previously scheduled animation by calling
 {{DOMxRef("XRSession.cancelAnimationFrame", "cancelAnimationFrame()")}}.
 
-> **Note:** Despite the obvious similarities between these methods and the
+> [!NOTE]
+> Despite the obvious similarities between these methods and the
 > global {{domxref("Window.requestAnimationFrame", "requestAnimationFrame()")}} function
 > provided by the `Window` interface, you _must not_ treat these as
 > interchangeable. There is _no_ guarantee that the latter will work at all while
@@ -41,11 +42,9 @@ requestAnimationFrame(animationFrameCallback)
 ### Parameters
 
 - `animationFrameCallback`
-
   - : A function which is called before the next repaint in order to allow you to update
     and render the XR scene based on elapsed time, animation, user input changes, and so
     forth. The callback receives as input two parameters:
-
     - `time`
       - : A {{domxref("DOMHighResTimeStamp")}} indicating the time offset at which the
         updated viewer state was received from the WebXR device.
@@ -66,7 +65,8 @@ remove the pending animation frame request.
 The following example requests `XRSession` with "inline" mode so that it can
 be displayed in an HTML element (without the need for a separate AR or VR device).
 
-> **Note:** A real application should check that the device and the User
+> [!NOTE]
+> A real application should check that the device and the User
 > Agent support WebXR API at all and then that they both support the desired session
 > type via {{DOMxRef("XRSystem.isSessionSupported()")}}.
 

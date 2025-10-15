@@ -8,7 +8,7 @@ status:
 browser-compat: api.XRWebGLLayer.antialias
 ---
 
-{{APIRef("WebXR Device API")}}{{SeeCompatTable}}
+{{APIRef("WebXR Device API")}}{{SeeCompatTable}}{{SecureContext_Header}}
 
 The read-only {{domxref("XRWebGLLayer")}} property
 **`antialias`** is a Boolean value which is `true`
@@ -17,13 +17,7 @@ property's value is `false`. The specific anti-aliasing technique used is left
 to the {{Glossary("user agent", "user agent's")}} discretion and cannot be specified by
 the website or web app.
 
-## Syntax
-
-```js-nolint
-xrWebGLLayer.antialias
-```
-
-### Value
+## Value
 
 A Boolean value which is `true` if the WebGL rendering layer's frame buffer
 is configured to support anti-aliasing. Otherwise, this property is `false`.

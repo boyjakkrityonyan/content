@@ -8,7 +8,7 @@ browser-compat: api.IDBRequest.error_event
 
 {{APIRef("IndexedDB")}}
 
-The `error` handler is executed when an error caused a request to fail.
+The `error` handler is executed when an error caused a request to fail. In the `error` event handler, you can access the error of the request, as well as place more requests to the same transaction.
 
 This event is not cancelable and does not bubble.
 
@@ -16,10 +16,10 @@ This event is not cancelable and does not bubble.
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("error", (event) => {});
+```js-nolint
+addEventListener("error", (event) => { })
 
-onerror = (event) => {};
+onerror = (event) => { }
 ```
 
 ## Event type
@@ -123,6 +123,10 @@ DBOpenRequest.onsuccess = (event) => {
   };
 };
 ```
+
+## Specifications
+
+{{Specifications}}
 
 ## Browser compatibility
 

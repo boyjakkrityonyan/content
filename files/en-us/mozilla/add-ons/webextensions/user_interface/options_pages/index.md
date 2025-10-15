@@ -2,9 +2,8 @@
 title: Options page
 slug: Mozilla/Add-ons/WebExtensions/user_interface/Options_pages
 page-type: guide
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar}}
 
 An Options page enables you to define preferences for your extension that your users can change. Users can access the options page for an extension from the browser's add-ons manager:
 
@@ -18,7 +17,7 @@ Options pages have a Content Security Policy that restricts the sources from whi
 
 ## Specifying the options page
 
-To create an options page, write an HTML file defining the page. This page can include CSS and JavaScript files, like a normal web page. This page, from the [favourite-color](https://github.com/mdn/webextensions-examples/tree/main/favourite-colour) example, includes a JavaScript file:
+To create an options page, write an HTML file defining the page. This page can include CSS and JavaScript files, like a normal web page. This page, from the [favourite-colour](https://github.com/mdn/webextensions-examples/tree/main/favourite-colour) example, includes a JavaScript file:
 
 ```html
 <!doctype html>
@@ -26,6 +25,7 @@ To create an options page, write an HTML file defining the page. This page can i
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="color-scheme" content="dark light" />
   </head>
 
   <body>
@@ -38,6 +38,8 @@ To create an options page, write an HTML file defining the page. This page can i
   </body>
 </html>
 ```
+
+Note the use of `<meta name="color-scheme" content="dark light">`. This enables automatic switching between light and dark themes in the embedded UI based on the user's browser preferences. For more information, see [`<meta name="color-scheme">`](/en-US/docs/Web/HTML/Reference/Elements/meta/name/color-scheme).
 
 JavaScript running in the page can use all the [WebExtension APIs](/en-US/docs/Mozilla/Add-ons/WebExtensions/API) that the add-on has [permissions](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions) for. In particular, you can use the [`storage`](/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage) API to persist preferences.
 
@@ -55,8 +57,8 @@ See the [`options_ui`](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/o
 
 ## Options content design
 
-For details on how to design your options content to match the style of Firefox, see the [Acorn Design System](https://acorn.firefox.com/latest/).
+For details on how to design your options content to match the style of Firefox, see the [Acorn Design System](https://acorn.firefox.com/latest).
 
 ## Examples
 
-The [webextensions-examples](https://github.com/mdn/webextensions-examples) repository on GitHub includes the [favourite-color](https://github.com/mdn/webextensions-examples/tree/main/favourite-colour) example which implements options page features.
+The [webextensions-examples](https://github.com/mdn/webextensions-examples) repository on GitHub includes the [favourite-colour](https://github.com/mdn/webextensions-examples/tree/main/favourite-colour) example which implements options page features.

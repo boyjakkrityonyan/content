@@ -2,9 +2,8 @@
 title: PHP
 slug: Glossary/PHP
 page-type: glossary-definition
+sidebar: glossarysidebar
 ---
-
-{{GlossarySidebar}}
 
 PHP (a recursive initialism for PHP: Hypertext Preprocessor) is an open-source server-side scripting language that can be embedded into HTML to build web applications and dynamic websites.
 
@@ -33,15 +32,15 @@ PHP (a recursive initialism for PHP: Hypertext Preprocessor) is an open-source s
 ```php
 <?php
   // variables
-  $nome='Danilo';
-  $sobrenome='Santos';
-  $pais='Brasil';
+  $name='Danilo';
+  $surname='Santos';
+  $country='Brasil';
   $email='danilocarsan@gmail.com';
 
   // printing the variables
-  echo $nome;
-  echo $sobrenome;
-  echo $pais;
+  echo $name;
+  echo $surname;
+  echo $country;
   echo $email;
 ?>
 ```
@@ -51,8 +50,7 @@ PHP (a recursive initialism for PHP: Hypertext Preprocessor) is an open-source s
 - [Official website](https://www.php.net/)
 - [PHP](https://en.wikipedia.org/wiki/PHP) on Wikipedia
 - [PHP programming](https://en.wikibooks.org/wiki/PHP_Programming) on Wikibooks
-- [MDN Web Docs Glossary](/en-US/docs/Glossary)
-
+- Related glossary terms:
   - {{Glossary("Java")}}
   - {{Glossary("JavaScript")}}
   - {{Glossary("Python")}}

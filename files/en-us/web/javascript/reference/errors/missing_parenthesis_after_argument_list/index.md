@@ -2,9 +2,8 @@
 title: "SyntaxError: missing ) after argument list"
 slug: Web/JavaScript/Reference/Errors/Missing_parenthesis_after_argument_list
 page-type: javascript-error
+sidebar: jssidebar
 ---
-
-{{jsSidebar("Errors")}}
 
 The JavaScript exception "missing ) after argument list" occurs when there is an error
 with how a function is called. This might be a typo, a missing operator, or an unescaped
@@ -44,7 +43,7 @@ console.log("PI: " + Math.PI);
 // "PI: 3.141592653589793"
 ```
 
-Alternatively, you can consider using a [template literal](/en-US/docs/Web/JavaScript/Reference/Template_literals), or take advantage of the fact that [`console.log`](/en-US/docs/Web/API/console/log) accepts multiple parameters:
+Alternatively, you can consider using a [template literal](/en-US/docs/Web/JavaScript/Reference/Template_literals), or take advantage of the fact that [`console.log`](/en-US/docs/Web/API/console/log_static) accepts multiple parameters:
 
 ```js example-good
 console.log(`PI: ${Math.PI}`);
@@ -60,7 +59,7 @@ console.log('"Java" + "Script" = \"' + "Java" + 'Script\");
 
 Here JavaScript thinks that you meant to have `);` inside the string and
 ignores it, and it ends up not knowing that you meant the `);` to end the
-function `console.log`. To fix this, we could put a`'` after the
+function `console.log`. To fix this, we could put a `'` after the
 "Script" string:
 
 ```js example-good

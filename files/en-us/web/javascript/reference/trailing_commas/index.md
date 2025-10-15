@@ -3,9 +3,8 @@ title: Trailing commas
 slug: Web/JavaScript/Reference/Trailing_commas
 page-type: javascript-language-feature
 browser-compat: javascript.grammar.trailing_commas
+sidebar: jssidebar
 ---
-
-{{jsSidebar("More")}}
 
 **Trailing commas** (sometimes called "final commas") can be useful when adding new elements, parameters, or properties to JavaScript code. If you want to add a new property, you can add a new line without modifying the previously last line if that line already uses a trailing comma. This makes version-control diffs cleaner and editing code might be less troublesome.
 
@@ -23,11 +22,12 @@ JavaScript allows trailing commas wherever a comma-separated list of values is a
 - [Function calls](#function_calls)
 - [Named imports](#named_imports)
 - [Named exports](#named_exports)
+- [Dynamic import](#trailing_commas_in_dynamic_import)
 - [Array and object destructuring](#trailing_commas_in_destructuring)
 
 In all these cases, the trailing comma is entirely optional and doesn't change the program's semantics in any way.
 
-It is particular useful when adding, removing, or reordering items in a list that spans multiple lines, because it reduces the number of lines that need to be changed, which helps with both editing and reviewing the diff.
+It is particularly useful when adding, removing, or reordering items in a list that spans multiple lines, because it reduces the number of lines that need to be changed, which helps with both editing and reviewing the diff.
 
 ```diff
   [
@@ -44,7 +44,7 @@ It is particular useful when adding, removing, or reordering items in a list tha
 
 #### Arrays
 
-JavaScript ignores trailing commas in arrays literals:
+JavaScript ignores trailing commas in array literals:
 
 ```js-nolint
 const arr = [
@@ -133,7 +133,7 @@ function f(...p,) {} // SyntaxError: parameter after rest parameter
 
 ### Trailing commas in destructuring
 
-A trailing comma is also allowed on the left-hand side when using [destructuring assignment](/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment):
+A trailing comma is also allowed within a [destructuring](/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring) pattern:
 
 ```js-nolint
 // array destructuring with trailing comma
@@ -147,7 +147,7 @@ const o = {
 const { p, q, } = o;
 ```
 
-Again, when using a rest element, a {{jsxref("SyntaxError")}} will be thrown:
+However, a trailing comma is not allowed after the rest element, if present
 
 ```js-nolint example-bad
 const [a, ...b,] = [1, 2, 3];
@@ -206,9 +206,22 @@ export { A, B, C, };
 export { A as B, C as D, E as F, };
 ```
 
+### Trailing commas in dynamic import
+
+Trailing commas are only allowed in [dynamic imports](/en-US/docs/Web/JavaScript/Reference/Operators/import) if the runtime also implements the second `options` parameter.
+
+```js-nolint
+import("D",);
+import(
+  "D",
+  { with: { type: "json" } },
+);
+```
+
 ### Quantifier prefix
 
-> **Note:** The trailing comma in a [quantifier](/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Quantifiers) actually changes its semantics from matching "exactly `n`" to matching "at least `n`".
+> [!NOTE]
+> The trailing comma in a [quantifier](/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Quantifiers) actually changes its semantics from matching "exactly `n`" to matching "at least `n`".
 
 ```js
 /x{2}/; // Exactly 2 occurrences of "x"; equivalent to /xx/

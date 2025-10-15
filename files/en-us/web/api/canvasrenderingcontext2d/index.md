@@ -5,7 +5,7 @@ page-type: web-api-interface
 browser-compat: api.CanvasRenderingContext2D
 ---
 
-{{APIRef}}
+{{APIRef("Canvas API")}}
 
 The **`CanvasRenderingContext2D`** interface, part of the [Canvas API](/en-US/docs/Web/API/Canvas_API), provides the 2D rendering context for the drawing surface of a {{HTMLElement("canvas")}} element.
 It is used for drawing shapes, text, images, and other objects.
@@ -60,7 +60,9 @@ The resulting drawing looks like this:
 
 ### Context
 
-- {{domxref("CanvasRenderingContext2D.isContextLost()")}} {{Experimental_Inline}}
+- {{domxref("CanvasRenderingContext2D.getContextAttributes()")}}
+  - : Returns an object containing the context attributes used by the browser. Context attributes can be requested when using {{domxref("HTMLCanvasElement.getContext()")}} to create the 2D context.
+- {{domxref("CanvasRenderingContext2D.isContextLost()")}}
   - : Returns `true` if the rendering context was lost.
 
 ### Drawing rectangles
@@ -120,23 +122,25 @@ The following properties control how text is laid out.
   - : Letter spacing. Default: `0px`.
 - {{domxref("CanvasRenderingContext2D.fontKerning")}}
   - : Font kerning. Possible values: `auto` (default), `normal`, `none`.
-- {{domxref("CanvasRenderingContext2D.fontStretch")}} {{experimental_inline}}
+- {{domxref("CanvasRenderingContext2D.fontStretch")}}
   - : Font stretch. Possible values: `ultra-condensed`, `extra-condensed`, `condensed`, `semi-condensed`, `normal` (default), `semi-expanded`, `expanded`, `extra-expanded`, `ultra-expanded`.
-- {{domxref("CanvasRenderingContext2D.fontVariantCaps")}} {{experimental_inline}}
+- {{domxref("CanvasRenderingContext2D.fontVariantCaps")}}
   - : Font variant caps. Possible values: `normal` (default), `small-caps`, `all-small-caps`, `petite-caps`, `all-petite-caps`, `unicase`, `titling-caps`.
 - {{domxref("CanvasRenderingContext2D.textRendering")}}
   - : Text rendering. Possible values: `auto` (default), `optimizeSpeed`, `optimizeLegibility`, `geometricPrecision`.
 - {{domxref("CanvasRenderingContext2D.wordSpacing")}}
   - : Word spacing. Default value: `0px`
+- {{domxref("CanvasRenderingContext2D.lang")}} {{experimental_inline}}
+  - : Gets or sets the language of the canvas drawing context.
 
 ### Fill and stroke styles
 
 Fill styling is used for colors and styles inside shapes and stroke styling is used for the lines around shapes.
 
 - {{domxref("CanvasRenderingContext2D.fillStyle")}}
-  - : Color or style to use inside shapes. Default `#000` (black).
+  - : Color or style to use inside shapes. Default is `black`.
 - {{domxref("CanvasRenderingContext2D.strokeStyle")}}
-  - : Color or style to use for the lines around shapes. Default `#000` (black).
+  - : Color or style to use for the lines around shapes. Default is `black`.
 
 ### Gradients and patterns
 
@@ -195,8 +199,6 @@ The following methods can be used to manipulate paths of objects.
   - : Strokes the current sub-paths with the current stroke style.
 - {{domxref("CanvasRenderingContext2D.drawFocusIfNeeded()")}}
   - : If a given element is focused, this method draws a focus ring around the current path.
-- {{domxref("CanvasRenderingContext2D.scrollPathIntoView()")}} {{Experimental_Inline}}
-  - : Scrolls the current path or a given path into the view.
 - {{domxref("CanvasRenderingContext2D.clip()")}}
   - : Creates a clipping path from the current sub-paths. Everything drawn after `clip()` is called appears inside the clipping path only. For an example, see [Clipping paths](/en-US/docs/Web/API/Canvas_API/Tutorial/Compositing) in the Canvas tutorial.
 - {{domxref("CanvasRenderingContext2D.isPointInPath()")}}

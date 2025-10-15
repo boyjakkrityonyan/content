@@ -1,21 +1,66 @@
 ---
 title: border-radius
 slug: Web/CSS/border-radius
-page-type: css-property
+page-type: css-shorthand-property
 browser-compat: css.properties.border-radius
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **`border-radius`** [CSS](/en-US/docs/Web/CSS) property rounds the corners of an element's outer border edge. You can set a single radius to make circular corners, or two radii to make elliptical corners.
 
-{{EmbedInteractiveExample("pages/css/border-radius.html")}}
+{{InteractiveExample("CSS Demo: border-radius")}}
+
+```css interactive-example-choice
+border-radius: 30px;
+```
+
+```css interactive-example-choice
+border-radius: 25% 10%;
+```
+
+```css interactive-example-choice
+border-radius: 10% 30% 50% 70%;
+```
+
+```css interactive-example-choice
+border-radius: 10% / 50%;
+```
+
+```css interactive-example-choice
+border-radius: 10px 100px / 120px;
+```
+
+```css interactive-example-choice
+border-radius: 50% 20% / 10% 40%;
+```
+
+```html interactive-example
+<section class="default-example" id="default-example">
+  <div class="transition-all" id="example-element">
+    This is a box with rounded corners.
+  </div>
+</section>
+```
+
+```css interactive-example
+#example-element {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #5b6dcd;
+  color: white;
+  padding: 10px;
+}
+```
 
 The radius applies to the whole {{cssxref("background")}}, even if the element has no border; the exact position of the clipping is defined by the {{cssxref("background-clip")}} property.
 
 The `border-radius` property does not apply to table elements when {{cssxref("border-collapse")}} is `collapse`.
 
-> **Note:** As with any shorthand property, individual sub-properties cannot inherit, such as in `border-radius:0 0 inherit inherit`, which would partially override existing definitions. Instead, the individual longhand properties have to be used.
+> [!NOTE]
+> As with any shorthand property, individual sub-properties cannot inherit, such as in `border-radius:0 0 inherit inherit`, which would partially override existing definitions. Instead, the individual longhand properties have to be used.
 
 ## Constituent properties
 
@@ -157,7 +202,7 @@ The `border-radius` property is specified as:
 For example:
 
 ```css
-border-radius: 1em/5em;
+border-radius: 1em / 5em;
 
 /* It is equivalent to: */
 border-top-left-radius: 1em 5em;
@@ -186,6 +231,11 @@ border-bottom-left-radius: 3px 4px;
 
 ## Examples
 
+### Comparing border styles
+
+The following example has seven {{htmlelement("pre")}} elements, each of which demonstrates combinations of `border` and `border-radius` styles.
+The styles applied to each `<pre>` element are included as the element's contents, so you can see the CSS declarations necessary to create the associated border style:
+
 ```html hidden
 <pre id="example-1">
   border: solid 10px;
@@ -200,7 +250,7 @@ border-bottom-left-radius: 3px 4px;
 <pre id="example-3">
   background: gold;
   border: ridge gold;
-  border-radius: 13em/3em;
+  border-radius: 13em / 3em;
 </pre>
 
 <pre id="example-4">
@@ -233,7 +283,7 @@ pre {
   margin: 20px;
   padding: 20px;
   width: 80%;
-  height: 80px;
+  height: 50px;
 }
 
 pre#example-1 {
@@ -249,7 +299,7 @@ pre#example-2 {
 pre#example-3 {
   background: gold;
   border: ridge gold;
-  border-radius: 13em/3em;
+  border-radius: 13em / 3em;
 }
 
 pre#example-4 {
@@ -277,15 +327,61 @@ pre#example-7 {
 }
 ```
 
-{{EmbedLiveSample("Examples", "200", "1150")}}
+{{EmbedLiveSample("Comparing border styles", "", "900")}}
 
-### Live Samples
+### Using `corner-shape` with `border-radius`
 
-- Sample 1 : <https://jsfiddle.net/Tripad/qnGKj/2/>
-- Sample 2 : <https://jsfiddle.net/Tripad/qnGKj/3/>
-- Sample 3 : <https://jsfiddle.net/Tripad/qnGKj/4/>
-- Sample 4 : <https://jsfiddle.net/Tripad/qnGKj/5/>
-- Sample 5 : <https://jsfiddle.net/Tripad/qnGKj/6/>
+When a non-`0` `border-radius` value is applied to a box corner, you can use the {{cssxref("corner-shape")}} property (or one of its [longhands and shorthands](/en-US/docs/Web/CSS/corner-shape#corner--shape_shorthands_and_longhands)) to apply custom shapes to that corner, such as a bevel, notch, or squircle. This example demonstrates `corner-shape` usage.
+
+#### HTML
+
+The markup for this example contains a single {{htmlelement("div")}} element.
+
+```html live-sample___basic-usage
+<div></div>
+```
+
+#### CSS
+
+We give the box some basic styles, which we've hidden for brevity. We also apply a {{cssxref("box-shadow")}}, a `border-radius` of `0 20% 50px 30%`, and a `corner-shape` of `superellipse(0.5) bevel notch squircle`.
+
+```css hidden live-sample___basic-usage
+body {
+  font-family: "Helvetica", "Arial", sans-serif;
+  width: 240px;
+  margin: 20px auto;
+}
+
+div {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: green;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 0),
+    rgb(255 255 255 / 0.5)
+  );
+}
+```
+
+```css live-sample___basic-usage
+div {
+  box-shadow: 1px 1px 3px gray;
+  border-radius: 0 20% 50px 30%;
+  corner-shape: superellipse(0.5) bevel notch squircle;
+}
+```
+
+#### Result
+
+The rendered result looks like this:
+
+{{EmbedLiveSample("basic-usage", "100%", "240")}}
+
+Note how no corner shape is applied to the top-left corner, because it has a `border-radius` of `0` set.
 
 ## Specifications
 

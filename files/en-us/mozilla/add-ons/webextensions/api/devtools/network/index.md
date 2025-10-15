@@ -3,9 +3,8 @@ title: devtools.network
 slug: Mozilla/Add-ons/WebExtensions/API/devtools/network
 page-type: webextension-api-property
 browser-compat: webextensions.api.devtools.network
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar}}
 
 The `devtools.network` API lets a devtools extension get information about network requests associated with the window that the devtools are attached to (the inspected window).
 
@@ -23,13 +22,14 @@ Like all the `devtools` APIs, this API is only available to code running in the 
 - [`devtools.network.onRequestFinished`](/en-US/docs/Mozilla/Add-ons/WebExtensions/API/devtools/network/onRequestFinished)
   - : Fired when the network request has finished and its details are available to the extension.
 
+{{WebExtExamples("h2")}}
+
 ## Browser compatibility
 
 {{Compat}}
 
-{{WebExtExamples("h2")}}
-
-> **Note:** This API is based on Chromium's [`chrome.devtools.network`](https://developer.chrome.com/docs/extensions/reference/devtools_network/) API.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.devtools.network`](https://developer.chrome.com/docs/extensions/reference/api/devtools/network) API.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

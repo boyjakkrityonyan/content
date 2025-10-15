@@ -10,8 +10,7 @@ browser-compat: api.NavigationCurrentEntryChangeEvent.navigationType
 
 {{APIRef("Navigation API")}}{{SeeCompatTable}}
 
-The **`navigationType`** read-only property of the
-{{domxref("NavigationCurrentEntryChangeEvent")}} interface returns the type of the navigation that resulted in the change.
+The **`navigationType`** read-only property of the {{domxref("NavigationCurrentEntryChangeEvent")}} interface returns the type of the navigation that resulted in the change. The property may be `null` if the change occurs due to {{domxref("Navigation.updateCurrentEntry()")}}.
 
 ## Value
 
@@ -44,4 +43,3 @@ navigation.addEventListener("currententrychange", (event) => {
 
 - [Modern client-side routing: the Navigation API](https://developer.chrome.com/docs/web-platform/navigation-api/)
 - [Navigation API explainer](https://github.com/WICG/navigation-api/blob/main/README.md)
-- Domenic Denicola's [Navigation API live demo](https://gigantic-honored-octagon.glitch.me/)

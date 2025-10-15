@@ -1,15 +1,30 @@
 ---
 title: "RegExp: lastIndex"
+short-title: lastIndex
 slug: Web/JavaScript/Reference/Global_Objects/RegExp/lastIndex
 page-type: javascript-instance-data-property
 browser-compat: javascript.builtins.RegExp.lastIndex
+sidebar: jsref
 ---
-
-{{JSRef}}
 
 The **`lastIndex`** data property of a {{jsxref("RegExp")}} instance specifies the index at which to start the next match.
 
-{{EmbedInteractiveExample("pages/js/regexp-lastindex.html")}}
+{{InteractiveExample("JavaScript Demo: RegExp: lastIndex")}}
+
+```js interactive-example
+const regex = /foo/g;
+const str = "table football, foosball";
+
+regex.test(str);
+
+console.log(regex.lastIndex);
+// Expected output: 9
+
+regex.test(str);
+
+console.log(regex.lastIndex);
+// Expected output: 19
+```
 
 ## Value
 
@@ -108,7 +123,8 @@ console.log(
 
 Try deleting the `mdLinkPattern.lastIndex += resolvedLink.length - originalLink.length` line and running the second example. You will find that the second link is not replaced correctly, because the `lastIndex` is already past the link's index after the string is shortened.
 
-> **Warning:** This example is for demonstration only. To deal with Markdown, you should probably use a parsing library instead of regex.
+> [!WARNING]
+> This example is for demonstration only. To deal with Markdown, you should probably use a parsing library instead of regex.
 
 ### Optimizing searching
 

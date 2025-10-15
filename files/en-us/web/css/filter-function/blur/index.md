@@ -3,34 +3,49 @@ title: blur()
 slug: Web/CSS/filter-function/blur
 page-type: css-function
 browser-compat: css.types.filter-function.blur
+sidebar: cssref
 ---
 
-{{CSSRef}}
+The **`blur()`** [CSS](/en-US/docs/Web/CSS) [function](/en-US/docs/Web/CSS/CSS_values_and_units/CSS_value_functions) applies a [Gaussian blur](https://en.wikipedia.org/wiki/Gaussian_blur) to the input image. Its result is a {{cssxref("&lt;filter-function&gt;")}}.
 
-The **`blur()`** [CSS](/en-US/docs/Web/CSS) [function](/en-US/docs/Web/CSS/CSS_Functions) applies a [Gaussian blur](https://en.wikipedia.org/wiki/Gaussian_blur) to the input image. Its result is a {{cssxref("&lt;filter-function&gt;")}}.
+{{InteractiveExample("CSS Demo: blur()")}}
 
-{{EmbedInteractiveExample("pages/css/function-blur.html")}}
+```css interactive-example-choice
+filter: blur(0);
+```
+
+```css interactive-example-choice
+filter: blur(4px);
+```
+
+```css interactive-example-choice
+filter: blur(1.5rem);
+```
+
+```html interactive-example
+<section id="default-example">
+  <img
+    class="transition-all"
+    id="example-element"
+    src="/shared-assets/images/examples/firefox-logo.svg"
+    width="200" />
+</section>
+```
 
 ## Syntax
 
-The `blur()` function applies a Gaussian blur to the elements on which it is applied.
-
 ```css
-blur(radius)
+blur()         /* No effect */
+blur(0)        /* No effect */
+
+blur(8px)      /* Blur with 8px radius */
+blur(1.17rem)  /* Blur with 1.17rem radius */
 ```
 
 ### Parameters
 
-- `radius`
-  - : The radius of the blur, specified as a {{cssxref("&lt;length&gt;")}}. It defines the value of the standard deviation to the Gaussian function, i.e., how many pixels on the screen blend into each other; thus, a larger value will create more blur. A value of `0` leaves the input unchanged. The initial value for {{Glossary("interpolation")}} is `0`. Percentage values are invalid.
-
-### Setting a blur with pixels and with rem
-
-```css
-blur(0)        /* No effect */
-blur(8px)      /* Blur with 8px radius */
-blur(1.17rem)  /* Blur with 1.17rem radius */
-```
+- {{cssxref("length")}} {{Optional_Inline}}
+  - : Specifies the radius of the blur. It defines the value of the standard deviation to the Gaussian function, that is, how many pixels on the screen blend into each other. Therefore, a larger value will create more blur. A value of `0` leaves the input unchanged. The initial value for {{Glossary("interpolation")}} is `0`. Percentage values are invalid. The default value is `0`.
 
 ## SVG filter
 
@@ -48,9 +63,13 @@ The following declarations produce the same effect:
 
 ```css
 filter: blur(1.1px);
-filter: url(#blur11); /* with embedded SVG */
-filter: url(folder/fileName.svg#blurr11); /* external svg filter definition */
+filter: url("#blur11"); /* with embedded SVG */
+filter: url("folder/fileName.svg#blur11"); /* external svg filter definition */
 ```
+
+## Formal syntax
+
+{{CSSSyntax}}
 
 ## Examples
 
@@ -67,7 +86,10 @@ This example shows three images: the image with a `blur()` filter function appli
   <filter id="blur">
     <feGaussianBlur stdDeviation="3.5" edgeMode="duplicate" />
   </filter>
-  <image xlink:href="flag.jpg" filter="url(#blur)" />
+  <image
+    href="https://mdn.github.io/shared-assets/images/examples/progress-pride-flag.jpg"
+    xlink:href="https://mdn.github.io/shared-assets/images/examples/progress-pride-flag.jpg"
+    filter="url('#blur')" />
 </svg>
 ```
 
@@ -89,18 +111,26 @@ svg:not([height]) {
   <tbody>
     <tr>
       <td>
-        <img class="filter" src="flag.jpg" alt="Pride flag" />
+        <img
+          class="filter"
+          src="https://mdn.github.io/shared-assets/images/examples/progress-pride-flag.jpg"
+          alt="Pride flag" />
       </td>
       <td>
-        <svg id="svg" height="220" width="220" style="overflow: visible">
+        <svg id="svg" height="220" width="220" overflow="visible">
           <filter id="svgBlur">
             <feGaussianBlur stdDeviation="3.5" />
           </filter>
-          <image xlink:href="flag.jpg" filter="url(#svgBlur)" />
+          <image
+            href="https://mdn.github.io/shared-assets/images/examples/progress-pride-flag.jpg"
+            xlink:href="https://mdn.github.io/shared-assets/images/examples/progress-pride-flag.jpg"
+            filter="url('#svgBlur')" />
         </svg>
       </td>
       <td>
-        <img src="flag.jpg" alt="Pride flag" />
+        <img
+          src="https://mdn.github.io/shared-assets/images/examples/progress-pride-flag.jpg"
+          alt="Pride flag" />
       </td>
     </tr>
   </tbody>

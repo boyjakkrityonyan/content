@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.WebGLRenderingContext.getActiveUniform
 ---
 
-{{APIRef("WebGL")}}
+{{APIRef("WebGL")}}{{AvailableInWorkers}}
 
 The **`WebGLRenderingContext.getActiveUniform()`** method of
 the [WebGL API](/en-US/docs/Web/API/WebGL_API) returns a
@@ -28,8 +28,7 @@ getActiveUniform(program, index)
 - `index`
   - : A {{domxref("WebGL_API/Types", "GLuint")}} specifying the index of the uniform attribute to get. This
     value is an index 0 to N - 1 as returned
-    by {{domxref("WebGLRenderingContext.getProgramParameter",
-    "gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS)")}}.
+    by {{domxref("WebGLRenderingContext.getProgramParameter", "gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS)")}}.
 
 ### Return value
 
@@ -56,7 +55,6 @@ The `type` attribute of the return value will be one of the following:
 - `gl.SAMPLER_CUBE`
 - When using a {{domxref("WebGL2RenderingContext", "WebGL 2 context", "", 1)}}, the
   following values are possible additionally:
-
   - `gl.UNSIGNED_INT`
   - `gl.UNSIGNED_INT_VEC2`
   - `gl.UNSIGNED_INT_VEC3`
@@ -83,7 +81,7 @@ The `type` attribute of the return value will be one of the following:
 
 When `gl.linkProgram` is called, WebGL creates a list of active uniforms.
 These are possible values of the `name` attribute of return values of
-{{domxref("WebGLRenderingContext.getActiveUniform()", "getActiveUniform")}}. WebGL
+`getActiveUniform`. WebGL
 generates one or more entries in the list depending on the declared type of the uniform
 in the shader:
 
@@ -97,7 +95,6 @@ in the shader:
   `c.foo` and `c.bar`.
 - Arrays of structs or arrays: each entry of the array will generate its own entries.
   E.g. `uniform struct { float foo; vec4 bar; } d[2];` will result in:
-
   - `d[0].foo`
   - `d[0].bar`
   - `d[1].foo`

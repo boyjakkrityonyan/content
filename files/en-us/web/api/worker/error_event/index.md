@@ -6,7 +6,7 @@ page-type: web-api-event
 browser-compat: api.Worker.error_event
 ---
 
-{{APIRef("Web Workers API")}}
+{{APIRef("Web Workers API")}}{{AvailableInWorkers("window_and_worker_except_service")}}
 
 The **`error`** event of the {{domxref("Worker")}} interface fires when an error occurs in the worker.
 
@@ -14,10 +14,10 @@ The **`error`** event of the {{domxref("Worker")}} interface fires when an error
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("error", (event) => {});
+```js-nolint
+addEventListener("error", (event) => { })
 
-onerror = (event) => {};
+onerror = (event) => { }
 ```
 
 ## Event type

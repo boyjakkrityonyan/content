@@ -2,9 +2,8 @@
 title: Work with files
 slug: Mozilla/Add-ons/WebExtensions/Working_with_files
 page-type: guide
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Your browser extension may need to work with files to deliver its full functionality. This article looks at the five mechanisms you have for handling files:
 
@@ -26,11 +25,12 @@ browser.downloads.download({ url: "https://example.org/image.png" });
 
 You can let the user download to a location of their choice by specifying the `saveAs` parameter.
 
-> **Note:** Using [URL.createObjectURL()](/en-US/docs/Web/API/URL/createObjectURL_static) you can also download files and blobs defined in your JavaScript, which can include local content retrieved from IndexedDB.
+> [!NOTE]
+> Using [URL.createObjectURL()](/en-US/docs/Web/API/URL/createObjectURL_static) you can also download files and blobs defined in your JavaScript, which can include local content retrieved from IndexedDB.
 
 The downloads API also provides features to cancel, pause, resume, erase, and remove downloads; search for downloaded files in the download manager; show downloaded files in the computer's file manager; and open a file in an associated application.
 
-To use this API, you need to have the `"downloads"` [API permission](/en-US/docs/Web/API/Permissions#api_permissions) specified in your [`manifest.json`](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json) file.
+To use this API, you need to have the `"downloads"` [API permission](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions#api_permissions) specified in your [`manifest.json`](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json) file.
 
 Example: [Latest download](https://github.com/mdn/webextensions-examples/tree/main/latest-download)
 API reference: [downloads API](/en-US/docs/Mozilla/Add-ons/WebExtensions/API/downloads)
@@ -41,9 +41,10 @@ If you want to work with a file from the user's computer one option is to let th
 
 Example: [Imagify](https://github.com/mdn/webextensions-examples/tree/main/imagify)
 Guide: [Using files from web applications](/en-US/docs/Web/API/File_API/Using_files_from_web_applications)
-API references: [HTML input element](/en-US/docs/Web/HTML/Element/input/file) | [DOM File API](/en-US/docs/Web/API/File)
+API references: [HTML input element](/en-US/docs/Web/HTML/Reference/Elements/input/file) | [DOM File API](/en-US/docs/Web/API/File)
 
-> **Note:** If you want to access or process all the files in a selected folder, you can do so using `<input type="file" webkitdirectory="true"/>` to select the folder and return all the files it contains.
+> [!NOTE]
+> If you want to access or process all the files in a selected folder, you can do so using `<input type="file" webkitdirectory="true"/>` to select the folder and return all the files it contains.
 
 ## Open files in an extension using drag and drop
 
@@ -62,9 +63,7 @@ The key features of the library are:
 - [getFileStorage](https://rpl.github.io/idb-file-storage/function/index.html#static-function-getFileStorage)
   - : Returns an `IDBFileStorage` instance, creating the named storage if it does not exist.
 - [IDBFileStorage](https://rpl.github.io/idb-file-storage/class/src/idb-file-storage.js~IDBFileStorage.html)
-
   - : Provides the methods to save and retrieve files, such as:
-
     - list to obtain an optionally filtered list of file in the database.
     - put to add a file or blob to the database.
     - get to retrieve a file or blob from the database.
@@ -135,7 +134,8 @@ Once the blob URL has been revoked, any attempt to load it will result in an err
 Example: [Store Collected Images](https://github.com/mdn/webextensions-examples/tree/main/store-collected-images/webextension-plain)
 API References: [idb-file-storage library](https://rpl.github.io/idb-file-storage/)
 
-> **Note:** You can also use the full Web [IndexedDB API](/en-US/docs/Web/API/IndexedDB_API) to store data from your extension. This can be useful where you need to store data that isn't handled well by the simple key/value pairs offered by the DOM [Storage API](/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage).
+> [!NOTE]
+> You can also use the full Web [IndexedDB API](/en-US/docs/Web/API/IndexedDB_API) to store data from your extension. This can be useful where you need to store data that isn't handled well by the simple key/value pairs offered by the DOM [Storage API](/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage).
 
 ## Process files in a local app
 

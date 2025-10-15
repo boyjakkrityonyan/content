@@ -3,13 +3,13 @@ title: runtime.onSuspend
 slug: Mozilla/Add-ons/WebExtensions/API/runtime/onSuspend
 page-type: webextension-api-event
 browser-compat: webextensions.api.runtime.onSuspend
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Sent to the event page just before it is unloaded. This gives the extension an opportunity to do some cleanup. Note that since the page is unloading, any asynchronous operations started while handling this event are not guaranteed to complete.
 
-> **Note:** If something prevents the event page from being unloaded, the {{WebExtAPIRef("runtime.onSuspendCanceled")}} event will be sent and the page won't be unloaded.
+> [!NOTE]
+> If something prevents the event page from being unloaded, the {{WebExtAPIRef("runtime.onSuspendCanceled")}} event will be sent and the page won't be unloaded.
 
 ## Syntax
 
@@ -35,10 +35,6 @@ Events have three functions:
 - `listener`
   - : The function called when this event occurs.
 
-## Browser compatibility
-
-{{Compat}}
-
 ## Examples
 
 Listen for suspend events:
@@ -54,7 +50,12 @@ browser.runtime.onSuspend.addListener(handleSuspend);
 
 {{WebExtExamples}}
 
-> **Note:** This API is based on Chromium's [`chrome.runtime`](https://developer.chrome.com/docs/extensions/reference/runtime/#event-onSuspend) API. This documentation is derived from [`runtime.json`](https://chromium.googlesource.com/chromium/src/+/master/extensions/common/api/runtime.json) in the Chromium code.
+## Browser compatibility
+
+{{Compat}}
+
+> [!NOTE]
+> This API is based on Chromium's [`chrome.runtime`](https://developer.chrome.com/docs/extensions/reference/api/runtime#event-onSuspend) API. This documentation is derived from [`runtime.json`](https://chromium.googlesource.com/chromium/src/+/master/extensions/common/api/runtime.json) in the Chromium code.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

@@ -8,7 +8,7 @@ status:
 browser-compat: api.SerialPort.open
 ---
 
-{{SecureContext_Header}}{{APIRef("Serial API")}}{{SeeCompatTable}}
+{{SecureContext_Header}}{{APIRef("Web Serial API")}}{{SeeCompatTable}}{{AvailableInWorkers("window_and_dedicated")}}
 
 The **`open()`** method of the {{domxref("SerialPort")}} interface returns a {{jsxref("Promise")}} that resolves when the port is opened. By default the port is opened with 8 data bits, 1 stop bit and no parity checking. The `baudRate` parameter is required.
 
@@ -21,9 +21,7 @@ open(options)
 ### Parameters
 
 - `options`
-
   - : An object with any of the following values:
-
     - `baudRate`
       - : A positive, non-zero value indicating the baud rate at which serial communication should be established.
     - `bufferSize` {{Optional_Inline}}

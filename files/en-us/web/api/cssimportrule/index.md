@@ -7,7 +7,7 @@ browser-compat: api.CSSImportRule
 
 {{APIRef("CSSOM")}}
 
-The **`CSSImportRule`** interface represents an {{cssxref("@import")}} [at-rule](/en-US/docs/Web/CSS/At-rule).
+The **`CSSImportRule`** interface represents an {{cssxref("@import")}} [at-rule](/en-US/docs/Web/CSS/CSS_syntax/At-rule).
 
 {{InheritanceDiagram}}
 
@@ -23,7 +23,7 @@ _Inherits properties from its ancestor {{domxref("CSSRule")}}._
   - : Returns the value of the `media` attribute of the associated stylesheet.
 - {{domxref("CSSImportRule.styleSheet")}} {{ReadOnlyInline}}
   - : Returns the associated stylesheet.
-- {{domxref("CSSImportRule.supportsText")}} {{ReadOnlyInline}} {{Experimental_Inline}}
+- {{domxref("CSSImportRule.supportsText")}} {{ReadOnlyInline}}
   - : Returns the supports condition specified by the {{cssxref("@import")}} rule.
 
 ## Instance methods
@@ -35,7 +35,7 @@ _Inherits methods from its ancestor {{domxref("CSSRule")}}._
 The document includes a single stylesheet which contains a single {{cssxref("@import")}} rule. Therefore the first item in the list of CSS rules will be a `CSSImportRule`.
 
 ```css
-@import url("style.css") screen;
+@import "style.css" screen;
 ```
 
 ```js

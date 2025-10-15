@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.ReadableStreamDefaultReader.releaseLock
 ---
 
-{{APIRef("Streams")}}
+{{APIRef("Streams")}}{{AvailableInWorkers}}
 
 The **`releaseLock()`** method of the {{domxref("ReadableStreamDefaultReader")}} interface releases the reader's lock on the stream.
 
@@ -40,11 +40,11 @@ None ({{jsxref("undefined")}}).
 function fetchStream() {
   const reader = stream.getReader();
 
-  // ...
+  // …
 
   reader.releaseLock();
 
-  // ...
+  // …
 }
 ```
 

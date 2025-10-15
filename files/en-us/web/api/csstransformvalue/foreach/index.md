@@ -1,5 +1,5 @@
 ---
-title: "cssTransformValue: forEach() method"
+title: "CSSTransformValue: forEach() method"
 short-title: forEach()
 slug: Web/API/CSSTransformValue/forEach
 page-type: web-api-instance-method
@@ -20,9 +20,7 @@ forEach(callbackFn, thisArg)
 ### Parameters
 
 - `callbackFn`
-
   - : The function to execute for each element, taking three arguments:
-
     - `currentValue`
       - : The value of the current element being processed.
     - `index` {{optional_inline}}

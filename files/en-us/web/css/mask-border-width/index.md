@@ -3,9 +3,8 @@ title: mask-border-width
 slug: Web/CSS/mask-border-width
 page-type: css-property
 browser-compat: css.properties.mask-border-width
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **`mask-border-width`** [CSS](/en-US/docs/Web/CSS) property sets the width of an element's [mask border](/en-US/docs/Web/CSS/mask-border).
 
@@ -69,10 +68,12 @@ The `mask-border-width` property may be specified using one, two, three, or four
 
 ### Basic usage
 
-This property doesn't appear to be supported anywhere yet. When it eventually starts to be supported, it will serve to define the width of the border mask — setting this to a different value to [`mask-border-slice`](/en-US/docs/Web/CSS/mask-border-slice) will cause the slices to be scaled to fit the border mask.
+`mask-border-width` defines the width of the border mask — setting this to a different value to [`mask-border-slice`](/en-US/docs/Web/CSS/mask-border-slice) will cause the slices to be scaled to fit the border mask.
 
 ```css
-mask-border-width: 30 fill;
+/* Final mask scaled down to 20px wide */
+mask-border-slice: 30 fill;
+mask-border-width: 20px;
 ```
 
 Chromium-based browsers support an outdated version of this property — `mask-box-image-width` — with a prefix:
@@ -81,7 +82,8 @@ Chromium-based browsers support an outdated version of this property — `mask-b
 -webkit-mask-box-image-width: 20px;
 ```
 
-> **Note:** The [`mask-border`](/en-US/docs/Web/CSS/mask-border) page features a working example (using the out-of-date prefixed border mask properties supported in Chromium), so you can get an idea of the effect.
+> [!NOTE]
+> The [`mask-border`](/en-US/docs/Web/CSS/mask-border) page features a working example (using the out-of-date prefixed border mask properties supported in Chromium), so you can get an idea of the effect.
 
 ## Specifications
 

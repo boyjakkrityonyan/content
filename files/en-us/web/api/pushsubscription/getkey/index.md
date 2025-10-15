@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.PushSubscription.getKey
 ---
 
-{{APIRef("Push API")}}
+{{APIRef("Push API")}}{{SecureContext_Header}}{{AvailableInWorkers}}
 
 The `getKey()` method of the {{domxref("PushSubscription")}} interface
 returns an {{jsxref("ArrayBuffer")}} representing a client public key, which can then
@@ -21,10 +21,8 @@ getKey(name)
 ### Parameters
 
 - `name`
-
   - : A string representing the encryption method used to generate a
     client key. The value can be:
-
     - `p256dh`
       - : An [Elliptic curve Diffie–Hellman](https://en.wikipedia.org/wiki/Elliptic_curve_Diffie%E2%80%93Hellman) public key on the P-256 curve (that is, the NIST
         secp256r1 elliptic curve). The resulting key is an uncompressed point in ANSI
@@ -63,7 +61,7 @@ reg.pushManager.getSubscription().then((subscription) => {
   const key = subscription.getKey("p256dh");
   const auth = subscription.getKey("auth");
 
-  // ...
+  // …
 });
 ```
 

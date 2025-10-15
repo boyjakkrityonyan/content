@@ -2,12 +2,10 @@
 title: GPUPipelineLayout
 slug: Web/API/GPUPipelineLayout
 page-type: web-api-interface
-status:
-  - experimental
 browser-compat: api.GPUPipelineLayout
 ---
 
-{{APIRef("WebGPU API")}}{{SeeCompatTable}}
+{{APIRef("WebGPU API")}}{{SecureContext_Header}}{{AvailableInWorkers}}
 
 The **`GPUPipelineLayout`** interface of the {{domxref("WebGPU API", "WebGPU API", "", "nocode")}} defines the {{domxref("GPUBindGroupLayout")}}s used by a pipeline. {{domxref("GPUBindGroup")}}s used with the pipeline during command encoding must have compatible {{domxref("GPUBindGroupLayout")}}s.
 
@@ -17,22 +15,23 @@ A `GPUPipelineLayout` object instance is created using the {{domxref("GPUDevice.
 
 ## Instance properties
 
-- {{domxref("GPUPipelineLayout.label", "label")}} {{Experimental_Inline}}
+- {{domxref("GPUPipelineLayout.label", "label")}}
   - : A string providing a label that can be used to identify the object, for example in {{domxref("GPUError")}} messages or console warnings.
 
 ## Examples
 
-> **Note:** The [WebGPU samples](https://webgpu.github.io/webgpu-samples/) feature many more examples.
+> [!NOTE]
+> The [WebGPU samples](https://webgpu.github.io/webgpu-samples/) feature many more examples.
 
 ### Basic pipeline layout example
 
 The following snippet:
 
 - Creates a {{domxref("GPUBindGroupLayout")}} that describes a binding with a buffer, a texture, and a sampler.
-- Creates a {{domxref("GPUPipelineLayout")}} based on the {{domxref("GPUBindGroupLayout")}}.
+- Creates a `GPUPipelineLayout` based on the {{domxref("GPUBindGroupLayout")}}.
 
 ```js
-// ...
+// …
 
 const bindGroupLayout = device.createBindGroupLayout({
   entries: [
@@ -58,7 +57,7 @@ const pipelineLayout = device.createPipelineLayout({
   bindGroupLayouts: [bindGroupLayout],
 });
 
-// ...
+// …
 ```
 
 ## Specifications

@@ -9,7 +9,7 @@ browser-compat: api.OTPCredential
 
 {{APIRef("WebOTP API")}}{{SecureContext_Header}}{{SeeCompatTable}}
 
-The **`OTPCredential`** interface of the {{domxref('WebOTP API','','',' ')}} is returned when a WebOTP {{domxref("CredentialsContainer.get", "navigator.credentials.get()")}} call (i.e. invoked with an `otp` option) fulfills. It includes a `code` property that contains the retrieved one-time password (OTP).
+The **`OTPCredential`** interface of the {{domxref('WebOTP API','','',' ')}} is returned when a WebOTP {{domxref("CredentialsContainer.get", "navigator.credentials.get()")}} call (i.e., invoked with an `otp` option) fulfills. It includes a `code` property that contains the retrieved one-time password (OTP).
 
 {{InheritanceDiagram}}
 
@@ -17,16 +17,8 @@ The **`OTPCredential`** interface of the {{domxref('WebOTP API','','',' ')}} is 
 
 _This interface also inherits properties from {{domxref("Credential")}}._
 
-- {{domxref("OTPCredential.code")}} {{Experimental_Inline}}
-  - : The OTP.
-- {{domxref("Credential.id", "OTPCredential.id")}}
-  - : Inherited from {{domxref("Credential")}}. The ID of the credential type.
-- {{domxref("Credential.type", "OTPCredential.type")}}
-  - : Inherited from {{domxref("Credential")}}. Always set to `otp` for `OTPCredential` instances.
-
-### Event handlers
-
-None.
+- {{domxref("OTPCredential.code")}} {{ReadOnlyInline}} {{Experimental_Inline}}
+  - : The one-time password (OTP).
 
 ## Instance methods
 
@@ -51,7 +43,8 @@ navigator.credentials
   });
 ```
 
-> **Note:** For a full explanation of the code, see the {{domxref('WebOTP API','','',' ')}} landing page. You can also [see this code as part of a full working demo](https://web-otp.glitch.me/).
+> [!NOTE]
+> For a full explanation of the code, see the {{domxref('WebOTP API','','',' ')}} landing page. You can also [see this code as part of a full working demo](https://chrome.dev/web-otp-demo/).
 
 ## Specifications
 

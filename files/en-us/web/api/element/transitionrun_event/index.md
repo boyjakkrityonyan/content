@@ -8,7 +8,7 @@ browser-compat: api.Element.transitionrun_event
 
 {{APIRef}}
 
-The **`transitionrun`** event is fired when a [CSS transition](/en-US/docs/Web/CSS/CSS_transitions/Using_CSS_transitions) is first created, i.e. before any {{cssxref("transition-delay")}} has begun.
+The **`transitionrun`** event is fired when a [CSS transition](/en-US/docs/Web/CSS/CSS_transitions/Using_CSS_transitions) is first created, i.e., before any {{cssxref("transition-delay")}} has begun.
 
 This event is not cancelable.
 
@@ -16,10 +16,10 @@ This event is not cancelable.
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("transitionrun", (event) => {});
+```js-nolint
+addEventListener("transitionrun", (event) => { })
 
-ontransitionrun = (event) => {};
+ontransitionrun = (event) => { }
 ```
 
 ## Event type
@@ -74,7 +74,7 @@ In the following example, we have a simple {{htmlelement("div")}} element, style
 .transition {
   width: 100px;
   height: 100px;
-  background: rgba(255, 0, 0, 1);
+  background: red;
   transition-property: transform, background;
   transition-duration: 2s;
   transition-delay: 1s;
@@ -82,11 +82,11 @@ In the following example, we have a simple {{htmlelement("div")}} element, style
 
 .transition:hover {
   transform: rotate(90deg);
-  background: rgba(255, 0, 0, 0);
+  background: transparent;
 }
 ```
 
-To this, we'll add some JavaScript to indicate where the {{domxref("Element/transitionstart_event", "transitionstart")}} and {{domxref("Element/transitionrun_event", "transitionrun")}} events fire.
+To this, we'll add some JavaScript to indicate where the {{domxref("Element/transitionstart_event", "transitionstart")}} and `transitionrun` events fire.
 
 ```js
 const el = document.querySelector(".transition");
@@ -109,8 +109,8 @@ el.addEventListener("transitionend", () => {
 
 The difference is that:
 
-- `transitionrun` fires when the transition is created (i.e. at the start of any delay).
-- `transitionstart` fires when the actual animation has begun (i.e. at the end of any delay).
+- `transitionrun` fires when the transition is created (i.e., at the start of any delay).
+- `transitionstart` fires when the actual animation has begun (i.e., at the end of any delay).
 
 The `transitionrun` will occur even if the transition is canceled before the delay expires. If there is no transition delay or if transition-delay is negative, both `transitionrun` and `transitionstart` are fired.
 

@@ -3,9 +3,8 @@ title: notifications.update()
 slug: Mozilla/Add-ons/WebExtensions/API/notifications/update
 page-type: webextension-api-function
 browser-compat: webextensions.api.notifications.update
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Updates a notification, given its ID.
 
@@ -30,10 +29,6 @@ let updating = browser.notifications.update(
 ### Return value
 
 A [`Promise`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that will be fulfilled with a boolean: `true` if the notification was updated, or `false` if it was not (for example, because the notification referenced by `id` did not exist).
-
-## Browser compatibility
-
-{{Compat}}
 
 ## Examples
 
@@ -90,4 +85,9 @@ browser.browserAction.onClicked.addListener(() => {
 
 {{WebExtExamples}}
 
-> **Note:** This API is based on Chromium's [`chrome.notifications`](https://developer.chrome.com/docs/extensions/reference/notifications/) API.
+## Browser compatibility
+
+{{Compat}}
+
+> [!NOTE]
+> This API is based on Chromium's [`chrome.notifications`](https://developer.chrome.com/docs/extensions/reference/api/notifications) API.

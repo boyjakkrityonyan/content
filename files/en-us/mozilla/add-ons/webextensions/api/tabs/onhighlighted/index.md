@@ -3,9 +3,8 @@ title: tabs.onHighlighted
 slug: Mozilla/Add-ons/WebExtensions/API/tabs/onHighlighted
 page-type: webextension-api-event
 browser-compat: webextensions.api.tabs.onHighlighted
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Fired when the set of highlighted tabs in a window changes.
 
@@ -33,9 +32,7 @@ Events have three functions:
 ### Parameters
 
 - `listener`
-
   - : The function called when this event occurs. The function is passed this argument:
-
     - `highlightInfo`
       - : `object`. ID(s) of the highlighted tabs, and ID of their window. See the [highlightInfo](#highlightinfo_2) section for more details.
 
@@ -66,7 +63,8 @@ browser.tabs.onHighlighted.addListener(handleHighlighted);
 
 {{Compat}}
 
-> **Note:** This API is based on Chromium's [`chrome.tabs`](https://developer.chrome.com/docs/extensions/reference/tabs/#event-onHighlighted) API. This documentation is derived from [`tabs.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/tabs.json) in the Chromium code.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.tabs`](https://developer.chrome.com/docs/extensions/reference/api/tabs#event-onHighlighted) API. This documentation is derived from [`tabs.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/tabs.json) in the Chromium code.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

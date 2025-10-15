@@ -3,9 +3,8 @@ title: AsyncGenerator
 slug: Web/JavaScript/Reference/Global_Objects/AsyncGenerator
 page-type: javascript-class
 browser-compat: javascript.builtins.AsyncGenerator
+sidebar: jsref
 ---
-
-{{JSRef}}
 
 The **`AsyncGenerator`** object is returned by an {{jsxref("Statements/async_function*", "async generator function", "", 1)}} and it conforms to both the [async iterable protocol and the async iterator protocol](/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_async_iterator_and_async_iterable_protocols).
 
@@ -13,17 +12,15 @@ Async generator methods always yield {{jsxref("Promise")}} objects.
 
 `AsyncGenerator` is a subclass of the hidden {{jsxref("AsyncIterator")}} class.
 
-{{EmbedInteractiveExample("pages/js/expressions-async-function-asterisk.html", "taller")}}
-
 ## Constructor
 
-The `AsyncGenerator` constructor is not available globally. Instances of `AsyncGenerator` must be returned from [async generator functions](/en-US/docs/Web/JavaScript/Reference/Statements/async_function*)
+There's no JavaScript entity that corresponds to the `AsyncGenerator` constructor. Instances of `AsyncGenerator` must be returned from [async generator functions](/en-US/docs/Web/JavaScript/Reference/Statements/async_function*):
 
 ```js
 async function* createAsyncGenerator() {
-  yield await Promise.resolve(1);
+  yield Promise.resolve(1);
   yield await Promise.resolve(2);
-  yield await Promise.resolve(3);
+  yield 3;
 }
 const asyncGen = createAsyncGenerator();
 asyncGen.next().then((res) => console.log(res.value)); // 1
@@ -31,20 +28,20 @@ asyncGen.next().then((res) => console.log(res.value)); // 2
 asyncGen.next().then((res) => console.log(res.value)); // 3
 ```
 
-In fact, there's no JavaScript entity that corresponds to the `AsyncGenerator` constructor. There's only a hidden object which is the prototype object shared by all objects created by async generator functions. This object is often stylized as `AsyncGenerator.prototype` to make it look like a class, but it should be more appropriately called [`AsyncGeneratorFunction.prototype.prototype`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGeneratorFunction), because `AsyncGeneratorFunction` is an actual JavaScript entity.
+There's only a hidden object which is the prototype object shared by all objects created by async generator functions. This object is often stylized as `AsyncGenerator.prototype` to make it look like a class, but it should be more appropriately called {{jsxref("AsyncGeneratorFunction.prototype.prototype")}}, because `AsyncGeneratorFunction` is an actual JavaScript entity. To understand the prototype chain of `AsyncGenerator` instances, see {{jsxref("AsyncGeneratorFunction.prototype.prototype")}}.
 
 ## Instance properties
 
 These properties are defined on `AsyncGenerator.prototype` and shared by all `AsyncGenerator` instances.
 
 - {{jsxref("Object/constructor", "AsyncGenerator.prototype.constructor")}}
-
   - : The constructor function that created the instance object. For `AsyncGenerator` instances, the initial value is [`AsyncGeneratorFunction.prototype`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGeneratorFunction).
 
-    > **Note:** `AsyncGenerator` objects do not store a reference to the async generator function that created them.
+    > [!NOTE]
+    > `AsyncGenerator` objects do not store a reference to the async generator function that created them.
 
-- `AsyncGenerator.prototype[@@toStringTag]`
-  - : The initial value of the [`@@toStringTag`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) property is the string `"AsyncGenerator"`. This property is used in {{jsxref("Object.prototype.toString()")}}.
+- `AsyncGenerator.prototype[Symbol.toStringTag]`
+  - : The initial value of the [`[Symbol.toStringTag]`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) property is the string `"AsyncGenerator"`. This property is used in {{jsxref("Object.prototype.toString()")}}.
 
 ## Instance methods
 
@@ -67,14 +64,14 @@ The following example iterates over an async generator, logging values 1–6 to 
 // An async task. Pretend it's doing something more useful
 // in practice.
 function delayedValue(time, value) {
-  return new Promise((resolve /*, reject*/) => {
+  return new Promise((resolve /*, reject */) => {
     setTimeout(() => resolve(value), time);
   });
 }
 
 async function* generate() {
   yield delayedValue(2000, 1);
-  yield delayedValue(100, 2);
+  yield delayedValue(1000, 2);
   yield delayedValue(500, 3);
   yield delayedValue(250, 4);
   yield delayedValue(125, 5);

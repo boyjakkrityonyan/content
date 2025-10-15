@@ -6,11 +6,9 @@ page-type: web-api-instance-property
 browser-compat: api.VisualViewport.width
 ---
 
-{{APIRef("Visual Viewport")}}
+{{APIRef("CSSOM view API")}}
 
-The **`width`** read-only property of the
-{{domxref("VisualViewport")}} interface returns the width of the visual viewport, in CSS
-pixels.
+The **`width`** read-only property of the {{domxref("VisualViewport")}} interface returns the width of the visual viewport, in CSS pixels, or `0` if current document is not fully active.
 
 ## Value
 

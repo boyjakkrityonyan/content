@@ -1,15 +1,29 @@
 ---
 title: "Function: name"
+short-title: name
 slug: Web/JavaScript/Reference/Global_Objects/Function/name
 page-type: javascript-instance-data-property
 browser-compat: javascript.builtins.Function.name
+sidebar: jsref
 ---
-
-{{JSRef}}
 
 The **`name`** data property of a {{jsxref("Function")}} instance indicates the function's name as specified when it was created, or it may be either `anonymous` or `''` (an empty string) for functions created anonymously.
 
-{{EmbedInteractiveExample("pages/js/function-name.html")}}
+{{InteractiveExample("JavaScript Demo: Function: name")}}
+
+```js interactive-example
+const func1 = function () {};
+
+const object = {
+  func2: function () {},
+};
+
+console.log(func1.name);
+// Expected output: "func1"
+
+console.log(object.func2.name);
+// Expected output: "func2"
+```
 
 ## Value
 
@@ -17,7 +31,8 @@ A string.
 
 {{js_property_attributes(0, 0, 1)}}
 
-> **Note:** In non-standard, pre-ES2015 implementations the `configurable` attribute was `false` as well.
+> [!NOTE]
+> In non-standard, pre-ES2015 implementations the `configurable` attribute was `false` as well.
 
 ## Description
 
@@ -76,14 +91,14 @@ const someFunction = function someFunctionName() {};
 someFunction.name; // "someFunctionName"
 ```
 
-Anonymous function expressions created using the keyword `function` or arrow functions would have `""` (an empty string) as their name.
+Anonymous function expressions, created using either the `function` keyword or the arrow function syntax, have `""` (an empty string) as their name by default.
 
 ```js
 (function () {}).name; // ""
 (() => {}).name; // ""
 ```
 
-However, such cases are rare — usually, in order to refer to the expression elsewhere, the function expression is attached to an identifier when it's created (such as in a variable declaration). In such cases, the name can be inferred, as the following few subsections demonstrate.
+However, such cases are rare — usually, in order to call the function elsewhere, the function expression is associated with an identifier. The name of an anonymous function expression can be inferred within certain syntactic contexts, including: [variable declaration, method](#variable_declaration_and_method), [initializer, and default value](#initializer_and_default_value).
 
 One practical case where the name cannot be inferred is a function returned from another function:
 
@@ -118,7 +133,7 @@ f.name; // "f"
 
 ### Initializer and default value
 
-Functions in initializers (default values) of [destructuring](/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#default_value), [default parameters](/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters), [class fields](/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields), etc., will inherit the name of the bound identifier as their `name`.
+Functions in initializers (default values) of [destructuring](/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring#default_value), [default parameters](/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters), [class fields](/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields), etc., will inherit the name of the bound identifier as their `name`.
 
 ```js
 const [f = () => {}] = [];
@@ -162,7 +177,9 @@ When using [`get`](/en-US/docs/Web/JavaScript/Reference/Functions/get) and [`set
 
 ```js
 const o = {
-  get foo() {},
+  get foo() {
+    return 1;
+  },
   set foo(x) {},
 };
 
@@ -180,7 +197,8 @@ class Foo {}
 Foo.name; // "Foo"
 ```
 
-> **Warning:** JavaScript will set the function's `name` property only if a function does not have an own property called `name`. However, classes' [static members](/en-US/docs/Web/JavaScript/Reference/Classes/static) will be set as own properties of the class constructor function, and thus prevent the built-in `name` from being applied. See [an example](#telling_the_constructor_name_of_an_object) below.
+> [!WARNING]
+> JavaScript will set the function's `name` property only if a function does not have an own property called `name`. However, classes' [static members](/en-US/docs/Web/JavaScript/Reference/Classes/static) will be set as own properties of the class constructor function, and thus prevent the built-in `name` from being applied. See [an example](#telling_the_constructor_name_of_an_object) below.
 
 ### Symbol as function name
 
@@ -199,7 +217,7 @@ o[sym1].name; // "[foo]"
 o[sym2].name; // "[]"
 ```
 
-### Private property
+### Private fields and methods
 
 Private fields and private methods have the hash (`#`) as part of their names.
 
@@ -267,7 +285,8 @@ Therefore you may not rely on the built-in `name` property to always hold a clas
 
 ### JavaScript compressors and minifiers
 
-> **Warning:** Be careful when using the `name` property with source-code transformations, such as those carried out by JavaScript compressors (minifiers) or obfuscators. These tools are often used as part of a JavaScript build pipeline to reduce the size of a program prior to deploying it to production. Such transformations often change a function's name at build time.
+> [!WARNING]
+> Be careful when using the `name` property with source-code transformations, such as those carried out by JavaScript compressors (minifiers) or obfuscators. These tools are often used as part of a JavaScript build pipeline to reduce the size of a program prior to deploying it to production. Such transformations often change a function's name at build time.
 
 Source code such as:
 
@@ -307,4 +326,5 @@ In the uncompressed version, the program runs into the truthy branch and logs "'
 ## See also
 
 - [Polyfill for `Function: name` in `core-js`](https://github.com/zloirock/core-js#ecmascript-function)
+- [es-shims polyfill of `Function.prototype.name`](https://www.npmjs.com/package/function.prototype.name)
 - {{jsxref("Function")}}

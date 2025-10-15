@@ -8,7 +8,7 @@ browser-compat: api.Navigator.vibrate
 
 {{APIRef("Vibration API")}}
 
-The **`Navigator.vibrate()`** method pulses the vibration
+The **`vibrate()`** method of the {{domxref("Navigator")}} interface pulses the vibration
 hardware on the device, if such hardware exists. If the device doesn't support
 vibration, this method has no effect. If a vibration pattern is already in progress when
 this method is called, the previous pattern is halted and the new one begins instead.
@@ -16,6 +16,8 @@ this method is called, the previous pattern is halted and the new one begins ins
 If the method was unable to vibrate because of invalid parameters, it will return
 `false`, else it returns `true`. If the pattern leads to a too
 long vibration, it is truncated: the max length depends on the implementation.
+
+Some devices may not vibrate if they are in Silent mode or Do Not Disturb (DND) mode. To ensure vibration works, make sure these modes are turned off and that vibration is enabled in the system settings.
 
 ## Syntax
 

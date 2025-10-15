@@ -2,13 +2,14 @@
 title: Regular expressions
 slug: Web/JavaScript/Guide/Regular_expressions
 page-type: guide
+sidebar: jssidebar
 ---
 
-{{jsSidebar("JavaScript Guide")}} {{PreviousNext("Web/JavaScript/Guide/Text_formatting", "Web/JavaScript/Guide/Indexed_collections")}}
+{{PreviousNext("Web/JavaScript/Guide/Representing_dates_times", "Web/JavaScript/Guide/Indexed_collections")}}
 
 Regular expressions are patterns used to match character combinations in strings.
 In JavaScript, regular expressions are also objects. These patterns are used with the {{jsxref("RegExp/exec", "exec()")}} and {{jsxref("RegExp/test", "test()")}} methods of {{jsxref("RegExp")}}, and with the {{jsxref("String/match", "match()")}}, {{jsxref("String/matchAll", "matchAll()")}}, {{jsxref("String/replace", "replace()")}}, {{jsxref("String/replaceAll", "replaceAll()")}}, {{jsxref("String/search", "search()")}}, and {{jsxref("String/split", "split()")}} methods of {{jsxref("String")}}.
-This chapter describes JavaScript regular expressions.
+This chapter describes JavaScript regular expressions. It provides a brief overview of each syntax element. For a detailed explanation of each one's semantics, read the [regular expressions](/en-US/docs/Web/JavaScript/Reference/Regular_expressions) reference.
 
 ## Creating a regular expression
 
@@ -37,8 +38,6 @@ You construct a regular expression in one of two ways:
 A regular expression pattern is composed of simple characters, such as `/abc/`, or a combination of simple and special characters, such as `/ab*c/` or `/Chapter (\d+)\.\d*/`.
 The last example includes parentheses, which are used as a memory device.
 The match made with this part of the pattern is remembered for later use, as described in [Using groups](/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Groups_and_backreferences#using_groups).
-
-> **Note:** If you are already familiar with the forms of a regular expression, you may also read [the cheat sheet](/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet) for a quick lookup for a specific pattern/construct.
 
 ### Using simple patterns
 
@@ -143,12 +142,15 @@ If you want to look at all the special characters that can be used in regular ex
   </tbody>
 </table>
 
-> **Note:** [A larger cheat sheet is also available](/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet) (only aggregating parts of those individual articles).
+> [!NOTE]
+> [A larger cheat sheet is also available](/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet) (only aggregating parts of those individual articles).
 
 ### Escaping
 
-If you need to use any of the special characters literally (actually searching for a `"*"`, for instance), you must escape it by putting a backslash in front of it.
-For instance, to search for `"a"` followed by `"*"` followed by `"b"`, you'd use `/a\*b/` — the backslash "escapes" the `"*"`, making it literal instead of special.
+If you need to use any of the special characters literally (actually searching for a `"*"`, for instance), you should escape it by putting a backslash in front of it. For instance, to search for `"a"` followed by `"*"` followed by `"b"`, you'd use `/a\*b/` — the backslash "escapes" the `"*"`, making it literal instead of special.
+
+> [!NOTE]
+> In many cases, when trying match a special character, you can wrap it in a [character class](/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Character_classes) as an alternative to escaping, for example `/a[*]b/`.
 
 Similarly, if you're writing a regular expression literal and need to match a slash ("/"), you need to escape that (otherwise, it terminates the pattern).
 For instance, to search for the string "/example/" followed by one or more alphabetic characters, you'd use `/\/example\/[a-z]+/i`—the backslashes before each slash make them literal.
@@ -159,18 +161,7 @@ For instance, to match the string "C:\\" where "C" can be any letter, you'd use 
 If using the `RegExp` constructor with a string literal, remember that the backslash is an escape in string literals, so to use it in the regular expression, you need to escape it at the string literal level.
 `/a\*b/` and `new RegExp("a\\*b")` create the same expression, which searches for "a" followed by a literal "\*" followed by "b".
 
-If escape strings are not already part of your pattern you can add them using {{jsxref("String.prototype.replace()")}}:
-
-```js
-function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
-}
-```
-
-The "g" after the regular expression is an option or flag that performs a global search, looking in the whole string and returning all matches.
-It is explained in detail below in [Advanced Searching With Flags](#advanced_searching_with_flags).
-
-_Why isn't this built into JavaScript?_ There is a [proposal](https://github.com/tc39/proposal-regex-escaping) to add such a function to RegExp.
+The {{jsxref("RegExp.escape()")}} function returns a new string where all special characters in regex syntax are escaped. This allows you to do `new RegExp(RegExp.escape("a*b"))` to create a regular expression that matches only the string `"a*b"`.
 
 ### Using parentheses
 
@@ -179,7 +170,7 @@ Once remembered, the substring can be recalled for other use. See [Groups and ba
 
 ## Using regular expressions in JavaScript
 
-Regular expressions are used with the {{jsxref("RegExp")}} methods {{jsxref("RegExp/test", "test()")}} and {{jsxref("RegExp/exec", "exec()")}} and with the {{jsxref("String")}} methods {{jsxref("String/match", "match()")}}, {{jsxref("String/replace", "replace()")}}, {{jsxref("String/search", "search()")}}, and {{jsxref("String/split", "split()")}}.
+Regular expressions are used with the {{jsxref("RegExp")}} methods {{jsxref("RegExp/test", "test()")}} and {{jsxref("RegExp/exec", "exec()")}} and with the {{jsxref("String")}} methods {{jsxref("String/match", "match()")}}, {{jsxref("String/matchAll", "matchAll()")}}, {{jsxref("String/replace", "replace()")}}, {{jsxref("String/replaceAll", "replaceAll()")}}, {{jsxref("String/search", "search()")}}, and {{jsxref("String/split", "split()")}}.
 
 | Method                                          | Description                                                                                                      |
 | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -311,7 +302,7 @@ These flags can be used separately or together in any order, and are included as
 | `d`  | Generate indices for substring matches.                                                       | {{jsxref("RegExp/hasIndices", "hasIndices")}}   |
 | `g`  | Global search.                                                                                | {{jsxref("RegExp/global", "global")}}           |
 | `i`  | Case-insensitive search.                                                                      | {{jsxref("RegExp/ignoreCase", "ignoreCase")}}   |
-| `m`  | Allows `^` and `$` to match newline characters.                                               | {{jsxref("RegExp/multiline", "multiline")}}     |
+| `m`  | Makes `^` and `$` match the start and end of each line instead of those of the entire string. | {{jsxref("RegExp/multiline", "multiline")}}     |
 | `s`  | Allows `.` to match newline characters.                                                       | {{jsxref("RegExp/dotAll", "dotAll")}}           |
 | `u`  | "Unicode"; treat a pattern as a sequence of Unicode code points.                              | {{jsxref("RegExp/unicode", "unicode")}}         |
 | `v`  | An upgrade to the `u` mode with more Unicode features.                                        | {{jsxref("RegExp/unicodeSets", "unicodeSets")}} |
@@ -359,6 +350,8 @@ and get the same result.
 The `m` flag is used to specify that a multiline input string should be treated as multiple lines.
 If the `m` flag is used, `^` and `$` match at the start or end of any line within the input string instead of the start or end of the entire string.
 
+The `i`, `m`, and `s` flags can be enabled or disabled for specific parts of a regex using the [modifier](/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Modifier) syntax.
+
 #### Using the global search flag with exec()
 
 {{jsxref("RegExp.prototype.exec()")}} method with the `g` flag returns each match and its position iteratively.
@@ -391,7 +384,8 @@ Unicode regular expressions have different execution behavior as well. [`RegExp.
 
 ## Examples
 
-> **Note:** Several examples are also available in:
+> [!NOTE]
+> Several examples are also available in:
 >
 > - The reference pages for {{jsxref("RegExp/exec", "exec()")}}, {{jsxref("RegExp/test", "test()")}}, {{jsxref("String/match", "match()")}}, {{jsxref("String/matchAll", "matchAll()")}}, {{jsxref("String/search", "search()")}}, {{jsxref("String/replace", "replace()")}}, {{jsxref("String/split", "split()")}}
 > - The guide articles: [character classes](/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Character_classes), [assertions](/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Assertions), [groups and backreferences](/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Groups_and_backreferences), [quantifiers](/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Quantifiers)
@@ -466,4 +460,4 @@ form.addEventListener("submit", (event) => {
 - [Regex visualizer](https://extendsclass.com/regex-tester.html)
   - : An online visual regex tester.
 
-{{PreviousNext("Web/JavaScript/Guide/Text_formatting", "Web/JavaScript/Guide/Indexed_collections")}}
+{{PreviousNext("Web/JavaScript/Guide/Representing_dates_times", "Web/JavaScript/Guide/Indexed_collections")}}

@@ -15,7 +15,8 @@ The **`setFloatValue()`** method of the
 attached to this value can't accept the specified unit or the float value, the value
 will be unchanged and a {{domxref("DOMException")}} will be raised.
 
-> **Note:** This method was part of an attempt to create a typed CSS Object Model. This attempt has been abandoned, and most browsers do
+> [!NOTE]
+> This method was part of an attempt to create a typed CSS Object Model. This attempt has been abandoned, and most browsers do
 > not implement it.
 >
 > To achieve your purpose, you can use:
@@ -32,7 +33,6 @@ setFloatValue(unitType, floatValue)
 ### Parameters
 
 - `unitType`
-
   - : An `unsigned short` representing the code for the unit type, in which the
     value should be returned. Valid values are:
 

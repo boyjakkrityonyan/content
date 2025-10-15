@@ -23,20 +23,19 @@ An {{domxref("HTMLHeadElement")}}.
 <head id="my-document-head">
   <title>Example: using document.head</title>
 </head>
+```
 
-<script>
-  const theHead = document.head;
+```js
+const theHead = document.head;
 
-  console.log(theHead.id); // "my-document-head";
-
-  console.log(theHead === document.querySelector("head")); // true
-</script>
+console.log(theHead.id); // "my-document-head";
+console.log(theHead === document.querySelector("head")); // true
 ```
 
 ## Notes
 
 `document.head` is read-only. Trying to assign a value to this property will
-fail silently or, in [Strict Mode](/en-US/docs/Web/JavaScript/Reference/Strict_mode), throws a {{jsxref("TypeError")}} .
+fail silently or, in [Strict Mode](/en-US/docs/Web/JavaScript/Reference/Strict_mode), throws a {{jsxref("TypeError")}}.
 
 ## Specifications
 

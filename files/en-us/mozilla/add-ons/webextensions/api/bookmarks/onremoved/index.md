@@ -3,9 +3,8 @@ title: bookmarks.onRemoved
 slug: Mozilla/Add-ons/WebExtensions/API/bookmarks/onRemoved
 page-type: webextension-api-event
 browser-compat: webextensions.api.bookmarks.onRemoved
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Fired when a bookmark or folder is removed. When a folder is removed recursively, a single notification is fired for the folder, and none for its contents.
 
@@ -31,9 +30,7 @@ Events have three functions:
 ### Parameters
 
 - `listener`
-
   - : The function called when this event occurs. The function is passed these arguments:
-
     - `id`
       - : `string`. ID of the item that was removed.
     - `removeInfo`
@@ -56,7 +53,7 @@ Events have three functions:
 function handleRemoved(id, removeInfo) {
   console.log(`Item: ${id} removed`);
   console.log(`Title: ${removeInfo.node.title}`);
-  console.log(`Url: ${removeInfo.node.url}`);
+  console.log(`URL: ${removeInfo.node.url}`);
 }
 
 function handleClick() {
@@ -72,7 +69,8 @@ browser.browserAction.onClicked.addListener(handleClick);
 
 {{Compat}}
 
-> **Note:** This API is based on Chromium's [`chrome.bookmarks`](https://developer.chrome.com/docs/extensions/reference/bookmarks/#event-onRemoved) API. This documentation is derived from [`bookmarks.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/bookmarks.json) in the Chromium code.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.bookmarks`](https://developer.chrome.com/docs/extensions/reference/api/bookmarks#event-onRemoved) API. This documentation is derived from [`bookmarks.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/bookmarks.json) in the Chromium code.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

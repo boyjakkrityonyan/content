@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.CanvasRenderingContext2D.clip
 ---
 
-{{APIRef}}
+{{APIRef("Canvas API")}}
 
 The
 **`CanvasRenderingContext2D.clip()`**
@@ -20,13 +20,15 @@ drawn.
 
 ![Star-shaped clipping region](canvas_clipping_path.png)
 
-> **Note:** Be aware that the clipping region is only constructed from
+> [!NOTE]
+> Be aware that the clipping region is only constructed from
 > shapes added to the path. It doesn't work with shape primitives drawn directly to the
 > canvas, such as {{domxref("CanvasRenderingContext2D.fillRect()","fillRect()")}}.
 > Instead, you'd have to use {{domxref("CanvasRenderingContext2D.rect()","rect()")}} to
 > add a rectangular shape to the path before calling `clip()`.
 
-> **Note:** Clip paths cannot be reverted directly. You must save your canvas state using {{domxref("CanvasRenderingContext2D/save", "save()")}} before calling `clip()`, and restore it once you have finished drawing in the clipped area using {{domxref("CanvasRenderingContext2D/restore", "restore()")}}.
+> [!NOTE]
+> Clip paths cannot be reverted directly. You must save your canvas state using {{domxref("CanvasRenderingContext2D/save", "save()")}} before calling `clip()`, and restore it once you have finished drawing in the clipped area using {{domxref("CanvasRenderingContext2D/restore", "restore()")}}.
 
 ## Syntax
 
@@ -40,10 +42,8 @@ clip(path, fillRule)
 ### Parameters
 
 - `fillRule`
-
   - : The algorithm by which to determine if a point is inside or outside the clipping
     region. Possible values:
-
     - `nonzero`
       - : The [non-zero winding rule](https://en.wikipedia.org/wiki/Nonzero-rule).
         Default rule.

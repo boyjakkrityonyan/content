@@ -3,20 +3,19 @@ title: dynamic-range
 slug: Web/CSS/@media/dynamic-range
 page-type: css-media-feature
 browser-compat: css.at-rules.media.dynamic-range
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **`dynamic-range`** [CSS](/en-US/docs/Web/CSS) [media feature](/en-US/docs/Web/CSS/@media#media_features) can be used to test the combination of brightness, contrast ratio, and color depth that are supported by the {{glossary("user agent")}} and the output device.
 
-> **Note:** Some devices have high dynamic range capabilities that are not always 'on' and need to be activated (sometimes programmatically, sometimes by the user, sometimes based on the content). This media feature does not test whether the dynamic range capability is active; it only tests whether the device is capable of high dynamic range visuals.
+> [!NOTE]
+> Some devices have high dynamic range capabilities that are not always 'on' and need to be activated (sometimes programmatically, sometimes by the user, sometimes based on the content). This media feature does not test whether the dynamic range capability is active; it only tests whether the device is capable of high dynamic range visuals.
 
 ## Syntax
 
 The `dynamic-range` feature is specified as a keyword value chosen from the list below.
 
 - `standard`
-
   - : This value matches any visual device and excludes devices lacking visual capabilities. A user agent or an output device that matches `high` will also match the `standard` value.
 
 - `high`

@@ -3,17 +3,76 @@ title: list-style-image
 slug: Web/CSS/list-style-image
 page-type: css-property
 browser-compat: css.properties.list-style-image
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **`list-style-image`** [CSS](/en-US/docs/Web/CSS) property sets an image to be used as the list item marker.
 
 It is often more convenient to use the shorthand {{ cssxref("list-style") }}.
 
-{{EmbedInteractiveExample("pages/css/list-style-image.html")}}
+{{InteractiveExample("CSS Demo: list-style-image")}}
 
-> **Note:** This property is applied to list items, i.e. elements with `{{cssxref("display")}}: list-item;` [by default](https://html.spec.whatwg.org/multipage/rendering.html#lists) this includes {{HTMLElement("li")}} elements. Because this property is inherited, it can be set on the parent element (normally {{HTMLElement("ol")}} or {{HTMLElement("ul")}}) to let it apply to all list items.
+```css interactive-example-choice
+list-style-image: url("/shared-assets/images/examples/rocket.svg");
+```
+
+```css interactive-example-choice
+list-style-image: none;
+```
+
+```html interactive-example
+<section class="default-example" id="default-example">
+  <div>
+    <p>NASA Notable Missions</p>
+    <ul class="transition-all unhighlighted" id="example-element">
+      <li>Apollo</li>
+      <li>Hubble</li>
+      <li>Chandra</li>
+      <li>Cassini-Huygens</li>
+      <li>Spitzer</li>
+    </ul>
+  </div>
+</section>
+```
+
+```css interactive-example
+.default-example {
+  font-size: 1.2rem;
+}
+
+#example-element {
+  width: 100%;
+  background: #be094b;
+  color: white;
+}
+
+section {
+  text-align: left;
+  flex-direction: column;
+}
+
+hr {
+  width: 50%;
+  color: lightgray;
+  margin: 0.5em;
+}
+
+.note {
+  font-size: 0.8rem;
+}
+
+.note a {
+  color: #009e5f;
+}
+
+@counter-style space-counter {
+  symbols: "\1F680" "\1F6F8" "\1F6F0" "\1F52D";
+  suffix: " ";
+}
+```
+
+> [!NOTE]
+> This property is applied to list items, i.e., elements with `{{cssxref("display")}}: list-item;` [by default](https://html.spec.whatwg.org/multipage/rendering.html#lists) this includes {{HTMLElement("li")}} elements. Because this property is inherited, it can be set on the parent element (normally {{HTMLElement("ol")}} or {{HTMLElement("ul")}}) to let it apply to all list items.
 
 ## Syntax
 
@@ -22,7 +81,7 @@ It is often more convenient to use the shorthand {{ cssxref("list-style") }}.
 list-style-image: none;
 
 /* <url> values */
-list-style-image: url("starsolid.gif");
+list-style-image: url("star-solid.gif");
 
 /* valid image values */
 list-style-image: linear-gradient(to left bottom, red, blue);
@@ -40,7 +99,7 @@ list-style-image: unset;
 - {{cssxref("&lt;image&gt;")}}
   - : A valid image to use as the marker.
 - `none`
-  - : Specifies that no image is used as the marker. If this value is set, the marker defined in {{ Cssxref("list-style-type") }} will be used instead.
+  - : Specifies that no image is used as the marker. If this value is set, the marker defined in {{ Cssxref("list-style-type") }} will be used instead. This is the default value for {{cssxref("list-style")}}.
 
 ## Formal definition
 
@@ -53,6 +112,8 @@ list-style-image: unset;
 ## Examples
 
 ### Using a url value
+
+This example has a star as a marker, which we include using the {{cssxref("url_value", "&lt;url&gt;")}} image function.
 
 #### HTML
 
@@ -67,7 +128,7 @@ list-style-image: unset;
 
 ```css
 ul {
-  list-style-image: url("starsolid.gif");
+  list-style-image: url("star-solid.gif");
 }
 ```
 
@@ -76,6 +137,8 @@ ul {
 {{ EmbedLiveSample('Using_a_url_value') }}
 
 ### Using a gradient
+
+This example has a [CSS gradient](/en-US/docs/Web/CSS/CSS_images/Using_CSS_gradients) as a marker, which we create uses the {{cssxref("gradient/linear-gradient", "linear-gradient()")}} image function.
 
 #### HTML
 
@@ -109,5 +172,9 @@ ul {
 
 ## See also
 
-- {{Cssxref("list-style")}}, {{Cssxref("list-style-type")}}, {{Cssxref("list-style-position")}}
-- {{cssxref("url", "url()")}} function
+- {{Cssxref("list-style")}} shorthand
+- {{Cssxref("list-style-type")}} property
+- {{Cssxref("list-style-position")}} property
+- {{cssxref("::marker")}} pseudo-element
+- [CSS lists and counters](/en-US/docs/Web/CSS/CSS_lists) module
+- [CSS counter styles](/en-US/docs/Web/CSS/CSS_counter_styles) module

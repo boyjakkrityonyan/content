@@ -3,13 +3,47 @@ title: background-position-x
 slug: Web/CSS/background-position-x
 page-type: css-property
 browser-compat: css.properties.background-position-x
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **`background-position-x`** [CSS](/en-US/docs/Web/CSS) property sets the initial horizontal position for each background image. The position is relative to the position layer set by {{cssxref("background-origin")}}.
 
-{{EmbedInteractiveExample("pages/css/background-position-x.html")}}
+{{InteractiveExample("CSS Demo: background-position-x")}}
+
+```css interactive-example-choice
+background-position-x: left;
+```
+
+```css interactive-example-choice
+background-position-x: center;
+```
+
+```css interactive-example-choice
+background-position-x: 25%;
+```
+
+```css interactive-example-choice
+background-position-x: 2rem;
+```
+
+```css interactive-example-choice
+background-position-x: right 32px;
+```
+
+```html interactive-example
+<section class="display-block" id="default-example">
+  <div class="transition-all" id="example-element"></div>
+</section>
+```
+
+```css interactive-example
+#example-element {
+  background-color: navajowhite;
+  background-image: url("/shared-assets/images/examples/star.png");
+  background-repeat: no-repeat;
+  height: 100%;
+}
+```
 
 <!-- The source for this interactive example is stored in a GitHub repository. If you'd like to contribute to the interactive examples project, please clone https://github.com/mdn/interactive-examples and send us a pull request. -->
 
@@ -73,7 +107,7 @@ The `background-position-x` property is specified as one or more values, separat
 
 ### Basic example
 
-The following example shows a simple background image implementation, with background-position-x and background-position-y used to define the image's horizontal and vertical positions separately.
+The following example shows a background image implementation, with background-position-x and background-position-y used to define the image's horizontal and vertical positions separately.
 
 #### HTML
 
@@ -88,16 +122,44 @@ div {
   width: 300px;
   height: 300px;
   background-color: skyblue;
-  background-image: url(https://mdn.dev/archives/media/attachments/2020/07/29/17350/3b4892b7e820122ac6dd7678891d4507/firefox.png);
+  background-image: url("https://mdn.dev/archives/media/attachments/2020/07/29/17350/3b4892b7e820122ac6dd7678891d4507/firefox.png");
   background-repeat: no-repeat;
   background-position-x: center;
-  background-position-y: bottom 10px;
+  background-position-y: bottom;
 }
 ```
 
 #### Result
 
 {{EmbedLiveSample('Basic_example', '100%', 300)}}
+
+### Side-relative values
+
+The following example shows support for side-relative offset syntax, which allows the developer to offset the background from any edge.
+
+#### HTML
+
+```html
+<div></div>
+```
+
+#### CSS
+
+```css
+div {
+  width: 300px;
+  height: 300px;
+  background-color: seagreen;
+  background-image: url("https://mdn.dev/archives/media/attachments/2020/07/29/17350/3b4892b7e820122ac6dd7678891d4507/firefox.png");
+  background-repeat: no-repeat;
+  background-position-x: right 20px;
+  background-position-y: bottom 10px;
+}
+```
+
+#### Result
+
+{{EmbedLiveSample('Side-relative_values', '100%', 300)}}
 
 ## Specifications
 
@@ -111,6 +173,4 @@ div {
 
 - {{cssxref("background-position")}}
 - {{cssxref("background-position-y")}}
-- {{cssxref("background-position-inline")}}
-- {{cssxref("background-position-block")}}
 - [Using multiple backgrounds](/en-US/docs/Web/CSS/CSS_backgrounds_and_borders/Using_multiple_backgrounds)

@@ -8,12 +8,13 @@ browser-compat: api.HTMLCanvasElement.captureStream
 
 {{APIRef("Media Capture and Streams")}}
 
-The {{domxref("HTMLCanvasElement")}} **`captureStream()`** method returns a {{domxref("MediaStream")}}
+The **`captureStream()`** method of the {{domxref("HTMLCanvasElement")}} interface returns a {{domxref("MediaStream")}}
 which includes a {{domxref("CanvasCaptureMediaStreamTrack")}} containing a real-time video capture of the canvas's contents.
 
 ## Syntax
 
 ```js-nolint
+captureStream()
 captureStream(frameRate)
 ```
 
@@ -35,7 +36,6 @@ A reference to a {{domxref("MediaStream")}} object, which has a single
 ### Exceptions
 
 - `NotSupportedError` {{domxref("DOMException")}}
-
   - : Thrown if the value of `frameRate` is negative.
 
 - `SecurityError` {{domxref("DOMException")}}
@@ -70,4 +70,4 @@ stream.getTracks().forEach((track) => pc.addTrack(track, stream));
 - {{domxref("HTMLMediaElement.captureStream()")}}, which allows capturing a stream
   from a media element.
 - {{domxref("MediaStream")}}
-- {{domxref("Media Capture and Streams API")}}
+- [Media Capture and Streams API](/en-US/docs/Web/API/Media_Capture_and_Streams_API)

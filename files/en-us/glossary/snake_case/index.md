@@ -2,9 +2,8 @@
 title: Snake case
 slug: Glossary/Snake_case
 page-type: glossary-definition
+sidebar: glossarysidebar
 ---
-
-{{GlossarySidebar}}
 
 **Snake case** is a way of writing phrases without spaces, where spaces are replaced with underscores `_`, and the words are typically all lower case. It's often stylized as "snake_case" to remind the reader of its appearance.
 
@@ -16,6 +15,7 @@ Snake case is the most popular convention in Python, Rust, and various other lan
 
 ## See also
 
-- [Camel case](/en-US/docs/Glossary/Camel_case)
-- [Kebab case](/en-US/docs/Glossary/Kebab_case)
+- Related glossary terms:
+  - {{Glossary("Camel case")}}
+  - {{Glossary("Kebab case")}}
 - [typescript-eslint rule: `naming-convention`](https://typescript-eslint.io/rules/naming-convention/)

@@ -3,11 +3,10 @@ title: container
 slug: Web/CSS/container
 page-type: css-shorthand-property
 browser-compat: css.properties.container
+sidebar: cssref
 ---
 
-{{CSSRef}}
-
-The **container** [shorthand](/en-US/docs/Web/CSS/Shorthand_properties) [CSS](/en-US/docs/Web/CSS) property establishes the element as a query container and specifies the name or name for the [containment context](/en-US/docs/Web/CSS/CSS_container_queries#naming_containment_contexts) used in a [container query](/en-US/docs/Web/CSS/CSS_container_queries).
+The **container** [shorthand](/en-US/docs/Web/CSS/CSS_cascade/Shorthand_properties) [CSS](/en-US/docs/Web/CSS) property establishes the element as a query container and specifies the name and type of the [containment context](/en-US/docs/Web/CSS/CSS_containment/Container_queries#naming_containment_contexts) used in a [container query](/en-US/docs/Web/CSS/CSS_containment/Container_queries).
 
 ## Constituent properties
 
@@ -85,7 +84,7 @@ The `container` shorthand is intended to make this simpler to define in a single
 You can then target that container by name using the {{cssxref("@container")}} at-rule:
 
 ```css
-@container sidebar (min-width: 400px) {
+@container sidebar (width >= 400px) {
   /* <stylesheet> */
 }
 ```
@@ -100,7 +99,8 @@ You can then target that container by name using the {{cssxref("@container")}} a
 
 ## See also
 
-- [CSS container queries](/en-US/docs/Web/CSS/CSS_container_queries)
+- [CSS container queries](/en-US/docs/Web/CSS/CSS_containment/Container_queries)
+- [Using container size and style queries](/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries)
 - {{Cssxref("@container")}} at-rule
 - CSS {{Cssxref("contain")}} property
 - CSS {{Cssxref("container-type")}} property

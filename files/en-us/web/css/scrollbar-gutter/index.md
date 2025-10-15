@@ -3,9 +3,8 @@ title: scrollbar-gutter
 slug: Web/CSS/scrollbar-gutter
 page-type: css-property
 browser-compat: css.properties.scrollbar-gutter
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **`scrollbar-gutter`** [CSS](/en-US/docs/Web/CSS) property allows authors to reserve space for the scrollbar, preventing unwanted layout changes as the content grows while also avoiding unnecessary visuals when scrolling isn't needed.
 
@@ -55,7 +54,8 @@ scrollbar-gutter: unset;
 
 The examples below show how the different values for the `scrollbar-gutter` property would affect a scrollable `div` element (`.container`) with one or more paragraphs contained within.
 
-> **Note:** In the images for the examples, the user's system settings are set to classic scrollbars (always shown).
+> [!NOTE]
+> In the images for the examples, the user's system settings are set to classic scrollbars (always shown).
 
 ### Example 1
 

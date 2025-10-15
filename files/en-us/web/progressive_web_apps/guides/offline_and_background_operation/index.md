@@ -2,9 +2,8 @@
 title: Offline and background operation
 slug: Web/Progressive_web_apps/Guides/Offline_and_background_operation
 page-type: guide
+sidebar: pwasidebar
 ---
-
-{{PWASidebar}}
 
 Usually, websites are very dependent on both reliable network connectivity and on the user having their pages open in a browser. Without network connectivity, most websites are just unusable, and if the user does not have the site open in a browser tab, most websites are unable to do anything.
 
@@ -48,7 +47,7 @@ In this guide, when we show code samples, we'll indicate which part of the app t
 
 Offline operation allows a PWA to provide a good user experience even when the device does not have network connectivity. This is enabled by adding a service worker to an app.
 
-A service worker _controls_ some or all of the app's pages. When the service worker is installed, it can fetch the resources from the server for the pages it controls (including pages, styles, scripts, and images, for example) and add them to a local cache. The {{domxref("Cache")}} interface is used to add resources to the cache. `Cache` instances are accessible through the {{domxref("caches")}} property in the service worker global scope.
+A service worker _controls_ some or all of the app's pages. When the service worker is installed, it can fetch the resources from the server for the pages it controls (including pages, styles, scripts, and images, for example) and add them to a local cache. The {{domxref("Cache")}} interface is used to add resources to the cache. `Cache` instances are accessible through the {{domxref("WorkerGlobalScope.caches")}} property in the service worker global scope.
 
 Then whenever the app requests a resource (for example, because the user opened the app or clicked an internal link), the browser fires an event called {{domxref("ServiceWorkerGlobalScope.fetch_event", "fetch")}} in the service worker's global scope. By listening for this event, the service worker can intercept the request.
 
@@ -120,7 +119,8 @@ self.addEventListener("fetch", (event) => {
 
 This means that in many situations, the web app will function well even if network connectivity is intermittent. From the point of view of the main app code, it is completely transparent: the app just makes network requests and gets responses. Also, because the service worker is in a separate thread, the main app code can stay responsive to user input while resources are fetched and cached.
 
-> **Note:** The strategy described here is just one way a service worker could implement caching. Specifically, in a cache first strategy, we check the cache first before the network, meaning that we are more likely to return a quick response without incurring a network cost, but are more likely to return a stale response.
+> [!NOTE]
+> The strategy described here is just one way a service worker could implement caching. Specifically, in a cache first strategy, we check the cache first before the network, meaning that we are more likely to return a quick response without incurring a network cost, but are more likely to return a stale response.
 >
 > An alternative would be a _network first_ strategy, in which we try to fetch the resource from the server first, and fall back to the cache if the device is offline.
 >
@@ -169,7 +169,7 @@ As soon as the device has network connectivity, the `sync` event fires in the se
 // service-worker.js
 
 self.addEventListener("sync", (event) => {
-  if (event.tag == "send-message") {
+  if (event.tag === "send-message") {
     event.waitUntil(sendMessage());
   }
 });
@@ -215,7 +215,7 @@ async function requestBackgroundFetch(movieData) {
       downloadTotal: 60 * 1024 * 1024,
     },
   );
-  //...
+  // …
 }
 ```
 
@@ -278,7 +278,7 @@ The event object passed into `backgroundfetchsuccess` and `backgroundfetchfail` 
 
 self.addEventListener("backgroundfetchsuccess", (event) => {
   // retrieve and store response data
-  // ...
+  // …
 
   event.updateUI({ title: "Finished your download!" });
 });
@@ -361,7 +361,7 @@ When the PWA no longer needs periodic background updates, (for example, because 
 ```js
 // main.js
 
-async function registerPeriodicSync() {
+async function unregisterPeriodicSync() {
   const swRegistration = await navigator.serviceWorker.ready;
   swRegistration.periodicSync.unregister("update-news");
 }
@@ -390,15 +390,13 @@ The pattern for subscribing to push messages looks like this:
 1. As a prerequisite, the app server needs to be provisioned with a {{Glossary("Public-key_cryptography", "public/private key pair")}}, so it can sign push messages. Signing messages needs to follow the [VAPID](https://datatracker.ietf.org/doc/html/draft-thomson-webpush-vapid-02) specification.
 
 2. On the device, the app uses the {{domxref("PushManager.subscribe()")}} method to subscribe to messages from the server. The `subscribe()` method:
-
    - Takes the app server's public key as an argument: this is what the push service will use to verify the signature on messages from the app server.
 
    - Returns a `Promise` that resolves to a {{domxref("PushSubscription")}} object. This object includes:
-
      - The [endpoint](/en-US/docs/Web/API/PushSubscription/endpoint) for the push service: this is how the app server knows where to send push messages.
      - The [public encryption key](/en-US/docs/Web/API/PushSubscription/getKey) that your server will use to encrypt messages to the push service.
 
-3. The app sends the endpoint and public encryption key to your server (for example, using {{domxref("fetch()")}}).
+3. The app sends the endpoint and public encryption key to your server (for example, using {{domxref("WorkerGlobalScope/fetch", "fetch()")}}).
 
 After this, the app server is able to start sending push messages.
 
@@ -445,8 +443,8 @@ In this section we'll outline these steps. Several of these APIs require explici
 
 ### Guides
 
-- [Introducing Background Sync](https://developer.chrome.com/blog/background-sync/) on web.dev (2017)
-- [Introducing Background Fetch](https://developer.chrome.com/blog/background-fetch/) on web.dev (2022)
-- [The Periodic Background Sync API](https://developer.chrome.com/articles/periodic-background-sync/) on web.dev (2020)
-- [Notifications](https://web.dev/notifications/) on web.dev
-- [PWA with offline streaming](https://web.dev/pwa-with-offline-streaming/) on web.dev (2021)
+- [Introducing Background Sync](https://developer.chrome.com/blog/background-sync/) on developer.chrome.com (2017)
+- [Introducing Background Fetch](https://developer.chrome.com/blog/background-fetch/) on developer.chrome.com (2022)
+- [The Periodic Background Sync API](https://developer.chrome.com/docs/capabilities/periodic-background-sync) on developer.chrome.com (2020)
+- [Notifications](https://web.dev/explore/notifications) on web.dev
+- [PWA with offline streaming](https://web.dev/articles/pwa-with-offline-streaming) on web.dev (2021)

@@ -3,13 +3,64 @@ title: break-inside
 slug: Web/CSS/break-inside
 page-type: css-property
 browser-compat: css.properties.break-inside
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **`break-inside`** [CSS](/en-US/docs/Web/CSS) property sets how page, column, or region breaks should behave inside a generated box. If there is no generated box, the property is ignored.
 
-{{EmbedInteractiveExample("pages/css/break-inside.html")}}
+{{InteractiveExample("CSS Demo: break-inside")}}
+
+```css interactive-example-choice
+break-inside: auto;
+```
+
+```css interactive-example-choice
+break-inside: avoid;
+```
+
+```html interactive-example
+<div>
+  <p>
+    The effect of this property can be noticed when the document is being
+    printed or a preview of a print is displayed.
+  </p>
+  <button id="print-btn">Show Print Preview</button>
+  <div class="box-container">
+    <div class="box">Content before the property</div>
+    <div class="box" id="example-element">Content with 'break-before'</div>
+    <div class="box">Content after the property</div>
+  </div>
+</div>
+```
+
+```css interactive-example
+.box {
+  border: solid #5b6dcd 5px;
+  background-color: #5b6dcd;
+  margin: 10px 0;
+  padding: 5px;
+}
+
+#example-element {
+  border: solid 5px #ffc129;
+  background-color: #ffc129;
+  color: black;
+}
+
+@media print {
+  #example-element {
+    height: 25cm;
+  }
+}
+```
+
+```js interactive-example
+const btn = document.getElementById("print-btn");
+
+btn.addEventListener("click", () => {
+  window.print();
+});
+```
 
 ## Syntax
 
@@ -48,7 +99,7 @@ Once forced breaks have been applied, soft breaks may be added if needed, but no
   - : Avoids any page break within the principal box.
 - `avoid-column`
   - : Avoids any column break within the principal box.
-- `avoid-region` {{experimental_inline}}
+- `avoid-region`
   - : Avoids any region break within the principal box.
 
 ## Page break aliases
@@ -117,7 +168,7 @@ By default, it is possible for you to get a break between the image and its capt
 
 ```css
 html {
-  font-family: helvetica, arial, sans-serif;
+  font-family: "Helvetica", "Arial", sans-serif;
 }
 
 body {
@@ -176,5 +227,5 @@ article {
 
 ## See also
 
-- [Multiple-column Layout](/en-US/docs/Learn/CSS/CSS_layout/Multiple-column_Layout)
+- [Learn: Multiple-column Layout](/en-US/docs/Learn_web_development/Core/CSS_layout/Multiple-column_Layout)
 - [Breaking Boxes With CSS Fragmentation](https://www.smashingmagazine.com/2019/02/css-fragmentation/)

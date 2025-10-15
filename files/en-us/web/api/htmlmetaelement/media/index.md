@@ -21,12 +21,12 @@ A string.
 
 ### Setting the theme color for dark mode
 
-The following example creates a new `<meta>` element with a `name` attribute set to [`theme-color`](/en-US/docs/Web/HTML/Element/meta/name#standard_metadata_names_defined_in_the_html_specification).
+The following example creates a new `<meta>` element with a `name` attribute set to [`theme-color`](/en-US/docs/Web/HTML/Reference/Elements/meta/name#meta_names_defined_in_the_html_specification).
 The `content` attribute is set to `#3c790a`, the `media` attribute is set to `prefers-color-scheme: dark`, and the element is appended to the document `<head>`.
 When a user has specified a dark mode in their operating system, the `media` property can be used to set a different `theme-color`:
 
 ```js
-var meta = document.createElement("meta");
+const meta = document.createElement("meta");
 meta.name = "theme-color";
 meta.content = "#3c790a";
 meta.media = "(prefers-color-scheme: dark)";
@@ -42,17 +42,17 @@ The order of matching the `media` query matters, so the more specific query shou
 
 ```js
 // Add a theme-color for all devices
-meta = document.createElement("meta");
-meta.name = "theme-color";
-meta.content = "#ffffff";
-document.head.appendChild(meta);
+const meta1 = document.createElement("meta");
+meta1.name = "theme-color";
+meta1.content = "white";
+document.head.appendChild(meta1);
 
 // Add a theme-color for small devices
-var meta = document.createElement("meta");
-meta.name = "theme-color";
-meta.media = "(max-width: 600px)";
-meta.content = "#000000";
-document.head.appendChild(meta);
+const meta2 = document.createElement("meta");
+meta2.name = "theme-color";
+meta2.media = "(width <= 600px)";
+meta2.content = "black";
+document.head.appendChild(meta2);
 ```
 
 ## Specifications

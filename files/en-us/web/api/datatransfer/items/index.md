@@ -8,10 +8,8 @@ browser-compat: api.DataTransfer.items
 
 {{APIRef("HTML Drag and Drop API")}}
 
-The read-only {{domxref("DataTransfer")}} property `items` property is a
-{{domxref("DataTransferItemList","list")}} of the {{domxref("DataTransferItem","data
-  transfer items", "", "nocode")}} in a drag operation. The list includes one item for each item in the
-operation and if the operation had no items, the list is empty.
+The read-only `items` property of the {{domxref("DataTransfer")}} interface is a
+{{domxref("DataTransferItemList","list")}} of the {{domxref("DataTransferItem","data transfer items", "", "nocode")}} in a drag operation. The list includes one item for each item in the operation and if the operation had no items, the list is empty.
 
 ## Value
 
@@ -109,5 +107,4 @@ reset.addEventListener("click", () => document.location.reload());
 
 - [Drag and drop](/en-US/docs/Web/API/HTML_Drag_and_Drop_API)
 - [Drag Operations](/en-US/docs/Web/API/HTML_Drag_and_Drop_API/Drag_operations)
-- [Recommended Drag Types](/en-US/docs/Web/API/HTML_Drag_and_Drop_API/Recommended_drag_types)
-- [DataTransfer test - Paste or Drag](https://codepen.io/tech_query/pen/MqGgap)
+- [Working with the drag data store](/en-US/docs/Web/API/HTML_Drag_and_Drop_API/Drag_data_store)

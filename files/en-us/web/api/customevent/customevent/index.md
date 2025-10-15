@@ -6,7 +6,7 @@ page-type: web-api-constructor
 browser-compat: api.CustomEvent.CustomEvent
 ---
 
-{{APIRef("DOM")}}
+{{APIRef("DOM")}}{{AvailableInWorkers}}
 
 The **`CustomEvent()`** constructor creates a new {{domxref("CustomEvent")}} object.
 
@@ -46,17 +46,19 @@ const dogFound = new CustomEvent("animalfound", {
   },
 });
 
+const element = document.createElement("div"); // create a <div> element
+
 // add an appropriate event listener
-obj.addEventListener("animalfound", (e) => console.log(e.detail.name));
+element.addEventListener("animalfound", (e) => console.log(e.detail.name));
 
 // dispatch the events
-obj.dispatchEvent(catFound);
-obj.dispatchEvent(dogFound);
+element.dispatchEvent(catFound);
+element.dispatchEvent(dogFound);
 
 // "cat" and "dog" logged in the console
 ```
 
-Additional examples can be found at [Creating and triggering events](/en-US/docs/Web/Events/Creating_and_triggering_events).
+Additional examples can be found at [Creating and dispatching events](/en-US/docs/Web/API/Document_Object_Model/Events#creating_and_dispatching_events).
 
 ## Specifications
 
@@ -69,4 +71,4 @@ Additional examples can be found at [Creating and triggering events](/en-US/docs
 ## See also
 
 - {{domxref("CustomEvent")}}
-- [Creating and triggering events](/en-US/docs/Web/Events/Creating_and_triggering_events)
+- [Creating and dispatching events](/en-US/docs/Web/API/Document_Object_Model/Events#creating_and_dispatching_events)

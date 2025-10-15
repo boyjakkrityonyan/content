@@ -27,10 +27,8 @@ complete(result)
 ### Parameters
 
 - `result` {{optional_inline}}
-
   - : A string indicating the state of the payment operation upon
     completion. It must be one of the following:
-
     - `success`
       - : The payment was successfully processed. The user agent may or may not present
         some form of "payment successful" indication to the user.
@@ -42,7 +40,8 @@ complete(result)
         the user agent should not present any notification, even if it normally would.
         _This is the default value._
 
-    > **Note:** In older versions of the specification, an empty string,
+    > [!NOTE]
+    > In older versions of the specification, an empty string,
     > `""`, was used instead of `unknown` to indicate a completion
     > without a known result state. See the [Browser compatibility](#browser_compatibility) section
     > below for details.

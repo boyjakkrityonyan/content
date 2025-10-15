@@ -1,12 +1,12 @@
 ---
-title: How to make PWAs installable
+title: "js13kGames: How to make PWAs installable"
+short-title: Making PWAs installable
 slug: Web/Progressive_web_apps/Tutorials/js13kGames/Installable_PWAs
 page-type: guide
+sidebar: pwasidebar
 ---
 
 {{PreviousMenuNext("Web/Progressive_web_apps/Tutorials/js13kGames/Offline_Service_workers", "Web/Progressive_web_apps/Tutorials/js13kGames/Re-engageable_Notifications_Push", "Web/Progressive_web_apps/Tutorials/js13kGames")}}
-
-{{PWASidebar}}
 
 In the last step of this tutorial, we read about how the example application, [js13kPWA](https://mdn.github.io/pwa-examples/js13kpwa/), works offline thanks to its [service worker](/en-US/docs/Web/API/Service_Worker_API), but we can go even further and allow users to install the web app on their device. The installed web app can then be launched by users just as if it were any OS-native app. This article explains how to achieve this using the web app's manifest.
 
@@ -21,7 +21,6 @@ To make our example application installable, the following things are needed:
 - A web application manifest, with the [correct members filled in](/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable#the_web_app_manifest).
 - The website to be served from a secure (HTTPS) domain.
 - An icon to represent the app on the device.
-- A [service worker](/en-US/docs/Web/API/Service_Worker_API) registered, to allow the app to work offline.
 
 ### The web app manifest file
 
@@ -35,7 +34,8 @@ The `js13kpwa.webmanifest` file of the [js13kPWA](https://mdn.github.io/pwa-exam
 <link rel="manifest" href="js13kpwa.webmanifest" />
 ```
 
-> **Note:** many use `manifest.json` for web app manifests as the contents are organized in a JSON structure. However, the `.webmanifest` file format is explicitly mentioned in the [W3C manifest specification](https://w3c.github.io/manifest/), so that's what we'll use here.
+> [!NOTE]
+> Many use `manifest.json` for web app manifests as the contents are organized in a JSON structure. However, the `.webmanifest` file format is explicitly mentioned in the [W3C manifest specification](https://w3c.github.io/manifest/), so that's what we'll use here.
 
 The content of the file looks like this:
 
@@ -50,7 +50,7 @@ The content of the file looks like this:
       "sizes": "32x32",
       "type": "image/png"
     },
-    // ...
+    // …
     {
       "src": "icons/icon-512.png",
       "sizes": "512x512",
@@ -75,11 +75,11 @@ Most of the members are self-explanatory. Here is a description of the members s
 - `theme_color`: A primary color for the UI, used by operating system.
 - `background_color`: A color used as the app's default background, used during install and on the splash screen.
 
-There are even more members you can use than listed above — be sure to check the [Web App Manifest reference](/en-US/docs/Web/Manifest) for details.
+There are even more members you can use than listed above — be sure to check the [Web App Manifest reference](/en-US/docs/Web/Progressive_web_apps/Manifest) for details.
 
 ## Installing the PWA
 
-Using the information found in our web app manifest, supporting browsers can display an installation prompt to the user. When the user visits the PWA, they can be prompted to install it on their device. When the accept the prompt, the PWA is installed just like other OS-native apps and the user can launch and use the web app as normal.
+Using the information found in our web app manifest, supporting browsers can display an installation prompt to the user. When the user visits the PWA, they can be prompted to install it on their device. When they accept the prompt, the PWA is installed just like other OS-native apps and the user can launch and use the web app as normal.
 
 To learn more about how users can install PWAs, see [Installing and uninstalling web apps](/en-US/docs/Web/Progressive_web_apps/Guides/Installing).
 

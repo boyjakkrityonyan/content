@@ -1,10 +1,10 @@
 ---
 title: Firefox 8 for developers
+short-title: Firefox 8
 slug: Mozilla/Firefox/Releases/8
 page-type: firefox-release-notes
+sidebar: firefox
 ---
-
-{{FirefoxSidebar}}
 
 Firefox 8 was released on November 8, 2011. This article provides information both for [web developers](#changes_for_web_developers) and for add-on and [Mozilla project developers](#changes_for_mozilla_and_add-on_developers) to help take full advantage of the features of this release.
 
@@ -12,8 +12,8 @@ Firefox 8 was released on November 8, 2011. This article provides information bo
 
 ### HTML
 
-- The {{ domxref("HTMLImageElement") }} `crossOrigin` property has been added and the [`crossorigin`](/en-US/docs/Web/HTML/Element/img#crossorigin) attribute has been added to the {{ HTMLElement("img") }} element. (see [Firefox bug 664299](https://bugzil.la/664299))
-- The {{ domxref("HTMLSelectElement","","add()") }} method now supports either an item or index of an item that the new item should be inserted before. Previously it only supported an item. (see [Firefox bug 666200](https://bugzil.la/666200))
+- The {{ domxref("HTMLImageElement") }} `crossOrigin` property has been added and the [`crossorigin`](/en-US/docs/Web/HTML/Reference/Elements/img#crossorigin) attribute has been added to the {{ HTMLElement("img") }} element. (see [Firefox bug 664299](https://bugzil.la/664299))
+- The {{ domxref("HTMLSelectElement.add()") }} method now supports either an item or index of an item that the new item should be inserted before. Previously it only supported an item. (see [Firefox bug 666200](https://bugzil.la/666200))
 - The `HTMLIsIndexElement` constructor has been removed. No elements have implemented this interface since before Firefox 4.
 - The HTML5 "context menu" feature (`contextmenu` attribute), which lets you add custom element specific items to native context menu, is now supported (the implementation is still experimental awaiting changes in the specification; see [Firefox bug 617528](https://bugzil.la/617528)).
 - Support for the {{ domxref("HTMLElement.accessKeyLabel") }} attribute has been added to all elements.
@@ -28,21 +28,21 @@ Firefox 8 was released on November 8, 2011. This article provides information bo
 - The {{ domxref("FileReaderSync") }} interface (part of the FileAPI) has been implemented.
 - Event handling in nested {{ HTMLElement("label") }}s has been fixed.
 - You can now use {{ domxref("window.postMessage()") }} to pass {{ domxref("File") }} and {{ domxref("FileList") }} objects between windows.
-- When editing {{ domxref("element.contenteditable") }} areas, exiting a heading by pressing return, or exiting list editing mode by pressing return twice, now returns to paragraph entry mode (that is, paragraphs inside {{ HTMLElement("p") }} blocks) instead of separating lines by {{ HTMLElement("br") }} elements.
-- Fixed a bug that prevents justification from taking effect properly when applied to the first line in a {{ domxref("element.contenteditable") }} area.
-- Fixed a bug that caused pressing delete or backspace at the beginning of a {{ domxref("element.contenteditable") }} area to affect the previous `contenteditable` block if one is present.
+- When editing {{ domxref("HTMLelement.contenteditable", "contenteditable") }} areas, exiting a heading by pressing return, or exiting list editing mode by pressing return twice, now returns to paragraph entry mode (that is, paragraphs inside {{ HTMLElement("p") }} blocks) instead of separating lines by {{ HTMLElement("br") }} elements.
+- Fixed a bug that prevents justification from taking effect properly when applied to the first line in a {{ domxref("HTMLelement.contenteditable", "contenteditable") }} area.
+- Fixed a bug that caused pressing delete or backspace at the beginning of a {{ domxref("HTMLelement.contenteditable", "contenteditable") }} area to affect the previous `contenteditable` block if one is present.
 - {{ domxref("Document.getSelection()") }} now returns the same `Selection` object as {{ domxref("window.getSelection()") }}, instead of _stringifying_ it.
 - The HTML5 `selectionDirection` property makes it possible to define the direction of the selection in an editable text.
 - {{ domxref("HTMLMediaElement") }} now have a `seekable` property that return a {{ domxref("TimeRanges") }} object.
-- The {{ domxref("HTMLMediaElement") }}`.preload` attribute now correctly reflects as an _enumerated value_.
-- [`crossOrigin` property](/en-US/docs/Web/HTML/Attributes/crossorigin) defaults to "Anonymous" when an invalid value is used.
-- {{ domxref("window.navigator.cookieEnabled") }} now returns correct information when the default cookie setting is overridden on a per-site basis.
+- The {{ domxref("HTMLMediaElement.preload") }} attribute now correctly reflects as an _enumerated value_.
+- [`crossOrigin` property](/en-US/docs/Web/HTML/Reference/Attributes/crossorigin) defaults to "Anonymous" when an invalid value is used.
+- {{ domxref("navigator.cookieEnabled") }} now returns correct information when the default cookie setting is overridden on a per-site basis.
 
 ### JavaScript
 
 - [`RegExp.exec()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec) and [`RegExp.test()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test) called with no arguments now match against the string "undefined".
 - [`String.search()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search) and [`String.match()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match) called with no arguments or `undefined` now match against the empty string and thus match every string.
-- Support for watchlists has been implemented with the new (non-standard) [`watch()`](/en-US/docs/JavaScript/Reference/Global_Objects/Object/watch) and [`unwatch()`](/en-US/docs/JavaScript/Reference/Global_Objects/Object/unwatch) methods.
+- Support for watchlists has been implemented with the new (non-standard) `watch()` and `unwatch()` methods.
 
 ### CSS
 
@@ -51,7 +51,7 @@ Firefox 8 was released on November 8, 2011. This article provides information bo
 - Handling of {{ cssxref("background-size") }} has been revised to more closely match the specification.
 - In the past, {{ cssxref("text-decoration") }} in quirks mode had line thickness and position adjusted on descendant text to match the descendant. Now standards mode and quirks mode rendering are more similar.
 - Horizontal positioning for elements has been brought more in line with the specification in many cases. Documentation for this is forthcoming, but for now, see [Firefox bug 682780](https://bugzil.la/682780), comment 23 for details.
-- [SVG images are now scaled properly](/en-US/docs/Web/CSS/Scaling_of_SVG_backgrounds) when used as background images.
+- [SVG images are now scaled properly](/en-US/docs/Web/CSS/CSS_backgrounds_and_borders/Scaling_of_SVG_backgrounds) when used as background images.
 
 ### Network
 
@@ -87,19 +87,20 @@ Firefox 8 was released on November 8, 2011. This article provides information bo
 
 ## Changes for Mozilla and add-on developers
 
-See [Updating add-ons for Firefox 8](/en-US/docs/Mozilla/Firefox/Updating_add-ons_for_Firefox_8) for a guide to changes you're likely to have to make your add-ons compatible with Firefox 8.
+See [Updating add-ons for Firefox 8](/en-US/docs/Mozilla/Firefox/Releases/8/Updating_add-ons) for a guide to changes you're likely to have to make your add-ons compatible with Firefox 8.
 
-> **Note:** Firefox 8 requires that binary components be recompiled, as do all major releases of Firefox. See [Binary Interfaces](/en-US/docs/Mozilla/Developer_guide/Interface_Compatibility#binary_interfaces) for details.
+> [!NOTE]
+> Firefox 8 requires that binary components be recompiled, as do all major releases of Firefox.
 
 ### XPCOM
 
-- [`Components.utils`](/en-US/docs/Components.utils)
-  - : The new methods [`Components.utils.createObjectIn()`](/en-US/docs/Components.utils.createObjectIn) and [`Components.utils.makeObjectPropsNormal()`](/en-US/docs/Components.utils.makeObjectPropsNormal) have been created to make it easier to create objects in specific compartments.
+- `Components.utils`
+  - : The new methods `Components.utils.createObjectIn()` and `Components.utils.makeObjectPropsNormal()` have been created to make it easier to create objects in specific compartments.
 
-#### Other XPCOM related changes
+#### Other XPCOM-related changes
 
 - You can now instantiate DOM {{ domxref("File") }} objects from component code by doing new File, instead of having to instantiate an `nsIDOMFile` directly.
-- The `nsTPtrArray` array type has been removed. Its functionality is now all available on `nsTArray`, which now offers the `SafeElementAt()` method when instantiated using a pointer type. See the section on [`SafeElementAt()`](/en-US/docs/XPCOM_array_guide#Bounds-safe_access_to_elements) in the [XPCOM array guide](/en-US/docs/XPCOM_array_guide) for more information.
+- The `nsTPtrArray` array type has been removed. Its functionality is now all available on `nsTArray`, which now offers the `SafeElementAt()` method when instantiated using a pointer type.
 
 ### Workers
 
@@ -107,14 +108,13 @@ It is no longer possible to access XPCOM objects from ChromeWorkers. XPConnect h
 
 ### XUL
 
-- A bug in {{ domxref("document.execCommand()") }} that occurred when calling it on the value of [`contentDocument`](/en-US/docs/XUL/Property/contentDocument) has been fixed. Since Firefox 3, this resulted in errors instead of working correctly.
-- [Bootstrapped add-ons](/en-US/docs/Extensions/Bootstrapped_extensions) can now load chrome using a [`chrome.manifest`](/en-US/docs/Chrome_Registration) file. See the section [Adding user interface with a chrome.manifest](/en-US/docs/Extensions/Bootstrapped_extensions#Adding_user_interface_with_a_chrome.manifest) for details.
-- [XUL images](/en-US/docs/XUL/image) now shrink down with the same ratio in both directions when specifying maximum sizes.
+- A bug in {{ domxref("document.execCommand()") }} that occurred when calling it on the value of `contentDocument` has been fixed. Since Firefox 3, this has resulted in errors instead of working correctly.
+- Bootstrapped add-ons can now load chrome using a `chrome.manifest` file.
+- XUL images now shrink down with the same ratio in both directions when specifying maximum sizes.
 
 ### Changes to the build system
 
 - The following build configuration options have been removed:
-
   - `--enable-timeline`
   - `--disable-storage`
   - `--necko-disk-cache`
@@ -123,7 +123,7 @@ It is no longer possible to access XPCOM objects from ChromeWorkers. XPConnect h
 
 ### Chrome registration
 
-- The [`platformversion`](/en-US/docs/Chrome_Registration#platformversion) flag can be used in the chrome.manifest to specify Gecko version compatibility.
+- The `platformversion` flag can be used in the chrome.manifest to specify Gecko version compatibility.
 
 ### Interface changes
 
@@ -138,7 +138,7 @@ It is no longer possible to access XPCOM objects from ChromeWorkers. XPConnect h
 - The `nsINetworkLinkService` interface has a new attribute, `linkType`. This attribute provides the type of network connection in use. All Operating Systems currently return `LINK_TYPE_UNKNOWN`. Android support was backed out due to perceived security concerns.
 - The `nsISelection2` interface has been merged into the `nsISelectionPrivate` interface.
 - The `nsISelection3` interface has been merged into the `nsISelection` interface.
-- The `nsISessionStartup` attribute state is now a [`jsval`](/en-US/SpiderMonkey/JSAPI_Reference/Jsval) instead of a string, for performance reasons.
+- The `nsISessionStartup` attribute state is now a `jsval` instead of a string, for performance reasons.
 - The `nsIDocShell` attribute `isActive` is now `false` for minimized windows.
 - The `nsIDownloadHistory.addDownload()` method now saves the target where the download is saved on the local file system.
 
@@ -156,16 +156,6 @@ The `nsIWorkerFactory` interface has been removed as well. Workers can still be 
 - When a window is minimized, un-minimized, or switches between full screen and windowed mode, it receives a `sizemodechange` event.
 - You can now [use the `extensions.autoDisableScopes` preference](https://extensionworkshop.com/documentation/publish/signing-and-distribution-overview/#preventing_automatic_install_from_specific_locations) to disable automatic installation of add-ons from specific add-on install locations.
 - The new `mozSyntheticDocument` property on {{ domxref("Document") }} objects lets you determine whether a document is synthetic (that is, something like a standalone image, video, or audio file) rather than a full, standard DOM document. This can be useful, for example, if you want to present different user interface in this situation (such as adding contextual items differently depending on this case).
-- You can now specify a filter when opening `about:config`; for example, "about:config?filter=sessionstore" will show only session storage related preferences.
+- You can now specify a filter when opening `about:config`; for example, `about:config?filter=sessionstore` will show only session storage related preferences.
 
-## See also
-
-- [Firefox 7 for developers](/en-US/docs/Mozilla/Firefox/Releases/7)
-- [Firefox 6 for developers](/en-US/docs/Mozilla/Firefox/Releases/6)
-- [Firefox 5 for developers](/en-US/docs/Mozilla/Firefox/Releases/5)
-- [Firefox 4 for developers](/en-US/docs/Mozilla/Firefox/Releases/4)
-- [Firefox 3.6 for developers](/en-US/docs/Mozilla/Firefox/Releases/3.6)
-- [Firefox 3.5 for developers](/en-US/docs/Mozilla/Firefox/Releases/3.5)
-- [Firefox 3 for developers](/en-US/docs/Mozilla/Firefox/Releases/3)
-- [Firefox 2 for developers](/en-US/docs/Mozilla/Firefox/Releases/2)
-- [Firefox 1.5 for developers](/en-US/docs/Mozilla/Firefox/Releases/1.5)
+<!-- cSpell:ignore sessionstore -->

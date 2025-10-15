@@ -3,9 +3,8 @@ title: CSS fonts
 slug: Web/CSS/CSS_fonts
 page-type: css-module
 spec-urls: https://drafts.csswg.org/css-fonts/
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **CSS fonts** module defines font-related properties and how font resources are loaded. It lets you define the style of a font, such as its family, size and weight, and the glyph variants to use when multiple are available for a single character.
 
@@ -33,6 +32,7 @@ The CSS fonts module also supports variable fonts. Unlike regular fonts, where e
 - {{cssxref("font-weight")}}
 
 - {{cssxref("font-synthesis")}} shorthand
+- {{cssxref("font-synthesis-position")}}
 - {{cssxref("font-synthesis-small-caps")}}
 - {{cssxref("font-synthesis-style")}}
 - {{cssxref("font-synthesis-weight")}}
@@ -47,18 +47,17 @@ The CSS fonts module also supports variable fonts. Unlike regular fonts, where e
 - {{cssxref("font-variant-position")}}
 - {{cssxref("font-variation-settings")}}
 
+The specification also defines the `font-width` property, which is not yet supported by any browser.
+
 ### At-rules and descriptors
 
 - At-rule: {{cssxref("@font-face")}}
-
   - : Descriptors:
     - {{cssxref("@font-face/ascent-override", "ascent-override")}}
     - {{cssxref("@font-face/descent-override", "descent-override")}}
     - {{cssxref("@font-face/font-display", "font-display")}}
     - {{cssxref("@font-face/font-family", "font-family")}}
     - {{cssxref("@font-face/font-feature-settings", "font-feature-settings")}}
-    - {{cssxref("@font-face/font-language-override", "font-language-override")}}
-    - {{cssxref("@font-face/font-named-instance", "font-named-instance")}}
     - {{cssxref("@font-face/font-stretch", "font-stretch")}}
     - {{cssxref("@font-face/font-style", "font-style")}}
     - {{cssxref("@font-face/font-variation-settings", "font-variation-settings")}}
@@ -68,10 +67,11 @@ The CSS fonts module also supports variable fonts. Unlike regular fonts, where e
     - {{cssxref("@font-face/src", "src")}}
     - {{cssxref("@font-face/unicode-range", "unicode-range")}}
 
+The CSS fonts module also defines the `font-language-override`, `font-named-instance`, `font-width`, `font-size`, `subscript-position-override`, `subscript-size-override`, `superscript-position-override`, and `superscript-size-override` descriptors. Currently, no browsers support these features.
+
 - At-rule: {{cssxref("@font-feature-values")}}
 
-  - : Descriptor:
-    - {{cssxref("@font-feature-values/font-display", "font-display")}}
+The CSS fonts module also defines the {{cssxref("@font-feature-values/font-display", "font-display")}} descriptor. Currently, no browsers support this feature.
 
 - At-rule: {{cssxref("@font-palette-values")}}
   - : Descriptors:
@@ -139,24 +139,19 @@ The CSS fonts module also supports variable fonts. Unlike regular fonts, where e
 
 ## Guides
 
-- [Learn: Fundamental text and font styling](/en-US/docs/Learn/CSS/Styling_text/Fundamentals)
-
+- [Learn: Fundamental text and font styling](/en-US/docs/Learn_web_development/Core/Text_styling/Fundamentals)
   - : This beginner's learning article covers the basic fundamentals of text and font styling. It covers how to set the font weight, family, and style by using the {{cssxref("font")}} shorthand and how to align text and manage line and letter spacing.
 
-- [Learn: Web fonts](/en-US/docs/Learn/CSS/Styling_text/Web_fonts)
-
+- [Learn: Web fonts](/en-US/docs/Learn_web_development/Core/Text_styling/Web_fonts)
   - : This beginner's learning article explains how to use custom fonts on your web page to allow for more varied and custom text styling.
 
-- [OpenType font features guide](/en-US/docs/Web/CSS/CSS_fonts/OpenType_fonts_guide)
-
+- [OpenType font features](/en-US/docs/Web/CSS/CSS_fonts/OpenType_fonts_guide)
   - : Font features or variants refer to different glyphs or character styles contained within an OpenType font. These include things like ligatures (special glyphs that combine characters like 'fi' or 'ffl'), kerning (adjustments to the spacing between specific letterform pairings), fractions, numeral styles, and a number of others. These are all referred to as OpenType Features, and are made available to use on the web via specific properties and a low-level control property — {{cssxref("font-feature-settings")}}. This article provides you with all you need to know about using OpenType font features in CSS.
 
-- [Variable fonts guide](/en-US/docs/Web/CSS/CSS_fonts/Variable_fonts_guide)
-
+- [Variable fonts](/en-US/docs/Web/CSS/CSS_fonts/Variable_fonts_guide)
   - : This article will help you get started with using variable fonts.
 
-- [Improving font perfomance](/en-US/docs/Learn/Performance/CSS#improving_font_performance)
-
+- [Improving font performance](/en-US/docs/Learn_web_development/Extensions/Performance/CSS#improving_font_performance)
   - : This article, part of the CSS performance guide, discusses font loading, loading only the required glyphs, and defining font display behavior with the `font-display` descriptor.
 
 ## Related concepts

@@ -3,13 +3,58 @@ title: break-after
 slug: Web/CSS/break-after
 page-type: css-property
 browser-compat: css.properties.break-after
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **`break-after`** [CSS](/en-US/docs/Web/CSS) property sets how page, column, or region breaks should behave after a generated box. If there is no generated box, the property is ignored.
 
-{{EmbedInteractiveExample("pages/css/break-after.html")}}
+{{InteractiveExample("CSS Demo: break-after")}}
+
+```css interactive-example-choice
+break-after: auto;
+```
+
+```css interactive-example-choice
+break-after: page;
+```
+
+```html interactive-example
+<div>
+  <p>
+    The effect of this property can be noticed when the document is being
+    printed or a preview of a print is displayed.
+  </p>
+  <button id="print-btn">Show Print Preview</button>
+  <div class="box-container">
+    <div class="box">Content before the property</div>
+    <div class="box" id="example-element">Content with 'break-after'</div>
+    <div class="box">Content after the property</div>
+  </div>
+</div>
+```
+
+```css interactive-example
+.box {
+  border: solid #5b6dcd 5px;
+  background-color: #5b6dcd;
+  margin: 10px 0;
+  padding: 5px;
+}
+
+#example-element {
+  border: solid 5px #ffc129;
+  background-color: #ffc129;
+  color: black;
+}
+```
+
+```js interactive-example
+const btn = document.getElementById("print-btn");
+
+btn.addEventListener("click", () => {
+  window.print();
+});
+```
 
 ## Syntax
 
@@ -61,9 +106,9 @@ Once forced breaks have been applied, soft breaks may be added if needed, but no
   - : Allows, but does not force, any break (page, column, or region) to be inserted right after the principal box.
 - `avoid`
   - : Avoids any break (page, column, or region) from being inserted right after the principal box.
-- `always` {{experimental_inline}}
+- `always`
   - : Forces a page break right after the principal box. The type of this break is that of the immediately-containing fragmentation context. If we are inside a multicol container then it would force a column break, inside paged media (but not inside a multicol container) a page break.
-- `all` {{experimental_inline}}
+- `all`
   - : Forces a page break right after the principal box. Breaking through all possible fragmentation contexts. So a break inside a multicol container, which was inside a page container would force a column and page break.
 
 #### Page break values
@@ -76,9 +121,9 @@ Once forced breaks have been applied, soft breaks may be added if needed, but no
   - : Forces one or two page breaks right after the principal box, whichever will make the next page into a left page. It's the page placed on the left side of the spine of the book or the back side of the page in duplex printing.
 - `right`
   - : Forces one or two page breaks right after the principal box, whichever will make the next page into a right page. It's the page placed on the right side of the spine of the book or the front side of the page in duplex printing.
-- `recto` {{experimental_inline}}
+- `recto`
   - : Forces one or two page breaks right after the principal box, whichever will make the next page into a recto page. (A recto page is a right page in a left-to-right spread or a left page in a right-to-left spread.)
-- `verso` {{experimental_inline}}
+- `verso`
   - : Forces one or two page breaks right after the principal box, whichever will make the next page into a verso page. (A verso page is a left page in a left-to-right spread or a right page in a right-to-left spread.)
 
 #### Column break values
@@ -90,9 +135,9 @@ Once forced breaks have been applied, soft breaks may be added if needed, but no
 
 #### Region break values
 
-- `avoid-region` {{experimental_inline}}
+- `avoid-region`
   - : Avoids any region break right after the principal box.
-- `region` {{experimental_inline}}
+- `region`
   - : Forces a region break right after the principal box.
 
 ## Page break aliases
@@ -107,7 +152,8 @@ For compatibility reasons, the legacy {{cssxref("page-break-after")}} property s
 | `avoid`          | `avoid`     |
 | `always`         | `page`      |
 
-> **Note:** The `always` value of `page-break-*` was implemented by browsers as a page break, and not as a column break. Therefore the aliasing is to `page`, rather than the `always` value in the Level 4 spec.
+> [!NOTE]
+> The `always` value of `page-break-*` was implemented by browsers as a page break, and not as a column break. Therefore the aliasing is to `page`, rather than the `always` value in the Level 4 spec.
 
 ## Formal definition
 
@@ -174,7 +220,7 @@ By default, the subheadings and paragraphs were laid out rather messily because 
 
 ```css
 html {
-  font-family: helvetica, arial, sans-serif;
+  font-family: "Helvetica", "Arial", sans-serif;
 }
 
 h1 {
@@ -214,5 +260,5 @@ article {
 
 ## See also
 
-- [Multiple-column Layout](/en-US/docs/Learn/CSS/CSS_layout/Multiple-column_Layout)
+- [Learn: Multiple-column Layout](/en-US/docs/Learn_web_development/Core/CSS_layout/Multiple-column_Layout)
 - [Breaking Boxes With CSS Fragmentation](https://www.smashingmagazine.com/2019/02/css-fragmentation/)

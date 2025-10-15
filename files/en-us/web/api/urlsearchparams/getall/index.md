@@ -6,12 +6,10 @@ page-type: web-api-instance-method
 browser-compat: api.URLSearchParams.getAll
 ---
 
-{{ApiRef("URL API")}}
+{{ApiRef("URL API")}} {{AvailableInWorkers}}
 
 The **`getAll()`** method of the {{domxref("URLSearchParams")}}
 interface returns all the values associated with a given search parameter as an array.
-
-{{availableinworkers}}
 
 ## Syntax
 
@@ -26,18 +24,18 @@ getAll(name)
 
 ### Return value
 
-An array of strings.
+An array of strings, which may be empty if no values for the given parameter are found.
 
 ## Examples
 
 ```js
-let url = new URL("https://example.com?foo=1&bar=2");
-let params = new URLSearchParams(url.search);
+const url = new URL("https://example.com?foo=1&bar=2");
+const params = new URLSearchParams(url.search);
 
-//Add a second foo parameter.
+// Add a second foo parameter.
 params.append("foo", 4);
 
-console.log(params.getAll("foo")); //Prints ["1","4"].
+console.log(params.getAll("foo")); // ["1", "4"]
 ```
 
 ## Specifications

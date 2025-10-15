@@ -18,7 +18,8 @@ It is expressed in dB, has a default value of `0`, and can take a value in a nom
 
 An {{domxref("AudioParam")}}.
 
-> **Note:** Though the `AudioParam` returned is read-only, the value it represents is not.
+> [!NOTE]
+> Though the `AudioParam` returned is read-only, the value it represents is not.
 
 ## Examples
 
@@ -28,14 +29,14 @@ For more complete applied examples/information, check out our [Voice-change-O-ma
 ```js
 const audioCtx = new AudioContext();
 
-//set up the different audio nodes we will use for the app
+// Set up the different audio nodes we will use for the app
 const analyser = audioCtx.createAnalyser();
 const distortion = audioCtx.createWaveShaper();
 const gainNode = audioCtx.createGain();
 const biquadFilter = audioCtx.createBiquadFilter();
 const convolver = audioCtx.createConvolver();
 
-// connect the nodes together
+// Connect the nodes together
 
 source = audioCtx.createMediaStreamSource(stream);
 source.connect(analyser);

@@ -1,17 +1,19 @@
 ---
-title: "-webkit-mask-box-image"
+title: -webkit-mask-box-image
 slug: Web/CSS/-webkit-mask-box-image
-page-type: css-property
+page-type: css-shorthand-property
 status:
   - non-standard
 browser-compat: css.properties.-webkit-mask-box-image
+sidebar: cssref
 ---
 
-{{CSSRef}} {{ Non-standard_header() }}
+{{ Non-standard_header() }}
 
-The non-standard prefixed **`-webkit-mask-box-image`** [shorthand](/en-US/docs/Web/CSS/Shorthand_properties) property sets the mask image for an element's border box.
+The non-standard prefixed **`-webkit-mask-box-image`** [shorthand](/en-US/docs/Web/CSS/CSS_cascade/Shorthand_properties) property sets the mask image for an element's border box.
 
-> **Note:** This property is not standard and is not on any standards track. Consider using the {{CSSXref("mask-border")}} property instead.
+> [!NOTE]
+> This property is not standard and is not on any standards track. Consider using the {{CSSXref("mask-border")}} property instead.
 
 ## Constituent properties
 
@@ -30,17 +32,17 @@ The values includes the `<image>` to be used as the mask border, and optionally 
 -webkit-mask-box-image: none;
 
 /* image */
--webkit-mask-box-image: url(image.png);
+-webkit-mask-box-image: url("image.png");
 
 /* image edge-offset */
--webkit-mask-box-image: url(image.png) 10 20 20 10;
--webkit-mask-box-image: url(image.png) 10px 20px 20px 10px;
+-webkit-mask-box-image: url("image.png") 10 20 20 10;
+-webkit-mask-box-image: url("image.png") 10px 20px 20px 10px;
 
 /* image repeat-style */
--webkit-mask-box-image: url(image.png) space repeat;
+-webkit-mask-box-image: url("image.png") space repeat;
 
 /* image edge-offset repeat-style */
--webkit-mask-box-image: url(image.png) 10px 20px 20px 10px space repeat;
+-webkit-mask-box-image: url("image.png") 10px 20px 20px 10px space repeat;
 
 /* Global values */
 -webkit-mask-box-image: inherit;
@@ -58,7 +60,7 @@ The values includes the `<image>` to be used as the mask border, and optionally 
   - : Used to specify that a border box is to have no mask image.
 - {{cssxref("length")}}
   - : The size of the mask image's offset. See {{cssxref("&lt;length&gt;")}} for possible units.
-- `{{cssxref("percentage")}}`
+- {{cssxref("percentage")}}
   - : The mask image's offset has a percentage value relative to the border box's corresponding dimension (width or height).
 - {{cssxref("number")}}
   - : The size of the mask image's offset in pixels.
@@ -73,35 +75,25 @@ The values includes the `<image>` to be used as the mask border, and optionally 
 
 The outset values, or edge offsets, define the distances from the top, right, bottom, and left edges of the image, in that order. The values can be set as {{cssxref("length")}}, {{cssxref("number")}}, or {{cssxref("percentage")}}, with numbers interpreted as pixel lengths.
 
-Border repeat styles, when included, are interpreted in the order of `<repeat-x> <repeat-y>`. If only one value is declared, the value is the same for both axes. While similar to `{{cssxref("background-repeat")}}`, the `cover` and `contain` values are not supported.
+Border repeat styles, when included, are interpreted in the order of `<repeat-x> <repeat-y>`. If only one value is declared, the value is the same for both axes. While similar to {{cssxref("background-repeat")}}, the `cover` and `contain` values are not supported.
 
 ## Formal definition
 
-- {{ Xref_cssinitial() }}: `none`
+- [Initial value](/en-US/docs/Web/CSS/CSS_cascade/Value_processing#initial_value): `none`
 - Applies to: all elements
-- {{ Xref_cssinherited() }}: no
-- {{ Xref_csscomputed() }}: as specified
+- [Inherited](/en-US/docs/Web/CSS/CSS_cascade/Inheritance): no
+- [Computed value](/en-US/docs/Web/CSS/CSS_cascade/Value_processing#computed_value): as specified
 
 ## Formal syntax
 
-```plain
--webkit-mask-box-image: <mask-image-source> [<mask-image-offset>{4} <mask-border-repeat>{1,2} ]
-
-Where:
-
-<mask-image-source> = {{cssxref("url", "&lt;uri&gt;")}} | <gradient> | none
-
-<mask-image-offset> = <length> | <percentage> | <number>
-
-<repeat-style> = repeat | stretch | round | space
-```
+{{CSSSyntaxRaw(`-webkit-mask-box-image = <mask-image-source> [ <mask-image-offset>{4} <mask-border-repeat>{1,2} ]`)}}
 
 ## Examples
 
 ### Setting an image
 
 ```css
-.exampleone {
+.example-one {
   -webkit-mask-box-image: url("mask.png");
 }
 ```
@@ -109,8 +101,8 @@ Where:
 ### Offsetting and filling an image
 
 ```css
-.exampletwo {
-  -webkit-mask-box-image: url("logo.png") 100 100 0 0 round round;
+.example-two {
+  -webkit-mask-box-image: url("logo.png") 100px 100px 0px 0px round round;
 }
 ```
 

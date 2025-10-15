@@ -3,9 +3,8 @@ title: permissions.onAdded
 slug: Mozilla/Add-ons/WebExtensions/API/permissions/onAdded
 page-type: webextension-api-event
 browser-compat: webextensions.api.permissions.onAdded
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Fired when the extension granted new permissions.
 
@@ -31,15 +30,9 @@ Events have three functions:
 ### Parameters
 
 - `listener`
-
   - : The function called when this event occurs. The function is passed this argument:
-
     - `permissions`
       - : {{WebExtAPIRef("permissions.Permissions")}} object containing the permissions that were granted.
-
-## Browser compatibility
-
-{{Compat}}
 
 ## Examples
 
@@ -54,4 +47,9 @@ browser.permissions.onAdded.addListener(handleAdded);
 
 {{WebExtExamples}}
 
-> **Note:** This API is based on Chromium's [`chrome.permissions`](https://developer.chrome.com/docs/extensions/reference/permissions/) API.
+## Browser compatibility
+
+{{Compat}}
+
+> [!NOTE]
+> This API is based on Chromium's [`chrome.permissions`](https://developer.chrome.com/docs/extensions/reference/api/permissions) API.

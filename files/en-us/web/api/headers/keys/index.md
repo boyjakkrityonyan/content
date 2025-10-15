@@ -6,13 +6,11 @@ page-type: web-api-instance-method
 browser-compat: api.Headers.keys
 ---
 
-{{APIRef("Fetch API")}}
+{{APIRef("Fetch API")}} {{AvailableInWorkers}}
 
 The **`Headers.keys()`** method returns an
 {{jsxref("Iteration_protocols",'iterator')}} allowing to go through all keys contained
 in this object. The keys are {{jsxref("String")}} objects.
-
-> **Note:** This method is available in [Web Workers](/en-US/docs/Web/API/Web_Workers_API).
 
 ## Syntax
 
@@ -56,5 +54,5 @@ vary
 ## See also
 
 - [ServiceWorker API](/en-US/docs/Web/API/Service_Worker_API)
-- [HTTP access control (CORS)](/en-US/docs/Web/HTTP/CORS)
+- [HTTP access control (CORS)](/en-US/docs/Web/HTTP/Guides/CORS)
 - [HTTP](/en-US/docs/Web/HTTP)

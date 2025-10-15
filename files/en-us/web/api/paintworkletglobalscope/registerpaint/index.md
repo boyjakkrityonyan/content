@@ -27,7 +27,7 @@ registerPaint(name, classRef)
 - `classRef`
   - : A reference to the class that implements the worklet.
 
-## Return value
+### Return value
 
 None ({{jsxref("undefined")}}).
 
@@ -74,14 +74,12 @@ The first step in using a paintworklet is defining the paint worklet using the
 `registerPaint()` function, as done above. To use it, you register it with
 the `CSS.paintWorklet.addModule()` method:
 
-```html
-<script>
-  CSS.paintWorklet.addModule("checkboardWorklet.js");
-</script>
+```js
+CSS.paintWorklet.addModule("checkboardWorklet.js");
 ```
 
-You can then use the `{{cssxref('image/paint', 'paint()')}}` CSS function in your
-CSS anywhere an `{{cssxref('&lt;image&gt;')}}` value is valid.
+You can then use the {{cssxref('image/paint', 'paint()')}} CSS function in your
+CSS anywhere an {{cssxref('&lt;image&gt;')}} value is valid.
 
 ```css
 li {
@@ -100,4 +98,4 @@ li {
 ## See also
 
 - [CSS Painting API](/en-US/docs/Web/API/CSS_Painting_API)
-- [Houdini APIs](/en-US/docs/Web/Guide/Houdini)
+- [Houdini APIs](/en-US/docs/Web/API/Houdini_APIs)

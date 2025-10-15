@@ -5,7 +5,7 @@ page-type: web-api-interface
 browser-compat: api.Clients
 ---
 
-{{APIRef("Service Workers API")}}
+{{APIRef("Service Workers API")}}{{AvailableInWorkers("service")}}
 
 The `Clients` interface provides access to {{domxref("Client")}} objects. Access it via `{{domxref("ServiceWorkerGlobalScope", "self")}}.clients` within a [service worker](/en-US/docs/Web/API/Service_Worker_API).
 
@@ -48,9 +48,7 @@ addEventListener("notificationclick", (event) => {
 
       // If we didn't find an existing chat window,
       // open a new one:
-      if (!chatClient) {
-        chatClient = await clients.openWindow("/chat/");
-      }
+      chatClient ??= await clients.openWindow("/chat/");
 
       // Message the client:
       chatClient.postMessage("New chat messages!");
@@ -70,5 +68,3 @@ addEventListener("notificationclick", (event) => {
 ## See also
 
 - [Using Service Workers](/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)
-- [Is ServiceWorker ready?](https://jakearchibald.github.io/isserviceworkerready/)
-- {{jsxref("Promise")}}

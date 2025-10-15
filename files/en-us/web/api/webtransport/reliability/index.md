@@ -8,11 +8,9 @@ status:
 browser-compat: api.WebTransport.reliability
 ---
 
-{{APIRef("WebTransport API")}}{{SeeCompatTable}}
+{{APIRef("WebTransport API")}}{{SeeCompatTable}}{{SecureContext_Header}} {{AvailableInWorkers}}
 
 The **`reliability`** read-only property of the {{domxref("WebTransport")}} interface indicates whether the connection supports reliable transports only, or whether it also supports unreliable transports (such as UDP).
-
-{{AvailableInWorkers}}
 
 ## Value
 
@@ -39,12 +37,12 @@ async function initTransport(url) {
   // Prior to this the reliability is "pending"
   await transport.ready;
 
-  if (transport.reliability == "reliable-only") {
+  if (transport.reliability === "reliable-only") {
     // Use connection only with reliable transports
   } else {
     // Use connection with either reliable or unreliable transports.
   }
-  // ...
+  // …
 }
 ```
 

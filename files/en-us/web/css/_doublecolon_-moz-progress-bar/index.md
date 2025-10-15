@@ -1,12 +1,15 @@
 ---
-title: "::-moz-progress-bar"
+title: ::-moz-progress-bar
 slug: Web/CSS/::-moz-progress-bar
 page-type: css-pseudo-element
 status:
+  - experimental
   - non-standard
+browser-compat: css.selectors.-moz-progress-bar
+sidebar: cssref
 ---
 
-{{CSSRef}}{{Non-standard_header}}
+{{Non-standard_header}}{{SeeCompatTable}}
 
 The **`::-moz-progress-bar`** [CSS](/en-US/docs/Web/CSS) [pseudo-element](/en-US/docs/Web/CSS/Pseudo-elements) is a [Mozilla extension](/en-US/docs/Web/CSS/Mozilla_Extensions) that represents the progress bar inside a {{HTMLElement("progress")}} element. (The bar represents the amount of progress that has been made.)
 
@@ -49,6 +52,10 @@ If you want to select the unfinished part of {{HTMLElement("progress")}} in Mozi
 ## Specifications
 
 Not part of any standard.
+
+## Browser compatibility
+
+{{Compat}}
 
 ## See also
 

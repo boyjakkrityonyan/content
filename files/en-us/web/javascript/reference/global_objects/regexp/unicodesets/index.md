@@ -1,13 +1,26 @@
 ---
 title: RegExp.prototype.unicodeSets
+short-title: unicodeSets
 slug: Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets
 page-type: javascript-instance-accessor-property
 browser-compat: javascript.builtins.RegExp.unicodeSets
+sidebar: jsref
 ---
 
-{{JSRef}}
-
 The **`unicodeSets`** accessor property of {{jsxref("RegExp")}} instances returns whether or not the `v` flag is used with this regular expression.
+
+{{InteractiveExample("JavaScript Demo: RegExp.prototype.unicodeSets")}}
+
+```js interactive-example
+const regex1 = /[\p{Lowercase}&&\p{Script=Greek}]/;
+const regex2 = /[\p{Lowercase}&&\p{Script=Greek}]/v;
+
+console.log(regex1.unicodeSets);
+// Expected output: false
+
+console.log(regex2.unicodeSets);
+// Expected output: true
+```
 
 ## Description
 
@@ -19,7 +32,8 @@ The **`unicodeSets`** accessor property of {{jsxref("RegExp")}} instances return
 
 Some valid `u`-mode regexes become invalid in `v`-mode. Specifically, the character class syntax is different and some characters can no longer appear literally. For more information, see [`v`-mode character class](/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Character_class#v-mode_character_class).
 
-> **Note:** The `v` mode does not interpret grapheme clusters as single characters; they are still multiple code points. For example, `/[🇺🇳]/v` is still able to match `"🇺"`.
+> [!NOTE]
+> The `v` mode does not interpret grapheme clusters as single characters; they are still multiple code points. For example, `/[🇺🇳]/v` is still able to match `"🇺"`.
 
 The set accessor of `unicodeSets` is `undefined`. You cannot change this property directly.
 

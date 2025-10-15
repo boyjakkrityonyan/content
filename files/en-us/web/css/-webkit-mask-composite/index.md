@@ -1,17 +1,19 @@
 ---
-title: "-webkit-mask-composite"
+title: -webkit-mask-composite
 slug: Web/CSS/-webkit-mask-composite
 page-type: css-property
 status:
   - non-standard
 browser-compat: css.properties.-webkit-mask-composite
+sidebar: cssref
 ---
 
-{{CSSRef}}{{Non-standard_header}}
+{{Non-standard_header}}
 
 The **`-webkit-mask-composite`** property specifies the manner in which multiple mask images applied to the same element are composited with one another. Mask images are composited in the opposite order that they are declared with the {{CSSxRef("mask-image", "-webkit-mask-image")}} property.
 
-> **Note:** There is a standardized {{CSSxRef("mask-composite")}} property covering parts of this non-standard property using different keywords.
+> [!NOTE]
+> There is a standardized {{CSSxRef("mask-composite")}} property covering parts of this non-standard property using different keywords.
 
 ## Syntax
 
@@ -68,10 +70,7 @@ The **`-webkit-mask-composite`** property specifies the manner in which multiple
 
 ## Formal syntax
 
-```plain
--webkit-mask-composite =
-  <composite-style>#
-```
+{{CSSSyntaxRaw(`-webkit-mask-composite = <composite-style>#`)}}
 
 ## Examples
 
@@ -79,7 +78,7 @@ The **`-webkit-mask-composite`** property specifies the manner in which multiple
 
 ```css
 .example {
-  -webkit-mask-image: url(mask1.png), url("mask2.png");
+  -webkit-mask-image: url("mask1.png"), url("mask2.png");
   -webkit-mask-composite: xor, source-over;
 }
 ```

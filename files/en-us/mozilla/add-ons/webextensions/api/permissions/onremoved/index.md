@@ -3,9 +3,8 @@ title: permissions.onRemoved
 slug: Mozilla/Add-ons/WebExtensions/API/permissions/onRemoved
 page-type: webextension-api-event
 browser-compat: webextensions.api.permissions.onRemoved
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Fired when some permissions are removed from the extension.
 
@@ -31,15 +30,9 @@ Events have three functions:
 ### Parameters
 
 - `listener`
-
   - : The function called when this event occurs. The function is passed this argument:
-
     - `permissions`
       - : {{WebExtAPIRef("permissions.Permissions")}} object containing the permissions that were removed.
-
-## Browser compatibility
-
-{{Compat}}
 
 ## Examples
 
@@ -54,4 +47,9 @@ browser.permissions.onRemoved.addListener(handleRemoved);
 
 {{WebExtExamples}}
 
-> **Note:** This API is based on Chromium's [`chrome.permissions`](https://developer.chrome.com/docs/extensions/reference/permissions/) API.
+## Browser compatibility
+
+{{Compat}}
+
+> [!NOTE]
+> This API is based on Chromium's [`chrome.permissions`](https://developer.chrome.com/docs/extensions/reference/api/permissions) API.

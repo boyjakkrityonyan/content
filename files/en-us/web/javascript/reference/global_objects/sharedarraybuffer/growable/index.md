@@ -1,11 +1,11 @@
 ---
 title: SharedArrayBuffer.prototype.growable
+short-title: growable
 slug: Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer/growable
 page-type: javascript-instance-accessor-property
 browser-compat: javascript.builtins.SharedArrayBuffer.growable
+sidebar: jsref
 ---
-
-{{JSRef}}
 
 The **`growable`** accessor property of {{jsxref("SharedArrayBuffer")}} instances returns whether this `SharedArrayBuffer` can be grow or not.
 
@@ -17,7 +17,7 @@ The `growable` property is an accessor property whose set accessor function is `
 
 ### Using growable
 
-In this example, we create a 8-byte buffer that is growable to a max length of 16 bytes, then check its {{jsxref("SharedArrayBuffer/growable", "growable")}} property, growing it if `growable` returns `true`:
+In this example, we create a 8-byte buffer that is growable to a max length of 16 bytes, then check its `growable` property, growing it if `growable` returns `true`:
 
 ```js
 const buffer = new SharedArrayBuffer(8, { maxByteLength: 16 });

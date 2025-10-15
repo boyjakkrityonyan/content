@@ -3,13 +3,13 @@ title: bookmarks.onMoved
 slug: Mozilla/Add-ons/WebExtensions/API/bookmarks/onMoved
 page-type: webextension-api-event
 browser-compat: webextensions.api.bookmarks.onMoved
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Fired when a bookmark or folder is moved to a different parent folder or position within a folder.
 
-> **Note:** If you're moving multiple bookmarks, because this API is asynchronous, the move calls may get processed in any order. Consequently, the value of each bookmark's index may change or be unknown until all the move calls are completed. If the index associated with a bookmark matters to your extension, then – when moving multiple bookmarks – the extension should wait for each `bookmarks.move` call to complete before moving the next bookmark. Waiting ensures that the index associated with each bookmark is not affected by a move call executing concurrently while the original call is in progress.
+> [!NOTE]
+> If you're moving multiple bookmarks, because this API is asynchronous, the move calls may get processed in any order. Consequently, the value of each bookmark's index may change or be unknown until all the move calls are completed. If the index associated with a bookmark matters to your extension, then – when moving multiple bookmarks – the extension should wait for each `bookmarks.move` call to complete before moving the next bookmark. Waiting ensures that the index associated with each bookmark is not affected by a move call executing concurrently while the original call is in progress.
 
 ## Syntax
 
@@ -33,9 +33,7 @@ Events have three functions:
 ### Parameters
 
 - `listener`
-
   - : The function called when this event occurs. The function is passed these arguments:
-
     - `id`
       - : `string`. ID of the item that was moved.
     - `moveInfo`
@@ -53,10 +51,6 @@ Events have three functions:
   - : `string`. The old parent folder.
 - `oldIndex`
   - : `integer`. The old index of the item in its parent.
-
-## Browser compatibility
-
-{{Compat}}
 
 ## Examples
 
@@ -78,7 +72,12 @@ browser.browserAction.onClicked.addListener(handleClick);
 
 {{WebExtExamples}}
 
-> **Note:** This API is based on Chromium's [`chrome.bookmarks`](https://developer.chrome.com/docs/extensions/reference/bookmarks/#event-onMoved) API. This documentation is derived from [`bookmarks.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/bookmarks.json) in the Chromium code.
+## Browser compatibility
+
+{{Compat}}
+
+> [!NOTE]
+> This API is based on Chromium's [`chrome.bookmarks`](https://developer.chrome.com/docs/extensions/reference/api/bookmarks#event-onMoved) API. This documentation is derived from [`bookmarks.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/bookmarks.json) in the Chromium code.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

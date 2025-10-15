@@ -2,20 +2,19 @@
 title: view()
 slug: Web/CSS/animation-timeline/view
 page-type: css-function
-status:
-  - experimental
 browser-compat: css.properties.animation-timeline.view
+sidebar: cssref
 ---
 
-{{CSSRef}}{{SeeCompatTable}}
-
-The **`view()`** [CSS function](/en-US/docs/Web/CSS/CSS_Functions) can be used with {{cssxref("animation-timeline")}} to indicate a subject element that will provide an anonymous view progress timeline to animate. The view progress timeline is progressed through by a change in visibility of the subject element inside the nearest ancestor scroller. The visibility of the subject inside the scroller is tracked — by default, the timeline is at 0% when the subject is first visible at one edge of the scroller, and 100% when it reaches the opposite edge.
+The **`view()`** [CSS function](/en-US/docs/Web/CSS/CSS_values_and_units/CSS_value_functions) can be used with {{cssxref("animation-timeline")}} to indicate a subject element that will provide an anonymous view progress timeline to animate. The view progress timeline is progressed through by a change in visibility of the subject element inside the nearest ancestor scroller. The visibility of the subject inside the scroller is tracked — by default, the timeline is at 0% when the subject is first visible at one edge of the scroller, and 100% when it reaches the opposite edge.
 
 The function parameters can specify the scrollbar axis along which timeline progress will be tracked and an inset that adjusts the position of the box in which the subject is deemed to be visible.
 
-> **Note:** If the indicated axis does not contain a scrollbar, then the animation timeline will be inactive (have zero progress).
+> [!NOTE]
+> If the indicated axis does not contain a scrollbar, then the animation timeline will be inactive (have zero progress).
 
-> **Note:** Each use of `view()` corresponds to its own unique instance of {{domxref("ViewTimeline")}} in the [Web Animations API](/en-US/docs/Web/API/Web_Animations_API).
+> [!NOTE]
+> Each use of `view()` corresponds to its own unique instance of {{domxref("ViewTimeline")}} in the [Web Animations API](/en-US/docs/Web/API/Web_Animations_API).
 
 ## Syntax
 
@@ -47,9 +46,7 @@ animation-timeline: view(x 200px auto);
 ### Parameters
 
 - axis
-
   - : The scrollbar axis value can be any one of the following:
-
     - `block`
       - : The scrollbar on the block axis of the scroll container, which is the axis in the direction perpendicular to the flow of text within a line.
         For horizontal writing modes, such as standard English, this is the same as `y`, while for vertical writing modes, it is the same as `x`. This is the default value.
@@ -62,17 +59,16 @@ animation-timeline: view(x 200px auto);
       - : The scrollbar on the horizontal axis of the scroll container.
 
 - inset
-
   - : The inset value can be one or two values, which can be either `auto` or a {{cssxref("length-percentage")}}. It specifies an inset (positive) or outset (negative) adjustment of the [scrollport](/en-US/docs/Glossary/Scroll_container#scrollport). The inset is used to determine whether the element is in view which determines the length of the animation timeline. In other words, the animation lasts as long as the element is in the inset-adjusted view.
-
     - start
       - : Inward offset from beginning of the scrollport.
     - end
       - : Inward offset from end of the scrollport.
 
-> **Note:** The scroller and inset values can be specified in any order.
+> [!NOTE]
+> The scroller and inset values can be specified in any order.
 
-### Formal syntax
+## Formal syntax
 
 {{CSSSyntax}}
 
@@ -169,13 +165,13 @@ To aid the understanding of the result, extra elements `subject-container`, `top
 
 .top {
   top: 0;
-  height: 244px;
+  height: 50%;
   align-items: end;
 }
 
 .bottom {
-  top: 432px;
-  height: 48px;
+  bottom: 0;
+  height: 10%;
 }
 ```
 

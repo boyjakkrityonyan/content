@@ -6,22 +6,28 @@ page-type: web-api-event
 browser-compat: api.Element.click_event
 ---
 
-{{APIRef}}
+{{APIRef("UI Events")}}
 
-An element receives a **`click`** event when a pointing device button (such as a mouse's primary mouse button) is both pressed and released while the pointer is located inside the element.
+An element receives a **`click`** event when any of the following occurs:
+
+- A pointing-device button (such as a mouse's primary button) is both pressed and released while the pointer is located inside the element.
+- A touch gesture is performed on the element.
+- Any user interaction that is equivalent to a click, such as pressing the <kbd>Space</kbd> key or <kbd>Enter</kbd> key while the element is focused. Note that this only applies to elements with a default key event handler, and therefore, excludes other elements that have been made focusable by setting the [`tabindex`](/en-US/docs/Web/HTML/Reference/Global_attributes/tabindex) attribute.
 
 If the button is pressed on one element and the pointer is moved outside the element before the button is released, the event is fired on the most specific ancestor element that contained both elements.
 
 `click` fires after both the {{domxref("Element/mousedown_event", "mousedown")}} and {{domxref("Element/mouseup_event", "mouseup")}} events have fired, in that order.
 
+The event is a device-independent event — meaning it can be activated by touch, keyboard, mouse, and any other mechanism provided by assistive technology.
+
 ## Syntax
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("click", (event) => {});
+```js-nolint
+addEventListener("click", (event) => { })
 
-onclick = (event) => {};
+onclick = (event) => { }
 ```
 
 ## Event type
@@ -30,78 +36,36 @@ A {{domxref("PointerEvent")}}. Inherits from {{domxref("MouseEvent")}}.
 
 {{InheritanceDiagram("PointerEvent")}}
 
-> **Note:** In earlier versions of the specification the event type for this event was a {{domxref("MouseEvent")}}, and this is still the type passed in Firefox and Safari.
+> [!NOTE]
+> In earlier versions of the specification, the event type for this event was a {{domxref("MouseEvent")}}. Check [browser compatibility](#browser_compatibility) for more information.
 
 ## Event properties
 
-_This interface also inherits properties of its parents, {{domxref("UIEvent")}} and {{domxref("Event")}}._
+_This interface inherits properties from {{domxref("MouseEvent")}} and {{domxref("Event")}}._
 
-- {{domxref("MouseEvent.altKey")}} {{ReadOnlyInline}}
-  - : Returns `true` if the <kbd>alt</kbd> key was down when the mouse event was fired.
-- {{domxref("MouseEvent.button")}} {{ReadOnlyInline}}
-  - : The button number that was pressed (if applicable) when the mouse event was fired.
-- {{domxref("MouseEvent.buttons")}} {{ReadOnlyInline}}
-  - : The buttons being pressed (if any) when the mouse event was fired.
-- {{domxref("MouseEvent.clientX")}} {{ReadOnlyInline}}
-  - : The X coordinate of the mouse pointer in local (DOM content) coordinates.
-- {{domxref("MouseEvent.clientY")}} {{ReadOnlyInline}}
-  - : The Y coordinate of the mouse pointer in local (DOM content) coordinates.
-- {{domxref("MouseEvent.ctrlKey")}} {{ReadOnlyInline}}
-  - : Returns `true` if the <kbd>control</kbd> key was down when the mouse event was fired.
-- {{domxref("MouseEvent.layerX")}} {{Non-standard_inline}} {{ReadOnlyInline}}
-  - : Returns the horizontal coordinate of the event relative to the current layer.
-- {{domxref("MouseEvent.layerY")}} {{Non-standard_inline}} {{ReadOnlyInline}}
-  - : Returns the vertical coordinate of the event relative to the current layer.
-- {{domxref("MouseEvent.metaKey")}} {{ReadOnlyInline}}
-  - : Returns `true` if the <kbd>meta</kbd> key was down when the mouse event was fired.
-- {{domxref("MouseEvent.movementX")}} {{ReadOnlyInline}}
-  - : The X coordinate of the mouse pointer relative to the position of the last {{domxref("Element/mousemove_event", "mousemove")}} event.
-- {{domxref("MouseEvent.movementY")}} {{ReadOnlyInline}}
-  - : The Y coordinate of the mouse pointer relative to the position of the last {{domxref("Element/mousemove_event", "mousemove")}} event.
-- {{domxref("MouseEvent.offsetX")}} {{ReadOnlyInline}}
-  - : The X coordinate of the mouse pointer relative to the position of the padding edge of the target node.
-- {{domxref("MouseEvent.offsetY")}} {{ReadOnlyInline}}
-  - : The Y coordinate of the mouse pointer relative to the position of the padding edge of the target node.
-- {{domxref("MouseEvent.pageX")}} {{ReadOnlyInline}}
-  - : The X coordinate of the mouse pointer relative to the whole document.
-- {{domxref("MouseEvent.pageY")}} {{ReadOnlyInline}}
-  - : The Y coordinate of the mouse pointer relative to the whole document.
-- {{domxref("MouseEvent.relatedTarget")}} {{ReadOnlyInline}}
-  - : The secondary target for the event, if there is one.
-- {{domxref("MouseEvent.screenX")}} {{ReadOnlyInline}}
-  - : The X coordinate of the mouse pointer in global (screen) coordinates.
-- {{domxref("MouseEvent.screenY")}} {{ReadOnlyInline}}
-  - : The Y coordinate of the mouse pointer in global (screen) coordinates.
-- {{domxref("MouseEvent.shiftKey")}} {{ReadOnlyInline}}
-  - : Returns `true` if the <kbd>shift</kbd> key was down when the mouse event was fired.
-- {{domxref("MouseEvent.mozInputSource")}} {{non-standard_inline()}} {{ReadOnlyInline}}
-  - : The type of device that generated the event (one of the `MOZ_SOURCE_*` constants).
-    This lets you, for example, determine whether a mouse event was generated by an actual mouse or by a touch event (which might affect the degree of accuracy with which you interpret the coordinates associated with the event).
-- {{domxref("MouseEvent.webkitForce")}} {{non-standard_inline()}} {{ReadOnlyInline}}
-  - : The amount of pressure applied when clicking.
-- {{domxref("MouseEvent.x")}} {{ReadOnlyInline}}
-  - : Alias for {{domxref("MouseEvent.clientX")}}.
-- {{domxref("MouseEvent.y")}} {{ReadOnlyInline}}
-  - : Alias for {{domxref("MouseEvent.clientY")}}.
-- {{ domxref('PointerEvent.pointerId')}} {{ReadOnlyInline}}
+- {{domxref('PointerEvent.altitudeAngle')}} {{ReadOnlyInline}} {{experimental_inline}}
+  - : Represents the angle between a transducer (a pointer or stylus) axis and the X-Y plane of a device screen.
+- {{domxref('PointerEvent.azimuthAngle')}} {{ReadOnlyInline}} {{experimental_inline}}
+  - : Represents the angle between the Y-Z plane and the plane containing both the transducer (a pointer or stylus) axis and the Y axis.
+- {{domxref('PointerEvent.pointerId')}} {{ReadOnlyInline}}
   - : A unique identifier for the pointer causing the event.
-- {{ domxref('PointerEvent.width')}} {{ReadOnlyInline}}
+- {{domxref('PointerEvent.width')}} {{ReadOnlyInline}}
   - : The width (magnitude on the X axis), in CSS pixels, of the contact geometry of the pointer.
-- {{ domxref('PointerEvent.height')}} {{ReadOnlyInline}}
+- {{domxref('PointerEvent.height')}} {{ReadOnlyInline}}
   - : The height (magnitude on the Y axis), in CSS pixels, of the contact geometry of the pointer.
-- {{ domxref('PointerEvent.pressure')}} {{ReadOnlyInline}}
+- {{domxref('PointerEvent.pressure')}} {{ReadOnlyInline}}
   - : The normalized pressure of the pointer input in the range `0` to `1`, where `0` and `1` represent the minimum and maximum pressure the hardware is capable of detecting, respectively.
-- {{ domxref('PointerEvent.tangentialPressure')}} {{ReadOnlyInline}}
+- {{domxref('PointerEvent.tangentialPressure')}} {{ReadOnlyInline}}
   - : The normalized tangential pressure of the pointer input (also known as barrel pressure or [cylinder stress](https://en.wikipedia.org/wiki/Cylinder_stress)) in the range `-1` to `1`, where `0` is the neutral position of the control.
-- {{ domxref('PointerEvent.tiltX')}} {{ReadOnlyInline}}
-  - : The plane angle (in degrees, in the range of `-90` to `90`) between the Y–Z plane and the plane containing both the pointer (e.g. pen stylus) axis and the Y axis.
-- {{ domxref('PointerEvent.tiltY')}} {{ReadOnlyInline}}
-  - : The plane angle (in degrees, in the range of `-90` to `90`) between the X–Z plane and the plane containing both the pointer (e.g. pen stylus) axis and the X axis.
-- {{ domxref('PointerEvent.twist')}} {{ReadOnlyInline}}
-  - : The clockwise rotation of the pointer (e.g. pen stylus) around its major axis in degrees, with a value in the range `0` to `359`.
-- {{ domxref('PointerEvent.pointerType')}} {{ReadOnlyInline}}
+- {{domxref('PointerEvent.tiltX')}} {{ReadOnlyInline}}
+  - : The plane angle (in degrees, in the range of `-90` to `90`) between the Y–Z plane and the plane containing both the pointer (e.g., pen stylus) axis and the Y axis.
+- {{domxref('PointerEvent.tiltY')}} {{ReadOnlyInline}}
+  - : The plane angle (in degrees, in the range of `-90` to `90`) between the X–Z plane and the plane containing both the pointer (e.g., pen stylus) axis and the X axis.
+- {{domxref('PointerEvent.twist')}} {{ReadOnlyInline}}
+  - : The clockwise rotation of the pointer (e.g., pen stylus) around its major axis in degrees, with a value in the range `0` to `359`.
+- {{domxref('PointerEvent.pointerType')}} {{ReadOnlyInline}}
   - : Indicates the device type that caused the event (mouse, pen, touch, etc.).
-- {{ domxref('PointerEvent.isPrimary')}} {{ReadOnlyInline}}
+- {{domxref('PointerEvent.isPrimary')}} {{ReadOnlyInline}}
   - : Indicates if the pointer represents the primary pointer of this pointer type.
 
 ## Usage notes
@@ -144,7 +108,7 @@ Try making rapid, repeated clicks on the button to increase the click count. If 
 
 ## See also
 
-- [Introduction to events](/en-US/docs/Learn/JavaScript/Building_blocks/Events)
+- [Learn: Introduction to events](/en-US/docs/Learn_web_development/Core/Scripting/Events)
 - {{domxref("Element/auxclick_event", "auxclick")}}
 - {{domxref("Element/contextmenu_event", "contextmenu")}}
 - {{domxref("Element/dblclick_event", "dblclick")}}

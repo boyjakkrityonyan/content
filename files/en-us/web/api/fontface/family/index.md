@@ -6,7 +6,7 @@ page-type: web-api-instance-property
 browser-compat: api.FontFace.family
 ---
 
-{{APIRef("CSS Font Loading API")}}
+{{APIRef("CSS Font Loading API")}}{{AvailableInWorkers}}
 
 The **`FontFace.family`** property allows the author to get or set the font family of a {{domxref("FontFace")}} object.
 
@@ -24,7 +24,7 @@ A string.
 ```js
 let fontFace = new FontFace(
   "Roboto",
-  "url(https://fonts.example.com/roboto.woff2)",
+  'url("https://fonts.example.com/roboto.woff2")',
 );
 console.log(fontFace.family); // 'Roboto'
 

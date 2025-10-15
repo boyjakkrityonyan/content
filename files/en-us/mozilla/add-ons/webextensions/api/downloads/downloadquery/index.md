@@ -3,9 +3,8 @@ title: downloads.DownloadQuery
 slug: Mozilla/Add-ons/WebExtensions/API/downloads/DownloadQuery
 page-type: webextension-api-type
 browser-compat: webextensions.api.downloads.DownloadQuery
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 The `DownloadQuery` type of the {{WebExtAPIRef("downloads")}} API defines a set of parameters that can be used to search the downloads manager for a specific set of downloads.
 
@@ -16,7 +15,7 @@ This type is used for example in {{WebExtAPIRef("downloads.search()")}} and {{We
 Values of this type are objects. They contain the following properties:
 
 - `cookieStoreId` {{optional_inline}}
-  - : The cookie store ID of the [contextual identity](/en-US/docs/Mozilla/Add-ons/WebExtensions/Work_with_contextual_identities) in which the download took place.
+  - : The cookie store ID of the [contextual identity](/en-US/docs/Mozilla/Add-ons/WebExtensions/Work_with_contextual_identities) in which the download took place. See [Work with contextual identities](/en-US/docs/Mozilla/Add-ons/WebExtensions/Work_with_contextual_identities) for more information.
 - `query` {{optional_inline}}
   - : An `array` of `string`s. Include only {{WebExtAPIRef("downloads.DownloadItem", "DownloadItems")}} whose `filename` or `url` contains all of the given strings. You can also include terms beginning with a dash (-) — these terms **must not** be contained in the item's `filename` or `url` for it to be included.
 - `startedBefore` {{optional_inline}}
@@ -56,7 +55,7 @@ Values of this type are objects. They contain the following properties:
 - `state` {{optional_inline}}
   - : A `string` representing a download {{WebExtAPIRef('downloads.State')}} (`in_progress`, `interrupted`, or `complete`). Include only {{WebExtAPIRef("downloads.DownloadItem", "DownloadItems")}} with this `state` value.
 - `paused` {{optional_inline}}
-  - : A `boolean` that indicates whether a download is paused — i.e. has stopped reading data from the host, but kept the connection open (`true`), or not (`false`). Include only {{WebExtAPIRef("downloads.DownloadItem", "DownloadItems")}} with this `paused` value.
+  - : A `boolean` that indicates whether a download is paused — i.e., has stopped reading data from the host, but kept the connection open (`true`), or not (`false`). Include only {{WebExtAPIRef("downloads.DownloadItem", "DownloadItems")}} with this `paused` value.
 - `error` {{optional_inline}}
   - : A string representing an {{WebExtAPIRef('downloads.InterruptReason')}} — a reason why a download was interrupted. Include only {{WebExtAPIRef("downloads.DownloadItem", "DownloadItems")}} with this `error` value.
 - `bytesReceived` {{optional_inline}}
@@ -68,13 +67,14 @@ Values of this type are objects. They contain the following properties:
 - `exists` {{optional_inline}}
   - : A `boolean` indicating whether a downloaded file still exists (`true`) or not (`false`). Include only {{WebExtAPIRef("downloads.DownloadItem", "DownloadItems")}} with this `exists` value.
 
+{{WebExtExamples}}
+
 ## Browser compatibility
 
 {{Compat}}
 
-{{WebExtExamples}}
-
-> **Note:** This API is based on Chromium's [`chrome.downloads`](https://developer.chrome.com/docs/extensions/reference/downloads/#type-DownloadQuery) API.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.downloads`](https://developer.chrome.com/docs/extensions/reference/api/downloads#type-DownloadQuery) API.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

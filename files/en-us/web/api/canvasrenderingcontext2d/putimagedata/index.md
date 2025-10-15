@@ -6,14 +6,15 @@ page-type: web-api-instance-method
 browser-compat: api.CanvasRenderingContext2D.putImageData
 ---
 
-{{APIRef}}
+{{APIRef("Canvas API")}}
 
 The **`CanvasRenderingContext2D.putImageData()`**
 method of the Canvas 2D API paints data from the given {{domxref("ImageData")}} object
 onto the canvas. If a dirty rectangle is provided, only the pixels from that rectangle
 are painted. This method is not affected by the canvas transformation matrix.
 
-> **Note:** Image data can be retrieved from a canvas using the
+> [!NOTE]
+> Image data can be retrieved from a canvas using the
 > {{domxref("CanvasRenderingContext2D.getImageData()", "getImageData()")}} method.
 
 You can find more information about `putImageData()` and general
@@ -82,26 +83,21 @@ function putImageData(
   imageData,
   dx,
   dy,
-  dirtyX,
-  dirtyY,
-  dirtyWidth,
-  dirtyHeight,
+  dirtyX = 0,
+  dirtyY = 0,
+  dirtyWidth = imageData.width,
+  dirtyHeight = imageData.height,
 ) {
   const data = imageData.data;
   const height = imageData.height;
   const width = imageData.width;
-  dirtyX = dirtyX || 0;
-  dirtyY = dirtyY || 0;
-  dirtyWidth = dirtyWidth !== undefined ? dirtyWidth : width;
-  dirtyHeight = dirtyHeight !== undefined ? dirtyHeight : height;
   const limitBottom = dirtyY + dirtyHeight;
   const limitRight = dirtyX + dirtyWidth;
   for (let y = dirtyY; y < limitBottom; y++) {
     for (let x = dirtyX; x < limitRight; x++) {
       const pos = y * width + x;
-      ctx.fillStyle = `rgba(${data[pos * 4 + 0]}, ${data[pos * 4 + 1]}, ${
-        data[pos * 4 + 2]
-      }, ${data[pos * 4 + 3] / 255})`;
+      ctx.fillStyle = `rgb(${data[pos * 4 + 0]} ${data[pos * 4 + 1]}
+      ${data[pos * 4 + 2]} / ${data[pos * 4 + 3] / 255})`;
       ctx.fillRect(x + dx, y + dy, 1, 1);
     }
   }
@@ -121,7 +117,8 @@ putImageData(ctx, imagedata, 150, 0, 50, 50, 25, 25);
 
 ### Data loss due to browser optimization
 
-> **Warning:** Due to the lossy nature of converting to and from premultiplied alpha color values,
+> [!WARNING]
+> Due to the lossy nature of converting to and from premultiplied alpha color values,
 > pixels that have just been set using `putImageData()` might be returned to
 > an equivalent `getImageData()` as different values.
 

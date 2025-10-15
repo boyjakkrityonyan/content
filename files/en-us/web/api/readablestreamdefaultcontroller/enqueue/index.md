@@ -6,11 +6,10 @@ page-type: web-api-instance-method
 browser-compat: api.ReadableStreamDefaultController.enqueue
 ---
 
-{{APIRef("Streams")}}
+{{APIRef("Streams")}}{{AvailableInWorkers}}
 
 The **`enqueue()`** method of the
-{{domxref("ReadableStreamDefaultController")}} interface enqueues a given chunk in the
-associated stream.
+{{domxref("ReadableStreamDefaultController")}} interface enqueues a given [chunk](/en-US/docs/Web/API/Streams_API/Concepts#chunks) in the associated stream.
 
 ## Syntax
 
@@ -30,7 +29,7 @@ None ({{jsxref("undefined")}}).
 ### Exceptions
 
 - {{jsxref("TypeError")}}
-  - : Thrown if the source object is not a `ReadableStreamDefaultController`.
+  - : Thrown if `enqueue()` is called when the stream is not readable — because it is already closed, cancelled, or errored — or because it has been requested to close by the underlying source but it has not yet done so because there are still enqueued chunks to read.
 
 ## Examples
 

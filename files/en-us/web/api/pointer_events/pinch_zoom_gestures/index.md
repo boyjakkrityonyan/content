@@ -8,29 +8,27 @@ page-type: guide
 
 Adding _gestures_ to an application can significantly improve the user experience. There are many types of gestures, from the simple single-touch _swipe_ gesture to the more complex multi-touch _twist_ gesture, where the touch points (aka _pointers_) move in different directions.
 
-This example shows how to detect the _pinch/zoom_ gesture, which uses {{domxref("Pointer_events","pointer events")}} to detect whether the user moves two pointers closer or farther apart from each other.
+This example shows how to detect the _pinch/zoom_ gesture, which uses [pointer events](/en-US/docs/Web/API/Pointer_events) to detect whether the user moves two pointers closer or farther apart from each other.
 
 A _live_ version of this application is available on [GitHub](https://mdn.github.io/dom-examples/pointerevents/Pinch_zoom_gestures.html). The [source code is available on GitHub](https://github.com/mdn/dom-examples/blob/main/pointerevents/Pinch_zoom_gestures.html); pull requests and [bug reports](https://github.com/mdn/dom-examples/issues) are welcome.
 
 ## Example
 
-In this example, you use the {{domxref("Pointer_events","pointer events")}} to simultaneously detect two pointing devices of any type, including fingers, mice, and pens. The pinch in (zoom out) gesture, which moves the two pointers toward each other, changes the target element's background color to `lightblue`. The pinch out (zoom in) gesture, which moves the two pointers away from each other, changes the target element's background color to `pink`.
+In this example, you use the [pointer events](/en-US/docs/Web/API/Pointer_events) to simultaneously detect two pointing devices of any type, including fingers, mice, and pens. The pinch in (zoom out) gesture, which moves the two pointers toward each other, changes the target element's background color to `lightblue`. The pinch out (zoom in) gesture, which moves the two pointers away from each other, changes the target element's background color to `pink`.
 
 ### Define touch target
 
 The application uses {{HTMLElement("div")}} to define the pointers' target areas.
 
-```html
-<style>
-  div {
-    margin: 0em;
-    padding: 2em;
-  }
-  #target {
-    background: white;
-    border: 1px solid black;
-  }
-</style>
+```css
+div {
+  margin: 0em;
+  padding: 2em;
+}
+#target {
+  background: white;
+  border: 1px solid black;
+}
 ```
 
 ### Global state
@@ -48,19 +46,17 @@ let prevDiff = -1;
 Event handlers are registered for the following pointer events: {{domxref("Element/pointerdown_event", "pointerdown")}}, {{domxref("Element/pointermove_event", "pointermove")}} and {{domxref("Element/pointerup_event", "pointerup")}}. The handler for {{domxref("Element/pointerup_event", "pointerup")}} is used for the {{domxref("Element/pointercancel_event", "pointercancel")}}, {{domxref("Element/pointerout_event", "pointerout")}} and {{domxref("Element/pointerleave_event", "pointerleave")}} events since these four events have the same semantics in this application.
 
 ```js
-function init() {
-  // Install event handlers for the pointer target
-  const el = document.getElementById("target");
-  el.onpointerdown = pointerdownHandler;
-  el.onpointermove = pointermoveHandler;
+// Install event handlers for the pointer target
+const el = document.getElementById("target");
+el.onpointerdown = pointerdownHandler;
+el.onpointermove = pointermoveHandler;
 
-  // Use same handler for pointer{up,cancel,out,leave} events since
-  // the semantics for these events - in this app - are the same.
-  el.onpointerup = pointerupHandler;
-  el.onpointercancel = pointerupHandler;
-  el.onpointerout = pointerupHandler;
-  el.onpointerleave = pointerupHandler;
-}
+// Use same handler for pointer{up,cancel,out,leave} events since
+// the semantics for these events - in this app - are the same.
+el.onpointerup = pointerupHandler;
+el.onpointercancel = pointerupHandler;
+el.onpointerout = pointerupHandler;
+el.onpointerleave = pointerupHandler;
 ```
 
 ### Pointer down
@@ -154,18 +150,22 @@ The application uses a {{HTMLElement("div")}} element for the touch area and pro
 To prevent the browser's default touch behavior from overriding this application's pointer handling, the {{cssxref("touch-action")}} property is applied to the {{HTMLElement("body")}} element.
 
 ```html
-<body onload="init();" style="touch-action:none">
-  <div id="target">
-    Touch and Hold with 2 pointers, then pinch in or out.<br />
-    The background color will change to pink if the pinch is opening (Zoom In)
-    or changes to lightblue if the pinch is closing (Zoom out).
-  </div>
-  <!-- UI for logging/debugging -->
-  <button id="log" onclick="enableLog(event);">Start/Stop event logging</button>
-  <button id="clearlog" onclick="clearLog(event);">Clear the log</button>
-  <p></p>
-  <output></output>
-</body>
+<div id="target">
+  Touch and Hold with 2 pointers, then pinch in or out.<br />
+  The background color will change to pink if the pinch is opening (Zoom In) or
+  changes to lightblue if the pinch is closing (Zoom out).
+</div>
+<!-- UI for logging/debugging -->
+<button id="log">Start/Stop event logging</button>
+<button id="clear-log">Clear the log</button>
+<p></p>
+<output></output>
+```
+
+```css
+body {
+  touch-action: none; /* Prevent default touch behavior */
+}
 ```
 
 ### Miscellaneous functions
@@ -194,6 +194,9 @@ These functions are used to send event activity to the application's window (to 
 // Log events flag
 let logEvents = false;
 
+document.getElementById("log").addEventListener("click", enableLog);
+document.getElementById("clear-log").addEventListener("click", clearLog);
+
 // Logging/debugging functions
 function enableLog(ev) {
   logEvents = !logEvents;
@@ -202,17 +205,16 @@ function enableLog(ev) {
 function log(prefix, ev) {
   if (!logEvents) return;
   const o = document.getElementsByTagName("output")[0];
-  const s =
-    `${prefix}:<br>` +
-    `  pointerID   = ${ev.pointerId}<br>` +
-    `  pointerType = ${ev.pointerType}<br>` +
-    `  isPrimary   = ${ev.isPrimary}`;
-  o.innerHTML += `${s}<br>`;
+  o.innerText += `${prefix}:
+  pointerID   = ${ev.pointerId}
+  pointerType = ${ev.pointerType}
+  isPrimary   = ${ev.isPrimary}
+`;
 }
 
 function clearLog(event) {
   const o = document.getElementsByTagName("output")[0];
-  o.innerHTML = "";
+  o.textContent = "";
 }
 ```
 
@@ -220,4 +222,4 @@ function clearLog(event) {
 
 - [Pointer Events now in Firefox Nightly](https://hacks.mozilla.org/2015/08/pointer-events-now-in-firefox-nightly/); Mozilla Hacks; by Matt Brubeck and Jason Weathersby; 2015-Aug-04
 - [jQuery Pointer Events Polyfill](https://github.com/jquery-archive/PEP)
-- [Gestures](https://material.io/design/interaction/gestures.html); Material Design
+- [Gestures](https://m2.material.io/design/interaction/gestures.html); Material Design

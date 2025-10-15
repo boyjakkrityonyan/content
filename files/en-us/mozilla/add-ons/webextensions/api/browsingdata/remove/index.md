@@ -3,9 +3,8 @@ title: browsingData.remove()
 slug: Mozilla/Add-ons/WebExtensions/API/browsingData/remove
 page-type: webextension-api-function
 browser-compat: webextensions.api.browsingData.remove
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Removes the specified browsing data.
 
@@ -29,7 +28,7 @@ let removing = browser.browsingData.remove(
 - `removalOptions`
   - : `object`. A {{WebExtAPIRef("browsingData.RemovalOptions")}} object, which may be used to control how far back in time to remove data, and whether to remove data from hosted web apps and extensions, or just normal web pages.
 - `dataTypes`
-  - : `object`. A {{WebExtAPIRef("browsingData.DataTypeSet")}} object, describing the types of data to remove (e.g. history, downloads, …).
+  - : `object`. A {{WebExtAPIRef("browsingData.DataTypeSet")}} object, describing the types of data to remove (e.g., history, downloads, …).
 
 ### Return value
 
@@ -81,7 +80,8 @@ browser.browsingData
 
 {{Compat}}
 
-> **Note:** This API is based on Chromium's [`chrome.browsingData`](https://developer.chrome.com/docs/extensions/reference/browsingData/) API.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.browsingData`](https://developer.chrome.com/docs/extensions/reference/api/browsingData) API.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

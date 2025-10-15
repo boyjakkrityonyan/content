@@ -2,13 +2,12 @@
 title: Content Security Policy
 slug: Mozilla/Add-ons/WebExtensions/Content_Security_Policy
 page-type: guide
+sidebar: addonsidebar
 ---
 
-{{AddonSidebar}}
+Extensions developed with WebExtension APIs have a Content Security Policy (CSP) applied to them by default. This restricts the sources from which they can load code such as [\<script>](/en-US/docs/Web/HTML/Reference/Elements/script) and disallows potentially unsafe practices such as using [`eval()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval). This article briefly explains what a CSP is, what the default policy is and what it means for an extension, and how an extension can change the default CSP.
 
-Extensions developed with WebExtension APIs have a Content Security Policy (CSP) applied to them by default. This restricts the sources from which they can load code such as [\<script>](/en-US/docs/Web/HTML/Element/script) and disallows potentially unsafe practices such as using [`eval()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval). This article briefly explains what a CSP is, what the default policy is and what it means for an extension, and how an extension can change the default CSP.
-
-[Content Security Policy](/en-US/docs/Web/HTTP/CSP) (CSP) is a mechanism to help prevent websites from inadvertently executing malicious content. A website specifies a CSP using an HTTP header sent from the server. The CSP is mostly concerned with specifying legitimate sources of various types of content, such as scripts or embedded plugins. For example, a website can use it to specify that the browser should only execute JavaScript served from the website itself, and not from any other sources. A CSP can also instruct the browser to disallow potentially unsafe practices, such as the use of [`eval()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval).
+[Content Security Policy](/en-US/docs/Web/HTTP/Guides/CSP) (CSP) is a mechanism to help prevent websites from inadvertently executing malicious content. A website specifies a CSP using an HTTP header sent from the server. The CSP is mostly concerned with specifying legitimate sources of various types of content, such as scripts or embedded plugins. For example, a website can use it to specify that the browser should only execute JavaScript served from the website itself, and not from any other sources. A CSP can also instruct the browser to disallow potentially unsafe practices, such as the use of [`eval()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval).
 
 Like websites, extensions can load content from different sources. For example, a browser action's popup is specified as an HTML document, and it can include JavaScript and CSS from different sources, just like a normal web page:
 
@@ -64,7 +63,7 @@ These policies are applied to any extension that has not explicitly set its own 
 
 ### Location of script and object resources
 
-Under the default CSP, you can only load code that is local to the extension. The CSP limits {{CSP("script-src")}} to secure sources only, which covers [\<script>](/en-US/docs/Web/HTML/Element/script) resources, [ES6 modules](/en-US/docs/Web/JavaScript/Guide/Modules) and [web workers](/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). In browsers that support obsolete [plugins](/en-US/docs/Glossary/Plugin), the {{CSP("object-src")}} directive is also restricted. For more information on object-src in extensions, see the WECG issue [Remove object-src from the CSP (at least in MV3)](https://github.com/w3c/webextensions/issues/204)).
+Under the default CSP, you can only load code that is local to the extension. The CSP limits {{CSP("script-src")}} to secure sources only, which covers [\<script>](/en-US/docs/Web/HTML/Reference/Elements/script) resources, [ES6 modules](/en-US/docs/Web/JavaScript/Guide/Modules) and [web workers](/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). In browsers that support obsolete [plugins](/en-US/docs/Glossary/Plugin), the {{CSP("object-src")}} directive is also restricted. For more information on object-src in extensions, see the WECG issue [Remove object-src from the CSP (at least in MV3)](https://github.com/w3c/webextensions/issues/204)).
 
 For example, consider a line like this in an extension's document:
 
@@ -77,7 +76,8 @@ This doesn't load the requested resource: it fails silently, and any object that
 - download the resource, package it in your extension, and refer to this version of the resource.
 - allow the remote origin you need using the [`content_security_policy`](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/content_security_policy) key or, in Manifest V3, the `content_scripts` property.
 
-> **Note:** If your modified CSP allows remote script injection, your extension will get rejected from addons.mozilla.org (AMO) during the review. For more information, see details about [security best practices](https://extensionworkshop.com/documentation/develop/build-a-secure-extension/).
+> [!NOTE]
+> If your modified CSP allows remote script injection, your extension will get rejected from addons.mozilla.org (AMO) during the review. For more information, see details about [security best practices](https://extensionworkshop.com/documentation/develop/build-a-secure-extension/).
 
 ### eval() and friends
 
@@ -125,7 +125,7 @@ For Chrome, extensions cannot use WebAssembly in version 101 or earlier. In 102,
 
 Extensions should use `https:` and `wss:` when communicating with external servers. To encourage this as the standard behavior, the default Manifest V3 CSP includes the {{CSP("upgrade-insecure-requests")}} directive. This directive automatically upgrades network requests to `http:` to use `https:`.
 
-While requests are automatically updated, it is still recommended to use `https:`-URLs in the extension's source code where possible. In particular, entries in the [`host_permissions` section of manifest.json](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/host_permissions) should start with `https://` or `*://` instead of only `http://`.
+While requests are automatically upgraded, it is still recommended to use `https:`-URLs in the extension's source code where possible. In particular, entries in the [`host_permissions` section of manifest.json](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/host_permissions) should start with `https://` or `*://` instead of only `http://`.
 
 Manifest V3 Extensions that need to make `http:` or `ws:` requests can opt out of this behavior by overriding the default CSP using the [`content_security_policy`](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/content_security_policy) manifest.json key with a policy that excludes the `upgrade-insecure-requests` directive. However, to comply with the [security requirements](https://extensionworkshop.com/documentation/publish/add-on-policies/#security-compliance-and-blocking) of the Add-on Policies, all user data must be transmitted securely.
 

@@ -1,17 +1,20 @@
 ---
 title: String.prototype.small()
+short-title: small()
 slug: Web/JavaScript/Reference/Global_Objects/String/small
 page-type: javascript-instance-method
 status:
   - deprecated
 browser-compat: javascript.builtins.String.small
+sidebar: jsref
 ---
 
-{{JSRef}} {{Deprecated_Header}}
+{{Deprecated_Header}}
 
 The **`small()`** method of {{jsxref("String")}} values creates a string that embeds this string in a {{HTMLElement("small")}} element (`<small>str</small>`), which causes this string to be displayed in a small font.
 
-> **Note:** All [HTML wrapper methods](/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#html_wrapper_methods) are deprecated and only standardized for compatibility purposes. Use [DOM APIs](/en-US/docs/Web/API/Document_Object_Model) such as [`document.createElement()`](/en-US/docs/Web/API/Document/createElement) instead.
+> [!NOTE]
+> All [HTML wrapper methods](/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#html_wrapper_methods) are deprecated and only standardized for compatibility purposes. Use [DOM APIs](/en-US/docs/Web/API/Document_Object_Model) such as [`document.createElement()`](/en-US/docs/Web/API/Document/createElement) instead.
 
 ## Syntax
 
@@ -65,5 +68,6 @@ document.body.appendChild(elem);
 ## See also
 
 - [Polyfill of `String.prototype.small` in `core-js`](https://github.com/zloirock/core-js#ecmascript-string-and-regexp)
+- [es-shims polyfill of `String.prototype.small`](https://www.npmjs.com/package/es-string-html-methods)
 - [HTML wrapper methods](/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#html_wrapper_methods)
 - {{HTMLElement("small")}}

@@ -3,9 +3,8 @@ title: tabs.reload()
 slug: Mozilla/Add-ons/WebExtensions/API/tabs/reload
 page-type: webextension-api-function
 browser-compat: webextensions.api.tabs.reload
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Reload a tab, optionally bypassing the local web cache.
 
@@ -25,9 +24,7 @@ let reloading = browser.tabs.reload(
 - `tabId` {{optional_inline}}
   - : `integer`. The ID of the tab to reload. Defaults to the selected tab of the current window.
 - `reloadProperties` {{optional_inline}}
-
   - : An object with the following properties:
-
     - `bypassCache` {{optional_inline}}
       - : `boolean`. Bypass the local web cache. Default is `false`.
 
@@ -70,7 +67,8 @@ reloading.then(onReloaded, onError);
 
 {{Compat}}
 
-> **Note:** This API is based on Chromium's [`chrome.tabs`](https://developer.chrome.com/docs/extensions/reference/tabs/#method-reload) API. This documentation is derived from [`tabs.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/tabs.json) in the Chromium code.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.tabs`](https://developer.chrome.com/docs/extensions/reference/api/tabs#method-reload) API. This documentation is derived from [`tabs.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/tabs.json) in the Chromium code.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

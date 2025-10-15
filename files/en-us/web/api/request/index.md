@@ -5,7 +5,7 @@ page-type: web-api-interface
 browser-compat: api.Request
 ---
 
-{{APIRef("Fetch API")}}
+{{APIRef("Fetch API")}}{{AvailableInWorkers}}
 
 The **`Request`** interface of the [Fetch API](/en-US/docs/Web/API/Fetch_API) represents a resource request.
 
@@ -25,13 +25,19 @@ You can create a new `Request` object using the {{domxref("Request.Request","Req
 - {{domxref("Request.cache")}} {{ReadOnlyInline}}
   - : Contains the cache mode of the request (e.g., `default`, `reload`, `no-cache`).
 - {{domxref("Request.credentials")}} {{ReadOnlyInline}}
-  - : Contains the credentials of the request (e.g., `omit`, `same-origin`, `include`). The default is `same-origin`.
+  - : Contains a value controlling whether credentials should be included with the request (e.g., `omit`, `same-origin`, `include`). The default is `same-origin`.
 - {{domxref("Request.destination")}} {{ReadOnlyInline}}
   - : A string describing the type of content being requested.
+- {{domxref("Request.duplex")}} {{ReadOnlyInline}} {{experimental_inline}}
+  - : The duplex mode of the request, which determines whether the browser must send the entire request before processing the response.
 - {{domxref("Request.headers")}} {{ReadOnlyInline}}
   - : Contains the associated {{domxref("Headers")}} object of the request.
 - {{domxref("Request.integrity")}} {{ReadOnlyInline}}
   - : Contains the [subresource integrity](/en-US/docs/Web/Security/Subresource_Integrity) value of the request (e.g., `sha256-BpfBw7ivV8q2jLiT13fxDYAe2tJllusRSZ273h2nFSE=`).
+- {{domxref("Request.isHistoryNavigation")}} {{ReadOnlyInline}}
+  - : A boolean indicating whether the request is a history navigation.
+- {{domxref("Request.keepalive")}} {{ReadOnlyInline}}
+  - : Contains the request's `keepalive` setting (`true` or `false`), which indicates whether the browser will keep the associated request alive if the page that initiated it is unloaded before the request is complete.
 - {{domxref("Request.method")}} {{ReadOnlyInline}}
   - : Contains the request's method (`GET`, `POST`, etc.)
 - {{domxref("Request.mode")}} {{ReadOnlyInline}}
@@ -53,6 +59,8 @@ You can create a new `Request` object using the {{domxref("Request.Request","Req
   - : Returns a promise that resolves with an {{jsxref("ArrayBuffer")}} representation of the request body.
 - {{domxref("Request.blob()")}}
   - : Returns a promise that resolves with a {{domxref("Blob")}} representation of the request body.
+- {{domxref("Request.bytes()")}}
+  - : Returns a promise that resolves with a {{jsxref("Uint8Array")}} representation of the request body.
 - {{domxref("Request.clone()")}}
   - : Creates a copy of the current `Request` object.
 - {{domxref("Request.formData()")}}
@@ -62,7 +70,8 @@ You can create a new `Request` object using the {{domxref("Request.Request","Req
 - {{domxref("Request.text()")}}
   - : Returns a promise that resolves with a text representation of the request body.
 
-> **Note:** The request body functions can be run only once; subsequent calls will reject with TypeError showing that the body stream has already used.
+> [!NOTE]
+> The request body functions can be run only once; subsequent calls will reject with TypeError showing that the body stream has already used.
 
 ## Examples
 
@@ -76,7 +85,7 @@ const method = request.method;
 const credentials = request.credentials;
 ```
 
-You could then fetch this request by passing the `Request` object in as a parameter to a {{domxref("fetch()")}} call, for example:
+You could then fetch this request by passing the `Request` object in as a parameter to a {{domxref("Window/fetch", "fetch()")}} call, for example:
 
 ```js
 fetch(request)
@@ -86,7 +95,7 @@ fetch(request)
   });
 ```
 
-In the following snippet, we create a new request using the `Request()` constructor with some initial data and body content for an API request which need a body payload:
+In the following snippet, we create a new request using the `Request()` constructor with some initial data and body content for an API request which needs a body payload:
 
 ```js
 const request = new Request("https://example.com", {
@@ -100,18 +109,18 @@ const credentials = request.credentials;
 const bodyUsed = request.bodyUsed;
 ```
 
-> **Note:** The body can only be a {{domxref("Blob")}}, an {{jsxref("ArrayBuffer")}}, a {{jsxref("TypedArray")}}, a {{jsxref("DataView")}}, a {{domxref("FormData")}}, a {{domxref("URLSearchParams")}}, a {{domxref("ReadableStream")}}, or a {{jsxref("String")}} object, as well as a string literal, so for adding a JSON object to the payload you need to stringify that object.
+> [!NOTE]
+> The body can only be a {{domxref("Blob")}}, an {{jsxref("ArrayBuffer")}}, a {{jsxref("TypedArray")}}, a {{jsxref("DataView")}}, a {{domxref("FormData")}}, a {{domxref("URLSearchParams")}}, a {{domxref("ReadableStream")}}, or a {{jsxref("String")}} object, as well as a string literal, so for adding a JSON object to the payload you need to stringify that object.
 
-You could then fetch this API request by passing the `Request` object in as a parameter to a {{domxref("fetch()")}} call, for example and get the response:
+You could then fetch this API request by passing the `Request` object in as a parameter to a {{domxref("Window/fetch", "fetch()")}} call, for example and get the response:
 
 ```js
 fetch(request)
   .then((response) => {
-    if (response.status === 200) {
-      return response.json();
-    } else {
+    if (response.status !== 200) {
       throw new Error("Something went wrong on API server!");
     }
+    return response.json();
   })
   .then((response) => {
     console.debug(response);
@@ -133,5 +142,5 @@ fetch(request)
 ## See also
 
 - [ServiceWorker API](/en-US/docs/Web/API/Service_Worker_API)
-- [HTTP access control (CORS)](/en-US/docs/Web/HTTP/CORS)
+- [HTTP access control (CORS)](/en-US/docs/Web/HTTP/Guides/CORS)
 - [HTTP](/en-US/docs/Web/HTTP)

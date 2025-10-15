@@ -3,9 +3,8 @@ title: webNavigation.onCommitted
 slug: Mozilla/Add-ons/WebExtensions/API/webNavigation/onCommitted
 page-type: webextension-api-event
 browser-compat: webextensions.api.webNavigation.onCommitted
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Fired when a navigation is committed. At least part of the new document has been received from the server and the browser has decided to switch to the new document.
 
@@ -34,11 +33,9 @@ Events have three functions:
 ### Parameters
 
 - `listener`
-
   - : The function called when this event occurs. The function is passed this argument:
-
     - `details`
-      - : `object`. Details about the navigation event. See the [details](#details_2) section for more information.
+      - : `object`. Details about the navigation event. See the [details](#details) section for more information.
 
 - `filter` {{optional_inline}}
   - : `object`. An object containing a single property `url`, which is an `Array` of {{WebExtAPIRef("events.UrlFilter")}} objects. If you include this parameter, then the event fires only for transitions to URLs which match at least one `UrlFilter` in the array. If you omit this parameter, the event fires for all transitions.
@@ -47,6 +44,12 @@ Events have three functions:
 
 ### details
 
+- `documentId`
+  - : `string`. A UUID of the document loaded.
+- `parentDocumentId`
+  - : `string`. A UUID of the parent document owning the frame. Not set if there is no parent.
+- `documentLifecycle`
+  - : `string`. The lifecycle the document is in. Returns the values `"prerender"`, `"active"`, `"cached"`, and `"pending_deletion"`.
 - `tabId`
   - : `integer`. The ID of the tab in which the navigation is about to occur.
 - `url`
@@ -57,16 +60,14 @@ Events have three functions:
   - : `integer`. Frame in which the navigation will occur. `0` indicates that navigation happens in the tab's top-level browsing context, not in a nested {{HTMLElement("iframe")}}. A positive value indicates that navigation happens in a nested iframe. Frame IDs are unique for a given tab and process.
 - `parentFrameId`
   - : `integer`. ID of this frame's parent. Set to `-1` if this is a top-level frame.
+- `frameType`
+  - : `string`. The type of frame the navigation occurred in. Returns the values `"outermost_frame"`, `"fenced_frame"`, and `"sub_frame"`.
 - `timeStamp`
   - : `number`. The time that the navigation was committed, in [milliseconds since the epoch](https://en.wikipedia.org/wiki/Unix_time).
 - `transitionType`
   - : {{WebExtAPIRef("webNavigation.transitionType", "transitionType")}}. The reason for the navigation. (For example, `"link"` if the user clicked a link, or `"reload"` if the user reloaded the page.)
 - `transitionQualifiers`
   - : `Array` of {{WebExtAPIRef("webNavigation.transitionQualifier", "transitionQualifier")}}. Extra information about the navigation: for example, whether there was a server or client redirect.
-
-## Browser compatibility
-
-{{Compat}}
 
 ## Examples
 
@@ -88,7 +89,12 @@ browser.webNavigation.onCommitted.addListener(logOnCommitted, filter);
 
 {{WebExtExamples}}
 
-> **Note:** This API is based on Chromium's [`chrome.webNavigation`](https://developer.chrome.com/docs/extensions/reference/webNavigation/#event-onBeforeNavigate) API. This documentation is derived from [`web_navigation.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/web_navigation.json) in the Chromium code.
+## Browser compatibility
+
+{{Compat}}
+
+> [!NOTE]
+> This API is based on Chromium's [`chrome.webNavigation`](https://developer.chrome.com/docs/extensions/reference/api/webNavigation#event-onBeforeNavigate) API. This documentation is derived from [`web_navigation.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/web_navigation.json) in the Chromium code.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

@@ -6,7 +6,7 @@ page-type: web-api-instance-property
 browser-compat: api.WritableStreamDefaultWriter.desiredSize
 ---
 
-{{APIRef("Streams")}}
+{{APIRef("Streams")}}{{AvailableInWorkers}}
 
 The **`desiredSize`** read-only property of the
 {{domxref("WritableStreamDefaultWriter")}} interface returns the desired size required
@@ -31,26 +31,26 @@ closed.
 const writableStream = new WritableStream(
   {
     write(chunk) {
-      // ...
+      // …
     },
     close() {
-      // ...
+      // …
     },
     abort(err) {
-      // ...
+      // …
     },
   },
   queuingStrategy,
 );
 
-// ...
+// …
 
 const writer = writableStream.getWriter();
 
-// ...
+// …
 
 // return stream's desired size
-let size = writer.desiredSize;
+const size = writer.desiredSize;
 ```
 
 ## Specifications

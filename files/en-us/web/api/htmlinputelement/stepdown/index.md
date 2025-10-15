@@ -9,23 +9,23 @@ browser-compat: api.HTMLInputElement.stepDown
 {{APIRef("HTML DOM")}}
 
 The
-**`HTMLInputElement.stepDown([n])`** method decrements the
+**`HTMLInputElement.stepDown()`** method decrements the
 value of a numeric type of {{HTMLElement("input")}} element by the value of the
-[`step`](/en-US/docs/Web/HTML/Attributes/step) attribute or up
+[`step`](/en-US/docs/Web/HTML/Reference/Attributes/step) attribute or up
 to `n` multiples of the step attribute if a number is passed as the
 parameter.
 
 The method, when invoked, decrements the
-[`value`](/en-US/docs/Web/HTML/Element/input#value) by ([`step`](/en-US/docs/Web/HTML/Element/input#step) \* n), where n
+[`value`](/en-US/docs/Web/HTML/Reference/Elements/input#value) by ([`step`](/en-US/docs/Web/HTML/Reference/Elements/input#step) \* n), where n
 defaults to 1 if not specified, and
-[`step`](/en-US/docs/Web/HTML/Attributes/step) defaults to the
+[`step`](/en-US/docs/Web/HTML/Reference/Attributes/step) defaults to the
 default value for `step` if not specified.
 
 Valid on all numeric, date, and time input types that support the step attribute,
 including {{HTMLElement("input/date", "date")}}, {{HTMLElement("input/month", "month")}},
 {{HTMLElement("input/week", "week")}}, {{HTMLElement("input/time", "time")}},
-{{HTMLElement("input/datetime-local", "datetime-local")}}, {{HTMLElement("input/number",
-  "number")}}, and {{HTMLElement("input/range", "range")}}.
+{{HTMLElement("input/datetime-local", "datetime-local")}},
+{{HTMLElement("input/number", "number")}}, and {{HTMLElement("input/range", "range")}}.
 
 Given `<input id="myTime" type="time" max="17:00" step="900" value="17:00">`,
 invoking `myTime.stepDown(3)` will change the value to 16:15, decrementing the
@@ -72,11 +72,11 @@ The method, when invoked, changes the form control's value by the value given in
 `step` attribute, multiplied by the parameter, within the constraints set
 within the form control. The default value for the parameter, if not is passed, is 1.
 The method will not cause the value to go below the
-[`min`](/en-US/docs/Web/HTML/Attributes/min) value set or defy the
+[`min`](/en-US/docs/Web/HTML/Reference/Attributes/min) value set or defy the
 constraints set by the
-[`step`](/en-US/docs/Web/HTML/Attributes/step) attribute. A
+[`step`](/en-US/docs/Web/HTML/Reference/Attributes/step) attribute. A
 negative value for `n` will increment the value, but will not increment
-beyond the [`max`](/en-US/docs/Web/HTML/Attributes/max) value.
+beyond the [`max`](/en-US/docs/Web/HTML/Reference/Attributes/max) value.
 
 If the value before invoking the `stepDown()` method is invalid, for
 example, if it doesn't match the constraints set by the `step` attribute,
@@ -86,19 +86,6 @@ controls constraints.
 If the form control is non time, date, or numeric in nature, and therefore does not
 support the `step` attribute (see the list of supported input types above), or if the `step` value is set to `any`, an
 `InvalidStateError` exception is thrown.
-
-- {{domxref("HTMLInputElement.stepDown()")}}
-
-  - : Decrements the [`value`](/en-US/docs/Web/HTML/Element/input#value) by
-    ([`step`](/en-US/docs/Web/HTML/Element/input#step) \* n), where n defaults to 1 if not specified. Throws
-    an `InvalidStateError` exception:
-
-    - if the method is not applicable to for the current
-      [`type`](/en-US/docs/Web/HTML/Element/input#type) value,
-    - if the element has no [`step`](/en-US/docs/Web/HTML/Element/input#step) value,
-    - if the [`value`](/en-US/docs/Web/HTML/Element/input#value) cannot be converted to a number,
-    - if the resulting value is above the [`max`](/en-US/docs/Web/HTML/Element/input#max) or below the
-      [`min`](/en-US/docs/Web/HTML/Element/input#min).
 
 ## Syntax
 
@@ -110,7 +97,6 @@ stepDown(stepDecrement)
 ### Parameters
 
 - `stepDecrement` {{optional_inline}}
-
   - : A numeric value. If no parameter is passed, _stepDecrement_ defaults to 1.
 
     If the value is a float, the value will decrement as if
@@ -122,10 +108,20 @@ stepDown(stepDecrement)
 
 None ({{jsxref("undefined")}}).
 
+## Exceptions
+
+- `InvalidStateError` {{domxref("DOMException")}}
+  - : Thrown in one of the following cases:
+    - if the method is not applicable to for the current
+      [`type`](/en-US/docs/Web/HTML/Reference/Elements/input#type) value,
+    - if the element has no [`step`](/en-US/docs/Web/HTML/Reference/Elements/input#step) value,
+    - if the [`value`](/en-US/docs/Web/HTML/Reference/Elements/input#value) cannot be converted to a number,
+    - if the resulting value is above the [`max`](/en-US/docs/Web/HTML/Reference/Elements/input#max) or below the
+      [`min`](/en-US/docs/Web/HTML/Reference/Elements/input#min).
+
 ## Examples
 
-Click the button in this example to decrement the {{HTMLElement("input/number",
-  "number")}} input type:
+Click the button in this example to decrement the {{HTMLElement("input/number", "number")}} input type:
 
 ### HTML
 
@@ -208,6 +204,6 @@ invoke the method?
 - {{HTMLElement("input")}}
 - {{domxref("HTMLInputElement")}}
 - {{domxref("HTMLInputElement.stepUp", "HTMLInputElement.stepUp()")}}
-- [`step`](/en-US/docs/Web/HTML/Attributes/step),
-  [`min`](/en-US/docs/Web/HTML/Attributes/min) and
-  [`max`](/en-US/docs/Web/HTML/Attributes/max) attributes
+- [`step`](/en-US/docs/Web/HTML/Reference/Attributes/step),
+  [`min`](/en-US/docs/Web/HTML/Reference/Attributes/min) and
+  [`max`](/en-US/docs/Web/HTML/Reference/Attributes/max) attributes

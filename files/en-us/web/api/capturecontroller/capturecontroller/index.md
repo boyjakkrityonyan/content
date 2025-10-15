@@ -5,10 +5,10 @@ slug: Web/API/CaptureController/CaptureController
 page-type: web-api-constructor
 status:
   - experimental
-browser-compat: api.CaptureController.setFocusBehavior
+browser-compat: api.CaptureController.CaptureController
 ---
 
-{{APIRef("Screen Capture API")}}{{SeeCompatTable}}
+{{APIRef("Screen Capture API")}}{{SeeCompatTable}}{{SecureContext_Header}}
 
 The {{domxref("CaptureController")}} constructor creates a new `CaptureController` object instance.
 
@@ -35,10 +35,10 @@ const stream = await navigator.mediaDevices.getDisplayMedia({ controller });
 const [track] = stream.getVideoTracks();
 const displaySurface = track.getSettings().displaySurface;
 
-if (displaySurface == "browser") {
+if (displaySurface === "browser") {
   // Focus the captured tab.
   controller.setFocusBehavior("focus-captured-surface");
-} else if (displaySurface == "window") {
+} else if (displaySurface === "window") {
   // Do not move focus to the captured window.
   // Keep the capturing page focused.
   controller.setFocusBehavior("no-focus-change");

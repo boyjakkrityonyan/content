@@ -13,12 +13,13 @@ returns the node immediately preceding the specified one in its parent's
 {{domxref("Node.childNodes", "childNodes")}} list,
 or `null` if the specified node is the first in that list.
 
-> **Note:** Browsers insert text nodes into a document to represent whitespace in the source markup.
+> [!NOTE]
+> Browsers insert text nodes into a document to represent whitespace in the source markup.
 > Therefore a node obtained, for example, using [`Node.firstChild`](/en-US/docs/Web/API/Node/firstChild)
 > or `Node.previousSibling`
 > may refer to a whitespace text node rather than the actual element the author intended to get.
 >
-> See [Whitespace in the DOM](/en-US/docs/Web/API/Document_Object_Model/Whitespace) for more information.
+> See [Working with whitespace in the DOM](/en-US/docs/Web/CSS/CSS_text/Whitespace#working_with_whitespace_in_the_dom) for more information.
 >
 > You can use [`previousElementSibling`](/en-US/docs/Web/API/Element/previousElementSibling)
 > to get the previous element node (skipping text nodes and any other non-element nodes).

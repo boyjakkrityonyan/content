@@ -2,39 +2,46 @@
 title: Baseline (compatibility)
 slug: Glossary/Baseline/Compatibility
 page-type: glossary-definition
+sidebar: glossarysidebar
 ---
 
-{{GlossarySidebar}}
+**Baseline** identifies the availability of web platform features across popular browsers, including APIs, CSS properties, and JavaScript syntax. Baseline describes web features as being either widely available or newly available. Features that do not meet the Baseline criteria are said to have limited availability.
 
-**Baseline** identifies widely-supported web platform features.
-Web developers can expect Baseline features to work in contemporary browsers.
+Baseline considers support in the following browsers:
 
-A Baseline feature - such as an API, a set of CSS properties, or a JavaScript syntax - is known to work consistently in at least one version before the current version of all of several well-known browsers (Chrome, Edge, Firefox, and Safari).
+- Apple Safari (iOS)
+- Apple Safari (macOS)
+- Google Chrome (Android)
+- Google Chrome (desktop)
+- Microsoft Edge (desktop)
+- Mozilla Firefox (Android)
+- Mozilla Firefox (desktop)
 
-## Badges
+Baseline is a summary of browser support. It is not a substitute for accessibility, usability, performance, security, or other testing. Baseline may not tell you if a feature works with:
 
-<!-- TODO: Show Baseline indicator itself, once it has been merged -->
+- Older devices and browser releases
+- Browsers not covered by the Baseline definition, such as operating system web views
+- Assistive technology, such as screen readers.
 
-🟢 If you see the green Baseline badge, then you can trust that the feature will work in the browsers' latest and previous major releases.
+## Baseline badges
 
-<!-- TODO: Show the non-Baseline indicator itself, once it has been merged -->
+![Green widget with the checkmark: Baseline, widely available. Four browsers logos, all with checkmarks.](high.png)
 
-🟡 If you see a yellow badge showing that a feature is not yet Baseline, then do more research and testing with your site's users before relying on that feature, or wait for it to become Baseline.
+Features listed as **widely available** have a consistent history of support in each of the Baseline browsers for at least 2.5 years.
 
-## Extra considerations
+![Blue widget with the checkmark: Baseline 2022, newly available. Four browsers' logos, all with checkmarks.](limited.png)
 
-Baseline is a summary guide to support and doesn't cover every situation.
-If your site needs to work with a browser's long-term support release, an older device or browser release, or a browser not covered by the Baseline report, then you may need to do your own research or testing.
-If Baseline doesn't cover your situation, then consider reading browser compatibility tables on MDN or visiting [caniuse.com](https://caniuse.com/) before committing to a feature.
+Features listed as **newly available** work in at least the latest stable version of each of the Baseline browsers, but may not work with older browsers and devices.
 
-## Contributing
+![Grey widget with the cross: limited availability. Four browsers' logos, two with checkmarks, two with crosses.](low.png)
 
-Baseline is a community effort of the W3C WebDX Community Group and relies on MDN's open source browser compatibility data.
-If you have questions, feedback, or want to help update and expand the features covered by Baseline status reports, then go to [web-platform-dx/web-features](https://github.com/web-platform-dx/web-features) to participate.
+Features listed with **limited availability** are _not_ yet available in all browsers.
 
 ## See also
 
-- [Cross browser testing](/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing)
+- [Testing](/en-US/docs/Learn_web_development/Extensions/Testing)
 - [web-platform-dx/web-features repository](https://github.com/web-platform-dx/web-features)
 - [W3C WebDX Community Group](https://www.w3.org/community/webdx/)
 - [mdn/browser-compat-data repository](https://github.com/mdn/browser-compat-data)
+- [caniuse.com](https://caniuse.com/)
+- [a11ysupport.io](https://a11ysupport.io/)

@@ -6,15 +6,15 @@ page-type: web-api-instance-property
 browser-compat: api.CanvasRenderingContext2D.fillStyle
 ---
 
-{{APIRef}}
+{{APIRef("Canvas API")}}
 
 The
 **`CanvasRenderingContext2D.fillStyle`**
 property of the [Canvas 2D API](/en-US/docs/Web/API/Canvas_API) specifies the
-color, gradient, or pattern to use inside shapes. The default style is `#000`
-(black).
+color, gradient, or pattern to use inside shapes. The default style is `black`.
 
-> **Note:** For more examples of fill and stroke styles, see [Applying styles and color](/en-US/docs/Web/API/Canvas_API/Tutorial/Applying_styles_and_colors) in the [Canvas tutorial](/en-US/docs/Web/API/Canvas_API/Tutorial).
+> [!NOTE]
+> For more examples of fill and stroke styles, see [Applying styles and color](/en-US/docs/Web/API/Canvas_API/Tutorial/Applying_styles_and_colors) in the [Canvas tutorial](/en-US/docs/Web/API/Canvas_API/Tutorial).
 
 ## Value
 
@@ -69,8 +69,8 @@ const ctx = canvas.getContext("2d");
 for (let i = 0; i < 6; i++) {
   for (let j = 0; j < 6; j++) {
     ctx.fillStyle = `rgb(
-        ${Math.floor(255 - 42.5 * i)},
-        ${Math.floor(255 - 42.5 * j)},
+        ${Math.floor(255 - 42.5 * i)}
+        ${Math.floor(255 - 42.5 * j)}
         0)`;
     ctx.fillRect(j * 25, i * 25, 25, 25);
   }
@@ -79,8 +79,7 @@ for (let i = 0; i < 6; i++) {
 
 The result looks like this:
 
-{{EmbedLiveSample("Creating_multiple_fill_colors_using_loops", 160, 160,
-  "canvas_fillstyle.png")}}
+{{EmbedLiveSample("Creating_multiple_fill_colors_using_loops", "", "160")}}
 
 ## Specifications
 
@@ -107,7 +106,6 @@ setFillColor(c, m, y, k, a);
 - [Canvas API](/en-US/docs/Web/API/Canvas_API)
 - The interface defining this property: {{domxref("CanvasRenderingContext2D")}}
 - Values used by this property:
-
   - {{cssxref("&lt;color&gt;")}} CSS data type
   - {{domxref("CanvasGradient")}} object
   - {{domxref("CanvasPattern")}} object

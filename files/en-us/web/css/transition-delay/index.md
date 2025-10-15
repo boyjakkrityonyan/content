@@ -3,13 +3,56 @@ title: transition-delay
 slug: Web/CSS/transition-delay
 page-type: css-property
 browser-compat: css.properties.transition-delay
+sidebar: cssref
 ---
 
-{{CSSRef}}
+The **`transition-delay`** [CSS](/en-US/docs/Web/CSS) property specifies the duration to wait before starting a property's [transition effect](/en-US/docs/Web/CSS/CSS_transitions/Using_CSS_transitions) when its value changes.
 
-The **`transition-delay`** CSS property specifies the duration to wait before starting a property's [transition effect](/en-US/docs/Web/CSS/CSS_transitions/Using_CSS_transitions) when its value changes.
+{{InteractiveExample("CSS Demo: transition-delay")}}
 
-{{EmbedInteractiveExample("pages/css/transition-delay.html")}}
+```css interactive-example-choice
+transition-delay: 250ms;
+transition-property: margin-right;
+```
+
+```css interactive-example-choice
+transition-delay: 1s;
+transition-property: background-color;
+```
+
+```css interactive-example-choice
+transition-delay: 1s;
+transition-property: margin-right, color;
+```
+
+```css interactive-example-choice
+transition-delay: 1s, 250ms;
+transition-property: margin-right, color;
+```
+
+```html interactive-example
+<section id="default-example">
+  <div id="example-element">Hover to see<br />the transition.</div>
+</section>
+```
+
+```css interactive-example
+#example-element {
+  background-color: #e4f0f5;
+  color: black;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font: 1em monospace;
+  width: 100%;
+  transition: margin-right 2s;
+}
+
+#default-example:hover > #example-element {
+  background-color: #990099;
+  color: white;
+  margin-right: 40%;
+}
+```
 
 The delay may be zero, positive, or negative:
 

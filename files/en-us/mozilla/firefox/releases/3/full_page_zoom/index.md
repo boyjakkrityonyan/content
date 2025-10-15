@@ -2,9 +2,8 @@
 title: Full page zoom
 slug: Mozilla/Firefox/Releases/3/Full_page_zoom
 page-type: guide
+sidebar: firefox
 ---
-
-{{FirefoxSidebar}}
 
 Full page zoom (or just fullZoom) is a new feature in [Firefox 3](/en-US/docs/Mozilla/Firefox/Releases/3).
 
@@ -22,7 +21,7 @@ ZoomManager.setZoomForBrowser(gBrowser.selectedBrowser, ZoomManager.MIN);
 
 Note: This is probably out of date.
 
-You may use the fullZoom feature for a [XUL:iframe](/en-US/docs/XUL/iframe) as well. However, because an iframe doesn't have a markupDocumentViewer property, we need to get that first:
+You may use the fullZoom feature for a `<XUL:iframe>` as well. However, because an iframe doesn't have a markupDocumentViewer property, we need to get that first:
 
 ```js
 var zoom = 1.5;

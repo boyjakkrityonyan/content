@@ -8,7 +8,7 @@ status:
 browser-compat: api.VirtualKeyboard.geometrychange_event
 ---
 
-{{APIRef("VirtualKeyboard API")}}{{SeeCompatTable}}
+{{APIRef("VirtualKeyboard API")}}{{SeeCompatTable}}{{securecontext_header}}
 
 The **`geometrychange`** event of the {{domxref("VirtualKeyboard")}}
 interface fires when the on-screen virtual keyboard is toggled between shown and hidden states.
@@ -19,10 +19,10 @@ The `geometrychange` event is useful to detect when the virtual keyboard appears
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-navigator.virtualKeyboard.addEventListener("geometrychange", (event) => {});
+```js-nolint
+addEventListener("geometrychange", (event) => { })
 
-navigator.virtualKeyboard.ongeometrychange = (event) => {};
+ongeometrychange = (event) => { }
 ```
 
 ## Event type

@@ -33,11 +33,9 @@ importNode(externalNode, deep)
   - : The external {{domxref("Node")}} or {{domxref("DocumentFragment")}} to import into
     the current document.
 - `deep` {{optional_inline}}
-
   - : A boolean flag, whose default value is `false`,
     which controls whether to include the entire DOM subtree
     of the `externalNode` in the import.
-
     - If `deep` is set to `true`, then
       `externalNode` and all of its descendants are copied.
     - If `deep` is set to `false`, then only
@@ -47,7 +45,8 @@ importNode(externalNode, deep)
 
 The copied `importedNode` in the scope of the importing document.
 
-> **Note:** `importedNode`'s {{domxref("Node.parentNode")}} is `null`, since it has not yet been inserted into the document tree!
+> [!NOTE]
+> `importedNode`'s {{domxref("Node.parentNode")}} is `null`, since it has not yet been inserted into the document tree!
 
 ## Examples
 
@@ -62,10 +61,11 @@ document.getElementById("container").appendChild(newNode);
 
 Before they can be inserted into the current document, nodes from external documents should either be:
 
-- cloned using {{domXref("document.importNode()")}}; or
+- cloned using `document.importNode()`; or
 - adopted using {{domXref("document.adoptNode()")}}.
 
-> **Note:** Although Firefox doesn't currently enforce this rule, we encourage you to follow this rule for improved future compatibility.
+> [!NOTE]
+> Although Firefox doesn't currently enforce this rule, we encourage you to follow this rule for improved future compatibility.
 
 For more on the {{domXref("Node.ownerDocument")}} issues, see the W3C DOM FAQ.
 

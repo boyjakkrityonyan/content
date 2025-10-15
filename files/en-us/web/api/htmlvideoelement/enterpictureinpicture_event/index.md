@@ -6,7 +6,7 @@ page-type: web-api-event
 browser-compat: api.HTMLVideoElement.enterpictureinpicture_event
 ---
 
-{{APIRef("HTMLVideoElement")}}
+{{APIRef("Picture-in-Picture API")}}
 
 The `enterpictureinpicture` event is fired when the {{DOMxRef("HTMLVideoElement")}} enters picture-in-picture mode successfully.
 
@@ -16,10 +16,10 @@ This event is not cancelable and does not bubble.
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("enterpictureinpicture", (event) => {});
+```js-nolint
+addEventListener("enterpictureinpicture", (event) => { })
 
-onenterpictureinpicture = (event) => {};
+onenterpictureinpicture = (event) => { }
 ```
 
 ## Event type
@@ -46,7 +46,7 @@ function onEnterPip() {
   console.log("Picture-in-Picture mode activated!");
 }
 
-video.addEventListener("enterpictureinpicture", onEnterPip, false);
+video.addEventListener("enterpictureinpicture", onEnterPip);
 
 button.onclick = () => {
   video.requestPictureInPicture();
@@ -81,4 +81,4 @@ button.onclick = () => {
 ## See also
 
 - {{domxref("HTMLVideoElement")}}
-- {{domxref("Picture-in-Picture_API", "Picture-in-Picture API")}}
+- [Picture-in-Picture API](/en-US/docs/Web/API/Picture-in-Picture_API)

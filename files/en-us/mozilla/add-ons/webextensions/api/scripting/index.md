@@ -3,16 +3,16 @@ title: scripting
 slug: Mozilla/Add-ons/WebExtensions/API/scripting
 page-type: webextension-api
 browser-compat: webextensions.api.scripting
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar}}
 
 Inserts JavaScript and CSS into websites. This API offers two approaches to inserting content:
 
 - {{WebExtAPIRef("scripting.executeScript()")}}, {{WebExtAPIRef("scripting.insertCSS()")}}, and {{WebExtAPIRef("scripting.removeCSS()")}} that provide for one-off injections.
 - {{WebExtAPIRef("scripting.registerContentScripts()")}} that registers content scripts dynamically, which can then be retrieved with {{WebExtAPIRef("scripting.getRegisteredContentScripts()")}} and unregistered with {{WebExtAPIRef("scripting.unregisterContentScripts()")}}).
 
-> **Note:** Chrome restricts this API to Manifest V3. Firefox and Safari support this API in Manifest V2 and V3.
+> [!NOTE]
+> Chrome restricts this API to Manifest V3. Firefox and Safari support this API in Manifest V2 and V3.
 
 This API requires the `"scripting"` [permission](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions) and [host permission](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions#host_permissions) for the target in the tab into which JavaScript or CSS is injected.
 
@@ -46,10 +46,11 @@ Alternatively, you can get permission temporarily in the active tab and only in 
 - {{WebExtAPIRef("scripting.unregisterContentScripts()")}}
   - : Unregisters one or more content scripts.
 
+{{WebExtExamples("h2")}}
+
 ## Browser compatibility
 
 {{Compat}}
 
-{{WebExtExamples("h2")}}
-
-> **Note:** This API is based on Chromium's [`chrome.scripting`](https://developer.chrome.com/docs/extensions/reference/scripting/) API.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.scripting`](https://developer.chrome.com/docs/extensions/reference/api/scripting) API.

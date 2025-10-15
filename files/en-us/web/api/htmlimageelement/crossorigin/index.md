@@ -22,9 +22,9 @@ without CORS (the fetch `no-cors` mode).
 Permitted values are:
 
 - `anonymous`
-  - : Requests by the {{HTMLElement("img")}} element have their {{domxref("Request.mode",
-    "mode")}} set to `cors` and their {{domxref("Request.credentials",
-    "credentials")}} mode set to `same-origin`. This means that CORS is enabled
+  - : Requests by the {{HTMLElement("img")}} element have their
+    {{domxref("Request.mode", "mode")}} set to `cors` and their {{domxref("Request.credentials", "credentials")}}
+    mode set to `same-origin`. This means that CORS is enabled
     and credentials are sent _if_ the image is fetched from the same origin from
     which the document was loaded.
 - `use-credentials`
@@ -48,7 +48,6 @@ The code below demonstrates setting the `crossOrigin` property on an
 newly-created image.
 
 ```js
-const imageUrl = "clock-demo-400px.png";
 const container = document.querySelector(".container");
 
 function loadImage(url) {
@@ -66,7 +65,7 @@ function loadImage(url) {
   image.src = url;
 }
 
-loadImage(imageUrl);
+loadImage("clock-demo-400px.png");
 ```
 
 ### HTML
@@ -86,8 +85,8 @@ loadImage(imageUrl);
 ```css
 body {
   font:
-    1.125rem/1.5,
-    Helvetica,
+    1.125rem/1.5 "Helvetica",
+    "Arial",
     sans-serif;
 }
 
@@ -103,8 +102,8 @@ img {
 }
 
 output {
-  background: rgba(100, 100, 100, 0.1);
-  font-family: Courier, monospace;
+  background: rgb(100 100 100 / 100%);
+  font-family: "Courier New", monospace;
   width: 95%;
 }
 ```
@@ -120,3 +119,9 @@ output {
 ## Browser compatibility
 
 {{Compat}}
+
+## See also
+
+- {{domxref("HTMLLinkElement.crossOrigin")}}
+- {{domxref("HTMLMediaElement.crossOrigin")}}
+- {{domxref("HTMLScriptElement.crossOrigin")}}

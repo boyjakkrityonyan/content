@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.ReadableStream.pipeTo
 ---
 
-{{APIRef("Streams")}}
+{{APIRef("Streams")}}{{AvailableInWorkers}}
 
 The **`pipeTo()`** method of the {{domxref("ReadableStream")}} interface pipes the current `ReadableStream` to a given {{domxref("WritableStream")}} and returns a {{jsxref("Promise")}} that fulfills when the piping process completes successfully, or rejects if any errors were encountered.
 
@@ -22,14 +22,11 @@ pipeTo(destination, options)
 ### Parameters
 
 - `destination`
-
   - : A {{domxref("WritableStream")}} that acts as the final destination for the {{domxref("ReadableStream")}}.
 
 - `options` {{optional_inline}}
-
   - : The options that should be used when piping to the `writable` stream.
     Available options are:
-
     - `preventClose`
       - : If this is set to `true`, the source `ReadableStream` closing will no longer cause the destination `WritableStream` to be closed.
         The method will return a fulfilled promise once this process completes, unless an error is encountered while closing the destination in which case it will be rejected with that error.
@@ -71,7 +68,7 @@ The same example, but using {{jsxref("Operators/await", "await")}}:
   // Fetch the original image
   const response = await fetch("png-logo.png");
   // Retrieve its body as ReadableStream
-  response.body
+  await response.body
     .pipeThrough(new PNGTransformStream())
     .pipeTo(new FinalDestinationStream());
 })();

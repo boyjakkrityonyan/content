@@ -8,7 +8,7 @@ status:
 browser-compat: api.XRSession.selectstart_event
 ---
 
-{{APIRef("WebXR Device API")}}{{SeeCompatTable}}
+{{APIRef("WebXR Device API")}}{{SeeCompatTable}}{{SecureContext_Header}}
 
 The [WebXR](/en-US/docs/Web/API/WebXR_Device_API) **`selectstart`** event is sent to an {{domxref("XRSession")}} when the user begins a [primary action](/en-US/docs/Web/API/WebXR_Device_API/Inputs#primary_action) on one of its input sources.
 
@@ -18,10 +18,10 @@ The {{domxref("Element.beforexrselect_event", "beforexrselect")}} is fired befor
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("selectstart", (event) => {});
+```js-nolint
+addEventListener("selectstart", (event) => { })
 
-onselectstart = (event) => {};
+onselectstart = (event) => { }
 ```
 
 ## Event type

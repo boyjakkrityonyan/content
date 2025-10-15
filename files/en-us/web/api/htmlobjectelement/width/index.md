@@ -10,7 +10,7 @@ browser-compat: api.HTMLObjectElement.width
 
 The **`width`** property of the
 {{domxref("HTMLObjectElement")}} interface returns a string that
-reflects the [`width`](/en-US/docs/Web/HTML/Element/object#width) HTML attribute, specifying the
+reflects the [`width`](/en-US/docs/Web/HTML/Reference/Elements/object#width) HTML attribute, specifying the
 displayed width of the resource in CSS pixels.
 
 ## Value
@@ -24,3 +24,12 @@ A string.
 ## Browser compatibility
 
 {{Compat}}
+
+## See also
+
+- {{domxref("HTMLCanvasElement.width")}}
+- {{domxref("HTMLEmbedElement.width")}}
+- {{domxref("HTMLIFrameElement.width")}}
+- {{domxref("HTMLImageElement.width")}}
+- {{domxref("HTMLSourceElement.width")}}
+- {{domxref("HTMLVideoElement.width")}}

@@ -13,7 +13,8 @@ The **`innerText`** property of the {{domxref("HTMLElement")}} interface represe
 As a getter, it approximates the text the user would get if they highlighted the contents of the element with the cursor and then copied it to the clipboard.
 As a setter this will replace the element's children with the given value, converting any line breaks into {{HTMLElement("br")}} elements.
 
-> **Note:** `innerText` is easily confused with {{domxref("Node.textContent")}}, but there are important differences between the two.
+> [!NOTE]
+> `innerText` is easily confused with {{domxref("Node.textContent")}}, but there are important differences between the two.
 > Basically, `innerText` is aware of the rendered appearance of text, while `textContent` is not.
 
 ## Value
@@ -22,7 +23,8 @@ A string representing the rendered text content of an element.
 
 If the element itself is not [being rendered](https://html.spec.whatwg.org/multipage/rendering.html#being-rendered) (for example, is detached from the document or is hidden from view), the returned value is the same as the {{domxref("Node.textContent")}} property.
 
-> **Warning:** Setting `innerText` on a node removes _all_ of the node's children
+> [!WARNING]
+> Setting `innerText` on a node removes _all_ of the node's children
 > and replaces them with a single text node with the given string value.
 
 ## Examples

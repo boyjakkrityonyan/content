@@ -6,11 +6,13 @@ page-type: web-api-instance-property
 browser-compat: api.OffscreenCanvas.width
 ---
 
-{{APIRef("Canvas API")}}
+{{APIRef("Canvas API")}}{{AvailableInWorkers}}
 
 The **`width`** property returns and sets the width of an {{domxref("OffscreenCanvas")}} object.
 
 ## Value
+
+A positive integer representing the width of the offscreen canvas in CSS pixels.
 
 ## Examples
 

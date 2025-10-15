@@ -3,15 +3,28 @@ title: this
 slug: Web/JavaScript/Reference/Operators/this
 page-type: javascript-language-feature
 browser-compat: javascript.operators.this
+sidebar: jssidebar
 ---
 
-{{jsSidebar("Operators")}}
+The **`this`** keyword refers to the context where a piece of code, such as a function's body, is supposed to run. Most typically, it is used in object methods, where `this` refers to the object that the method is attached to, thus allowing the same method to be reused on different objects.
 
-A function's **`this`** keyword behaves a little differently in JavaScript compared to other languages. It also has some differences between [strict mode](/en-US/docs/Web/JavaScript/Reference/Strict_mode) and non-strict mode.
+The value of `this` in JavaScript depends on how a function is invoked (runtime {{glossary("binding")}}), not how it is defined. When a regular function is invoked as a method of an object (`obj.method()`), `this` points to that object. When invoked as a standalone function (not attached to an object: `func()`), `this` typically refers to the [global object](/en-US/docs/Glossary/Global_object) (in non-strict mode) or `undefined` (in [strict mode](/en-US/docs/Web/JavaScript/Reference/Strict_mode)). The {{jsxref("Function.prototype.bind()")}} method can create a function whose `this` binding doesn't change, and methods {{jsxref("Function.prototype.apply()")}} and {{jsxref("Function.prototype.call()")}} can also set the `this` value for a particular call.
 
-In most cases, the value of `this` is determined by how a function is called (runtime {{Glossary("binding")}}). It can't be set by assignment during execution, and it may be different each time the function is called. The {{jsxref("Function.prototype.bind()")}} method can [set the value of a function's `this` regardless of how it's called](#the_bind_method), and [arrow functions](/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) don't provide their own `this` binding (it retains the `this` value of the enclosing lexical context).
+[Arrow functions](/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) differ in their handling of `this`: they inherit `this` from the parent scope at the time they are defined. This behavior makes arrow functions particularly useful for callbacks and preserving context. However, arrow functions do not have their own `this` binding. Therefore, their `this` value cannot be set by `bind()`, `apply()` or `call()` methods, nor does it point to the current object in object methods.
 
-{{EmbedInteractiveExample("pages/js/expressions-this.html")}}
+{{InteractiveExample("JavaScript Demo: this expression")}}
+
+```js interactive-example
+const test = {
+  prop: 42,
+  func() {
+    return this.prop;
+  },
+};
+
+console.log(test.func());
+// Expected output: 42
+```
 
 ## Syntax
 
@@ -31,7 +44,7 @@ The value of `this` depends on in which context it appears: function, class, or 
 
 Inside a function, the value of `this` depends on how the function is called. Think about `this` as a hidden parameter of a function — just like the parameters declared in the function definition, `this` is a binding that the language creates for you when the function body is evaluated.
 
-For a typical function, the value of `this` is the object that the function is accessed on. In other words, if the function call is in the form `obj.f()`, then `this` refers to `obj`. For example:
+For a regular function (not an arrow function, bound function, etc.), the value of `this` is the object that the function is accessed on. In other words, if the function call is in the form `obj.f()`, then `this` refers to `obj`. For example:
 
 ```js
 function getThis() {
@@ -50,7 +63,7 @@ console.log(obj2.getThis()); // { name: 'obj2', getThis: [Function: getThis] }
 
 Note how the function is the same, but based on how it's invoked, the value of `this` is different. This is analogous to how function parameters work.
 
-The value of `this` is not the object that has the function as an own property, but the object that is used to call the function. You can prove this by calling a method of an object up in the [prototype chain](/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain).
+The value of `this` is not the object that has the function as an own property, but the object that is used to call the function. You can prove this by calling a method of an object up in the [prototype chain](/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain).
 
 ```js
 const obj3 = {
@@ -148,7 +161,7 @@ const foo = () => this;
 console.log(foo() === globalObject); // true
 ```
 
-Arrow functions create a [closure](/en-US/docs/Web/JavaScript/Closures) over the `this` value of its surrounding scope, which means arrow functions behave as if they are "auto-bound" — no matter how it's invoked, `this` is bound to what it was when the function was created (in the example above, the global object). The same applies to arrow functions created inside other functions: their `this` remains that of the enclosing lexical context. [See example below](#this_in_arrow_functions).
+Arrow functions create a [closure](/en-US/docs/Web/JavaScript/Guide/Closures) over the `this` value of its surrounding scope, which means arrow functions behave as if they are "auto-bound" — no matter how it's invoked, `this` is bound to what it was when the function was created (in the example above, the global object). The same applies to arrow functions created inside other functions: their `this` remains that of the enclosing lexical context. [See example below](#this_in_arrow_functions).
 
 Furthermore, when invoking arrow functions using `call()`, `bind()`, or `apply()`, the `thisArg` parameter is ignored. You can still pass other arguments using these methods, though.
 
@@ -192,7 +205,7 @@ When a function is invoked in the `super.method()` form, the `this` inside the `
 
 ### Class context
 
-A [class](/en-US/docs/Web/JavaScript/Reference/Classes) can be split into two contexts: static and instance. [Constructors](/en-US/docs/Web/JavaScript/Reference/Classes/constructor), methods, and instance field initializers ([public](/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields) or [private](/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields)) belong to the instance context. [Static](/en-US/docs/Web/JavaScript/Reference/Classes/static) methods, static field initializers, and [static initialization blocks](/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks) belong to the static context. The `this` value is different in each context.
+A [class](/en-US/docs/Web/JavaScript/Reference/Classes) can be split into two contexts: static and instance. [Constructors](/en-US/docs/Web/JavaScript/Reference/Classes/constructor), methods, and instance field initializers ([public](/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields) or [private](/en-US/docs/Web/JavaScript/Reference/Classes/Private_elements)) belong to the instance context. [Static](/en-US/docs/Web/JavaScript/Reference/Classes/static) methods, static field initializers, and [static initialization blocks](/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks) belong to the static context. The `this` value is different in each context.
 
 Class constructors are always called with `new`, so their behavior is the same as [function constructors](#constructors): the `this` value is the new instance being created. Class methods behave like methods in object literals — the `this` value is the object that the method was accessed on. If the method is not transferred to another object, `this` is generally an instance of the class.
 
@@ -219,7 +232,8 @@ Unlike base class constructors, derived constructors have no initial `this` bind
 this = new Base();
 ```
 
-> **Warning:** Referring to `this` before calling `super()` will throw an error.
+> [!WARNING]
+> Referring to `this` before calling `super()` will throw an error.
 
 Derived classes must not return before calling `super()`, unless the constructor returns an object (so the `this` value is overridden) or the class has no constructor at all.
 
@@ -244,9 +258,10 @@ new Bad(); // ReferenceError: Must call super constructor in derived class befor
 
 In the global execution context (outside of any functions or classes; may be inside [blocks](/en-US/docs/Web/JavaScript/Reference/Statements/block) or [arrow functions](#arrow_functions) defined in the global scope), the `this` value depends on what execution context the script runs in. Like [callbacks](#callbacks), the `this` value is determined by the runtime environment (the caller).
 
-At the top level of a script, `this` refers to {{jsxref("globalThis")}} whether in strict mode or not. This is generally the same as the global object — for example, if the source is put inside an HTML [`<script>`](/en-US/docs/Web/HTML/Element/script) element and executed as a script, `this === window`.
+At the top level of a script, `this` refers to {{jsxref("globalThis")}} whether in strict mode or not. This is generally the same as the global object — for example, if the source is put inside an HTML [`<script>`](/en-US/docs/Web/HTML/Reference/Elements/script) element and executed as a script, `this === window`.
 
-> **Note:** `globalThis` is generally the same concept as the global object (i.e. adding properties to `globalThis` makes them global variables) — this is the case for browsers and Node — but hosts are allowed to provide a different value for `globalThis` that's unrelated to the global object.
+> [!NOTE]
+> `globalThis` is generally the same concept as the global object (i.e., adding properties to `globalThis` makes them global variables) — this is the case for browsers and Node — but hosts are allowed to provide a different value for `globalThis` that's unrelated to the global object.
 
 ```js
 // In web browsers, the window object is also the global object:
@@ -387,7 +402,7 @@ const fn2 = obj.getThisGetter;
 console.log(fn2()() === globalThis); // true in non-strict mode
 ```
 
-This behavior is very useful when defining callbacks. Usually, each function expression creates its own `this` binding, which shadows the `this` value of the upper scope. Now, you can define functions as arrow functions if you don't care about the `this` value, and only create `this` bindings where you do (e.g. in class methods). See [example with `setTimeout()`](/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#using_call_bind_and_apply).
+This behavior is very useful when defining callbacks. Usually, each function expression creates its own `this` binding, which shadows the `this` value of the upper scope. Now, you can define functions as arrow functions if you don't care about the `this` value, and only create `this` bindings where you do (e.g., in class methods). See [example with `setTimeout()`](/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#using_call_bind_and_apply).
 
 ### this with a getter or setter
 
@@ -436,13 +451,13 @@ const elements = document.getElementsByTagName("*");
 // Add bluify as a click listener so when the
 // element is clicked on, it turns blue
 for (const element of elements) {
-  element.addEventListener("click", bluify, false);
+  element.addEventListener("click", bluify);
 }
 ```
 
 ### this in inline event handlers
 
-When the code is called from an inline [event handler attribute](/en-US/docs/Web/HTML/Attributes#event_handler_attributes), its `this` is bound to the DOM element on which the listener is placed:
+When the code is called from an inline [event handler attribute](/en-US/docs/Web/HTML/Reference/Attributes#event_handler_attributes), its `this` is bound to the DOM element on which the listener is placed:
 
 ```html
 <button onclick="alert(this.tagName.toLowerCase());">Show this</button>
@@ -456,7 +471,7 @@ The above alert shows `button`. Note, however, that only the outer scope has its
 </button>
 ```
 
-In this case, the `this` parameter of the inner function is bound to `globalThis` (i.e. the default object in non–strict mode where `this` isn't passed in the call).
+In this case, the `this` parameter of the inner function is bound to `globalThis` (i.e., the default object in non–strict mode where `this` isn't passed in the call).
 
 ### Bound methods in classes
 
@@ -501,23 +516,29 @@ bird.sayBye = car.sayBye;
 bird.sayBye(); // Bye from Ferrari
 ```
 
-> **Note:** Classes are always in strict mode. Calling methods with an undefined `this` will throw an error if the method tries to access properties on `this`.
+> [!NOTE]
+> Classes are always in strict mode. Calling methods with an undefined `this` will throw an error if the method tries to access properties on `this`.
+>
+> ```js example-bad
+> const carSayHi = car.sayHi;
+> carSayHi(); // TypeError because the 'sayHi' method tries to access 'this.name', but 'this' is undefined in strict mode.
+> ```
 
 Note, however, that auto-bound methods suffer from the same problem as [using arrow functions for class properties](/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#cannot_be_used_as_methods): each instance of the class will have its own copy of the method, which increases memory usage. Only use it where absolutely necessary. You can also mimic the implementation of [`Intl.NumberFormat.prototype.format()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/format#using_format_with_map): define the property as a getter that returns a bound function when accessed and saves it, so that the function is only created once and only created when necessary.
 
 ### this in with statements
 
-Although [`with`](/en-US/docs/Web/JavaScript/Reference/Statements/with) statements are deprecated and not available in strict mode, they still serve as an exception to the normal `this` binding rules. If a function is called within a `with` statement and that function is a property of the scope object, the `this` value is bound to the scope object, as if the `obj1.` prefix exists.
+Although [`with`](/en-US/docs/Web/JavaScript/Reference/Statements/with) statements are deprecated and not available in strict mode, they still serve as an exception to the normal `this` binding rules. If a function is called within a `with` statement and that function is a property of the scope object, the `this` value is bound to the scope object, as if the `obj.` prefix exists.
 
 ```js
-const obj1 = {
+const obj = {
   foo() {
     return this;
   },
 };
 
-with (obj1) {
-  console.log(foo() === obj1); // true
+with (obj) {
+  console.log(foo() === obj); // true
 }
 ```
 

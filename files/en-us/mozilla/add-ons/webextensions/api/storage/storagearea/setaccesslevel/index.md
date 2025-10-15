@@ -3,9 +3,8 @@ title: StorageArea.setAccessLevel()
 slug: Mozilla/Add-ons/WebExtensions/API/storage/StorageArea/setAccessLevel
 page-type: webextension-api-function
 browser-compat: webextensions.api.storage.StorageArea.setAccessLevel
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Sets the access level for the storage area.
 
@@ -23,12 +22,11 @@ await browser.storage.<storageType>.setAccessLevel(
 )
 ```
 
-`<storageType>` can be the {{WebExtAPIRef("storage.session")}} storage type.
+Where `<storageType>` is the {{WebExtAPIRef("storage.session")}} storage type.
 
 ### Parameters
 
 - `accessLevel`
-
   - : `String`. The access level of the storage area. Possible values are `TRUSTED_CONTEXTS` or `TRUSTED_AND_UNTRUSTED_CONTEXTS`.
 
 ### Return value
@@ -41,4 +39,5 @@ A {{jsxref("Promise")}} that is fulfilled with no arguments if the operation suc
 
 {{Compat}}
 
-> **Note:** This API is based on Chromium's [`chrome.storage`](https://developer.chrome.com/docs/extensions/reference/storage/) API. This documentation is derived from [`storage.json`](https://chromium.googlesource.com/chromium/src/+/master/extensions/common/api/storage.json) in the Chromium code.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.storage`](https://developer.chrome.com/docs/extensions/reference/api/storage) API. This documentation is derived from [`storage.json`](https://chromium.googlesource.com/chromium/src/+/master/extensions/common/api/storage.json) in the Chromium code.

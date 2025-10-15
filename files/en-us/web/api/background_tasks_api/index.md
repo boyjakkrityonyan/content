@@ -9,7 +9,8 @@ browser-compat: api.Window.requestIdleCallback
 
 The **Cooperative Scheduling of Background Tasks API** (also referred to as the Background Tasks API or the `requestIdleCallback()` API) provides the ability to queue tasks to be executed automatically by the user agent when it determines that there is free time to do so.
 
-> **Note:** This API is _not available_ in [Web Workers](/en-US/docs/Web/API/Web_Workers_API).
+> [!NOTE]
+> This API is _not available_ in [Web Workers](/en-US/docs/Web/API/Web_Workers_API).
 
 ## Concepts and usage
 
@@ -195,26 +196,22 @@ Finally, we set up a couple of variables for other items:
 - `statusRefreshScheduled` is used to track whether or not we've already scheduled an update of the status display box for the upcoming frame, so that we only do it once per frame
 
 ```js hidden
-requestIdleCallback =
-  requestIdleCallback ||
-  ((handler) => {
-    const startTime = Date.now();
+window.requestIdleCallback ||= (handler) => {
+  const startTime = Date.now();
 
-    return setTimeout(() => {
-      handler({
-        didTimeout: false,
-        timeRemaining() {
-          return Math.max(0, 50.0 - (Date.now() - startTime));
-        },
-      });
-    }, 1);
-  });
+  return setTimeout(() => {
+    handler({
+      didTimeout: false,
+      timeRemaining() {
+        return Math.max(0, 50.0 - (Date.now() - startTime));
+      },
+    });
+  }, 1);
+};
 
-cancelIdleCallback =
-  cancelIdleCallback ||
-  ((id) => {
-    clearTimeout(id);
-  });
+window.cancelIdleCallback ||= (id) => {
+  clearTimeout(id);
+};
 ```
 
 #### Managing the task queue
@@ -234,9 +231,7 @@ function enqueueTask(taskHandler, taskData) {
 
   totalTaskCount++;
 
-  if (!taskHandle) {
-    taskHandle = requestIdleCallback(runTaskQueue, { timeout: 1000 });
-  }
+  taskHandle ||= requestIdleCallback(runTaskQueue, { timeout: 1000 });
 
   scheduleStatusRefresh();
 }
@@ -357,10 +352,7 @@ The `log()` function adds the specified text to the log. Since we don't know at 
 
 ```js
 function log(text) {
-  if (!logFragment) {
-    logFragment = document.createDocumentFragment();
-  }
-
+  logFragment ??= document.createDocumentFragment();
   const el = document.createElement("div");
   el.textContent = text;
   logFragment.appendChild(el);
@@ -369,7 +361,9 @@ function log(text) {
 
 First, we create a {{domxref("DocumentFragment")}} object named `logFragment` if one doesn't currently exist. This element is a pseudo-DOM into which we can insert elements without immediately changing the main DOM itself.
 
-We then create a new {{HTMLElement("div")}} element and set its contents to match the input `text`. Then we append the new element to the end of the pseudo-DOM in `logFragment`. `logFragment` will accumulate log entries until the next time `updateDisplay()` is called because the DOM for the changes.
+We then create a new {{HTMLElement("div")}} element and set its contents to match the input `text`.
+Then we append the new element to the end of the pseudo-DOM in `logFragment`.
+`logFragment` will accumulate log entries until the next time `updateDisplay()` is called, once the DOM is ready for the changes.
 
 ### Running tasks
 
@@ -421,7 +415,7 @@ function decodeTechnoStuff() {
 
 document
   .getElementById("startButton")
-  .addEventListener("click", decodeTechnoStuff, false);
+  .addEventListener("click", decodeTechnoStuff);
 ```
 
 `decodeTechnoStuff()` starts by zeroing the values of totalTaskCount (the number of tasks added to the queue so far) and currentTaskNumber (the task currently being run), and then calls `updateDisplay()` to reset the display to its "nothing's happened yet" state.

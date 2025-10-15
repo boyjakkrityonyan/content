@@ -7,11 +7,9 @@ browser-compat:
   - api.WritableStream
 ---
 
-{{DefaultAPISidebar("Streams")}}
+{{DefaultAPISidebar("Streams")}}{{AvailableInWorkers}}
 
 The Streams API allows JavaScript to programmatically access streams of data received over the network and process them as desired by the developer.
-
-{{AvailableInWorkers}}
 
 ## Concepts and usage
 
@@ -25,22 +23,23 @@ With the Streams API, you can start processing raw data with JavaScript bit by b
 
 There are more advantages too — you can detect when streams start or end, chain streams together, handle errors and cancel streams as required, and react to the speed at which the stream is being read.
 
-The usage of Streams hinges on making responses available as streams. For example, the response body returned by a successful [fetch request](/en-US/docs/Web/API/fetch) is a {{domxref("ReadableStream")}} that can be read by a reader created with {{domxref("ReadableStream.getReader()")}}.
+The usage of Streams hinges on making responses available as streams. For example, the response body returned by a successful [fetch request](/en-US/docs/Web/API/Window/fetch) is a {{domxref("ReadableStream")}} that can be read by a reader created with {{domxref("ReadableStream.getReader()")}}.
 
 More complicated uses involve creating your own stream using the {{domxref("ReadableStream.ReadableStream", "ReadableStream()")}} constructor, for example to process data inside a [service worker](/en-US/docs/Web/API/Service_Worker_API).
 
 You can also write data to streams using {{domxref("WritableStream")}}.
 
-> **Note:** You can find a lot more details about the theory and practice of streams in our articles — [Streams API concepts](/en-US/docs/Web/API/Streams_API/Concepts), [Using readable streams](/en-US/docs/Web/API/Streams_API/Using_readable_streams), [Using readable byte streams](/en-US/docs/Web/API/Streams_API/Using_readable_byte_streams), and [Using writable streams](/en-US/docs/Web/API/Streams_API/Using_writable_streams).
+> [!NOTE]
+> You can find a lot more details about the theory and practice of streams in our articles — [Streams API concepts](/en-US/docs/Web/API/Streams_API/Concepts), [Using readable streams](/en-US/docs/Web/API/Streams_API/Using_readable_streams), [Using readable byte streams](/en-US/docs/Web/API/Streams_API/Using_readable_byte_streams), and [Using writable streams](/en-US/docs/Web/API/Streams_API/Using_writable_streams).
 
 ## Stream interfaces
 
 ### Readable streams
 
 - {{domxref("ReadableStream")}}
-  - : Represents a readable stream of data. It can be used to handle response streams of the [Fetch API](/en-US/docs/Web/API/Fetch_API), or developer-defined streams (e.g. a custom {{domxref("ReadableStream.ReadableStream", "ReadableStream()")}} constructor).
+  - : Represents a readable stream of data. It can be used to handle response streams of the [Fetch API](/en-US/docs/Web/API/Fetch_API), or developer-defined streams (e.g., a custom {{domxref("ReadableStream.ReadableStream", "ReadableStream()")}} constructor).
 - {{domxref("ReadableStreamDefaultReader")}}
-  - : Represents a default reader that can be used to read stream data supplied from a network (e.g. a fetch request).
+  - : Represents a default reader that can be used to read stream data supplied from a network (e.g., a fetch request).
 - {{domxref("ReadableStreamDefaultController")}}
   - : Represents a controller allowing control of a {{domxref("ReadableStream")}}'s state and internal queue. Default controllers are for streams that are not byte streams.
 
@@ -70,14 +69,14 @@ You can also write data to streams using {{domxref("WritableStream")}}.
 ### Extensions to other APIs
 
 - {{domxref("Request")}}
-  - : When a new `Request` object is constructed, you can pass it a {{domxref("ReadableStream")}} in the `body` property of its `RequestInit` dictionary. This `Request` could then be passed to a {{domxref("fetch()")}} to commence fetching the stream.
+  - : When a new `Request` object is constructed, you can pass it a {{domxref("ReadableStream")}} in the `body` property of its `RequestInit` dictionary. This `Request` could then be passed to a {{domxref("Window/fetch", "fetch()")}} to commence fetching the stream.
 - {{domxref("Response.body")}}
-  - : The response body returned by a successful [fetch request](/en-US/docs/Web/API/fetch) is exposed by default as a {{domxref("ReadableStream")}}, and can have a reader attached to it, etc.
+  - : The response body returned by a successful [fetch request](/en-US/docs/Web/API/Window/fetch) is exposed by default as a {{domxref("ReadableStream")}}, and can have a reader attached to it, etc.
 
 ### ByteStream-related interfaces
 
 - {{domxref("ReadableStreamBYOBReader")}}
-  - : Represents a BYOB ("bring your own buffer") reader that can be used to read stream data supplied by the developer (e.g. a custom {{domxref("ReadableStream.ReadableStream", "ReadableStream()")}} constructor).
+  - : Represents a BYOB ("bring your own buffer") reader that can be used to read stream data supplied by the developer (e.g., a custom {{domxref("ReadableStream.ReadableStream", "ReadableStream()")}} constructor).
 - {{domxref("ReadableByteStreamController")}}
   - : Represents a controller allowing control of a {{domxref("ReadableStream")}}'s state and internal queue. Byte stream controllers are for byte streams.
 - {{domxref("ReadableStreamBYOBRequest")}}

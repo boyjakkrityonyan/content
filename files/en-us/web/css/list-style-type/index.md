@@ -3,15 +3,91 @@ title: list-style-type
 slug: Web/CSS/list-style-type
 page-type: css-property
 browser-compat: css.properties.list-style-type
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **`list-style-type`** [CSS](/en-US/docs/Web/CSS) property sets the marker (such as a disc, character, or custom counter style) of a list item element.
 
-{{EmbedInteractiveExample("pages/css/list-style-type.html")}}
+{{InteractiveExample("CSS Demo: list-style-type")}}
 
-The [color](/en-US/docs/Web/CSS/color_value) of the marker will be the same as the computed color of the element it applies to.
+```css interactive-example-choice
+list-style-type: space-counter;
+```
+
+```css interactive-example-choice
+list-style-type: disc;
+```
+
+```css interactive-example-choice
+list-style-type: circle;
+```
+
+```css interactive-example-choice
+list-style-type: "\1F44D";
+```
+
+```html interactive-example
+<section class="default-example" id="default-example">
+  <div>
+    <p>NASA Notable Missions</p>
+    <ul class="transition-all unhighlighted" id="example-element">
+      <li>Apollo</li>
+      <li>Hubble</li>
+      <li>Chandra</li>
+      <li>Cassini-Huygens</li>
+    </ul>
+  </div>
+  <hr />
+  <div class="note">
+    <p>
+      <code>space-counter</code> is defined with
+      <a
+        href="//developer.mozilla.org/docs/Web/CSS/@counter-style"
+        target="_parent"
+        ><code>@counter-style</code></a
+      >
+    </p>
+  </div>
+</section>
+```
+
+```css interactive-example
+.default-example {
+  font-size: 1.2rem;
+}
+
+#example-element {
+  width: 100%;
+  background: #be094b;
+  color: white;
+}
+
+section {
+  text-align: left;
+  flex-direction: column;
+}
+
+hr {
+  width: 50%;
+  color: lightgray;
+  margin: 0.5em;
+}
+
+.note {
+  font-size: 0.8rem;
+}
+
+.note a {
+  color: #009e5f;
+}
+
+@counter-style space-counter {
+  symbols: "\1F680" "\1F6F8" "\1F6F0" "\1F52D";
+  suffix: " ";
+}
+```
+
+The marker will be [`currentColor`](/en-US/docs/Web/CSS/color_value#currentcolor_keyword), the same as the computed [color](/en-US/docs/Web/CSS/color_value) of the element it applies to.
 
 Only a few elements ({{HTMLElement("li")}} and {{HTMLElement("summary")}}) have a default value of `display: list-item`. However, the `list-style-type` property may be applied to any element whose {{cssxref("display")}} value is set to `list-item`. Moreover, because this property is inherited, it can be set on a parent element (commonly {{HTMLElement("ol")}} or {{HTMLElement("ul")}}) to make it apply to all list items.
 
@@ -171,23 +247,26 @@ Note that:
 - `disclosure-closed`
   - : Symbol indicating that a disclosure widget, like {{HTMLElement("details")}} is closed.
 
-Refer to the [All list style types](#all_list_style_types) example to see the above values in action. Details of all the available counter styles used by various cultures around the world can be found in [Ready-made Counter Styles](https://www.w3.org/TR/predefined-counter-styles/).
+Refer to the [All list style types](#all_list_style_types) example to see the above values in action. Details of all the available counter styles used by various cultures around the world can be found in [Ready-made Counter Styles](https://w3c.github.io/predefined-counter-styles/).
 
 ### Non-standard extensions
 
-A few more predefined types are provided by Mozilla (Firefox), Blink (Chrome and Opera) and WebKit (Safari) to support list types in other languages. See the compatibility table to check which browsers support which extension.
+A few predefined types are supported by Mozilla (Firefox) with a `-moz-` prefix.
 
-- `-moz-ethiopic-halehame`
-- `-moz-ethiopic-halehame-am`
-- `ethiopic-halehame-ti-er`, `-moz-ethiopic-halehame-ti-er`
-- `ethiopic-halehame-ti-et`, `-moz-ethiopic-halehame-ti-et`
-- `hangul`, `-moz-hangul`
-- `hangul-consonant`, `-moz-hangul-consonant`
-- `urdu`, `-moz-urdu`
+- `ethiopic-halehame`: `-moz-ethiopic-halehame`
+- `ethiopic-halehame-am`: `-moz-ethiopic-halehame-am`
+- `ethiopic-halehame-ti-er`: `-moz-ethiopic-halehame-ti-er`
+- `ethiopic-halehame-ti-et`: `-moz-ethiopic-halehame-ti-et`
+- `ethiopic-numeric`: `-moz-ethiopic-numeric`
+- `hangul`: `-moz-hangul`
+- `hangul-consonant`: `-moz-hangul-consonant`
+- `urdu`: `-moz-urdu`
 
-## Accessibility concerns
+See the [compatibility table](#browser_compatibility) to check which browsers support which extension.
 
-Safari will not recognize an ordered or unordered list as a list in the accessibility tree if it has a `list-style-type` value of `none`. To learn more about this and potential workarounds, see [`list-style`](/en-US/docs/Web/CSS/list-style#accessibility_concerns).
+## Accessibility
+
+Safari will not recognize an ordered or unordered list as a list in the accessibility tree if it has a `list-style-type` value of `none`. This can be resolved by adding `role="list"` to the list's opening tag. To learn more about this and potential workarounds, see [`list-style`](/en-US/docs/Web/CSS/list-style#accessibility).
 
 ## Formal definition
 
@@ -687,8 +766,9 @@ input {
 
 ```js
 const container = document.querySelector(".container");
+const list = document.querySelector("ol");
+
 container.addEventListener("change", (event) => {
-  const list = document.querySelector("ol");
   list.setAttribute("style", `list-style-type: ${event.target.value}`);
 });
 ```
@@ -696,6 +776,8 @@ container.addEventListener("change", (event) => {
 #### Result
 
 {{EmbedLiveSample("All_list_style_types", "600", "800")}}
+
+We're not limited to the list style types defined on this page or the specification. The {{cssxref("@counter-style")}} at-rule enables creating [counters using any alphabet](https://r12a.github.io/app-counters/).
 
 ## Specifications
 
@@ -707,5 +789,9 @@ container.addEventListener("change", (event) => {
 
 ## See also
 
-- {{Cssxref("list-style")}}, {{Cssxref("list-style-image")}}, {{Cssxref("list-style-position")}}
-- [Counter styles converter](https://r12a.github.io/app-counters/)
+- {{Cssxref("list-style")}} shorthand property
+- {{Cssxref("list-style-image")}} property
+- {{Cssxref("list-style-position")}} property
+- {{Cssxref("::marker")}} pseudo-element
+- [CSS lists and counters](/en-US/docs/Web/CSS/CSS_lists) module
+- [CSS counter styles](/en-US/docs/Web/CSS/CSS_counter_styles) module

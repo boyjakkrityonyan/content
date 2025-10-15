@@ -1,11 +1,11 @@
 ---
 title: Using CSS transitions
+short-title: Using transitions
 slug: Web/CSS/CSS_transitions/Using_CSS_transitions
 page-type: guide
 spec-urls: https://drafts.csswg.org/css-transitions/
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 **CSS transitions** provide a way to control animation speed when changing CSS properties. Instead of having property changes take effect immediately, you can cause the changes in a property to take place over a period of time. For example, if you change the color of an element from white to black, usually the change is instantaneous. With CSS transitions enabled, changes occur at time intervals that follow an acceleration curve, all of which can be customized.
 
@@ -19,7 +19,8 @@ CSS transitions let you decide which properties to animate (by [_listing them ex
 
 The Web author can define which property has to be animated and in which way. This allows the creation of complex transitions. However, some properties are [not animatable](/en-US/docs/Web/CSS/CSS_animated_properties) as it doesn't make sense to animate them.
 
-> **Note:** The `auto` value is often a very complex case. The specification recommends not animating from and to `auto`. Some user agents, like those based on Gecko, implement this requirement and others, like those based on WebKit, are less strict. Using animations with `auto` may lead to unpredictable results, depending on the browser and its version, and should be avoided.
+> [!NOTE]
+> The `auto` value is often a very complex case. The specification recommends not animating from and to `auto`. Some user agents, like those based on Gecko, implement this requirement and others, like those based on WebKit, are less strict. Using animations with `auto` may lead to unpredictable results, depending on the browser and its version, and should be avoided.
 
 ## Defining transitions
 
@@ -38,15 +39,13 @@ You can control the individual components of the transition with the following s
 
 The `transition` shorthand CSS syntax is written as follows:
 
-```css
-div {
-  transition: <property> <duration> <timing-function> <delay>;
-}
+```plain
+transition: <property> <duration> <timing-function> <delay>;
 ```
 
 ## Examples
 
-### Simple example
+### Basic example
 
 This example performs a four-second font size transition with a two-second delay between the time the user mouses over the element and the beginning of the animation effect:
 
@@ -84,7 +83,7 @@ This example performs a four-second font size transition with a two-second delay
   display: block;
   width: 100px;
   height: 100px;
-  background-color: #0000ff;
+  background-color: blue;
   transition:
     width 2s,
     height 2s,
@@ -165,8 +164,8 @@ nav {
 
 a {
   flex: 1;
-  background-color: #333;
-  color: #fff;
+  background-color: #333333;
+  color: white;
   border: 1px solid;
   padding: 0.5rem;
   text-align: center;
@@ -176,8 +175,8 @@ a {
 
 a:hover,
 a:focus {
-  background-color: #fff;
-  color: #333;
+  background-color: white;
+  color: #333333;
 }
 ```
 
@@ -185,9 +184,110 @@ This CSS establishes the look of the menu, with the background and text colors b
 
 {{EmbedLiveSample("Using transitions when highlighting menus")}}
 
+### Transitioning display and content-visibility
+
+This example demonstrates how [`display`](/en-US/docs/Web/CSS/display) and [`content-visibility`](/en-US/docs/Web/CSS/content-visibility) can be transitioned. This behavior is useful for creating entry/exit animations where you want to for example remove a container from the DOM with `display: none`, but have it fade out with [`opacity`](/en-US/docs/Web/CSS/opacity) rather than disappearing immediately.
+
+Supporting browsers transition `display` and `content-visibility` with a variation on the [discrete animation type](/en-US/docs/Web/CSS/CSS_animated_properties#discrete). This generally means that properties will flip between two values 50% through animating between the two.
+
+There is an exception, however, which is when animating to/from `display: none` or `content-visibility: hidden`. In this case, the browser will flip between the two values so that the transitioned content is shown for the entire animation duration.
+
+So for example:
+
+- When animating `display` from `none` to `block` (or another visible `display` value), the value will flip to `block` at `0%` of the animation duration so it is visible throughout.
+- When animating `display` from `block` (or another visible `display` value) to `none`, the value will flip to `none` at `100%` of the animation duration so it is visible throughout.
+
+When transitioning these properties [`transition-behavior: allow-discrete`](/en-US/docs/Web/CSS/transition-behavior) needs to be set on the transitions. This effectively enables `display`/`content-visibility` transitions.
+
+When transitioning `display`, [`@starting-style`](/en-US/docs/Web/CSS/@starting-style) is needed to provide a set of starting values for properties set on an element that you want to transition from when the element receives its first style update. This is needed to avoid unexpected behavior. By default, CSS transitions are not triggered on elements' first style updates when they first appear in the DOM, which includes when `display` changes from `none` to another state. `content-visibility` animations do not need starting values specified in a `@starting-style` block. This is because `content-visibility` doesn't hide an element from the DOM like `display` does: it just skips rendering the element's content.
+
+#### HTML
+
+The HTML contains two {{htmlelement("p")}} elements with a {{htmlelement("div")}} in between that we will animate from `display` `none` to `block`.
+
+```html
+<p>
+  Click anywhere on the screen or press any key to toggle the
+  <code>&lt;div&gt;</code> between hidden and showing.
+</p>
+
+<div>
+  This is a <code>&lt;div&gt;</code> element that transitions between
+  <code>display: none; opacity: 0</code> and
+  <code>display: block; opacity: 1</code>. Neat, huh?
+</div>
+
+<p>
+  This is another paragraph to show that <code>display: none;</code> is being
+  applied and removed on the above <code>&lt;div&gt; </code>. If only its
+  <code>opacity</code> was being changed, it would always take up the space in
+  the DOM.
+</p>
+```
+
+#### CSS
+
+```css
+html {
+  height: 100vh;
+}
+
+div {
+  font-size: 1.6rem;
+  padding: 20px;
+  border: 3px solid red;
+  border-radius: 20px;
+  width: 480px;
+
+  display: none;
+  opacity: 0;
+  transition:
+    opacity 1s,
+    display 1s allow-discrete;
+  /* Equivalent to
+  transition: all 1s allow-discrete; */
+}
+
+.showing {
+  opacity: 1;
+  display: block;
+}
+
+@starting-style {
+  .showing {
+    opacity: 0;
+  }
+}
+```
+
+Note the `@starting-style` block used to specify the starting style for the transition, and the inclusion of the `display` property in the transitions list, with `allow-discrete` set on it.
+
+#### JavaScript
+
+Finally, we include a bit of JavaScript to set up event listeners to trigger the transition (via the `showing` class).
+
+```js
+const divElem = document.querySelector("div");
+const htmlElem = document.querySelector(":root");
+
+htmlElem.addEventListener("click", showHide);
+document.addEventListener("keydown", showHide);
+
+function showHide() {
+  divElem.classList.toggle("showing");
+}
+```
+
+#### Result
+
+The code renders as follows:
+
+{{ EmbedLiveSample("Transitioning display and content-visibility", "100%", "350") }}
+
 ## JavaScript examples
 
-> **Note:** Care should be taken when using a transition immediately after:
+> [!NOTE]
+> Care should be taken when using a transition immediately after:
 >
 > - adding the element to the DOM using `.appendChild()`
 > - removing an element's `display: none;` property.
@@ -198,33 +298,57 @@ This CSS establishes the look of the menu, with the background and text colors b
 
 Transitions are a great tool to make things look much smoother without having to do anything to your JavaScript functionality. Take the following example.
 
-```html
+```html live-sample___js-transitions
 <p>Click anywhere to move the ball</p>
 <div id="foo" class="ball"></div>
 ```
 
-Using JavaScript you can make the effect of moving the ball to a certain position happen:
-
-```js
+```js live-sample___js-transitions
+// Make the ball move to a certain position:
 const f = document.getElementById("foo");
-document.addEventListener(
-  "click",
-  (ev) => {
-    f.style.transform = `translateY(${ev.clientY - 25}px)`;
-    f.style.transform += `translateX(${ev.clientX - 25}px)`;
-  },
-  false,
-);
+document.addEventListener("click", (ev) => {
+  f.style.transform = `translateY(${ev.clientY - 25}px)`;
+  f.style.transform += `translateX(${ev.clientX - 25}px)`;
+});
 ```
 
-With CSS you can make it smooth without any extra effort. Add a transition to the element and any change will happen smoothly:
+With CSS, you can smooth the styles applied through JavaScript. Add a transition to the element and any change will happen smoothly:
 
-```css
+```css hidden live-sample___js-transitions
+body {
+  background-color: white;
+  color: #333333;
+  font:
+    1.2em / 1.5 "Helvetica Neue",
+    "Helvetica",
+    "Arial",
+    sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  margin-top: 3em;
+}
+
+main {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 660px;
+  height: 400px;
+  border: 1px solid #cccccc;
+  padding: 20px;
+}
+```
+
+```css live-sample___js-transitions
 .ball {
   border-radius: 25px;
   width: 50px;
   height: 50px;
-  background: #c00;
+  background: #cc0000;
   position: absolute;
   top: 0;
   left: 0;
@@ -232,7 +356,7 @@ With CSS you can make it smooth without any extra effort. Add a transition to th
 }
 ```
 
-{{EmbedGHLiveSample("css-examples/transitions/js-transitions.html", '100%', 500)}}
+{{EmbedLiveSample("js-transitions", "", "400px")}}
 
 ### Detecting the start and completion of a transition
 
@@ -246,17 +370,18 @@ You can use the {{domxref("Element/transitionend_event", "transitionend")}} even
 As usual, you can use the {{domxref("EventTarget.addEventListener", "addEventListener()")}} method to monitor for this event:
 
 ```js
-el.addEventListener("transitionend", updateTransition, true);
+el.addEventListener("transitionend", updateTransition);
 ```
 
 You detect the beginning of a transition using {{domxref("Element/transitionrun_event", "transitionrun")}} (fires before any delay) and {{domxref("Element/transitionstart_event", "transitionstart")}} (fires after any delay), in the same kind of fashion:
 
 ```js
-el.addEventListener("transitionrun", signalStart, true);
-el.addEventListener("transitionstart", signalStart, true);
+el.addEventListener("transitionrun", signalStart);
+el.addEventListener("transitionstart", signalStart);
 ```
 
-> **Note:** The `transitionend` event doesn't fire if the transition is aborted before the transition is completed because either the element is made {{cssxref("display")}}`: none` or the animating property's value is changed.
+> [!NOTE]
+> The `transitionend` event doesn't fire if the transition is aborted before the transition is completed because either the element is made {{cssxref("display", "display: none")}} or the animating property's value is changed.
 
 ## Specifications
 

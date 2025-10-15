@@ -6,7 +6,7 @@ page-type: web-api-constructor
 browser-compat: api.VideoFrame.VideoFrame
 ---
 
-{{APIRef("Web Codecs API")}}
+{{APIRef("Web Codecs API")}}{{AvailableInWorkers("window_and_dedicated")}}
 
 The **`VideoFrame()`** constructor creates a new {{domxref("VideoFrame")}} object representing a frame of a video.
 
@@ -54,11 +54,15 @@ The first type of constructor (see above) creates a new {{domxref("VideoFrame")}
       - : The width of the `VideoFrame` when displayed after applying aspect-ratio adjustments.
     - `displayHeight` {{Optional_Inline}}
       - : The height of the `VideoFrame` when displayed after applying aspect-ratio adjustments.
+    - `flip` {{optional_inline}}
+      - : A boolean. If `true`, horizontal mirroring is applied. Defaults to `false`.
+    - `rotation` {{optional_inline}}
+      - : An integer representing the rotation (0, 90, 180, or 270) in degrees clockwise. Defaults to `0`. Arbitrary numbers (including negatives) are rounded to the next quarter turn.
 
 The second type of constructor (see above) creates a new {{domxref("VideoFrame")}} from an {{jsxref("ArrayBuffer")}}. Its parameters are:
 
 - `data`
-  - : An {{jsxref("ArrayBuffer")}} containing the data for the new `VideoFrame`.
+  - : An {{jsxref("ArrayBuffer")}}, a {{jsxref("TypedArray")}}, or a {{jsxref("DataView")}} containing the data for the new `VideoFrame`.
 - `options`
   - : An object containing the following:
     - `format`
@@ -111,16 +115,22 @@ The second type of constructor (see above) creates a new {{domxref("VideoFrame")
           - : A string representing the video color matrix, described on the page for the {{domxref("VideoColorSpace.matrix")}} property.
         - `fullRange`
           - : A Boolean. If `true`, indicates that full-range color values are used.
+    - `transfer`
+      - : An array of {{jsxref("ArrayBuffer")}}s that `VideoFrame` will detach and take ownership of. If the array contains the {{jsxref("ArrayBuffer")}} backing `data`, `VideoFrame` will use that buffer directly instead of copying from it.
+    - `flip` {{optional_inline}}
+      - : A boolean. If `true`, horizontal mirroring is applied. Defaults to `false`.
+    - `rotation` {{optional_inline}}
+      - : An integer representing the rotation (0, 90, 180, or 270) in degrees clockwise. Defaults to `0`. Arbitrary numbers (including negatives) are rounded to the next quarter turn.
 
 ## Examples
 
-The following examples are from the article [Video processing with WebCodecs](https://web.dev/webcodecs/). In this first example, a `VideoFrame` is created from a canvas.
+The following examples are from the article [Video processing with WebCodecs](https://developer.chrome.com/docs/web-platform/best-practices/webcodecs). In this first example, a `VideoFrame` is created from a canvas.
 
 ```js
 const cnv = document.createElement("canvas");
 // draw something on the canvas
-// ...
-let frame_from_canvas = new VideoFrame(cnv, { timestamp: 0 });
+// …
+const frame_from_canvas = new VideoFrame(cnv, { timestamp: 0 });
 ```
 
 In the following example a `VideoFrame` is created from a {{jsxref("TypedArray")}}.
@@ -133,17 +143,18 @@ const init = {
   codedHeight: 200,
   format: "RGBA",
 };
-let data = new Uint8Array(init.codedWidth * init.codedHeight * pixelSize);
+const data = new Uint8Array(init.codedWidth * init.codedHeight * pixelSize);
 for (let x = 0; x < init.codedWidth; x++) {
   for (let y = 0; y < init.codedHeight; y++) {
-    let offset = (y * init.codedWidth + x) * pixelSize;
+    const offset = (y * init.codedWidth + x) * pixelSize;
     data[offset] = 0x7f; // Red
     data[offset + 1] = 0xff; // Green
     data[offset + 2] = 0xd4; // Blue
     data[offset + 3] = 0x0ff; // Alpha
   }
 }
-let frame = new VideoFrame(data, init);
+init.transfer = [data.buffer];
+const frame = new VideoFrame(data, init);
 ```
 
 ## Specifications

@@ -6,7 +6,7 @@ page-type: web-api-event
 browser-compat: api.HTMLVideoElement.leavepictureinpicture_event
 ---
 
-{{APIRef("HTMLVideoElement")}}
+{{APIRef("Picture-in-Picture API")}}
 
 The `leavepictureinpicture` event is fired when the {{DOMxRef("HTMLVideoElement")}} leaves picture-in-picture mode successfully.
 
@@ -16,10 +16,10 @@ This event is not cancelable and does not bubble.
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("leavepictureinpicture", (event) => {});
+```js-nolint
+addEventListener("leavepictureinpicture", (event) => { })
 
-onleavepictureinpicture = (event) => {};
+onleavepictureinpicture = (event) => { }
 ```
 
 ## Event type
@@ -46,7 +46,7 @@ function onExitPip() {
   console.log("Picture-in-Picture mode deactivated!");
 }
 
-video.addEventListener("leavepictureinpicture", onExitPip, false);
+video.addEventListener("leavepictureinpicture", onExitPip);
 
 button.onclick = () => {
   if (document.pictureInPictureElement) {
@@ -85,4 +85,4 @@ button.onclick = () => {
 ## See also
 
 - {{domxref("HTMLVideoElement")}}
-- {{domxref("Picture-in-Picture_API", "Picture-in-Picture API")}}
+- [Picture-in-Picture API](/en-US/docs/Web/API/Picture-in-Picture_API)

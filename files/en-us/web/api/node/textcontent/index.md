@@ -8,10 +8,11 @@ browser-compat: api.Node.textContent
 
 {{APIRef("DOM")}}
 
-The **`textContent`** property of the {{domxref ("Node")}}
+The **`textContent`** property of the {{domxref("Node")}}
 interface represents the text content of the node and its descendants.
 
-> **Note:** `textContent` and {{domxref("HTMLElement.innerText")}} are easily confused,
+> [!NOTE]
+> `textContent` and {{domxref("HTMLElement.innerText")}} are easily confused,
 > but the two properties are [different in important ways](#differences_from_innertext).
 
 ## Value
@@ -21,7 +22,8 @@ A string, or [`null`](/en-US/docs/Web/JavaScript/Reference/Operators/null). Its 
 - If the node is a {{domxref("document")}} or a {{glossary("doctype")}},
   `textContent` returns [`null`](/en-US/docs/Web/JavaScript/Reference/Operators/null).
 
-  > **Note:** To get _all_ of the text and [CDATA data](/en-US/docs/Web/API/CDATASection) for the whole
+  > [!NOTE]
+  > To get _all_ of the text and [CDATA data](/en-US/docs/Web/API/CDATASection) for the whole
   > document, use `document.documentElement.textContent`.
 
 - If the node is a [CDATA section](/en-US/docs/Web/API/CDATASection),
@@ -33,7 +35,8 @@ A string, or [`null`](/en-US/docs/Web/JavaScript/Reference/Operators/null). Its 
   `textContent` of every child node, excluding comments and processing
   instructions. (This is an empty string if the node has no children.)
 
-> **Warning:** Setting `textContent` on a node removes _all_ of the node's children
+> [!WARNING]
+> Setting `textContent` on a node removes _all_ of the node's children
 > and replaces them with a single text node with the given string value.
 
 ### Differences from innerText
@@ -48,7 +51,6 @@ important differences:
 - `textContent` returns every element in the node. In contrast,
   `innerText` is aware of styling and won't return the text of "hidden"
   elements.
-
   - Moreover, since `innerText` takes CSS styles into account,
     reading the value of `innerText` triggers a
     {{glossary("reflow")}} to ensure up-to-date computed styles. (Reflows can
@@ -56,12 +58,7 @@ important differences:
 
 ### Differences from innerHTML
 
-{{domxref("Element.innerHTML")}} returns HTML, as its name indicates. Sometimes people
-use `innerHTML` to retrieve or write text inside an element, but
-`textContent` has better performance because its value is not parsed as
-HTML.
-
-Moreover, using `textContent` can prevent {{glossary("Cross-site_scripting", "XSS attacks")}}.
+{{domxref("Element.innerHTML")}} gets or sets HTML, as its name indicates. We advise against using `innerHTML` to get or set text inside an element because it deals with raw HTML rather than plain text and can be susceptible to {{glossary("Cross-site_scripting", "XSS attacks")}}. Even if you are sure that the text never contains HTML syntax, it is still less semantic and slower because it needs to invoke the HTML parser.
 
 ## Examples
 
@@ -98,5 +95,3 @@ document.getElementById("divA").textContent = "This text is different!";
 
 - {{domxref("HTMLElement.innerText")}}
 - {{domxref("Element.innerHTML")}}
-- [More on differences between `innerText` and `textContent`](http://perfectionkills.com/the-poor-misunderstood-innerText/)
-  (blog post)

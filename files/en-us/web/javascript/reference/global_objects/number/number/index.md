@@ -1,11 +1,11 @@
 ---
 title: Number() constructor
+short-title: Number()
 slug: Web/JavaScript/Reference/Global_Objects/Number/Number
 page-type: javascript-constructor
 browser-compat: javascript.builtins.Number.Number
+sidebar: jsref
 ---
-
-{{JSRef}}
 
 The **`Number()`** constructor creates {{jsxref("Number")}} objects. When called as a function, it returns primitive values of type Number.
 
@@ -16,7 +16,8 @@ new Number(value)
 Number(value)
 ```
 
-> **Note:** `Number()` can be called with or without [`new`](/en-US/docs/Web/JavaScript/Reference/Operators/new), but with different effects. See [Return value](#return_value).
+> [!NOTE]
+> `Number()` can be called with or without [`new`](/en-US/docs/Web/JavaScript/Reference/Operators/new), but with different effects. See [Return value](#return_value).
 
 ### Parameters
 
@@ -25,11 +26,12 @@ Number(value)
 
 ### Return value
 
-When `Number` is called as a constructor (with [`new`](/en-US/docs/Web/JavaScript/Reference/Operators/new)), it creates a {{jsxref("Number")}} object, which is **not** a primitive.
+When `Number()` is called as a function (without [`new`](/en-US/docs/Web/JavaScript/Reference/Operators/new)), it returns `value` [coerced to a number primitive](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#number_coercion). Specially, [BigInts](/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt) values are converted to numbers instead of throwing. If `value` is absent, it becomes `0`.
 
-When `Number` is called as a function, it [coerces the parameter to a number primitive](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#number_coercion). [BigInts](/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt) are converted to numbers. If the value can't be converted, it returns {{jsxref("NaN")}}.
+When `Number()` is called as a constructor (with `new`), it uses the coercion process above and returns a wrapping {{jsxref("Number")}} object, which is **not** a primitive.
 
-> **Warning:** You should rarely find yourself using `Number` as a constructor.
+> [!WARNING]
+> You should rarely find yourself using `Number` as a constructor.
 
 ## Examples
 

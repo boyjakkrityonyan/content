@@ -3,40 +3,39 @@ title: tabs.query()
 slug: Mozilla/Add-ons/WebExtensions/API/tabs/query
 page-type: webextension-api-function
 browser-compat: webextensions.api.tabs.query
+sidebar: addonsidebar
 ---
 
-{{AddonSidebar()}}
-
 Gets all tabs that have the specified properties, or all tabs if no properties are specified.
-
-This is an asynchronous function that returns a [`Promise`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 
 ## Syntax
 
 ```js-nolint
-let querying = browser.tabs.query(queryObj)
+let querying = browser.tabs.query(queryInfo)
 ```
 
 ### Parameters
 
-- `queryObj`
-
-  - : `object`. The `query()` function will only get tabs whose properties match the properties included here.
+- `queryInfo`
+  - : `object`. The `query()` function gets the tabs whose properties match the properties included here.
 
     See the {{WebExtAPIRef("tabs.Tab")}} documentation to learn more about these properties.
-
     - `active` {{optional_inline}}
       - : `boolean`. Whether the tabs are active in their windows.
+    - `attention` {{optional_inline}}
+      - : `boolean`. Indicates whether the tabs are drawing attention.
     - `audible` {{optional_inline}}
       - : `boolean`. Whether the tabs are audible.
     - `autoDiscardable` {{optional_inline}}
       - : `boolean`. Whether the tab can be discarded by the browser. The default value is `true`. When set to `false`, the browser cannot automatically discard the tab. However, the tab can be discarded by {{WebExtAPIRef("tabs.discard")}}.
     - `cookieStoreId` {{optional_inline}}
-      - : `string` or `array` of `string`. Use this to return tabs whose `tab.cookieStoreId` matches any of the `cookieStoreId` strings. This option is only available if the add-on has the `"cookies"` [permission](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions).
+      - : `string` or `array` of `string`. Use this to return tabs whose `tab.cookieStoreId` matches any of the `cookieStoreId` strings. This option is only available if the add-on has the `"cookies"` [permission](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions). See [Work with contextual identities](/en-US/docs/Mozilla/Add-ons/WebExtensions/Work_with_contextual_identities) for more information.
     - `currentWindow` {{optional_inline}}
       - : `boolean`. Whether the tabs are in the current window.
     - `discarded` {{optional_inline}}
       - : `boolean`. Whether the tabs are discarded. A discarded tab is one whose content has been unloaded from memory, but is still visible in the tab strip. Its content gets reloaded the next time it's activated.
+    - `groupId` {{optional_inline}}
+      - : `integer`. The ID of the tab group the tabs are in or `-1` ({{WebExtAPIRef("tabGroups.TAB_GROUP_ID_NONE")}}) for ungrouped tabs. For more information on tab groups, see {{WebExtAPIRef("tabGroups")}}.
     - `hidden` {{optional_inline}}
       - : `boolean`. Whether the tabs are hidden.
     - `highlighted` {{optional_inline}}
@@ -62,7 +61,7 @@ let querying = browser.tabs.query(queryObj)
 
 ### Return value
 
-A [`Promise`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that will be fulfilled with an `array` of `{{WebExtAPIRef('tabs.Tab')}}` objects, containing information about each matching tab.
+A [`Promise`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that will be fulfilled with an `array` of {{WebExtAPIRef('tabs.Tab')}} objects, containing information about each matching tab.
 
 If any error occurs, the promise will be rejected with an error message.
 
@@ -142,7 +141,8 @@ browser.tabs.query({ url: "*://*.mozilla.org/*" }).then(logTabs, onError);
 
 {{Compat}}
 
-> **Note:** This API is based on Chromium's [`chrome.tabs`](https://developer.chrome.com/docs/extensions/reference/tabs/#method-query) API. This documentation is derived from [`tabs.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/tabs.json) in the Chromium code.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.tabs`](https://developer.chrome.com/docs/extensions/reference/api/tabs#method-query) API. This documentation is derived from [`tabs.json`](https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/tabs.json) in the Chromium code.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

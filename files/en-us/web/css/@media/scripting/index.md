@@ -3,11 +3,13 @@ title: scripting
 slug: Web/CSS/@media/scripting
 page-type: css-media-feature
 browser-compat: css.at-rules.media.scripting
+sidebar: cssref
 ---
 
-{{CSSRef}}
-
 The **`scripting`** [CSS](/en-US/docs/Web/CSS) [media feature](/en-US/docs/Web/CSS/@media#media_features) can be used to test whether scripting (such as JavaScript) is available.
+
+> [!NOTE]
+> The detection is done by the browsers based on the user settings. Some browser extensions can implement script blocking using different techniques. In such cases the `scripting` media feature may not work as expected.
 
 ## Syntax
 

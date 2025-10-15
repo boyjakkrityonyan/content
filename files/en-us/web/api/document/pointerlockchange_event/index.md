@@ -6,22 +6,22 @@ page-type: web-api-event
 browser-compat: api.Document.pointerlockchange_event
 ---
 
-{{APIRef}}
+{{APIRef("Pointer Lock API")}}
 
-The `pointerlockchange` event is fired when the pointer is locked/unlocked.
+The **`pointerlockchange`** event is fired when the pointer is locked/unlocked.
 
 The event handler can use {{domxref("Document.pointerLockElement")}} to determine whether the pointer is locked, and if so, to which element it is locked.
 
-This event is not cancelable.
+This event is not cancelable and does not bubble.
 
 ## Syntax
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("pointerlockchange", (event) => {});
+```js-nolint
+addEventListener("pointerlockchange", (event) => { })
 
-onpointerlockchange = (event) => {};
+onpointerlockchange = (event) => { }
 ```
 
 ## Event type

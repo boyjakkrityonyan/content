@@ -6,11 +6,9 @@ page-type: web-api-constructor
 browser-compat: api.WebTransport.WebTransport
 ---
 
-{{APIRef("WebTransport API")}}
+{{APIRef("WebTransport API")}}{{SecureContext_Header}} {{AvailableInWorkers}}
 
 The **`WebTransport()`** constructor creates a new {{domxref("WebTransport")}} object instance.
-
-{{AvailableInWorkers}}
 
 ## Syntax
 
@@ -25,9 +23,7 @@ new WebTransport(url, options)
   - : A string representing the URL of the HTTP/3 server to connect to.
     The scheme must be HTTPS, and the port number needs to be explicitly specified.
 - `options` {{optional_inline}}
-
   - : An object that may have the following properties:
-
     - `allowPooling` {{optional_inline}}
       - : A boolean value.
         If `true`, the network connection for this {{domxref("WebTransport")}} can be shared with a pool of other HTTP/3 sessions.
@@ -41,7 +37,6 @@ new WebTransport(url, options)
         If `true`, the connection cannot be established over HTTP/2 if an HTTP/3 connection is not possible.
         By default the value is `false`.
     - `serverCertificateHashes` {{optional_inline}}
-
       - : An array of objects, each defining the hash value of a server certificate along with the name of the algorithm that was used to generate it.
         This option is only supported for transports using dedicated connections (`allowPooling` is `false`).
 
@@ -51,7 +46,8 @@ new WebTransport(url, options)
 
         This feature allows developers to connect to WebTransport servers that would normally find obtaining a publicly trusted certificate challenging, such as hosts that are not publicly routable, or ephemeral hosts like virtual machines.
 
-        > **Note:** The web application might typically fetch the hashes from a trusted intermediary.
+        > [!NOTE]
+        > The web application might typically fetch the hashes from a trusted intermediary.
         > For example, you might use a cloud provider to provision VMs that run your WebTransport servers.
         > The provider has trusted access to the server and can request its certificate, generate hashes, and provide these to the application via an API (which is mediated via PKI), or a cloud console.
         > The web application can now connect directly to the VM-hosted server using the supplied hashes, even though the VM itself does not have a long-lived TLS certificate.
@@ -62,9 +58,7 @@ new WebTransport(url, options)
         A user agent may add further requirements; these will be listed in the [browser compatibility](#browser_compatibility) section if known.
 
         Each object in the array has the following properties:
-
         - `algorithm`
-
           - : A string with the value: `sha-256` (case-insensitive).
             Note that this string represents the algorithm to use to verify the hash, and that any hash using an unknown algorithm will be ignored.
             At time of writing, `SHA-256` is the only hash algorithm listed in the specification.
@@ -130,7 +124,7 @@ async function useTransport(url) {
   const transport = await initTransport(url);
 
   // Use the transport object to send and receive data
-  // ...
+  // …
 
   // When done, close the transport
   await closeTransport(transport);
@@ -171,7 +165,7 @@ const transport = new WebTransport(url, {
 
 ## See also
 
-- [Using WebTransport](https://web.dev/webtransport/)
+- [Using WebTransport](https://developer.chrome.com/docs/capabilities/web-apis/webtransport)
 - {{domxref("WebSockets API", "WebSockets API", "", "nocode")}}
 - {{domxref("Streams API", "Streams API", "", "nocode")}}
 - [WebTransport over HTTP/3](https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http3/)

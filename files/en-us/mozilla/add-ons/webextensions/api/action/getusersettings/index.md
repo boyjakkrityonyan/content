@@ -3,13 +3,13 @@ title: action.getUserSettings()
 slug: Mozilla/Add-ons/WebExtensions/API/action/getUserSettings
 page-type: webextension-api-function
 browser-compat: webextensions.api.action.getUserSettings
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Gets the user-specified settings for the browser action.
 
-> **Note:** This API is available in Manifest V3 or higher.
+> [!NOTE]
+> This API is available in Manifest V3 or higher.
 
 This is an asynchronous function that returns a [`Promise`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 
@@ -28,9 +28,7 @@ This function takes no parameters.
 A [`Promise`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that fulfills with an object with these properties:
 
 - `userSettings`
-
   - : An object containing the user-specified settings for the browser action with these properties:
-
     - `isOnToolbar` {{optional_inline}}
       - : `boolean`. Whether the user has pinned the action's icon to the browser UI. This setting does not indicate whether the action icon is visible. The icon's visibility depends on the size of the browser window and the layout of the browser UI.
 
@@ -57,7 +55,8 @@ gettingUserSettings.then(gotSettings);
 
 {{Compat}}
 
-> **Note:** This API is based on Chromium's [`chrome.action`](https://developer.chrome.com/docs/extensions/reference/action/#method-getUserSettings) API.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.action`](https://developer.chrome.com/docs/extensions/reference/api/action#method-getUserSettings) API.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

@@ -11,7 +11,8 @@ browser-compat: api.Node.isDefaultNamespace
 The **`isDefaultNamespace()`** method of the {{domxref("Node")}} interface accepts a namespace URI as an argument.
 It returns a boolean value that is `true` if the namespace is the default namespace on the given node and `false` if not.
 
-> **Note:** The default namespace of an HTML element is always `""`. For a SVG element, it is set by the `xmlns` attribute.
+> [!NOTE]
+> The default namespace of an HTML element is always `""`. For a SVG element, it is set by the `xmlns` attribute.
 
 ## Syntax
 
@@ -23,7 +24,8 @@ isDefaultNamespace(namespaceURI)
 
 - `namespaceURI`
   - : A string representing the namespace against which the element will be checked.
-    > **Note:** `namespaceURI` is not an optional parameter, but can be `null`.
+    > [!NOTE]
+    > `namespaceURI` is not an optional parameter, but can be `null`.
 
 ### Return value
 
@@ -46,14 +48,14 @@ Is "http://www.w3.org/2000/svg" the default namespace for &lt;svg&gt;:
 ```js
 const button = document.querySelector("button");
 button.addEventListener("click", () => {
-  const aHtmlElt = document.querySelector("output");
-  const aSvgElt = document.querySelector("svg");
+  const htmlElt = document.querySelector("output");
+  const svgElt = document.querySelector("svg");
 
   const result = document.getElementsByTagName("output");
-  result[0].value = aHtmlElt.isDefaultNamespace(""); // true
-  result[1].value = aHtmlElt.isDefaultNamespace("http://www.w3.org/2000/svg"); // false
-  result[2].value = aSvgElt.isDefaultNamespace(""); // false
-  result[3].value = aSvgElt.isDefaultNamespace("http://www.w3.org/2000/svg"); // true
+  result[0].value = htmlElt.isDefaultNamespace(""); // true
+  result[1].value = htmlElt.isDefaultNamespace("http://www.w3.org/2000/svg"); // false
+  result[2].value = svgElt.isDefaultNamespace(""); // false
+  result[3].value = svgElt.isDefaultNamespace("http://www.w3.org/2000/svg"); // true
 });
 ```
 

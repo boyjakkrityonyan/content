@@ -3,9 +3,8 @@ title: "Word boundary assertion: \\b, \\B"
 slug: Web/JavaScript/Reference/Regular_expressions/Word_boundary_assertion
 page-type: javascript-language-feature
 browser-compat: javascript.regular_expressions.word_boundary_assertion
+sidebar: jssidebar
 ---
-
-{{jsSidebar}}
 
 A **word boundary assertion** checks if the current position in the string is a word boundary. A word boundary is where the next character is a word character and the previous character is not a word character, or vice versa.
 
@@ -53,7 +52,8 @@ hasThanks("Just want to say thank you for all your work."); // true
 hasThanks("Thanksgiving is around the corner."); // false
 ```
 
-> **Warning:** Not all languages have clearly defined word boundaries. If you are working with languages like Chinese or Thai, where there are no whitespace separators, use a more advanced library like {{jsxref("Intl.Segmenter")}} to search for words instead.
+> [!WARNING]
+> Not all languages have clearly defined word boundaries. If you are working with languages like Chinese or Thai, where there are no whitespace separators, use a more advanced library like {{jsxref("Intl.Segmenter")}} to search for words instead.
 
 ## Specifications
 

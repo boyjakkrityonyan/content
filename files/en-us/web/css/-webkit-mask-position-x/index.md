@@ -1,13 +1,14 @@
 ---
-title: "-webkit-mask-position-x"
+title: -webkit-mask-position-x
 slug: Web/CSS/-webkit-mask-position-x
 page-type: css-property
 status:
   - non-standard
 browser-compat: css.properties.-webkit-mask-position-x
+sidebar: cssref
 ---
 
-{{CSSRef}}{{Non-standard_header}}
+{{Non-standard_header}}
 
 The `-webkit-mask-position-x` CSS property sets the initial horizontal position of a mask image.
 
@@ -58,10 +59,7 @@ The `-webkit-mask-position-x` CSS property sets the initial horizontal position 
 
 ## Formal syntax
 
-```plain
--webkit-mask-position-x =
-  [ <length-percentage> | left | center | right ]#
-```
+{{CSSSyntaxRaw(`-webkit-mask-position-x = [ <length-percentage> | left | center | right ]#`)}}
 
 ## Examples
 
@@ -69,12 +67,12 @@ The `-webkit-mask-position-x` CSS property sets the initial horizontal position 
 
 ```css
 .exampleOne {
-  -webkit-mask-image: url(mask.png);
+  -webkit-mask-image: url("mask.png");
   -webkit-mask-position-x: right;
 }
 
 .exampleTwo {
-  -webkit-mask-image: url(mask.png);
+  -webkit-mask-image: url("mask.png");
   -webkit-mask-position-x: 25%;
 }
 ```
@@ -89,4 +87,4 @@ Not part of any standard.
 
 ## See also
 
-{{cssxref("mask-position", "-webkit-mask-position")}}, {{cssxref("-webkit-mask-position-y")}}, {{cssxref("mask-origin", "-webkit-mask-origin")}}, {{cssxref("-webkit-mask-attachment")}}
+{{cssxref("mask-position", "-webkit-mask-position")}}, {{cssxref("-webkit-mask-position-y")}}, {{cssxref("mask-origin", "-webkit-mask-origin")}}

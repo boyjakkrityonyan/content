@@ -1,22 +1,72 @@
 ---
 title: text-wrap
 slug: Web/CSS/text-wrap
-page-type: css-property
-status:
-  - experimental
+page-type: css-shorthand-property
 browser-compat: css.properties.text-wrap
+sidebar: cssref
 ---
 
-{{CSSRef}}{{seecompattable}}
-
-The **`text-wrap`** CSS property controls how text inside an element is wrapped. The different values provide:
+The **`text-wrap`** [CSS](/en-US/docs/Web/CSS) shorthand property controls how text inside an element is wrapped. The different values provide:
 
 - Typographic improvements, for example more balanced line lengths across broken headings
 - A way to turn text wrapping off completely.
 
-<!-- - More stability in content-editable elements — for example {{htmlelement("textarea")}}s and elements with [`contenteditable`](/en-US/docs/Web/HTML/Global_attributes/contenteditable) set on them — as content is edited.-->
+{{InteractiveExample("CSS Demo: text-wrap")}}
 
-> **Note:** The {{CSSxRef("white-space-collapse")}} and `text-wrap` properties can be declared together using the {{CSSxRef("white-space")}} shorthand property.
+```css interactive-example-choice
+text-wrap: wrap;
+```
+
+```css interactive-example-choice
+text-wrap: nowrap;
+```
+
+```css interactive-example-choice
+text-wrap: balance;
+```
+
+```css interactive-example-choice
+text-wrap: pretty;
+```
+
+```css interactive-example-choice
+text-wrap: stable;
+```
+
+```html interactive-example
+<section class="default-example" id="default-example">
+  <div class="whole-content-wrapper">
+    <p>Edit the text in the box:</p>
+    <div class="transition-all" id="example-element">
+      <p contenteditable="">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem aut
+        cum eum id quos est.
+      </p>
+    </div>
+  </div>
+</section>
+```
+
+```css interactive-example
+.whole-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+#example-element {
+  border: 1px solid #c5c5c5;
+  width: 250px;
+}
+```
+
+## Constituent properties
+
+This property is a shorthand for the following CSS properties:
+
+- [`text-wrap-mode`](/en-US/docs/Web/CSS/text-wrap-mode)
+- [`text-wrap-style`](/en-US/docs/Web/CSS/text-wrap-style)
 
 ## Syntax
 
@@ -25,6 +75,8 @@ The **`text-wrap`** CSS property controls how text inside an element is wrapped.
 text-wrap: wrap;
 text-wrap: nowrap;
 text-wrap: balance;
+text-wrap: pretty;
+text-wrap: stable;
 
 /* Global values */
 text-wrap: inherit;
@@ -43,21 +95,23 @@ The `text-wrap` property is specified as a single keyword chosen from the list o
 - `nowrap`
   - : Text does not wrap across lines. It will overflow its containing element rather than breaking onto a new line.
 - `balance`
-  - : Text is wrapped in a way that best balances the number of characters on each line, enhancing layout quality and legibility. Because counting characters and balancing them across multiple lines is computationally expensive, this value is only supported for blocks of text spanning a limited number of lines (the Chromium implementation uses six wrapped lines or less), meaning that it is useful for cases such as headings or pull quotes.
+  - : Text is wrapped in a way that best balances the number of characters on each line, enhancing layout quality and legibility. Because counting characters and balancing them across multiple lines is computationally expensive, this value is only supported for blocks of text spanning a limited number of lines (six or less for Chromium and ten or less for Firefox).
+- `pretty`
+  - : Results in the same behavior as `wrap`, except that the user agent will use a slower algorithm that favors better layout over speed. This is intended for body copy where good typography is favored over performance (for example, when the number of [orphans](/en-US/docs/Web/CSS/orphans) should be kept to a minimum).
+- `stable`
+  - : Results in the same behavior as `wrap`, except that when the user is editing the content, the lines that come before the lines they are editing remain static rather than the whole block of text re-wrapping.
 
-<!--
-`pretty`
+## Description
 
-Results in the same behavior as `wrap`, except that the user agent will use a slower algorithm that favors better layout over speed. This is intended for body copy where good typography is favored over performance (for example, when the number of [orphans](/en-US/docs/Web/CSS/orphans) should be kept to a minimum).
+There are 2 ways that text can flow across lines within a block of content, such as a paragraph ({{HTMLElement("p")}}) or headings ({{HTMLElement("heading_elements","&lt;h1&gt;–&lt;h6&gt;")}}). These are _forced line breaks_, that are controlled by the user, and _soft line breaks_, that are controlled by the browser. The `text-wrap` property can be used to prompt the browser how to control the _soft line breaks_.
 
-`stable`
+The value you choose, for `text-wrap`, depends on how many lines of text you anticipate styling, whether the text is `contenteditable`, and whether you need to prioritize appearance or performance.
 
-Results in the same behavior as `wrap`, except that the algorithm does not consider subsequent lines when making break decisions. When editing text that has already been painted to the screen, line 1 breaking is not affected by changes on lines 2 and later, line 2 breaking is not affected by changes on lines 3 and later, etc.
+When the styled content will be limited to a short number of lines, such as headings, captions, and blockquotes, `text-wrap: balance` can be added to balance the number of characters on each line, enhancing layout quality and legibility. As browsers limit the number of lines impacted by this property, this value's impact on performance is negligible.
 
-For example, imagine a situation where you have a long word broken onto the next line because it doesn't quite fit on the previous line. With the default behavior (i.e. with values like `wrap` or `balance`), if you start deleting the long word so that what is left would then fit on the previous line, the user agent will recalculate the break and all the content will jump onto the same line. With `stable`, recalculation won't happen, and it will remain as two lines.
+For longer sections of text, `text-wrap: pretty` can be used. Note that `pretty` has a negative effect on performance, so it should be only used for longer blocks of text when the layout is more important than speed.
 
-The intention is to keep the text layout as stable as possible and mitigate performance issues in containers where editable text is updated. You don't want the editing cursor jumping around as text is added or removed due to the algorithm recalculating the wrapping.
--->
+The `stable` value improves user experience when used on content that is [`contenteditable`](/en-US/docs/Web/HTML/Reference/Global_attributes/contenteditable). This value ensures that, as the user is editing text, the previous lines in the area being edited remain stable.
 
 ## Formal definition
 
@@ -127,4 +181,6 @@ The text in the example is editable. Change the text, adding long words, to view
 - {{CSSxRef("white-space")}}
 - {{CSSxRef("white-space-collapse")}}
 - [CSS text module](/en-US/docs/Web/CSS/CSS_text)
-- [CSS `text-wrap: balance`](https://developer.chrome.com/blog/css-text-wrap-balance/) on developer.chrome.com
+- [CSS `text-wrap: balance`](https://developer.chrome.com/docs/css-ui/css-text-wrap-balance) on developer.chrome.com (2023)
+- [CSS `text-wrap: pretty`](https://developer.chrome.com/blog/css-text-wrap-pretty/) on developer.chrome.com (2023)
+- [Balancing Japanese and Korean typography](https://ryelle.codes/2025/04/typography-troubles-balancing-in-japanese-korean/) by Kelly Choyce-Dwan (2025)

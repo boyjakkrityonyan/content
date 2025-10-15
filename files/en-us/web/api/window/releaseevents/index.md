@@ -21,7 +21,6 @@ releaseEvents(eventType)
 ### Parameters
 
 - `eventType`
-
   - : `eventType` is a combination of the following values:
     `Event.ABORT`, `Event.BLUR`, `Event.CLICK`,
     `Event.CHANGE`, `Event.DBLCLICK`, `Event.DRAGDDROP`,
@@ -52,7 +51,7 @@ See also [`window.captureEvents`](/en-US/docs/Web/API/Window/captureEvents)
 
 ## Specifications
 
-This is not part of any specification.
+{{Specifications}}
 
 ## Browser compatibility
 

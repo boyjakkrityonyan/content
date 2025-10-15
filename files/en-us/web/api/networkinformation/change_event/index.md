@@ -3,24 +3,21 @@ title: "NetworkInformation: change event"
 short-title: change
 slug: Web/API/NetworkInformation/change_event
 page-type: web-api-event
-status:
-  - experimental
 browser-compat: api.NetworkInformation.change_event
 ---
 
-{{apiref("Network Information API")}}{{SeeCompatTable}}
+{{apiref("Network Information API")}} {{AvailableInWorkers}}
 
-The **`change`** event fires when connection information changes, and the event
-is received by the {{domxref("NetworkInformation")}} object.
+The **`change`** event of the {{domxref("NetworkInformation")}} interface fires when connection information changes, and the event is received by the {{domxref("NetworkInformation")}} object.
 
 ## Syntax
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("change", (event) => {});
+```js-nolint
+addEventListener("change", (event) => { })
 
-onchange = (event) => {};
+onchange = (event) => { }
 ```
 
 ## Event type

@@ -3,9 +3,8 @@ title: runtime.onUpdateAvailable
 slug: Mozilla/Add-ons/WebExtensions/API/runtime/onUpdateAvailable
 page-type: webextension-api-event
 browser-compat: webextensions.api.runtime.onUpdateAvailable
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Fired when an update to the extension is available. This event enables an extension to delay an update: for example, because it is in the middle of some operation which should not be interrupted.
 
@@ -37,15 +36,9 @@ Events have three functions:
 ### Parameters
 
 - `listener`
-
   - : The function called when this event occurs. The function is passed this argument:
-
     - `details`
       - : `object`. Contains a single property, a string named `version`, which represents the version number of the update.
-
-## Browser compatibility
-
-{{Compat}}
 
 ## Examples
 
@@ -63,7 +56,12 @@ browser.runtime.onUpdateAvailable.addListener(handleUpdateAvailable);
 
 {{WebExtExamples}}
 
-> **Note:** This API is based on Chromium's [`chrome.runtime`](https://developer.chrome.com/docs/extensions/reference/runtime/#event-onUpdateAvailable) API. This documentation is derived from [`runtime.json`](https://chromium.googlesource.com/chromium/src/+/master/extensions/common/api/runtime.json) in the Chromium code.
+## Browser compatibility
+
+{{Compat}}
+
+> [!NOTE]
+> This API is based on Chromium's [`chrome.runtime`](https://developer.chrome.com/docs/extensions/reference/api/runtime#event-onUpdateAvailable) API. This documentation is derived from [`runtime.json`](https://chromium.googlesource.com/chromium/src/+/master/extensions/common/api/runtime.json) in the Chromium code.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

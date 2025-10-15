@@ -2,17 +2,19 @@
 title: view-timeline-inset
 slug: Web/CSS/view-timeline-inset
 page-type: css-property
-status:
-  - experimental
 browser-compat: css.properties.view-timeline-inset
+sidebar: cssref
 ---
-
-{{CSSRef}}{{SeeCompatTable}}
 
 The **`view-timeline-inset`** [CSS](/en-US/docs/Web/CSS) property is used to specify one or two values representing an adjustment to the position of the scrollport (see {{glossary("Scroll container")}} for more details) in which the subject element of a _named view progress timeline_ animation is deemed to be visible. Put another way, this allows you to specify start and/or end inset (or outset) values that offset the position of the timeline.
 
 This can be combined with or used instead of {{cssxref("animation-range")}} and its longhand properties, which can be used to set the attachment range of an animation along its timeline.
 See [CSS scroll-driven animations](/en-US/docs/Web/CSS/CSS_scroll-driven_animations) for more details.
+
+> [!NOTE]
+> If the scroller element does not overflow its container in the axis dimension or if the overflow is hidden or clipped, no scroll progress timeline will be created.
+
+The `view-timeline-inset`, {{cssxref("view-timeline-axis")}}, and {{cssxref("view-timeline-name")}} properties can also be set using the {{cssxref("view-timeline")}} shorthand property.
 
 ## Syntax
 
@@ -37,7 +39,7 @@ Allowed values for `view-timeline-inset` are:
 - {{cssxref("length-percentage")}}
   - : Any valid `<length-percentage>` value is accepted as an inset/outset value.
     - If the value is positive, the position of the animation's start/end will be moved inside the scrollport by the specified length or percentage.
-    - If the value is negative, the position of the animation's start/end will be moved outside the scrollport by the specified length or percentage, i.e. it will start animating before it appears in the scrollport, or finish animating after it leaves the scrollport.
+    - If the value is negative, the position of the animation's start/end will be moved outside the scrollport by the specified length or percentage, i.e., it will start animating before it appears in the scrollport, or finish animating after it leaves the scrollport.
 
 If two values are provided, the first value represents the start inset/outset in the relevant axis (where the animation begins) and the second value represents the end inset/outset (where the animation ends). If only one value is provided, the start and end inset/outset are both set to the same value.
 
@@ -53,8 +55,8 @@ If two values are provided, the first value represents the start inset/outset in
 
 ### Creating a named view progress timeline with inset
 
-A view progress timeline named `--subjectReveal` is defined using the `view-timeline` property on a subject element with a `class` of `animation`.
-This is then set as the timeline for the same element using `animation-timeline: --subjectReveal;`. The result is that the subject element animates as it moves upwards through the document as it is scrolled.
+A view progress timeline named `--subject-reveal` is defined using the `view-timeline` property on a subject element with a `class` of `animation`.
+This is then set as the timeline for the same element using `animation-timeline: --subject-reveal;`. The result is that the subject element animates as it moves upwards through the document as it is scrolled.
 
 A `view-timeline-inset` declaration is also set to make the animation begin later than expected, and finish earlier.
 
@@ -117,7 +119,7 @@ The `subject` element and its containing `content` element are styled minimally,
 
 p,
 h1 {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Helvetica", "Arial", sans-serif;
 }
 
 h1 {
@@ -136,9 +138,9 @@ Last, an animation is specified on the element that animates its opacity and sca
 
 ```css
 .animation {
-  view-timeline: --subjectReveal block;
+  view-timeline: --subject-reveal block;
   view-timeline-inset: 70% -100px;
-  animation-timeline: --subjectReveal;
+  animation-timeline: --subject-reveal;
 
   animation-name: appear;
   animation-fill-mode: both;
@@ -152,7 +154,7 @@ Last, an animation is specified on the element that animates its opacity and sca
   }
 
   to {
-    opacity: 1,
+    opacity: 1;
     transform: scaleX(1);
   }
 }
@@ -174,7 +176,7 @@ Scroll to see the subject element being animated.
 
 ## See also
 
-- [`animation-timeline`](/en-US/docs/Web/CSS/animation-timeline)
+- {{cssxref("animation-timeline")}}
 - {{cssxref("timeline-scope")}}
-- [`view-timeline`](/en-US/docs/Web/CSS/view-timeline), [`view-timeline-axis`](/en-US/docs/Web/CSS/view-timeline-axis), [`view-timeline-name`](/en-US/docs/Web/CSS/view-timeline-name)
+- {{cssxref("view-timeline")}}, {{cssxref("view-timeline-axis")}}, {{cssxref("view-timeline-name")}}
 - [CSS scroll-driven animations](/en-US/docs/Web/CSS/CSS_scroll-driven_animations)

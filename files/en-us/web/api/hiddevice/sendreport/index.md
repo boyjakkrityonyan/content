@@ -8,7 +8,7 @@ status:
 browser-compat: api.HIDDevice.sendReport
 ---
 
-{{securecontext_header}}{{APIRef("WebHID API")}}{{SeeCompatTable}}
+{{securecontext_header}}{{APIRef("WebHID API")}}{{SeeCompatTable}}{{AvailableInWorkers("window_and_worker_except_shared")}}
 
 The **`sendReport()`** method of the {{domxref("HIDDevice")}} interface sends an output report to the HID device.
 
@@ -38,7 +38,7 @@ A {{jsxref("Promise")}} that resolves with `undefined` once the report has been 
 
 ## Examples
 
-The example below shows how to make a Joy-Con device rumble using output reports. You can see more examples, and live demos in the article [Connecting to uncommon HID devices](https://web.dev/hid/).
+The example below shows how to make a Joy-Con device rumble using output reports. You can see more examples, and live demos in the article [Connecting to uncommon HID devices](https://developer.chrome.com/docs/capabilities/hid).
 
 ```js
 // First, send a command to enable vibration.

@@ -3,9 +3,8 @@ title: Reflect
 slug: Web/JavaScript/Reference/Global_Objects/Reflect
 page-type: javascript-namespace
 browser-compat: javascript.builtins.Reflect
+sidebar: jsref
 ---
-
-{{JSRef}}
 
 The **`Reflect`** namespace object contains static methods for invoking interceptable JavaScript object internal methods. The methods are the same as those of [proxy handlers](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/Proxy).
 
@@ -38,8 +37,8 @@ Nearly every `Reflect` method's behavior can be done with some other syntax or m
 
 ## Static properties
 
-- `Reflect[@@toStringTag]`
-  - : The initial value of the [`@@toStringTag`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) property is the string `"Reflect"`. This property is used in {{jsxref("Object.prototype.toString()")}}.
+- `Reflect[Symbol.toStringTag]`
+  - : The initial value of the [`[Symbol.toStringTag]`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) property is the string `"Reflect"`. This property is used in {{jsxref("Object.prototype.toString()")}}.
 
 ## Static methods
 

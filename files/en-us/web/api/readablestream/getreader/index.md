@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.ReadableStream.getReader
 ---
 
-{{APIRef("Streams")}}
+{{APIRef("Streams")}}{{AvailableInWorkers}}
 
 The **`getReader()`** method of the {{domxref("ReadableStream")}} interface creates a reader and locks the stream to it.
 While the stream is locked, no other reader can be acquired until this one is released.
@@ -21,14 +21,10 @@ getReader(options)
 ### Parameters
 
 - `options` {{optional_inline}}
-
   - : An object containing the following properties:
-
     - `mode` {{optional_inline}}
-
       - : An property that specifies the type of reader to create.
         Values can be:
-
         - `"byob"`, which results in a {{domxref("ReadableStreamBYOBReader")}} being created that can read readable byte streams (streams that support zero-copy transfer from an underlying byte source to the reader when internal stream buffers are empty).
         - `undefined` (or not specified at all — this is the default), which results in a {{domxref("ReadableStreamDefaultReader")}} being created that can read individual chunks from a stream.
 

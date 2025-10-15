@@ -3,13 +3,13 @@ title: scripting.executeScript()
 slug: Mozilla/Add-ons/WebExtensions/API/scripting/executeScript
 page-type: webextension-api-function
 browser-compat: webextensions.api.scripting.executeScript
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Injects a script into a target context. The script is run at `document_idle` by default.
 
-> **Note:** This method is available in Manifest V3 or higher in Chrome and Firefox 101. In Safari and Firefox 102+, this method is also available in Manifest V2.
+> [!NOTE]
+> This method is available in Manifest V3 or higher in Chrome and Firefox 101. In Safari and Firefox 102+, this method is also available in Manifest V2.
 
 To use this API you must have the `"scripting"` [permission](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions) and permission for the target's URL, either explicitly as a [host permission](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions#host_permissions) or using the [activeTab permission](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions#activetab_permission). Note that some special pages do not allow this permission, including reader view, view-source, and PDF viewer pages.
 
@@ -30,9 +30,7 @@ let results = await browser.scripting.executeScript(
 ### Parameters
 
 - `details`
-
   - : An object describing the script to inject. It contains these properties:
-
     - `args` {{optional_inline}}
       - : An array of arguments to carry into the function. This is only valid if the `func` parameter is specified. The arguments must be JSON-serializable.
     - `files` {{optional_inline}}
@@ -59,7 +57,6 @@ Each `InjectionResult` object has these properties:
 - `result` {{optional_inline}}
   - : `any`. The result of the script execution.
 - `error` {{optional_inline}}
-
   - : `any`. If an error occurs, contains the value the script threw or rejected with. Typically this is an error object with a message property but it could be any value (including primitives and undefined).
 
     Chrome does not support the `error` property yet (see [Issue 1271527: Propagate errors from scripting.executeScript to InjectionResult](https://crbug.com/1271527)). As an alternative, runtime errors can be caught by wrapping the code to execute in a try-catch statement. Uncaught errors are also reported to the console of the target tab.
@@ -71,7 +68,7 @@ let foo = "my result";
 foo;
 ```
 
-Here the results array contains the string "`my result`" as an element.
+Here the results array contains the string `"my result"` as an element.
 
 The script result must be a [structured cloneable](/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm) value in Firefox or a [JSON-serializable](/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#description) value in Chrome. The [Chrome incompatibilities](/en-US/docs/Mozilla/Add-ons/WebExtensions/Chrome_incompatibilities) article discusses this difference in more detail in the [Data cloning algorithm](/en-US/docs/Mozilla/Add-ons/WebExtensions/Chrome_incompatibilities#data_cloning_algorithm) section.
 
@@ -120,4 +117,5 @@ browser.action.onClicked.addListener(async (tab) => {
 
 {{Compat}}
 
-> **Note:** This API is based on Chromium's [`chrome.scripting`](https://developer.chrome.com/docs/extensions/reference/scripting/#method-executeScript) API.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.scripting`](https://developer.chrome.com/docs/extensions/reference/api/scripting#method-executeScript) API.

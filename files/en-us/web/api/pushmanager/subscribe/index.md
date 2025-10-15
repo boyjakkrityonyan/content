@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.PushManager.subscribe
 ---
 
-{{ApiRef("Push API")}}
+{{ApiRef("Push API")}}{{SecureContext_Header}}{{AvailableInWorkers}}
 
 The **`subscribe()`** method of the {{domxref("PushManager")}}
 interface subscribes to a push service.
@@ -24,10 +24,8 @@ subscribe(options)
 ### Parameters
 
 - `options` {{optional_inline}}
-
   - : An object containing optional configuration parameters. It can have the following
     properties:
-
     - `userVisibleOnly`
       - : A boolean indicating that the returned push
         subscription will only be used for messages whose effect is made visible to the
@@ -41,8 +39,9 @@ subscribe(options)
         NOT_** the same ECDH key that you use to encrypt the data. For more
         information, see "[Using VAPID with WebPush](https://blog.mozilla.org/services/2016/04/04/using-vapid-with-webpush/)".
 
-    > **Note:** This parameter is required in some browsers like
-    > Chrome and Edge.
+    > [!NOTE]
+    > This parameter is required in some browsers like
+    > Chrome and Edge. They will reject the Promise if `userVisibleOnly` is not set to `true`.
 
 ### Return value
 
@@ -70,7 +69,7 @@ navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
       console.log(pushSubscription.endpoint);
       // The push subscription details needed by the application
       // server are now available, and can be sent to it using,
-      // for example, an XMLHttpRequest.
+      // for example, the fetch() API.
     },
     (error) => {
       // During development it often helps to log errors to the

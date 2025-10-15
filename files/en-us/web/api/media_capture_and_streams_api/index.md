@@ -2,7 +2,16 @@
 title: Media Capture and Streams API (Media Stream)
 slug: Web/API/Media_Capture_and_Streams_API
 page-type: web-api-overview
-browser-compat: api.MediaStream
+browser-compat:
+  - api.MediaStream
+  - api.MediaStreamTrack
+  - api.MediaDevices
+  - api.MediaDeviceInfo
+  - api.InputDeviceInfo
+  - api.CanvasCaptureMediaStreamTrack
+spec-urls:
+  - https://w3c.github.io/mediacapture-main/
+  - https://w3c.github.io/mediacapture-fromelement/
 ---
 
 {{DefaultAPISidebar("Media Capture and Streams")}}
@@ -13,7 +22,7 @@ It provides the interfaces and methods for working with the streams and their co
 
 ## Concepts and usage
 
-The API is based on the manipulation of a {{domxref("MediaStream")}} object representing a flux of audio- or video-related data. See an example in [Get the media stream](/en-US/docs/Web/API/Media_Capture_and_Streams_API/Taking_still_photos#the_startup_function).
+The API is based on the manipulation of a {{domxref("MediaStream")}} object representing a flux of audio- or video-related data. See an example in [Get the media stream](/en-US/docs/Web/API/Media_Capture_and_Streams_API/Taking_still_photos#demo).
 
 A `MediaStream` consists of zero or more {{domxref("MediaStreamTrack")}} objects, representing various audio or video **tracks**. Each `MediaStreamTrack` may have one or more **channels**. The channel represents the smallest unit of a media stream, such as an audio signal associated with a given speaker, like _left_ or _right_ in a stereo audio track.
 
@@ -30,21 +39,18 @@ In these reference articles, you'll find the fundamental information you'll need
 - {{domxref("MediaDeviceInfo")}}
 - {{domxref("MediaDevices")}}
 - {{domxref("MediaStream")}}
-- {{domxref("MediaStreamEvent")}}
 - {{domxref("MediaStreamTrack")}}
 - {{domxref("MediaStreamTrackEvent")}}
 - {{domxref("MediaTrackConstraints")}}
 - {{domxref("MediaTrackSettings")}}
 - {{domxref("MediaTrackSupportedConstraints")}}
 - {{domxref("OverconstrainedError")}}
-- {{domxref("URL")}}
 
 ## Events
 
 - {{domxref("MediaStream/addtrack_event", "addtrack")}}
 - {{domxref("MediaStreamTrack/ended_event", "ended")}}
 - {{domxref("MediaStreamTrack/mute_event", "mute")}}
-- {{domxref("MediaStreamTrack.overconstrained_event", "overconstrained")}}
 - {{domxref("MediaStream/removetrack_event", "removetrack")}}
 - {{domxref("MediaStreamTrack/unmute_event", "unmute")}}
 
@@ -54,6 +60,10 @@ The [Capabilities, constraints, and settings](/en-US/docs/Web/API/Media_Capture_
 
 The [Taking still photos with getUserMedia()](/en-US/docs/Web/API/Media_Capture_and_Streams_API/Taking_still_photos) article shows how to use [`getUserMedia()`](/en-US/docs/Web/API/MediaDevices/getUserMedia) to access the camera on a computer or mobile phone with `getUserMedia()` support and take a photo with it.
 
+## Specifications
+
+{{Specifications}}
+
 ## Browser compatibility
 
 {{Compat}}
@@ -61,5 +71,4 @@ The [Taking still photos with getUserMedia()](/en-US/docs/Web/API/Media_Capture_
 ## See also
 
 - [WebRTC](/en-US/docs/Web/API/WebRTC_API) - the introductory page to the API
-- {{domxref("mediaDevices.getUserMedia()")}}
 - [Taking still photos with WebRTC](/en-US/docs/Web/API/Media_Capture_and_Streams_API/Taking_still_photos): a demonstration and tutorial about using `getUserMedia()`.

@@ -3,9 +3,8 @@ title: mask-border-outset
 slug: Web/CSS/mask-border-outset
 page-type: css-property
 browser-compat: css.properties.mask-border-outset
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **`mask-border-outset`** [CSS](/en-US/docs/Web/CSS) property specifies the distance by which an element's [mask border](/en-US/docs/Web/CSS/mask-border) is set out from its border box.
 
@@ -73,7 +72,8 @@ Chromium-based browsers support an outdated version of this property — `mask-b
 -webkit-mask-box-image-outset: 1rem;
 ```
 
-> **Note:** The [`mask-border`](/en-US/docs/Web/CSS/mask-border) page features a working example (using the out-of-date prefixed border mask properties supported in Chromium), so you can get an idea of the effect.
+> [!NOTE]
+> The [`mask-border`](/en-US/docs/Web/CSS/mask-border) page features a working example (using the out-of-date prefixed border mask properties supported in Chromium), so you can get an idea of the effect.
 
 ## Specifications
 

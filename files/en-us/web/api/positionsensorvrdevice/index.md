@@ -15,7 +15,7 @@ The **`PositionSensorVRDevice`** interface of the [WebVR API](/en-US/docs/Web/AP
 ## Instance methods
 
 - {{domxref("PositionSensorVRDevice.getState()")}} {{Deprecated_Inline}} {{Non-standard_Inline}}
-  - : Returns the current state of the position sensor for the current frame (e.g. within the current {{domxref("window.requestAnimationFrame")}} callback) or for the previous frame, contained with a {{domxref("VRPose")}} object. This is the method you'd normally want to use, versus `getImmediateState()`.
+  - : Returns the current state of the position sensor for the current frame (e.g., within the current {{domxref("window.requestAnimationFrame")}} callback) or for the previous frame, contained with a {{domxref("VRPose")}} object. This is the method you'd normally want to use, versus `getImmediateState()`.
 - {{domxref("PositionSensorVRDevice.getImmediateState()")}} {{Deprecated_Inline}} {{Non-standard_Inline}}
   - : Returns the current instantaneous position sensor state. This is intended to only be used rarely, for certain special uses, for example sampling the immediate position of a hand orientation sensor — or at least it will be, in the future.
 - {{domxref("PositionSensorVRDevice.resetSensor()")}} {{Deprecated_Inline}} {{Non-standard_Inline}}
@@ -32,7 +32,7 @@ _This interface doesn't define any properties of its own, but it does inherit th
 
 ## Examples
 
-The following example uses the WebVR API to update the view of a simple {{domxref("CanvasRenderingContext2D","2D canvas")}} scene on each frame of a {{domxref("window.requestAnimationFrame()","requestAnimationFrame")}} loop.
+The following example uses the WebVR API to update the view of a simple [2D canvas](/en-US/docs/Web/API/CanvasRenderingContext2D) scene on each frame of a {{domxref("window.requestAnimationFrame()","requestAnimationFrame")}} loop.
 
 ```js
 function setView() {
@@ -69,5 +69,4 @@ We then output the x, y and z position and orientation values for informational 
 
 ## See also
 
-- [WebVR API homepage](/en-US/docs/Web/API/WebVR_API).
-- <https://mixedreality.mozilla.org/> — demos, downloads, and other resources from the Mozilla VR team.
+- [WebVR API](/en-US/docs/Web/API/WebVR_API)

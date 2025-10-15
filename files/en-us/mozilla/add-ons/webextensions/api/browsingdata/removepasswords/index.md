@@ -3,9 +3,8 @@ title: browsingData.removePasswords()
 slug: Mozilla/Add-ons/WebExtensions/API/browsingData/removePasswords
 page-type: webextension-api-function
 browser-compat: webextensions.api.browsingData.removePasswords
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Clears saved passwords.
 
@@ -71,13 +70,14 @@ function onError(error) {
 browser.browsingData.removePasswords({}).then(onRemoved, onError);
 ```
 
+{{WebExtExamples}}
+
 ## Browser compatibility
 
 {{Compat}}
 
-{{WebExtExamples}}
-
-> **Note:** This API is based on Chromium's [`chrome.browsingData`](https://developer.chrome.com/docs/extensions/reference/browsingData/) API.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.browsingData`](https://developer.chrome.com/docs/extensions/reference/api/browsingData) API.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

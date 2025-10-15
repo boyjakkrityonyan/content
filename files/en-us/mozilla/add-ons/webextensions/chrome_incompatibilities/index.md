@@ -2,9 +2,8 @@
 title: Chrome incompatibilities
 slug: Mozilla/Add-ons/WebExtensions/Chrome_incompatibilities
 page-type: guide
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar}}
 
 The WebExtension APIs aim to provide compatibility across all the main browsers, so extensions should run on any browser with minimal changes.
 
@@ -13,14 +12,12 @@ However, there are significant differences between Chrome (and Chromium-based br
 - Support for WebExtension APIs differs across browsers. See [Browser support for JavaScript APIs](/en-US/docs/Mozilla/Add-ons/WebExtensions/Browser_support_for_JavaScript_APIs) for details.
 - Support for `manifest.json` keys differs across browsers. See the ["Browser compatibility" section](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json#browser_compatibility) on the [`manifest.json`](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json) page for more details.
 - Extension API namespace:
-
   - **In Firefox and Safari:** Extension APIs are accessed under the `browser` namespace. The `chrome` namespace is also supported for compatibility with Chrome.
   - **In Chrome:** Extension APIs are accessed under the `chrome` namespace. (cf. [Chrome bug 798169](https://crbug.com/798169))
 
 - Asynchronous APIs:
-
   - **In Firefox and Safari:** Asynchronous APIs are implemented using promises.
-  - **In Chrome:** In Manifest V2, asynchronous APIs are implemented using callbacks. In Manifest V3, support is provided for [promises](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-overview/#promises) on most appropriate methods. (cf. [Chrome bug 328932](https://crbug.com/328932)) Callbacks are supported in Manifest V3 for backward compatibility.
+  - **In Chrome:** In Manifest V2, asynchronous APIs are implemented using callbacks. In Manifest V3, support is provided for [promises](https://developer.chrome.com/docs/extensions/develop/migrate#promises) on most appropriate methods. (cf. [Chrome bug 328932](https://crbug.com/328932)) Callbacks are supported in Manifest V3 for backward compatibility.
 
 The rest of this page details these and other incompatibilities.
 
@@ -59,7 +56,7 @@ The rest of this page details these and other incompatibilities.
   setCookie.then(logCookie, logError);
   ```
 
-- **In Chrome:** In Manifest V2, asynchronous APIs use callbacks to return values and {{WebExtAPIRef("runtime.lastError")}} to communicate errors. In Manifest V3, callbacks are supported for backward compatibility, along with support for [promises](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-overview/#promises) on most appropriate methods.
+- **In Chrome:** In Manifest V2, asynchronous APIs use callbacks to return values and {{WebExtAPIRef("runtime.lastError")}} to communicate errors. In Manifest V3, callbacks are supported for backward compatibility, along with support for [promises](https://developer.chrome.com/docs/extensions/develop/migrate#promises) on most appropriate methods.
 
   ```js
   function logCookie(c) {
@@ -77,7 +74,8 @@ The rest of this page details these and other incompatibilities.
 
 As a porting aid, the Firefox implementation of WebExtensions supports `chrome` using callbacks and `browser` using promises. This means that many Chrome extensions work in Firefox without changes.
 
-> **Note:** The `browser` namespace is supported by Firefox and Safari. Chrome does not offer the `browser` namespace, until [Chrome bug 798169](https://crbug.com/798169) is resolved.
+> [!NOTE]
+> The `browser` namespace is supported by Firefox and Safari. Chrome does not offer the `browser` namespace, until [Chrome bug 798169](https://crbug.com/798169) is resolved.
 
 If you choose to write your extension to use `browser` and promises, Firefox provides a polyfill that should enable it to run in Chrome: <https://github.com/mozilla/webextension-polyfill>.
 
@@ -111,8 +109,15 @@ Firefox and Chrome include a Proxy API. However, the design of these two APIs is
 
 - **In Firefox**: Proxies are set using the [proxy.settings](/en-US/docs/Mozilla/Add-ons/WebExtensions/API/proxy/settings) property or [proxy.onRequest](/en-US/docs/Mozilla/Add-ons/WebExtensions/API/proxy/onRequest) to provide [ProxyInfo](/en-US/docs/Mozilla/Add-ons/WebExtensions/API/proxy/ProxyInfo) dynamically.
   See [proxy](/en-US/docs/Mozilla/Add-ons/WebExtensions/API/proxy) for more information on the API.
-- **In Chrome**: Proxy settings are defined in a [`proxy.ProxyConfig`](https://developer.chrome.com/docs/extensions/reference/proxy/#type-ProxyConfig) object. Depending on Chrome's proxy settings, the settings may contain [`proxy.ProxyRules`](https://developer.chrome.com/docs/extensions/reference/proxy/#type-ProxyRules) or a [`proxy.PacScript`](https://developer.chrome.com/docs/extensions/reference/proxy/#type-PacScript). Proxies are set using the [proxy.settings](https://developer.chrome.com/docs/extensions/reference/proxy/#property-settings) property.
-  See [chrome.proxy](https://developer.chrome.com/docs/extensions/reference/proxy/) for more information on the API.
+- **In Chrome**: Proxy settings are defined in a [`proxy.ProxyConfig`](https://developer.chrome.com/docs/extensions/reference/api/proxy#type-ProxyConfig) object. Depending on Chrome's proxy settings, the settings may contain [`proxy.ProxyRules`](https://developer.chrome.com/docs/extensions/reference/api/proxy#type-ProxyRules) or a [`proxy.PacScript`](https://developer.chrome.com/docs/extensions/reference/api/proxy#type-PacScript). Proxies are set using the [proxy.settings](https://developer.chrome.com/docs/extensions/reference/api/proxy#property-settings) property.
+  See [chrome.proxy](https://developer.chrome.com/docs/extensions/reference/api/proxy) for more information on the API.
+
+#### Sidebar API
+
+Firefox and Chrome provide incompatible APIs for working with a [sidebar](/en-US/docs/Mozilla/Add-ons/WebExtensions/user_interface/Sidebars).
+
+- **In Firefox (and Opera)**: a sidebar is specified with the [`sidebar_action`](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/sidebar_action) manifest key and manipulated with the {{WebExtAPIRef("sidebarAction")}} API.
+- **In Chrome**: an initial sidebar can be specified with the `side_panel` manifest key. The [`sidePanel` API](https://developer.chrome.com/docs/extensions/reference/api/sidePanel) then enables panels to be manipulated.
 
 #### Tabs API
 
@@ -135,16 +140,15 @@ When calling `tabs.remove()`:
 #### WebRequest API
 
 - **In Firefox:**
-
   - Requests can be redirected only if their original URL uses the `http:` or `https:` scheme.
   - The `activeTab` permission does not allow for intercepting network requests in the current tab. (See [bug 1617479](https://bugzil.la/1617479))
   - Events are not fired for system requests (for example, extension upgrades or search bar suggestions).
-
     - **From Firefox 57 onwards:** Firefox makes an exception for extensions that need to intercept {{WebExtAPIRef("webRequest.onAuthRequired")}} for proxy authorization. See the documentation for {{WebExtAPIRef("webRequest.onAuthRequired")}}.
 
   - If an extension wants to redirect a public (e.g., HTTPS) URL to an [extension page](/en-US/docs/Mozilla/Add-ons/WebExtensions/user_interface/Extension_pages), the extension's `manifest.json` file must contain a [`web_accessible_resources`](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/web_accessible_resources) key with the URL of the extension page.
 
-    - > **Note:** _Any_ website may link or redirect to that URL, and extensions should treat any input (POST data, for example) as if it came from an untrusted source, as a normal web page should.
+    > [!NOTE]
+    > _Any_ website may link or redirect to that URL, and extensions should treat any input (POST data, for example) as if it came from an untrusted source, as a normal web page should.
 
   - Some of the `browser.webRequest.*` APIs allow for returning Promises that resolves `webRequest.BlockingResponse` asynchronously.
 
@@ -158,7 +162,7 @@ When calling `tabs.remove()`:
 
 #### DeclarativeContent API
 
-- **In Firefox:** Chrome's [declarativeContent](https://developer.chrome.com/docs/extensions/reference/declarativeContent/) API [is not implemented](https://bugzil.la/1435864). In addition, Firefox [will not support](https://bugzil.la/1323433#c16) the `declarativeContent.RequestContentScript` API (which is rarely used and is unavailable in stable releases of Chrome).
+- **In Firefox:** Chrome's [declarativeContent](https://developer.chrome.com/docs/extensions/reference/api/declarativeContent) API [is not implemented](https://bugzil.la/1435864). In addition, Firefox [will not support](https://bugzil.la/1323433#c16) the `declarativeContent.RequestContentScript` API (which is rarely used and is unavailable in stable releases of Chrome).
 
 ### Miscellaneous incompatibilities
 
@@ -179,7 +183,7 @@ When calling `tabs.remove()`:
 #### Manifest "key" property
 
 - **In Firefox:** As Firefox uses random UUIDs for `web_accessible_resources`, this property is unsupported. Firefox extensions can fix their extension ID through the `browser_specific_settings.gecko.id` manifest key (see [browser_specific_settings.gecko](/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_specific_settings#firefox_gecko_properties)).
-- **In Chrome:** When working with an unpacked extension, the manifest may include a [`"key"` property](https://developer.chrome.com/docs/extensions/mv3/manifest/key/) to pin the extension ID across different machines. This is mainly useful when working with `web_accessible_resources`.
+- **In Chrome:** When working with an unpacked extension, the manifest may include a [`"key"` property](https://developer.chrome.com/docs/extensions/reference/manifest/key) to pin the extension ID across different machines. This is mainly useful when working with `web_accessible_resources`.
 
 #### Content script HTTP(S) requests
 
@@ -190,6 +194,13 @@ When calling `tabs.remove()`:
 
 - **In Firefox:** The global scope of the [content script environment](/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_scripts#content_script_environment) is not strictly equal to `window` ([Firefox bug 1208775](https://bugzil.la/1208775)). More specifically, the global scope (`globalThis`) is composed of standard JavaScript features as usual, plus `window` as the prototype of the global scope. Most DOM APIs are inherited from the page through `window`, through [Xray vision](/en-US/docs/Mozilla/Add-ons/WebExtensions/Sharing_objects_with_page_scripts#xray_vision_in_firefox) to shield the content script from modifications by the web page. A content script may encounter JavaScript objects from its global scope or Xray-wrapped versions from the web page.
 - **In Chrome:** The global scope is `window`, and the available DOM APIs are generally independent of the web page (other than sharing the underlying DOM). Content scripts cannot directly access JavaScript objects from the web page.
+
+#### Content script page event handlers
+
+- **In Firefox:** separate event handlers are not maintained per world. This means that the most recent content script to request `element.onclick = xxx` overwrites the page's or other extensions' event handlers.
+- **In Chrome:** separate event handlers are maintained per world, so Chrome maintains event handlers for a page and every requesting extension.
+
+To work around this inconsistency, use {{domxref("EventTarget.addEventListener", "addEventListener()")}} to register event listeners. See [Firefox bug 1965975](https://bugzil.la/1965975#c5) for more information.
 
 #### Executing code in a web page from content script
 
@@ -243,7 +254,7 @@ The tables are generated from compatibility data stored as [JSON files in GitHub
 
 ### App persistence
 
-- **In Firefox:** When a native messaging connection is closed, Firefox kills the subprocesses if they do not break away. On Windows, the browser puts the native application's process into a [Job object](<https://msdn.microsoft.com/library/windows/desktop/ms684161(v=vs.85).aspx>) and kills the job. Suppose the native application launches other processes and wants them to remain open after the native application is killed. In that case, the native application must use `CreateProcess`, instead of `ShellExecute`, to launch the additional process with the [`CREATE_BREAKAWAY_FROM_JOB`](<https://msdn.microsoft.com/library/windows/desktop/ms684863(v=vs.85).aspx>) flag.
+- **In Firefox:** When a native messaging connection is closed, Firefox kills the subprocesses if they do not break away. On Windows, the browser puts the native application's process into a [Job object](https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects) and kills the job. Suppose the native application launches other processes and wants them to remain open after the native application is killed. In that case, the native application must use `CreateProcess`, instead of `ShellExecute`, to launch the additional process with the [`CREATE_BREAKAWAY_FROM_JOB`](https://learn.microsoft.com/en-us/windows/win32/procthread/process-creation-flags) flag.
 
 ## Data cloning algorithm
 

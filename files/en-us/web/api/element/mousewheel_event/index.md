@@ -9,25 +9,26 @@ status:
 browser-compat: api.Element.mousewheel_event
 ---
 
-{{APIRef}}{{deprecated_header}}{{ Non-standard_header() }}
+{{APIRef("UI Events")}}{{deprecated_header}}{{Non-standard_header}}
 
 The _obsolete_ and _non-standard_ **`mousewheel`** event is fired asynchronously at an {{domxref("Element")}} to provide updates while a mouse wheel or similar device is operated. The `mousewheel` event was never part of any standard, and while it was implemented by several browsers, it was never implemented by Firefox.
 
-> **Note:** Instead of this obsolete event, use the standard {{domxref("Element.wheel_event", "wheel")}} event.
+> [!NOTE]
+> Instead of this obsolete event, use the standard {{domxref("Element.wheel_event", "wheel")}} event.
 
 ## Syntax
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("mousewheel", (event) => {});
+```js-nolint
+addEventListener("mousewheel", (event) => { })
 
-onmousewheel = (event) => {};
+onmousewheel = (event) => { }
 ```
 
 ## Event type
 
-A {{domxref("WheelEvent")}}. Inherits from {{domxref("Event")}}.
+A {{domxref("WheelEvent")}}. Inherits from {{domxref("MouseEvent")}}, {{domxref("UIEvent")}} and {{domxref("Event")}}.
 
 {{InheritanceDiagram("WheelEvent")}}
 
@@ -42,7 +43,6 @@ _This interface inherits properties from its ancestors, {{DOMxRef("MouseEvent")}
 - {{DOMxRef("WheelEvent.deltaZ")}} {{ReadOnlyInline}}
   - : Returns a `double` representing the scroll amount for the z-axis.
 - {{DOMxRef("WheelEvent.deltaMode")}} {{ReadOnlyInline}}
-
   - : Returns an `unsigned long` representing the unit of the `delta*` values' scroll amount. Permitted values are:
 
     | Constant                     | Value  | Description                                                                                                                                                  |
@@ -62,7 +62,8 @@ _This interface inherits properties from its ancestors, {{DOMxRef("MouseEvent")}
 
 The value of the {{domxref("UIEvent/detail", "detail")}} property is always zero, except in Opera, which uses `detail` similarly to the Firefox-only {{domxref("Element.DOMMouseScroll_event", "DOMMouseScroll")}} event's `detail` value, which indicates the scroll distance in terms of lines, with negative values indicating the scrolling movement is either toward the bottom or toward the right, and positive values indicating scrolling to the top or left.
 
-> **Note:** On macOS, the scroll distance (and therefore the value of `detail`) is computed based on the accelerated scroll distance.
+> [!NOTE]
+> On macOS, the scroll distance (and therefore the value of `detail`) is computed based on the accelerated scroll distance.
 
 On Linux, `2` or `-2` is set per native wheel event.
 

@@ -6,7 +6,7 @@ page-type: web-api-instance-property
 browser-compat: api.Event.type
 ---
 
-{{APIRef}}
+{{APIRef("DOM")}}{{AvailableInWorkers}}
 
 The **`type`** read-only property of the {{domxref("Event")}}
 interface returns a string containing the event's type. It is set when the event is
@@ -38,14 +38,14 @@ function getEventType(event) {
 }
 
 // Keyboard events
-document.addEventListener("keydown", getEventType, false); // first
-document.addEventListener("keypress", getEventType, false); // second
-document.addEventListener("keyup", getEventType, false); // third
+document.addEventListener("keydown", getEventType); // first
+document.addEventListener("keypress", getEventType); // second
+document.addEventListener("keyup", getEventType); // third
 
 // Mouse events
-document.addEventListener("mousedown", getEventType, false); // first
-document.addEventListener("mouseup", getEventType, false); // second
-document.addEventListener("click", getEventType, false); // third
+document.addEventListener("mousedown", getEventType); // first
+document.addEventListener("mouseup", getEventType); // second
+document.addEventListener("click", getEventType); // third
 ```
 
 ### Result

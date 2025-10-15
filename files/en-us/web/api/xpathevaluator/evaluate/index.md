@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.XPathEvaluator.evaluate
 ---
 
-{{APIRef("DOM XPath")}}
+{{APIRef("DOM")}}
 
 The `evaluate()` method of the {{domxref("XPathEvaluator")}} interface
 executes an XPath expression on the given node or document and returns an
@@ -29,7 +29,7 @@ evaluate(expression, contextNode, resolver, type, result)
 - `contextNode`
   - : A {{domxref("Node")}} representing the context to use for evaluating the expression.
 - `resolver` {{optional_inline}}
-  - : Permits translation of all prefixes, including the `xml` namespace
+  - : A {{domxref("Node")}}, `null`, or any object implementing the {{domxref("Node/lookupNamespaceURI", "lookupNamespaceURI")}} method. Permits translation of all prefixes, including the `xml` namespace
     prefix, within the XPath expression into appropriate namespace URIs.
 - `type` {{optional_inline}}
   - : Specifies the type of result to be returned by evaluating the expression. This must
@@ -49,18 +49,18 @@ expression.
 #### INVALID_EXPRESSION_ERR
 
 If the expression is not legal according to the rules of the
-{{domxref("XPathEvaluator")}}, an {{domxref("XPathException")}} of type
+{{domxref("XPathEvaluator")}}, a {{domxref("DOMException")}} of type
 `INVALID_EXPRESSION_ERR` is raised.
 
 #### TYPE_ERR
 
-In case result cannot be converted to the specified type, an
-{{domxref("XPathException")}} of type `TYPE_ERR` is raised.
+In case result cannot be converted to the specified type, a
+{{domxref("DOMException")}} of type `TYPE_ERR` is raised.
 
 #### NAMESPACE_ERR
 
 If the expression contains namespace prefixes which cannot be resolved by the specified
-{{domxref("XPathNSResolver")}}, a {{domxref("DOMException")}} of type
+`XPathNSResolver`, a {{domxref("DOMException")}} of type
 `NAMESPACE_ERROR` is raised.
 
 #### WRONG_DOCUMENT_ERR

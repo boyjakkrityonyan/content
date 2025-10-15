@@ -13,7 +13,8 @@ attribute node, and returns it. The object created is a node implementing the
 {{domxref("Attr")}} interface. The DOM does not enforce what sort of attributes can be
 added to a particular element in this manner.
 
-> **Note:** The string given in parameter is converted to lowercase.
+> [!NOTE]
+> The string given in parameter is converted to lowercase.
 
 ## Syntax
 
@@ -23,7 +24,8 @@ createAttribute(name)
 
 ### Parameters
 
-- `name` is a string containing the name of the attribute.
+- `name`
+  - : A string containing the name of the attribute.
 
 ### Return value
 
@@ -32,7 +34,7 @@ A {{domxref("Attr")}} node.
 ### Exceptions
 
 - `InvalidCharacterError` {{domxref("DOMException")}}
-  - : Thrown if the [`name`](#name) value is not a valid [XML name](https://www.w3.org/TR/REC-xml/#dt-name); for example, it starts with a number, hyphen, or period, or contains characters other than alphanumeric characters, underscores, hyphens, or periods.
+  - : Thrown if the [`name`](#name) value is not a valid [XML name](https://www.w3.org/TR/xml/#dt-name); for example, it starts with a number, hyphen, or period, or contains characters other than alphanumeric characters, underscores, hyphens, or periods.
 
 ## Examples
 

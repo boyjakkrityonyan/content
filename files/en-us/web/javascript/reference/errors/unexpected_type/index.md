@@ -2,9 +2,8 @@
 title: 'TypeError: "x" is (not) "y"'
 slug: Web/JavaScript/Reference/Errors/Unexpected_type
 page-type: javascript-error
+sidebar: jssidebar
 ---
-
-{{jsSidebar("Errors")}}
 
 The JavaScript exception "_x_ is (not) _y_" occurs when there was an
 unexpected type. Oftentimes, unexpected {{jsxref("undefined")}} or [`null`](/en-US/docs/Web/JavaScript/Reference/Operators/null)
@@ -45,7 +44,7 @@ const foo = undefined;
 foo.substring(1); // TypeError: foo is undefined
 
 const foo2 = null;
-foo2.substring(1); // TypeError: foo is null
+foo2.substring(1); // TypeError: foo2 is null
 ```
 
 Certain methods might require a specific type.
@@ -55,7 +54,7 @@ const foo = {};
 Symbol.keyFor(foo); // TypeError: foo is not a symbol
 
 const foo2 = "bar";
-Object.create(foo2); // TypeError: "foo" is not an object or null
+Object.create(foo2); // TypeError: "foo2" is not an object or null
 ```
 
 ### Fixing the issue

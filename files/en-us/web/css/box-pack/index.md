@@ -6,11 +6,13 @@ status:
   - deprecated
   - non-standard
 browser-compat: css.properties.box-pack
+sidebar: cssref
 ---
 
-{{CSSRef}}{{Non-standard_header}}{{Deprecated_Header}}
+{{Non-standard_header}}{{Deprecated_Header}}
 
-> **Warning:** This is a property of the original CSS Flexible Box Layout Module draft, and has been replaced by a newer standard. See [flexbox](/en-US/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox) for information about the current standard.
+> [!WARNING]
+> This is a property of the original CSS flexible box layout Module draft, and has been replaced by a newer standard. See [flexbox](/en-US/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox) for information about the current standard.
 
 The **`-moz-box-pack`** and **`-webkit-box-pack`** [CSS](/en-US/docs/Web/CSS) properties specify how a `-moz-box` or `-webkit-box` packs its contents in the direction of its layout. The effect of this is only visible if there is extra space in the box.
 
@@ -81,10 +83,7 @@ If the packing is set using the element's `pack` attribute, then the style is ig
 
 ## Formal syntax
 
-```plain
-box-pack =
-  start | center | end | justify
-```
+{{CSSSyntaxRaw(`box-pack = start | center | end | justify`)}}
 
 ## Examples
 

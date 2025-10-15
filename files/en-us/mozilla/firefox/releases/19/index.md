@@ -1,10 +1,10 @@
 ---
 title: Firefox 19 for developers
+short-title: Firefox 19
 slug: Mozilla/Firefox/Releases/19
 page-type: firefox-release-notes
+sidebar: firefox
 ---
-
-{{FirefoxSidebar}}
 
 Firefox 19 was released on February 19, 2013. This article lists key changes that are useful not only for web developers, but also Firefox and Gecko developers as well as add-on developers.
 
@@ -31,7 +31,7 @@ Firefox 19 was released on February 19, 2013. This article lists key changes tha
 
 - The {{domxref("Element.getElementsByTagName")}}, {{domxref("Element.getElementsByTagNameNS")}} and {{domxref("Element.getElementsByClassName")}} methods now return a live {{domxref("HTMLCollection")}} ([Firefox bug 799464](https://bugzil.la/799464)).
 - The {{domxref("File")}} `mozLastModifiedDate` property has been implemented. ([Firefox bug 793955](https://bugzil.la/793955))
-- The {{domxref("File")}} lastModifiedDate property returns the current date, when the date of the last modification is unknown. ([Firefox bug 793459](https://bugzil.la/793459)
+- The {{domxref("File")}} lastModifiedDate property returns the current date, when the date of the last modification is unknown. ([Firefox bug 793459](https://bugzil.la/793459))
 - The {{domxref("CanvasRenderingContext2D")}} `isPointInStroke` method has been implemented ([Firefox bug 803124](https://bugzil.la/803124)).
 - The {{domxref("HTMLCanvasElement")}} `toBlob` method has been implemented ([Firefox bug 648610](https://bugzil.la/648610)).
 - The `Node.isSupported` and the {{domxref("document.implementation", "document.implementation.hasFeature()")}} methods have been changed to always return `true` ([Firefox bug 801425](https://bugzil.la/801425)).
@@ -40,11 +40,12 @@ Firefox 19 was released on February 19, 2013. This article lists key changes tha
 
 ### XForms
 
-Support for [XForms](/en-US/docs/XForms) has been [**removed**](https://www.philipp-wagner.com/blog/2011/07/the-future-of-mozilla-xforms) in Firefox 19.
+Support for XForms has been [**removed**](https://www.philipp-wagner.com/blog/2011/07/the-future-of-mozilla-xforms) in Firefox 19.
 
 ## Changes for add-on and Mozilla developers
 
-> **Note:** A key change in Firefox 19 is that `nsresult` is now strongly typed. This will help make it easier to detect bugs that are caused by mishandling of return values, but may cause existing code to break if it's making incorrect assumptions in this regard.
+> [!NOTE]
+> A key change in Firefox 19 is that `nsresult` is now strongly typed. This will help make it easier to detect bugs that are caused by mishandling of return values, but may cause existing code to break if it's making incorrect assumptions in this regard.
 
 - `getBrowserSelection()` now returns the selected text in a text input field. As a result, `gContextMenu.isTextSelected` will be `true` when the user selects text in a text input field that is not a password field. ([Firefox bug 565717](https://bugzil.la/565717))
 - Dict.jsm: `Dict()` now takes a JSON String. `Dict.toJSON()` was added, and it returns a JSON String. ([Firefox bug 727967](https://bugzil.la/727967))
@@ -60,7 +61,3 @@ Support for [XForms](/en-US/docs/XForms) has been [**removed**](https://www.phil
 
 - [Firefox 19 Beta Release Notes](https://website-archive.mozilla.org/www.mozilla.org/firefox_releasenotes/en-us/firefox/19.0beta/releasenotes/)
 - [Add-on Compatibility for Firefox 19](https://blog.mozilla.org/addons/2013/02/07/compatibility-for-firefox-19/)
-
-### Older versions
-
-{{Firefox_for_developers('18')}}

@@ -3,13 +3,11 @@ title: "HighlightRegistry: set() method"
 short-title: set()
 slug: Web/API/HighlightRegistry/set
 page-type: web-api-instance-method
-status:
-  - experimental
 browser-compat: api.HighlightRegistry.set
 spec-urls: https://tc39.es/ecma262/multipage/keyed-collections.html#sec-map.prototype.set
 ---
 
-{{APIRef("CSS Custom Highlight API")}}{{SeeCompatTable}}
+{{APIRef("CSS Custom Highlight API")}}
 
 The **`set()`** method of the {{domxref("HighlightRegistry")}} interface adds or updates a {{domxref("Highlight")}} object in the registry with the specified name.
 
@@ -67,4 +65,5 @@ CSS.highlights
 ## See also
 
 - {{domxref("css_custom_highlight_api", "The CSS Custom Highlight API", "", "nocode")}}
+- [CSS custom highlight API](/en-US/docs/Web/CSS/CSS_custom_highlight_API) module
 - [CSS Custom Highlight API: The Future of Highlighting Text Ranges on the Web](https://css-tricks.com/css-custom-highlight-api-early-look/)

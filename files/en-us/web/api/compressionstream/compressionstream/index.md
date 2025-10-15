@@ -6,7 +6,7 @@ page-type: web-api-constructor
 browser-compat: api.CompressionStream.CompressionStream
 ---
 
-{{APIRef("Compression Streams API")}}
+{{APIRef("Compression Streams API")}}{{AvailableInWorkers}}
 
 The **`CompressionStream()`** constructor creates a new {{domxref("CompressionStream")}} object which compresses a stream of data.
 
@@ -19,9 +19,7 @@ new CompressionStream(format)
 ### Parameters
 
 - `format`
-
   - : One of the following allowed compression formats:
-
     - `"gzip"`
       - : Compresses the stream using the [GZIP](https://www.rfc-editor.org/rfc/rfc1952) format.
     - `"deflate"`
@@ -30,7 +28,7 @@ new CompressionStream(format)
     - `"deflate-raw"`
       - : Compresses the stream using the [DEFLATE](https://www.rfc-editor.org/rfc/rfc1951) algorithm without a header and trailing checksum.
 
-## Exceptions
+### Exceptions
 
 - {{jsxref("TypeError")}}
   - : Thrown if the format passed to the constructor is not supported.

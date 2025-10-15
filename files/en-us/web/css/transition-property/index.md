@@ -3,13 +3,52 @@ title: transition-property
 slug: Web/CSS/transition-property
 page-type: css-property
 browser-compat: css.properties.transition-property
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **`transition-property`** [CSS](/en-US/docs/Web/CSS) property sets the CSS properties to which a [transition effect](/en-US/docs/Web/CSS/CSS_transitions/Using_CSS_transitions) should be applied.
 
-{{EmbedInteractiveExample("pages/css/transition-property.html")}}
+{{InteractiveExample("CSS Demo: transition-property")}}
+
+```css interactive-example-choice
+transition-property: margin-right;
+```
+
+```css interactive-example-choice
+transition-property: margin-right, color;
+```
+
+```css interactive-example-choice
+transition-property: all;
+```
+
+```css interactive-example-choice
+transition-property: none;
+```
+
+```html interactive-example
+<section id="default-example">
+  <div id="example-element">Hover to see<br />the transition.</div>
+</section>
+```
+
+```css interactive-example
+#example-element {
+  background-color: #e4f0f5;
+  color: black;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font: 1em monospace;
+  width: 100%;
+  transition: margin-right 2s;
+}
+
+#default-example:hover > #example-element {
+  background-color: #990099;
+  color: white;
+  margin-right: 40%;
+}
+```
 
 If you specify a shorthand property (e.g., {{cssxref("background")}}), all of its longhand sub-properties that can be animated will be.
 
@@ -60,33 +99,48 @@ transition-property: unset;
 
 ## Examples
 
-### Simple example
+### Basic example
 
-This example performs a four-second font size transition when the user hovers over the element, the `transition-property` is the `font-size`.
+When the button is hovered or focused, it undergoes a one-second color transition; the `transition-property` is [`background-color`](/en-US/docs/Web/CSS/background-color).
 
 #### HTML
 
 ```html
-<a class="target">Hover over me</a>
+<button class="target">Focus me!</button>
 ```
 
 #### CSS
 
-```css
-.target {
-  font-size: 14px;
-  transition-property: font-size;
-  transition-duration: 4s;
+```css hidden
+html {
+  height: 100vh;
 }
 
-.target:hover {
-  font-size: 36px;
+button {
+  font-size: 1.4rem;
+  padding: 10px 20px;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  outline: none;
 }
 ```
 
-{{EmbedLiveSample('Simple_example', 600, 100)}}
+```css
+.target {
+  transition-property: background-color;
+  transition-duration: 1s;
+  background-color: #cccccc;
+}
 
-You will find more examples of `transition-property` included in the main [CSS transitions](/en-US/docs/Web/CSS/CSS_transitions/Using_CSS_transitions) article.
+.target:hover,
+.target:focus {
+  background-color: #eeeeee;
+}
+```
+
+{{EmbedLiveSample('Basic_example', 600, 100)}}
+
+See our [Using CSS transitions](/en-US/docs/Web/CSS/CSS_transitions/Using_CSS_transitions) guide for more `transition-property` examples.
 
 ## Specifications
 

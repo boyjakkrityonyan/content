@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.CanvasRenderingContext2D.closePath
 ---
 
-{{APIRef}}
+{{APIRef("Canvas API")}}
 
 The
 **`CanvasRenderingContext2D.closePath()`**
@@ -71,7 +71,8 @@ ctx.stroke();
 
 This example draws a smiley face consisting of three disconnected sub-paths.
 
-> **Note:** Although `closePath()` is called after all the arcs have been
+> [!NOTE]
+> Although `closePath()` is called after all the arcs have been
 > created, only the last arc (sub-path) gets closed.
 
 #### HTML

@@ -1,11 +1,11 @@
 ---
 title: Array.prototype.with()
+short-title: with()
 slug: Web/JavaScript/Reference/Global_Objects/Array/with
 page-type: javascript-instance-method
 browser-compat: javascript.builtins.Array.with
+sidebar: jsref
 ---
-
-{{JSRef}}
 
 The **`with()`** method of {{jsxref("Array")}} instances is the [copying](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#copying_methods_and_mutating_methods) version of using the [bracket notation](/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors#bracket_notation) to change the value of a given index. It returns a new array with the element at the given index replaced with the given value.
 
@@ -19,7 +19,7 @@ arrayInstance.with(index, value)
 
 - `index`
   - : Zero-based index at which to change the array, [converted to an integer](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#integer_conversion).
-    - Negative index counts back from the end of the array — if `index < 0`, `index + array.length` is used.
+    - Negative index counts back from the end of the array — if `-array.length <= index < 0`, `index + array.length` is used.
     - If the index after normalization is out of bounds, a {{jsxref("RangeError")}} is thrown.
 - `value`
   - : Any value to be assigned to the given index.
@@ -98,6 +98,7 @@ console.log(Array.prototype.with.call(arrayLike, 0, 1));
 ## See also
 
 - [Polyfill of `Array.prototype.with` in `core-js`](https://github.com/zloirock/core-js#change-array-by-copy)
+- [es-shims polyfill of `Array.prototype.with`](https://www.npmjs.com/package/array.prototype.with)
 - [Indexed collections](/en-US/docs/Web/JavaScript/Guide/Indexed_collections) guide
 - {{jsxref("Array.prototype.toReversed()")}}
 - {{jsxref("Array.prototype.toSorted()")}}

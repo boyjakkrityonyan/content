@@ -3,9 +3,8 @@ title: downloads.State
 slug: Mozilla/Add-ons/WebExtensions/API/downloads/State
 page-type: webextension-api-type
 browser-compat: webextensions.api.downloads.State
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 The `State` type of the {{WebExtAPIRef("downloads")}} API defines different states that a current download can be in.
 
@@ -22,15 +21,17 @@ Values of this type are strings. Possible values are:
 - `complete`
   - : The download completed successfully.
 
-> **Note:** These string constants will never change, but new constants may be added.
+> [!NOTE]
+> These string constants will never change, but new constants may be added.
+
+{{WebExtExamples}}
 
 ## Browser compatibility
 
 {{Compat}}
 
-{{WebExtExamples}}
-
-> **Note:** This API is based on Chromium's [`chrome.downloads`](https://developer.chrome.com/docs/extensions/reference/downloads/#type-State) API.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.downloads`](https://developer.chrome.com/docs/extensions/reference/api/downloads#type-State) API.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

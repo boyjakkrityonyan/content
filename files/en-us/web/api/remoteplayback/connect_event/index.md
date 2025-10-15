@@ -6,7 +6,7 @@ page-type: web-api-event
 browser-compat: api.RemotePlayback.connect_event
 ---
 
-{{APIRef()}}
+{{APIRef("Remote Playback API")}}
 
 The **`connect`** event of the {{domxref("RemotePlayback")}} interface fires when the user agent connects to the remote device.
 
@@ -14,10 +14,10 @@ The **`connect`** event of the {{domxref("RemotePlayback")}} interface fires whe
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("connect", (event) => {});
+```js-nolint
+addEventListener("connect", (event) => { })
 
-onconnect = (event) => {};
+onconnect = (event) => { }
 ```
 
 ## Event type

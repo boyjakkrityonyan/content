@@ -13,7 +13,8 @@ The **`default`** read-only property of the
 indicating whether the voice is the default voice for the current app
 (`true`), or not (`false`.)
 
-> **Note:** For some devices, it might be the default voice for the
+> [!NOTE]
+> For some devices, it might be the default voice for the
 > voice's language. The spec is not very clear on which it should be, so some
 > implementations may differ.
 
@@ -24,16 +25,16 @@ A boolean value.
 ## Examples
 
 ```js
-for (let i = 0; i < voices.length; i++) {
+for (const voice of voices) {
   const option = document.createElement("option");
-  option.textContent = `${voices[i].name} (${voices[i].lang})`;
+  option.textContent = `${voice.name} (${voice.lang})`;
 
-  if (voices[i].default) {
+  if (voice.default) {
     option.textContent += " — DEFAULT";
   }
 
-  option.setAttribute("data-lang", voices[i].lang);
-  option.setAttribute("data-name", voices[i].name);
+  option.setAttribute("data-lang", voice.lang);
+  option.setAttribute("data-name", voice.name);
   voiceSelect.appendChild(option);
 }
 ```

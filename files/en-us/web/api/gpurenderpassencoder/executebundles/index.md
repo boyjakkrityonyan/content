@@ -3,17 +3,16 @@ title: "GPURenderPassEncoder: executeBundles() method"
 short-title: executeBundles()
 slug: Web/API/GPURenderPassEncoder/executeBundles
 page-type: web-api-instance-method
-status:
-  - experimental
 browser-compat: api.GPURenderPassEncoder.executeBundles
 ---
 
-{{APIRef("WebGPU API")}}{{SeeCompatTable}}
+{{APIRef("WebGPU API")}}{{SecureContext_Header}}{{AvailableInWorkers}}
 
 The **`executeBundles()`** method of the
 {{domxref("GPURenderPassEncoder")}} interface executes commands previously recorded into the referenced {{domxref("GPURenderBundle")}}s, as part of this render pass.
 
-> **Note:** After calling `executeBundles()` the currently set vertex buffers, index buffers, bind groups, and pipeline are all cleared, even if no bundles are actually executed.
+> [!NOTE]
+> After calling `executeBundles()` the currently set vertex buffers, index buffers, bind groups, and pipeline are all cleared, even if no bundles are actually executed.
 
 ## Syntax
 
@@ -42,10 +41,10 @@ For each {{domxref("GPURenderBundle")}}:
 
 ## Examples
 
-In the WebGPU Samples [Animometer example](https://webgpu.github.io/webgpu-samples/samples/animometer), a lot of like operations are done on many different objects simultaneously. `executeBundles()` is used to reuse the work on multiple render passes to improve performance. Study the example code listing for the full context.
+In the WebGPU Samples [Animometer example](https://webgpu.github.io/webgpu-samples/samples/animometer/), a lot of like operations are done on many different objects simultaneously. `executeBundles()` is used to reuse the work on multiple render passes to improve performance. Study the example code listing for the full context.
 
 ```js
-// ...
+// …
 
 return function doDraw(timestamp) {
   if (startTime === undefined) {
@@ -71,7 +70,7 @@ return function doDraw(timestamp) {
   device.queue.submit([commandEncoder.finish()]);
 };
 
-// ...
+// …
 ```
 
 ## Specifications

@@ -8,7 +8,8 @@ browser-compat: api.Element.remove
 
 {{APIRef("DOM")}}
 
-The **`Element.remove()`** method removes the element from the DOM.
+The **`Element.remove()`** method removes the element from its parent node.
+If it has no parent node, calling `remove()` does nothing.
 
 ## Syntax
 
@@ -61,4 +62,5 @@ with (node) {
 
 ## See also
 
-- [Polyfill](https://github.com/chenzhenxi/element-remove)
+- {{domxref("CharacterData.remove()")}}
+- {{domxref("DocumentType.remove()")}}

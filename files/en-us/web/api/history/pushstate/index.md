@@ -8,11 +8,8 @@ browser-compat: api.History.pushState
 
 {{APIRef("History API")}}
 
-In an [HTML](/en-US/docs/Web/HTML) document, the
-**`history.pushState()`** method adds an entry to the browser's
+The **`pushState()`** method of the {{domxref("History")}} interface adds an entry to the browser's
 session history stack.
-
-This method is {{glossary("asynchronous")}}. Add a listener for the {{domxref("Window/popstate_event", "popstate")}} event in order to determine when the navigation has completed. The `state` parameter will be available in it.
 
 ## Syntax
 
@@ -24,7 +21,6 @@ pushState(state, unused, url)
 ### Parameters
 
 - `state`
-
   - : The `state` object is a JavaScript object which is associated with the
     new history entry created by `pushState()`. Whenever the user navigates to
     the new `state`, a {{domxref("Window/popstate_event", "popstate")}} event is fired, and
@@ -33,10 +29,10 @@ pushState(state, unused, url)
 
     The `state` object can be anything that can be serialized.
 
-    > **Note:** Some browsers save `state` objects to the user's disk so they can be restored after the user restarts the browser, and impose a size limit on the serialized representation of a `state` object, and will throw an exception if you pass a `state` object whose serialized representation is larger than that size limit. So in cases where you want to ensure you have more space than what some browsers might impose, you're encouraged to use {{domxref("Window.sessionStorage", "sessionStorage")}} and/or {{domxref("Window.localStorage", "localStorage")}}.
+    > [!NOTE]
+    > Some browsers save `state` objects to the user's disk so they can be restored after the user restarts the browser, and impose a size limit on the serialized representation of a `state` object, and will throw an exception if you pass a `state` object whose serialized representation is larger than that size limit. So in cases where you want to ensure you have more space than what some browsers might impose, you're encouraged to use {{domxref("Window.sessionStorage", "sessionStorage")}} and/or {{domxref("Window.localStorage", "localStorage")}}.
 
 - `unused`
-
   - : This parameter exists for historical reasons, and cannot be omitted; passing an empty string is safe against future changes to the method.
 
 - `url` {{optional_inline}}
@@ -51,6 +47,13 @@ pushState(state, unused, url)
 ### Return value
 
 None ({{jsxref("undefined")}}).
+
+### Exceptions
+
+- `SecurityError` {{domxref("DOMException")}}
+  - : Thrown if the associated document is not fully active, or if the provided `url` parameter is not a valid URL, or if the method is called too frequently.
+- `DataCloneError` {{domxref("DOMException")}}
+  - : Thrown if the provided `state` parameter is not serializable.
 
 ## Description
 

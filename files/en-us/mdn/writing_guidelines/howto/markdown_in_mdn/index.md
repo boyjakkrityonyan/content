@@ -1,26 +1,26 @@
 ---
 title: How to write in Markdown
+short-title: Write in Markdown
 slug: MDN/Writing_guidelines/Howto/Markdown_in_MDN
 page-type: mdn-writing-guide
+sidebar: mdnsidebar
 ---
 
-{{MDNSidebar}}
-
-This page describes how we use Markdown to write documentation on MDN Web Docs. We have chosen GitHub-Flavored Markdown (GFM) as a baseline, and added some extensions to support some of the things we need to do on MDN that aren't readily supported in GFM.
+This page describes how we use Markdown to write documentation on MDN Web Docs.
+We have chosen GitHub-Flavored Markdown (GFM) as a baseline and added extensions to support the things we need on MDN.
 
 ## Baseline: GitHub-Flavored Markdown
 
-The baseline for MDN Markdown is GitHub-Flavored Markdown (GFM): <https://github.github.com/gfm/>. This means that you can refer to the GFM specification for anything not explicitly specified in this page. GFM in turn is a superset of CommonMark ([https://spec.commonmark.org/](https://spec.commonmark.org/)).
+The baseline for MDN Markdown is GitHub-Flavored Markdown (GFM): <https://github.github.com/gfm/>. This means that you can refer to the GFM specification for anything not explicitly specified in this page. GFM in turn is a superset of CommonMark (<https://spec.commonmark.org/>).
 
 ## Links
 
 The GFM specification defines two basic types of links:
 
-- [inline links](https://github.github.com/gfm/#inline-link), in which the destination is given immediately after the link text
+- [inline links](https://github.github.com/gfm/#inline-link), in which the destination is given immediately after the link text.
 - [reference links](https://github.github.com/gfm/#reference-link), in which the destination is defined elsewhere in the document.
 
 On MDN we allow only inline links.
-
 This is the correct way to write GFM links on MDN:
 
 ```md example-good
@@ -37,19 +37,7 @@ This is an incorrect way to write links on MDN:
 
 ## Example code blocks
 
-In GFM and CommonMark, authors can use "code fences" to demarcate `<pre>` blocks. The opening code fence may be followed by some text that is called the "info string". The specification states the following:
-
-> The first word of the info string is typically used to specify the language of the code sample, and rendered in the class attribute of the code tag.
-
-It's permissible for the info string to contain multiple words, like:
-
-````md
-```fee fi fo fum
-// some example code
-```
-````
-
-On MDN, writers will use code fences for example code blocks. They must specify the language of the code sample using the first word of the info string, and this will be used to provide syntax highlighting for the block. The following words are supported:
+In GFM and CommonMark, authors can use "code fences" to demarcate `<pre>` blocks. The opening code fence may be followed by some text that is called the "info string". The language of the code sample must be specified using the first word of the info string, and this will be used to provide syntax highlighting for the block. The following words are supported:
 
 - Programming Languages
   - JavaScript
@@ -68,7 +56,7 @@ On MDN, writers will use code fences for example code blocks. They must specify 
     - `rust` - Rust
     - `glsl` - GLSL (OpenGL Shaders)
     - `sql` - SeQueL commands
-    - `wasm` - WebAssembly
+    - `wat` - WebAssembly
     - `webidl` - Web Interface Definition Language
 - Styling
   - `css` - CSS
@@ -97,8 +85,8 @@ On MDN, writers will use code fences for example code blocks. They must specify 
 - Templates
   - `django` - Django templates
   - `svelte` - Svelte templates
-  - `handlebars` - Handlebars templates
-  - `pug` - [Pug templates](https://pugjs.org/api/getting-started.html) (which may be used by [Express](/en-US/docs/Learn/Server-side/Express_Nodejs/Displaying_data/Template_primer))
+  - `hbs` - Handlebars templates
+  - `pug` - [Pug templates](https://pugjs.org/api/getting-started.html) (which may be used by [Express](/en-US/docs/Learn_web_development/Extensions/Server-side/Express_Nodejs/Displaying_data/Template_primer))
 - Other
   - `plain` - Plain text
   - `diff` - Diff file
@@ -116,6 +104,9 @@ const greeting = "I will get JavaScript syntax highlighting";
 
 If the highlighting that you wish to use is not listed above, you should markup the code block as `plain`.
 Additional languages may be requested in the process [discussed on GitHub](https://github.com/orgs/mdn/discussions/170#discussioncomment-3404366).
+
+> [!NOTE]
+> Use the language identifier exactly as listed above. For example, `javascript` is not allowed and you must write `js`.
 
 ### Suppressing linting
 
@@ -135,7 +126,7 @@ Code blocks like this will get appropriate syntax highlighting and will be recog
 
 GFM supports [info strings](https://github.github.com/gfm/#info-string), which allow authors to supply additional information about a code block. On MDN, info strings are converted into class names.
 
-Writers will be able to supply any one of the following info strings:
+Writers can supply one of the following info strings:
 
 - `example-good`: style this example as a good example (one to follow)
 - `example-bad`: style this example as a bad example (one to avoid)
@@ -176,15 +167,18 @@ This issue was resolved in:
 
 ## Notes, warnings, and callouts
 
-Sometimes writers want to call special attention to a piece of content. To do this, they will use a GFM blockquote with a special first paragraph. There are three types of these: notes, warnings, and callouts.
+Writers can use the [GFM alerts syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts) to call special attention to content. There are three types of alerts: notes, warnings, and callouts.
 
-- To add a note, create a GFM blockquote whose first paragraph starts with `**Note:**`.
-- To add a warning, create a GFM blockquote whose first paragraph starts with `**Warning:**`.
-- To add a callout, create a GFM blockquote whose first paragraph starts with `**Callout:**`.
+> [!NOTE]
+> MDN Web Docs supported alerts with its own syntax prior to support for GFM alerts, and referred to them as "noteblocks".
+> MDN does not support the following GFM alerts: `[!TIP]`, `[!CAUTION]`, `[!IMPORTANT]`.
+> GFM does not support `[!CALLOUT]`.
 
-Notes and warnings will render the **Note:** or **Warning:** text in the output, while callouts will not. This makes callouts a good choice when an author wants to provide a custom title.
+- To add a note, create a blockquote whose first line is `[!NOTE]`.
+- To add a warning, create a blockquote whose first line is `[!WARNING]`.
+- To add a callout, create a blockquote whose first line is `[!CALLOUT]`.
 
-Processing of the markup works on the AST it produces, not on the exact characters provided. This means that providing `<strong>Note:</strong>` will also generate a note. However, the Markdown syntax is required as a matter of style.
+Notes and warnings will add a localized **Note:** or **Warning:** to the beginning of the output, while callouts will not. This makes callouts a good choice when an author wants to provide a custom title.
 
 Multiple lines are produced by an empty block quote line in the same way as normal paragraphs. Further, multiple lines without a space are also treated like normal Markdown lines, and concatenated.
 
@@ -195,7 +189,8 @@ The blockquote can contain code blocks or other block elements.
 #### Note
 
 ```md
-> **Note:** This is how you write a note.
+> [!NOTE]
+> This is how you write a note.
 >
 > It can have multiple lines.
 ```
@@ -211,14 +206,16 @@ This will produce the following HTML:
 
 This HTML will be rendered as a highlighted box:
 
-> **Note:** This is how you write a note.
+> [!NOTE]
+> This is how you write a note.
 >
 > It can have multiple lines.
 
 #### Warnings
 
 ```md
-> **Warning:** This is how you write a warning.
+> [!WARNING]
+> This is how you write a warning.
 >
 > It can have multiple paragraphs.
 ```
@@ -234,14 +231,17 @@ This will produce the following HTML:
 
 This HTML will be rendered as a highlighted box:
 
-> **Warning:** This is how you write a warning.
+> [!WARNING]
+> This is how you write a warning.
 >
 > It can have multiple paragraphs.
 
 #### Callouts
 
 ```md
-> **Callout:** **This is how you write a callout.**
+> [!CALLOUT]
+>
+> **This is how you write a callout.**
 >
 > It can have multiple paragraphs.
 ```
@@ -257,38 +257,19 @@ This will produce the following HTML:
 
 This HTML will be rendered as a highlighted box:
 
-> **Callout:**
+> [!CALLOUT]
 >
 > **This is how you write a callout.**
 >
 > It can have multiple paragraphs.
-
-#### Translated warning
-
-Because the text "Note:" or "Warning:" also appears in the rendered output, it has to be sensitive to translations. In practice this means that every locale supported by MDN must supply its own translation of these strings, and the platform must recognize them as indicating that the construct needs special treatment.
-
-The localizations are stored in [Yari](https://github.com/mdn/yari/tree/main/markdown/localizations) as JSON files in [gettext](https://www.gnu.org/software/gettext/) format. Refer to these files to determine what string should be used in place of "Note:" or "Warning:" for that locale. If a locale file is not defined, English will be used as a fallback.
-
-For example, if we want to use "Warnung" for "Warning" in German, then in German pages we would write:
-
-```md
-> **Warnung:** So schreibt man eine Warnung.
-```
-
-And this will produce:
-
-```html
-<div class="notecard warning">
-  <p><strong>Warnung:</strong> So schreibt man eine Warnung.</p>
-</div>
-```
 
 #### Note containing a code block
 
 This example contains a code block.
 
 ````md
-> **Note:** This is how you write a note.
+> [!NOTE]
+> This is how you write a note.
 >
 > It can contain code blocks.
 >
@@ -312,7 +293,8 @@ This will produce the following HTML:
 
 This HTML will be rendered as with a code block:
 
-> **Note:** This is how you write a note.
+> [!NOTE]
+> This is how you write a note.
 >
 > It can contain code blocks.
 >
@@ -343,11 +325,8 @@ For example, this is a `<dl>`:
 
 ````md
 - term1
-
   - : My description of term1
-
 - `term2`
-
   - : My description of term2
 
     It can have multiple paragraphs, and code blocks too:
@@ -459,7 +438,7 @@ and not this style:
 cell 4 | cell 5 | cell 6
 ```
 
-Luckily, table formatting is auto-fixed by Prettier, so authors may rely on Prettier to format their tables properly.
+Tables are formatted by Prettier, so authors rely on tooling to format tables properly.
 
 ### When to use HTML tables
 
@@ -477,7 +456,7 @@ The main limitations of GFM table syntax are:
 - GFM tables may not have a header column.
 - GFM won't parse GFM block elements in table cells. For example, you can't have a list in a table cell.
 - GFM tables cannot have classes assigned to them.
-- GFM doesn't support any table elements beyond `<table>`, `<tr>`, and `<th>`, and `<td>`.
+- GFM doesn't support any table elements beyond `<table>`, `<tr>`, `<th>`, and `<td>`.
 - GFM doesn't support any table element attributes like `colspan`, `rowspan`, or `scope`.
 
 If an author needs to use any of the unsupported features, they should write the table in HTML.
@@ -583,7 +562,7 @@ This issue was resolved in <https://github.com/mdn/content/issues/4578>.
 
 ## Page summary
 
-The _page summary_ is the first "content" paragraph in a page—the first text that appears after the page front matter and any [sidebar](/en-US/docs/MDN/Writing_guidelines/Page_structures/Macros/Commonly_used_macros#sidebar_generation) or [page banner](/en-US/docs/MDN/Writing_guidelines/Page_structures/Macros/Commonly_used_macros#page_or_section_header_indicators) macros.
+The _page summary_ is the first "content" paragraph in a page—the first text that appears after the page front matter and any [sidebar](/en-US/docs/MDN/Writing_guidelines/Page_structures/Macros/Commonly_used_macros) or [page banner](/en-US/docs/MDN/Writing_guidelines/Page_structures/Macros/Commonly_used_macros#page_or_section_header_indicators) macros.
 
 This summary is used for search engine optimization (SEO) and also automatically included alongside page listings by some macros.
 The first paragraph should therefore be both succinct and informative.
@@ -592,20 +571,14 @@ The first paragraph should therefore be both succinct and informative.
 
 This issue was resolved in <https://github.com/mdn/content/issues/3923>.
 
-## KumaScript
+## Macros
 
-Writers will be able to include KumaScript macro calls in prose content:
+Writers use macros in prose for templating common linking patterns, or to include specific blocks of code or text:
 
 ```md
-The **`margin`** [CSS](/en-US/docs/Web/CSS) property
-sets the margin area on all four sides of an element. It is a shorthand for
-\{{cssxref("margin-top")}}, \{{cssxref("margin-right")}}, \{{cssxref("margin-bottom")}},
-and \{{cssxref("margin-left")}}.
-
-\{{EmbedInteractiveExample("pages/css/margin.html")}}
-
-The top and bottom margins have no effect on replaced inline elements, such as
-\{{HTMLElement("span")}} or \{{HTMLElement("code")}}.
+The **`margin`** [CSS](/en-US/docs/Web/CSS) property sets the margin area on all four sides of an element.
+It is a shorthand for \{{cssxref("margin-top")}}, \{{cssxref("margin-right")}}, \{{cssxref("margin-bottom")}}, and \{{cssxref("margin-left")}}.
+…
 ```
 
-See [Using macros](/en-US/docs/MDN/Writing_guidelines/Page_structures/Macros) for more information on macros.
+See [Using macros](/en-US/docs/MDN/Writing_guidelines/Page_structures/Macros) for more information.

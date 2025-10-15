@@ -6,7 +6,7 @@ page-type: web-api-static-method
 browser-compat: api.HTMLScriptElement.supports_static
 ---
 
-{{APIRef}}
+{{APIRef("HTML DOM")}}
 
 The **`supports()`** static method of the {{domxref("HTMLScriptElement")}} interface provides a simple and consistent method to feature-detect what types of scripts are supported by the user agent.
 
@@ -21,19 +21,17 @@ HTMLScriptElement.supports(type)
 ### Parameters
 
 - `type`
-
   - : A string literal that indicates the type of script for which support is to be checked.
     Supported values are case sensitive, and include:
-
     - `"classic"`
       - : Test if _classic scripts_ are supported.
         "Classic" scripts are the normal/traditional JavaScript files that predate module scripts.
     - `"module"`
       - : Test if [module scripts](/en-US/docs/Web/JavaScript/Guide/Modules) are supported.
     - `"importmap"`
-      - : Test if import maps are supported.
+      - : Test if [import maps](/en-US/docs/Web/HTML/Reference/Elements/script/type/importmap) are supported.
     - `"speculationrules"`
-      - : Test if speculation rules are supported and enabled.
+      - : Test if [speculation rules](/en-US/docs/Web/API/Speculation_Rules_API) are supported and enabled.
 
     Any other value will cause the method to return `false`.
 

@@ -2,11 +2,10 @@
 title: Syntax sections
 slug: MDN/Writing_guidelines/Page_structures/Syntax_sections
 page-type: mdn-writing-guide
+sidebar: mdnsidebar
 ---
 
-{{MDNSidebar}}
-
-The syntax section of an MDN reference page contains a syntax box defining the exact syntax that a feature has (e.g. what parameters can it accept, which ones are optional?) This article explains how to write syntax boxes for reference articles.
+The syntax section of an MDN reference page contains a syntax box defining the exact syntax that a feature has (e.g., what parameters can it accept, which ones are optional?) This article explains how to write syntax boxes for reference articles.
 
 ## API reference syntax
 
@@ -26,7 +25,8 @@ slice(start, end)
 ```
 ````
 
-> **Note:** The markup-language used in this case is `js-nolint`, where `js` indicates that JavaScript syntax highlighting should be used.
+> [!NOTE]
+> The markup-language used in this case is `js-nolint`, where `js` indicates that JavaScript syntax highlighting should be used.
 > For JavaScript syntax sections `-nolint` is also required because the syntax section is deliberatively not "quite" JavaScript and we don't want the linter to "fix" it (return values and end-of-line semicolons are omitted).
 
 ### General style rules
@@ -49,7 +49,7 @@ A few rules to follow in terms of markup within the syntax block:
 
 #### Syntax block
 
-Start with a syntax block, like this (from the {{DOMxRef("IntersectionObserver.IntersectionObserver", "IntersectionObserver constructor")}} page):
+Start with a syntax block, like this (from the {{DOMxRef("IntersectionObserver.IntersectionObserver", "IntersectionObserver()")}} constructor page):
 
 ```js-nolint
 new IntersectionObserver(callback, options)
@@ -61,7 +61,7 @@ or this (from {{DOMxRef("Document.hasStorageAccess()")}}):
 hasStorageAccess()
 ```
 
-When the method is static, for example {{DOMxRef("URL.createObjectURL()")}}, then provide its interface as well:
+When the method is static, for example {{DOMxRef("URL/createObjectURL_static", "URL.createObjectURL()")}}, then provide its interface as well:
 
 ```js-nolint
 URL.createObjectURL(object)
@@ -102,9 +102,9 @@ new Date(year, monthIndex, day, hours, minutes, seconds, milliseconds)
 
 ##### Formal syntax
 
-Formal syntax notation (using [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)) should not be used in the Syntax section — instead use the expanded multiple-line format [described above](multiple_linesoptional_parameters).
+Formal syntax notation (using [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)) should not be used in the Syntax section — instead use the expanded multiple-line format [described above](#multiple_linesoptional_parameters).
 
-While the formal notation provides a concise mechanism for describing complex syntax, it is not familiar to many developers, and can _conflict_ with valid syntax for particular programming languages. For example, "`[ ]`" indicates both an "optional parameter" and a JavaScript {{jsxref("Array")}}. You can see this in the formal syntax for {{jsxref("Array.prototype.slice()")}} below:
+While the formal notation provides a concise mechanism for describing complex syntax, it is not familiar to many developers, and can _conflict_ with valid syntax for particular programming languages. For example, `[ ]` indicates both an "optional parameter" and a JavaScript {{jsxref("Array")}}. You can see this in the formal syntax for {{jsxref("Array.prototype.slice()")}} below:
 
 ```js-nolint
 arr.slice([begin[, end]])
@@ -117,7 +117,7 @@ For specific cases where it is seen as beneficial, a separate **Formal syntax** 
 The aim is to make the syntax block as pure and unambiguous a definition of the feature's syntax as possible — don't include any irrelevant syntax. For example, you may see this syntax form used to describe promises in many places on the site:
 
 ```js-nolint
-caches.match(request, options).then(function (response) {
+caches.match(request, options).then((response) => {
   // Do something with the response
 })
 ```
@@ -188,7 +188,8 @@ Next, include a "Parameters" subsection, which explains what each parameter shou
 
 The name of each parameter in the list should be contained in markdown code fence notation `` ` ` ``.
 
-> **Note:** Even if the feature does not take any parameters, you need to include a "Parameters" section, with content of "None".
+> [!NOTE]
+> Even if the feature does not take any parameters, you need to include a "Parameters" section, with content of "None".
 
 #### Return value section
 
@@ -200,13 +201,14 @@ None (\\{{jsxref("undefined")}}).
 
 #### Exceptions section
 
-Finally, include an "Exceptions" subsection, which explains what exceptions can be thrown if a problem is encountered when invoking the constructor/method. This could be because a parameter name has been misspelled or it has been given a value of the wrong datatype, because there is a problem with the environment it is being invoked in (e.g. trying to run a secure context-only feature in a non-secure context), or some other reason.
+Finally, include an "Exceptions" subsection, which explains what exceptions can be thrown if a problem is encountered when invoking the constructor/method. This could be because a parameter name has been misspelled or it has been given a value of the wrong datatype, because there is a problem with the environment it is being invoked in (e.g., trying to run a secure context-only feature in a non-secure context), or some other reason.
 
 Determining what exceptions are thrown by a method can require a good perusal of the specification. Looking through the spec's step-by-step explanation of how a feature operates will generally provide a solid list of the exceptions and the situations that cause them to be thrown.
 
 The exception names and explanations should be included in a description list.
 
-> **Note:** If no exceptions can be raised on the feature, you don't need to include an "Exceptions" section, but you can if you wish include it with content of "None".
+> [!NOTE]
+> If no exceptions can be raised on the feature, you don't need to include an "Exceptions" section, but you can if you wish include it with content of "None".
 
 ### Properties
 
@@ -220,7 +222,7 @@ If accessing the property can throw an exception, include an "Exceptions" subsec
 
 ## JavaScript reference syntax
 
-JavaScript built-in object reference pages follow the same basic rules as API reference pages; e.g. for methods and properties. There are a few differences that you might observe:
+JavaScript built-in object reference pages follow the same basic rules as API reference pages; e.g., for methods and properties. There are a few differences that you might observe:
 
 - For built-in objects with a single constructor, the constructor syntax is often included on the object landing page. See {{JSxRef("Date")}} for example. You'll notice that static methods (those that exist on the `Date` object itself) are listed under "Methods", whereas instance methods are listed under "Date.prototype methods".
 - You'll also notice that methods that have no parameters/exceptions are more likely to have those subsections not included at all on JavaScript reference pages. See {{JSxRef("Date.getDate()")}} and {{JSxRef("Date.now()")}} for examples.
@@ -231,7 +233,8 @@ JavaScript built-in object reference pages follow the same basic rules as API re
 
 CSS property reference pages include a "Syntax" section, which used to be found at the top of the page but is increasingly commonly found below a section containing a block of code showing typical usage of the feature, plus a live example to illustrate what the feature does (see {{CSSxRef("animation")}} for example).
 
-> **Note:** We do this because CSS formal syntax is complex, not used by many of the MDN readership, and off-putting for beginners. Real syntax and examples are more useful to the majority of people.
+> [!NOTE]
+> We do this because CSS formal syntax is complex, not used by many of the MDN readership, and off-putting for beginners. Real syntax and examples are more useful to the majority of people.
 
 Inside the syntax section you'll find the following contents.
 
@@ -245,15 +248,14 @@ Next, you should include a "Values" section — this contains a description list
 
 #### Formal syntax
 
-The last section, "Formal syntax", is automatically generated from the data included in the [MDN data repo](https://github.com/mdn/data)'s CSS directory. You just need to include a `CSSSyntax` macro call below the title, and it will take care of the rest.
+The last section, "Formal syntax", is automatically generated using the `\{{CSSSyntax}}` macro. This macro fetches data from the CSS specifications using the [@webref/css npm package](https://www.npmjs.com/package/@webref/css). To include the formal syntax in your document:
 
-The only complication arises from making sure the data you need is present. The [properties.json](https://github.com/mdn/data/blob/main/css/properties.json) file needs to contain an entry for the property you are documenting, and the [types.json](https://github.com/mdn/data/blob/main/css/types.json) file needs to contain an entry for all of the value types used in the property's value.
-
-You need to do this by forking the [MDN data repo](https://github.com/mdn/data), cloning your fork locally, making the changes in a new branch, then submitting a pull request against the upstream repo. You can [find more details about using Git here](/en-US/docs/MDN/Writing_guidelines/Page_structures/Compatibility_tables).
+1. Add a heading like: `## Formal syntax`.
+2. Place the `\{{CSSSyntax}}` macro directly below this heading.
 
 ### Selectors
 
-The "Syntax" section of selector reference pages is much simpler than that of property pages. It contains one block styled using the "Syntax Box" style, which shows the basic syntax of the selector, whether it is just a simple keyword (e.g. {{CSSxRef(":hover")}}), or a more complex function value that takes a parameter (e.g. {{CSSxRef(":not", ":not()")}}). Sometimes the parameter is explained in a further entry inside the syntax block (see {{CSSxRef(":nth-last-of-type", ":nth-last-of-type()")}} for an example).
+The "Syntax" section of selector reference pages is much simpler than that of property pages. It contains one block styled using the "Syntax Box" style, which shows the basic syntax of the selector, whether it is just a simple keyword (e.g., {{CSSxRef(":hover")}}), or a more complex function value that takes a parameter (e.g., {{CSSxRef(":not", ":not()")}}). Sometimes the parameter is explained in a further entry inside the syntax block (see {{CSSxRef(":nth-last-of-type", ":nth-last-of-type()")}} for an example).
 
 This block is automatically generated from the data included in the [MDN data repo](https://github.com/mdn/data)'s CSS directory. You just need to include a `CSSSyntax` macro call below the title, and it will take care of the rest.
 
@@ -291,7 +293,7 @@ The "Directive" section contains a description list containing the names and des
 
 ### HTTP request methods
 
-Request method syntax is really simple, just containing a syntax block styled using the "Syntax Box" style that shows how the method syntax is structured. The syntax for the [GET method](/en-US/docs/Web/HTTP/Methods/GET) looks like this:
+Request method syntax is really simple, just containing a syntax block styled using the "Syntax Box" style that shows how the method syntax is structured. The syntax for the [GET method](/en-US/docs/Web/HTTP/Reference/Methods/GET) looks like this:
 
 ```http
 GET /index.html

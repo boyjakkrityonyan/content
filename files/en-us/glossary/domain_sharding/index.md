@@ -2,9 +2,8 @@
 title: Domain sharding
 slug: Glossary/Domain_sharding
 page-type: glossary-definition
+sidebar: glossarysidebar
 ---
-
-{{GlossarySidebar}}
 
 Browsers limit the number of active connections for each domain. To enable concurrent downloads of assets exceeding that limit, **domain sharding** splits content across multiple subdomains. When multiple domains are used to serve multiple assets, browsers are able to download more resources simultaneously, resulting in a faster page load time and improved user experience.
 
@@ -16,6 +15,7 @@ HTTP2 supports unlimited concurrent requests making domain sharding an obsolete 
 
 ## See also
 
-- {{Glossary("TLS")}}
-- [DNS](/en-US/docs/Glossary/DNS)
-- [HTTP/2](/en-US/docs/Glossary/HTTP_2)
+- Related glossary terms:
+  - {{Glossary("TLS")}}
+  - {{Glossary("DNS")}}
+  - {{Glossary("HTTP 2", "HTTP/2")}}

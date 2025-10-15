@@ -18,7 +18,6 @@ The **`userChoice`** property of the {{domxref("BeforeInstallPromptEvent")}} int
 A {{jsxref("Promise")}} which resolves to an object containing two properties:
 
 - `outcome` {{experimental_inline}} {{non-standard_inline}}
-
   - : A string indicating whether the user chose to install the app or not. It must be one of the following values:
     - `"accepted"`: The user installed the app.
     - `"dismissed"`: The user did not install the app.
@@ -33,4 +32,4 @@ A {{jsxref("Promise")}} which resolves to an object containing two properties:
 ## See also
 
 - [Making PWAs installable](/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable)
-- [How to provide your own in-app install experience](https://web.dev/customize-install/) on web.dev (2021)
+- [How to provide your own in-app install experience](https://web.dev/articles/customize-install) on web.dev (2021)

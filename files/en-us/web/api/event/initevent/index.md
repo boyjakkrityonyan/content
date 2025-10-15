@@ -8,7 +8,7 @@ status:
 browser-compat: api.Event.initEvent
 ---
 
-{{ ApiRef("DOM") }}{{deprecated_header}}
+{{APIRef("DOM")}}{{deprecated_header}}{{AvailableInWorkers}}
 
 The **`Event.initEvent()`** method is used to initialize the
 value of an {{ domxref("event") }} created using {{domxref("Document.createEvent()")}}.
@@ -19,14 +19,15 @@ This method must be called to set the event
 before it is dispatched, using {{ domxref("EventTarget.dispatchEvent()") }}.
 Once dispatched, it doesn't do anything anymore.
 
-> **Note:** _Do not use this method anymore as it is deprecated._
+> [!NOTE]
+> _Do not use this method anymore as it is deprecated._
 > Instead use specific event constructors, like {{domxref("Event.Event", "Event()")}}.
-> The page on [Creating and triggering events](/en-US/docs/Web/Events/Creating_and_triggering_events) gives more information about the way to use these.
+> The section on [Creating and dispatching events](/en-US/docs/Web/API/Document_Object_Model/Events#creating_and_dispatching_events) gives more information about the way to use these.
 
 ## Syntax
 
 ```js-nolint
-event.initEvent(type, bubbles, cancelable)
+initEvent(type, bubbles, cancelable)
 ```
 
 ### Parameters
@@ -41,7 +42,7 @@ event.initEvent(type, bubbles, cancelable)
   - : A boolean value defining whether the event can be canceled. Once set, the
     read-only property {{ domxref("Event.cancelable") }} will give its value.
 
-## Return value
+### Return value
 
 None.
 
@@ -56,13 +57,9 @@ const event = document.createEvent("Event");
 event.initEvent("click", true, false);
 
 // Listen for the event.
-elem.addEventListener(
-  "click",
-  (e) => {
-    // e.target matches elem
-  },
-  false,
-);
+elem.addEventListener("click", (e) => {
+  // e.target matches elem
+});
 
 elem.dispatchEvent(event);
 ```

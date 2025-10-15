@@ -5,11 +5,11 @@ page-type: web-api-interface
 browser-compat: api.OrientationSensor
 ---
 
-{{APIRef("Sensor API")}}
+{{securecontext_header}}{{APIRef("Sensor API")}}
 
 The **`OrientationSensor`** interface of the [Sensor APIs](/en-US/docs/Web/API/Sensor_APIs) is the base class for orientation sensors. This interface cannot be used directly. Instead it provides properties and methods accessed by interfaces that inherit from it.
 
-This feature may be blocked by a [Permissions Policy](/en-US/docs/Web/HTTP/Permissions_Policy) set on your server.
+This feature may be blocked by a [Permissions Policy](/en-US/docs/Web/HTTP/Guides/Permissions_Policy) set on your server.
 
 {{InheritanceDiagram}}
 
@@ -22,7 +22,7 @@ Below is a list of interfaces based on the OrientationSensor interface.
 
 ## Instance properties
 
-- {{domxref("OrientationSensor.quaternion")}}
+- {{domxref("OrientationSensor.quaternion")}} {{ReadOnlyInline}}
   - : Returns a four element {{jsxref('Array')}} whose elements contain the components of the unit quaternion representing the device's orientation.
 
 ## Instance methods

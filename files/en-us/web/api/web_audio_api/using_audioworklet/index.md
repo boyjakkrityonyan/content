@@ -28,7 +28,7 @@ Throughout the remainder of this article, we'll look at these steps in more deta
 
 The example code found on this page is derived from [this working example](https://mdn.github.io/webaudio-examples/audioworklet/) which is part of MDN's [GitHub repository of Web Audio examples](https://github.com/mdn/webaudio-examples/). The example creates an oscillator node and adds white noise to it using an {{domxref("AudioWorkletNode")}} before playing the resulting sound out. Slider controls are available to allow controlling the gain of both the oscillator and the audio worklet's output.
 
-[**See the code**](https://github.com/mdn/webaudio-examples/tree/master/audioworklet)
+[**See the code**](https://github.com/mdn/webaudio-examples/tree/main/audioworklet)
 
 [**Try it live**](https://mdn.github.io/webaudio-examples/audioworklet/)
 
@@ -105,23 +105,26 @@ It's entirely up to you. This is a very powerful tool in your audio programming 
 Let's take a look at an implementation of `process()` that can process multiple inputs, with each input being used to generate the corresponding output. Any excess inputs are ignored.
 
 ```js
-process(inputList, outputList, parameters) {
-  const sourceLimit = Math.min(inputList.length, outputList.length);
+class MyAudioProcessor extends AudioWorkletProcessor {
+  // …
+  process(inputList, outputList, parameters) {
+    const sourceLimit = Math.min(inputList.length, outputList.length);
 
-  for (let inputNum = 0; inputNum < sourceLimit; inputNum++) {
-    const input = inputList[inputNum];
-    const output = outputList[inputNum];
-    const channelCount = Math.min(input.length, output.length);
+    for (let inputNum = 0; inputNum < sourceLimit; inputNum++) {
+      const input = inputList[inputNum];
+      const output = outputList[inputNum];
+      const channelCount = Math.min(input.length, output.length);
 
-    for (let channelNum = 0; channelNum < channelCount; channelNum++) {
-      input[channelNum].forEach((sample, i) => {
-        // Manipulate the sample
-        output[channelNum][i] = sample;
-      });
+      for (let channelNum = 0; channelNum < channelCount; channelNum++) {
+        input[channelNum].forEach((sample, i) => {
+          // Manipulate the sample
+          output[channelNum][i] = sample;
+        });
+      }
     }
-  };
 
-  return true;
+    return true;
+  }
 }
 ```
 
@@ -132,29 +135,32 @@ Note that when determining the number of sources to process and send through to 
 Many nodes perform **mixing** operations, where the inputs are combined in some way into a single output. This is demonstrated in the following example.
 
 ```js
-process(inputList, outputList, parameters) {
-  const sourceLimit = Math.min(inputList.length, outputList.length);
-  for (let inputNum = 0; inputNum < sourceLimit; inputNum++) {
-    let input = inputList[inputNum];
-    let output = outputList[0];
-    let channelCount = Math.min(input.length, output.length);
+class MyAudioProcessor extends AudioWorkletProcessor {
+  // …
+  process(inputList, outputList, parameters) {
+    const sourceLimit = Math.min(inputList.length, outputList.length);
+    for (let inputNum = 0; inputNum < sourceLimit; inputNum++) {
+      let input = inputList[inputNum];
+      let output = outputList[0];
+      let channelCount = Math.min(input.length, output.length);
 
-    for (let channelNum = 0; channelNum < channelCount; channelNum++) {
-      for (let i = 0; i < input[channelNum].length; i++) {
-        let sample = output[channelNum][i] + input[channelNum][i];
+      for (let channelNum = 0; channelNum < channelCount; channelNum++) {
+        for (let i = 0; i < input[channelNum].length; i++) {
+          let sample = output[channelNum][i] + input[channelNum][i];
 
-        if (sample > 1.0) {
-          sample = 1.0;
-        } else if (sample < -1.0) {
-          sample = -1.0;
+          if (sample > 1.0) {
+            sample = 1.0;
+          } else if (sample < -1.0) {
+            sample = -1.0;
+          }
+
+          output[channelNum][i] = sample;
         }
-
-        output[channelNum][i] = sample;
       }
     }
-  };
 
-  return true;
+    return true;
+  }
 }
 ```
 
@@ -170,7 +176,8 @@ Specifying a value of `true` as the result from your `process()` function in ess
 
 Returning `false` from the `process()` method tells the API that it should follow its normal logic and shut down your processor node if it deems it appropriate to do so. If the API determines that your node is no longer needed, `process()` will not be called again.
 
-> **Note:** At this time, unfortunately, Chrome does not implement this algorithm in a manner that matches the current standard. Instead, it keeps the node alive if you return `true` and shuts it down if you return `false`. Thus for compatibility reasons you must always return `true` from `process()`, at least on Chrome. However, once [this Chrome issue](https://crbug.com/921354) is fixed, you will want to change this behavior if possible as it may have a slight negative impact on performance.
+> [!NOTE]
+> At this time, unfortunately, Chrome does not implement this algorithm in a manner that matches the current standard. Instead, it keeps the node alive if you return `true` and shuts it down if you return `false`. Thus for compatibility reasons you must always return `true` from `process()`, at least on Chrome. However, once [this Chrome issue](https://crbug.com/921354) is fixed, you will want to change this behavior if possible as it may have a slight negative impact on performance.
 
 ## Creating an audio processor worklet node
 
@@ -207,7 +214,7 @@ In order to ensure the context is usable, this starts by creating the context if
 You can then create a new audio processor node by doing this:
 
 ```js
-let newProcessorNode = createMyAudioProcessor();
+let newProcessorNode = await createMyAudioProcessor();
 ```
 
 If the returned value, `newProcessorNode`, is non-`null`, we have a valid audio context with its hiss processor node in place and ready to use.
@@ -223,21 +230,24 @@ To add parameters to an {{domxref("AudioWorkletNode")}}, you need to define them
 In the following implementation of `parameterDescriptors()`, the returned array has two `AudioParam` objects. The first defines `gain` as a value between 0 and 1, with a default value of 0.5. The second parameter is named `frequency` and defaults to 440.0, with a range from 27.5 to 4186.009, inclusively.
 
 ```js
-static get parameterDescriptors() {
-  return [
-   {
-      name: "gain",
-      defaultValue: 0.5,
-      minValue: 0,
-      maxValue: 1
-    },
-    {
-      name: "frequency",
-      defaultValue: 440.0,
-      minValue: 27.5,
-      maxValue: 4186.009
-    }
-  ];
+class MyAudioProcessor extends AudioWorkletProcessor {
+  // …
+  static get parameterDescriptors() {
+    return [
+      {
+        name: "gain",
+        defaultValue: 0.5,
+        minValue: 0,
+        maxValue: 1,
+      },
+      {
+        name: "frequency",
+        defaultValue: 440.0,
+        minValue: 27.5,
+        maxValue: 4186.009,
+      },
+    ];
+  }
 }
 ```
 
@@ -251,31 +261,34 @@ Accessing your processor node's parameters is as simple as looking them up in th
 In the code below, we see a `process()` function that handles a `gain` parameter which can be used as either an a-rate or k-rate parameter. Our node only supports one input, so it just takes the first input in the list, applies the gain to it, and writes the resulting data to the first output's buffer.
 
 ```js
-process(inputList, outputList, parameters) {
-  const input = inputList[0];
-  const output = outputList[0];
-  const gain = parameters.gain;
+class MyAudioProcessor extends AudioWorkletProcessor {
+  // …
+  process(inputList, outputList, parameters) {
+    const input = inputList[0];
+    const output = outputList[0];
+    const gain = parameters.gain;
 
-  for (let channelNum = 0; channelNum < input.length; channelNum++) {
-    const inputChannel = input[channelNum];
-    const outputChannel = output[channelNum];
+    for (let channelNum = 0; channelNum < input.length; channelNum++) {
+      const inputChannel = input[channelNum];
+      const outputChannel = output[channelNum];
 
-    // If gain.length is 1, it's a k-rate parameter, so apply
-    // the first entry to every frame. Otherwise, apply each
-    // entry to the corresponding frame.
+      // If gain.length is 1, it's a k-rate parameter, so apply
+      // the first entry to every frame. Otherwise, apply each
+      // entry to the corresponding frame.
 
-    if (gain.length === 1) {
-      for (let i = 0; i < inputChannel.length; i++) {
-        outputChannel[i] = inputChannel[i] * gain[0];
-      }
-    } else {
-      for (let i = 0; i < inputChannel.length; i++) {
-        outputChannel[i] = inputChannel[i] * gain[i];
+      if (gain.length === 1) {
+        for (let i = 0; i < inputChannel.length; i++) {
+          outputChannel[i] = inputChannel[i] * gain[0];
+        }
+      } else {
+        for (let i = 0; i < inputChannel.length; i++) {
+          outputChannel[i] = inputChannel[i] * gain[i];
+        }
       }
     }
-  }
 
-  return true;
+    return true;
+  }
 }
 ```
 
@@ -283,7 +296,7 @@ Here, if `gain.length` indicates that there's only a single value in the `gain` 
 
 ### Accessing parameters from the main thread script
 
-Your main thread script can access the parameters just like it can any other node. To do so, first you need to get a reference to the parameter by calling the {{domxref("AudioWorkletNode")}}'s {{domxref("AudioWorkletNode.parameters", "parameters")}} property's {{domxref("AudioParamMap.get", "get()")}} method:
+Your main thread script can access the parameters just like it can any other node. To do so, first you need to get a reference to the parameter by calling the {{domxref("AudioWorkletNode")}}'s {{domxref("AudioWorkletNode.parameters", "parameters")}} property's [`get()`](/en-US/docs/Web/API/AudioParamMap#get) method:
 
 ```js
 let gainParam = myAudioWorkletNode.parameters.get("gain");

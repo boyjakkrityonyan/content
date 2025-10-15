@@ -3,9 +3,8 @@ title: devtools.inspectedWindow.tabId
 slug: Mozilla/Add-ons/WebExtensions/API/devtools/inspectedWindow/tabId
 page-type: webextension-api-property
 browser-compat: webextensions.api.devtools.inspectedWindow.tabId
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 The ID of the {{WebExtAPIRef("tabs.Tab", "tab")}} that this instance of the devtools is attached to, represented as a number.
 
@@ -36,13 +35,14 @@ function handleMessage(request, sender, sendResponse) {
 browser.runtime.onMessage.addListener(handleMessage);
 ```
 
+{{WebExtExamples}}
+
 ## Browser compatibility
 
 {{Compat}}
 
-{{WebExtExamples}}
-
-> **Note:** This API is based on Chromium's [`chrome.devtools`](https://developer.chrome.com/docs/extensions/mv3/devtools/) API.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.devtools`](https://developer.chrome.com/docs/extensions/how-to/devtools/extend-devtools) API.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

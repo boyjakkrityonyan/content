@@ -17,15 +17,17 @@ This includes:
 - Restoring a frozen page on mobile OSes
 - Returning to the page using the browser's forward or back buttons
 
-> **Note:** During the initial page load, the `pageshow` event fires _after_ the {{domxref("Window/load_event", "load")}} event.
+> [!NOTE]
+> During the initial page load, the `pageshow` event fires _after_ the {{domxref("Window/load_event", "load")}} event.
 
 ## Syntax
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("pageshow", (event) => {});
-onpageshow = (event) => {};
+```js-nolint
+addEventListener("pageshow", (event) => { })
+
+onpageshow = (event) => { }
 ```
 
 ## Event type

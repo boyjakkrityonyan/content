@@ -3,20 +3,15 @@ title: privacy.services
 slug: Mozilla/Add-ons/WebExtensions/API/privacy/services
 page-type: webextension-api-property
 browser-compat: webextensions.api.privacy.services
+sidebar: addonsidebar
 ---
 
-{{AddonSidebar}}
-
-The {{WebExtAPIRef("privacy.services")}} property contains privacy-related settings controlling services offered by the browser or by third parties. Each property is a {{WebExtAPIRef("types.BrowserSetting")}} object.
+The `privacy.services` property contains privacy-related settings controlling services offered by the browser or by third parties. Each property is a {{WebExtAPIRef("types.BrowserSetting")}} object.
 
 ## Properties
 
 - `passwordSavingEnabled`
   - : A {{WebExtAPIRef("types.BrowserSetting")}} object whose underlying value is a boolean. If `true`, the browser's password manager will offer to store passwords when the user enters them. Defaults to `true`.
-
-## Browser compatibility
-
-{{Compat}}
 
 ## Examples
 
@@ -50,4 +45,9 @@ getting.then((got) => {
 
 {{WebExtExamples}}
 
-> **Note:** This API is based on Chromium's [`chrome.privacy`](https://developer.chrome.com/docs/extensions/reference/privacy/) API.
+## Browser compatibility
+
+{{Compat}}
+
+> [!NOTE]
+> This API is based on Chromium's [`chrome.privacy`](https://developer.chrome.com/docs/extensions/reference/api/privacy) API.

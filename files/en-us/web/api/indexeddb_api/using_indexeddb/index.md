@@ -43,7 +43,8 @@ The open request doesn't open the database or start the transaction right away. 
 
 The second parameter to the open method is the version of the database. The version of the database determines the database schema — the object stores in the database and their structure. If the database doesn't already exist, it is created by the `open` operation, then an `onupgradeneeded` event is triggered and you create the database schema in the handler for this event. If the database does exist but you are specifying an upgraded version number, an `onupgradeneeded` event is triggered straight away, allowing you to provide an updated schema in its handler. More on this later in [Creating or updating the version of the database](#creating_or_updating_the_version_of_the_database) below, and the {{ domxref("IDBFactory.open") }} reference page.
 
-> **Warning:** The version number is an `unsigned long long` number, which means that it can be a very big integer. It also means that you can't use a float, otherwise it will be converted to the closest lower integer and the transaction may not start, nor the `upgradeneeded` event trigger. So for example, don't use 2.4 as a version number:
+> [!WARNING]
+> The version number is an `unsigned long long` number, which means that it can be a very big integer. It also means that you can't use a float, otherwise it will be converted to the closest lower integer and the transaction may not start, nor the `upgradeneeded` event trigger. So for example, don't use 2.4 as a version number:
 > `const request = indexedDB.open("MyTestDatabase", 2.4); // don't do this, as the version will be rounded to 2`
 
 #### Generating handlers
@@ -52,14 +53,14 @@ The first thing you'll want to do with almost all of the requests you generate i
 
 ```js
 request.onerror = (event) => {
-  // Do something with request.errorCode!
+  // Do something with request.error!
 };
 request.onsuccess = (event) => {
   // Do something with request.result!
 };
 ```
 
-Which of the two functions, `onsuccess()` or `onerror()`, gets called? If everything succeeds, a success event (that is, a DOM event whose `type` property is set to `"success"`) is fired with `request` as its `target`. Once it is fired, the `onsuccess()` function on `request` is triggered with the success event as its argument. Otherwise, if there was any problem, an error event (that is, a DOM event whose `type` property is set to `"error"`) is fired at `request`. This triggers the `onerror()` function with the error event as its argument.
+If the request succeeds, the {{domxref("IDBRequest.success_event", "success")}} event is fired, and the function assigned to `onsuccess` is called. If the request fails, the {{domxref("IDBRequest.error_event", "error")}} event is fired, and the function assigned to `onerror` is called.
 
 The IndexedDB API is designed to minimize the need for error handling, so you're not likely to see many error events (at least, not once you're used to the API!). In the case of opening a database, however, there are some common conditions that generate error events. The most likely problem is that the user decided not to give your web app permission to create a database. One of the main design goals of IndexedDB is to allow large amounts of data to be stored for offline use. (To learn more about how much storage you can have for each browser, see [How much data can be stored? on the Browser storage quotas and eviction criteria page](/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria#how_much_data_can_be_stored).)
 
@@ -86,7 +87,7 @@ As mentioned above, error events bubble. Error events are targeted at the reques
 db.onerror = (event) => {
   // Generic error handler for all errors targeted at this database's
   // requests!
-  console.error(`Database error: ${event.target.errorCode}`);
+  console.error(`Database error: ${event.target.error?.message}`);
 };
 ```
 
@@ -260,7 +261,7 @@ request.onupgradeneeded = (event) => {
 };
 ```
 
-For more details about the key generator, please see ["W3C Key Generators"](https://www.w3.org/TR/IndexedDB/#key-generator-concept).
+For more details about the key generator, see [Key generators](https://w3c.github.io/IndexedDB/#key-generator-construct) in the spec.
 
 ## Adding, retrieving, and removing data
 
@@ -270,7 +271,8 @@ To change the "schema" or structure of the database—which involves creating or
 
 To read the records of an existing object store, the transaction can either be in `readonly` or `readwrite` mode. To make changes to an existing object store, the transaction must be in `readwrite` mode. You open such transactions with {{domxref("IDBDatabase.transaction")}}. The method accepts two parameters: the `storeNames` (the scope, defined as an array of object stores that you want to access) and the `mode` (`readonly` or `readwrite`) for the transaction. The method returns a transaction object containing the {{domxref("IDBIndex.objectStore")}} method, which you can use to access your object store. By default, where no mode is specified, transactions open in `readonly` mode.
 
-> **Note:** As of Firefox 40, IndexedDB transactions have relaxed durability guarantees to increase performance (see [Webkit bug 1112702](https://bugzil.la/1112702).) Previously in a `readwrite` transaction, a {{domxref("IDBTransaction.complete_event", "complete")}} event was fired only when all data was guaranteed to have been flushed to disk. In Firefox 40+ the `complete` event is fired after the OS has been told to write the data but potentially before that data has actually been flushed to disk. The `complete` event may thus be delivered quicker than before, however, there exists a small chance that the entire transaction will be lost if the OS crashes or there is a loss of system power before the data is flushed to disk. Since such catastrophic events are rare most consumers should not need to concern themselves further. If you must ensure durability for some reason (e.g. you're storing critical data that cannot be recomputed later) you can force a transaction to flush to disk before delivering the `complete` event by creating a transaction using the experimental (non-standard) `readwriteflush` mode (see {{domxref("IDBDatabase.transaction")}}).
+> [!NOTE]
+> As of Firefox 40, IndexedDB transactions have relaxed durability guarantees to increase performance (see [Firefox bug 1112702](https://bugzil.la/1112702).) Previously in a `readwrite` transaction, a {{domxref("IDBTransaction.complete_event", "complete")}} event was fired only when all data was guaranteed to have been flushed to disk. In Firefox 40+ the `complete` event is fired after the OS has been told to write the data but potentially before that data has actually been flushed to disk. The `complete` event may thus be delivered quicker than before, however, there exists a small chance that the entire transaction will be lost if the OS crashes or there is a loss of system power before the data is flushed to disk. Since such catastrophic events are rare most consumers should not need to concern themselves further. If you must ensure durability for some reason (e.g., you're storing critical data that cannot be recomputed later) you can force a transaction to flush to disk before delivering the `complete` event by creating a transaction using the experimental (non-standard) `readwriteflush` mode (see {{domxref("IDBDatabase.transaction")}}).
 
 You can speed up data access by using the right scope and mode in the transaction. Here are a couple of tips:
 
@@ -393,7 +395,8 @@ request.onsuccess = (event) => {
 
 So here we're creating an `objectStore` and requesting a customer record out of it, identified by its ssn value (`444-44-4444`). We then put the result of that request in a variable (`data`), update the `age` property of this object, then create a second request (`requestUpdate`) to put the customer record back into the `objectStore`, overwriting the previous value.
 
-> **Note:** In this case we've had to specify a `readwrite` transaction because we want to write to the database, not just read from it.
+> [!NOTE]
+> In this case we've had to specify a `readwrite` transaction because we want to write to the database, not just read from it.
 
 ### Using a cursor
 
@@ -431,7 +434,8 @@ objectStore.openCursor().onsuccess = (event) => {
 };
 ```
 
-> **Note:** Alternatively, you can use `getAll()` to handle this case (and `getAllKeys()`). The following code does precisely the same thing as above:
+> [!NOTE]
+> Alternatively, you can use `getAll()` to handle this case (and `getAllKeys()`). The following code does precisely the same thing as above:
 >
 > ```js
 > objectStore.getAll().onsuccess = (event) => {
@@ -478,11 +482,30 @@ index.openCursor().onsuccess = (event) => {
 index.openKeyCursor().onsuccess = (event) => {
   const cursor = event.target.result;
   if (cursor) {
-    // cursor.key is a name, like "Bill", and cursor.value is the SSN.
+    // cursor.key is a name, like "Bill", and cursor.primaryKey is the SSN.
     // No way to directly get the rest of the stored object.
     console.log(`Name: ${cursor.key}, SSN: ${cursor.primaryKey}`);
     cursor.continue();
   }
+};
+```
+
+The index can also be created on multiple properties, allowing to look up records using a combination of values, such as finding a person by both their name and email. To create a compound index, pass an array of property names as the key path when calling `createIndex`. You can then query the index by passing an array of values in the same order.
+
+First, make sure you created the index in `request.onupgradeneeded`:
+
+```js
+const index = objectStore.createIndex("name_email", ["name", "email"]);
+```
+
+Then later you can query the index like this:
+
+```js
+const index = objectStore.index("name_email");
+
+index.get(["Donna", "donna@home.org"]).onsuccess = (event) => {
+  console.log(event.target.result);
+  // {ssn: '555-55-5555', name: 'Donna', age: 32, email: 'donna@home.org'}
 };
 ```
 
@@ -576,7 +599,6 @@ openReq.onupgradeneeded = (event) => {
 openReq.onsuccess = (event) => {
   const db = event.target.result;
   useDatabase(db);
-  return;
 };
 
 function useDatabase(db) {
@@ -600,7 +622,7 @@ You should also listen for `VersionError` errors to handle the situation where a
 
 IndexedDB uses the same-origin principle, which means that it ties the store to the origin of the site that creates it (typically, this is the site domain or subdomain), so it cannot be accessed by any other origin.
 
-Third party window content (e.g. {{htmlelement("iframe")}} content) cannot access IndexedDB if the browser is set to [never accept third party cookies](https://support.mozilla.org/en-US/kb/third-party-cookies-firefox-tracking-protection) (see [Firefox bug 1147821](https://bugzil.la/1147821)).
+Third party window content (e.g., {{htmlelement("iframe")}} content) cannot access IndexedDB if the browser is set to [never accept third party cookies](https://support.mozilla.org/en-US/kb/third-party-cookies-firefox-tracking-protection) (see [Firefox bug 1147821](https://bugzil.la/1147821)).
 
 ## Warning about browser shutdown
 
@@ -624,23 +646,6 @@ In fact, there is no way to guarantee that IndexedDB transactions will complete,
 
 At least with the addition of the abort notifications and {{domxref("IDBDatabase.close_event", "IDBDatabase.onclose")}}, you can know when this has happened.
 
-## Locale-aware sorting
-
-Mozilla has implemented the ability to perform locale-aware sorting of IndexedDB data in Firefox 43+. By default, IndexedDB didn't handle internationalization of sorting strings at all, and everything was sorted as if it were English text. For example, b, á, z, a would be sorted as:
-
-- a
-- b
-- z
-- á
-
-which is obviously not how users want their data to be sorted — Aaron and Áaron for example should go next to one another in a contacts list. Achieving proper international sorting therefore required the entire dataset to be called into memory, and sorting to be performed by client-side JavaScript, which is not very efficient.
-
-This new functionality enables developers to specify a locale when creating an index using {{domxref("IDBObjectStore.createIndex()")}} (check out its parameters.) In such cases, when a cursor is then used to iterate through the dataset, and you want to specify locale-aware sorting, you can use a specialized {{domxref("IDBLocaleAwareKeyRange")}}.
-
-{{domxref("IDBIndex")}} has also had new properties added to it to specify if it has a locale specified, and what it is: `locale` (returns the locale if any, or null if none is specified) and `isAutoLocale` (returns `true` if the index was created with an auto locale, meaning that the platform's default locale is used, `false` otherwise.)
-
-> **Note:** This feature is currently hidden behind a flag — to enable it and experiment, go to `about:config` and enable `dom.indexedDB.experimental`.
-
 ## Full IndexedDB example
 
 We have a complete example using the IndexedDB API. The example uses IndexedDB to store and retrieve publications.
@@ -655,13 +660,13 @@ Further reading for you to find out more information if desired.
 ### Reference
 
 - [IndexedDB API Reference](/en-US/docs/Web/API/IndexedDB_API)
-- [Indexed Database API Specification](https://www.w3.org/TR/IndexedDB/)
-- IndexedDB [interface files](https://searchfox.org/mozilla-central/search?q=dom%2FindexedDB%2F.*%5C.idl&path=&case=false&regexp=true) in the Firefox source code
+- [Indexed Database API Specification](https://w3c.github.io/IndexedDB/)
+- IndexedDB [interface files](https://searchfox.org/firefox-main/search?q=dom%2FindexedDB%2F.*%5C.idl&path=&case=false&regexp=true) in the Firefox source code
 
 ### Tutorials and guides
 
-- [Databinding UI Elements with IndexedDB (2012)](https://web.dev/indexeddb-uidatabinding/)
-- [IndexedDB — The Store in Your Browser](<https://docs.microsoft.com/previous-versions/msdn10/gg679063(v=msdn.10)>)
+- [Databinding UI Elements with IndexedDB (2012)](https://web.dev/articles/indexeddb-uidatabinding)
+- [IndexedDB — The Store in Your Browser](<https://learn.microsoft.com/en-us/previous-versions/msdn10/gg679063(v=msdn.10)>)
 
 ### Libraries
 
@@ -669,8 +674,8 @@ Further reading for you to find out more information if desired.
 - [Dexie.js](https://dexie.org/): A wrapper for IndexedDB that allows much faster code development via nice, simple syntax.
 - [JsStore](https://jsstore.net/): A simple and advanced IndexedDB wrapper having SQL like syntax.
 - [MiniMongo](https://github.com/mWater/minimongo): A client-side in-memory MongoDB backed by localstorage with server sync over http. MiniMongo is used by MeteorJS.
-- [PouchDB](https://pouchdb.com): A client-side implementation of CouchDB in the browser using IndexedDB
+- [PouchDB](https://pouchdb.com/): A client-side implementation of CouchDB in the browser using IndexedDB
 - [IDB](https://github.com/jakearchibald/idb): A tiny library that mostly mirrors the IndexedDB API but with small usability improvements.
-- [idb-keyval](https://www.npmjs.com/package/idb-keyval): A super-simple-small (\~600B) promise-based keyval store implemented with IndexedDB
+- [idb-keyval](https://www.npmjs.com/package/idb-keyval): A super-simple-small (\~600B) promise-based key-value store implemented with IndexedDB
 - [$mol_db](https://github.com/hyoo-ru/mam_mol/tree/master/db): Tiny (\~1.3kB) TypeScript facade with promise-based API and automatic migrations.
 - [RxDB](https://rxdb.info/): A NoSQL client side database that can be used on top of IndexedDB. Supports indexes, compression and replication. Also adds cross tab functionality and observability to IndexedDB.

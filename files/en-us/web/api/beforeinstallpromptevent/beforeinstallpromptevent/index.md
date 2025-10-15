@@ -23,7 +23,7 @@ new BeforeInstallPromptEvent(type, eventInitDict)
 ### Parameters
 
 - `type`
-  - : A string with the name of the event, set to `beforeinstallpromptevent`.
+  - : A string with the name of the event, set to `beforeinstallprompt`.
 - `eventInitDict` {{optional_inline}}
   - : An object with a single optional property `platforms`, which is an array of strings, listing the platforms on which the event will be dispatched.
 
@@ -38,4 +38,4 @@ new BeforeInstallPromptEvent(type, eventInitDict)
 ## See also
 
 - [Making PWAs installable](/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable)
-- [How to provide your own in-app install experience](https://web.dev/customize-install/) on web.dev (2021)
+- [How to provide your own in-app install experience](https://web.dev/articles/customize-install) on web.dev (2021)

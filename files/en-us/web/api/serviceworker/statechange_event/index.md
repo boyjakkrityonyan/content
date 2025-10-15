@@ -6,7 +6,7 @@ page-type: web-api-event
 browser-compat: api.ServiceWorker.statechange_event
 ---
 
-{{APIRef("Service Workers API")}}
+{{APIRef("Service Workers API")}}{{SecureContext_Header}}{{AvailableInWorkers}}
 
 The `statechange` event fires anytime the {{domxref("ServiceWorker.state")}} changes.
 
@@ -14,10 +14,10 @@ The `statechange` event fires anytime the {{domxref("ServiceWorker.state")}} cha
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("statechange", (event) => {});
+```js-nolint
+addEventListener("statechange", (event) => { })
 
-onstatechange = (event) => {};
+onstatechange = (event) => { }
 ```
 
 ## Event type

@@ -3,9 +3,8 @@ title: font-display
 slug: Web/CSS/@font-face/font-display
 page-type: css-at-rule-descriptor
 browser-compat: css.at-rules.font-face.font-display
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The **`font-display`** descriptor for the [`@font-face`](/en-US/docs/Web/CSS/@font-face) at-rule determines how a font face is displayed based on whether and when it is downloaded and ready to use.
 
@@ -33,7 +32,8 @@ font-display: optional;
 - `optional`
   - : Gives the font face an extremely small block period and no swap period.
 
-> **Note:** In Firefox, the preferences `gfx.downloadable_fonts.fallback_delay`
+> [!NOTE]
+> In Firefox, the preferences `gfx.downloadable_fonts.fallback_delay`
 > and `gfx.downloadable_fonts.fallback_delay_short` provide the duration
 > of the "short" and "extremely small" periods, respectively.
 
@@ -59,10 +59,10 @@ The font display timeline is based on a timer that begins the moment the user ag
 
 ```css
 @font-face {
-  font-family: ExampleFont;
+  font-family: "ExampleFont";
   src:
-    url(/path/to/fonts/examplefont.woff) format("woff"),
-    url(/path/to/fonts/examplefont.eot) format("eot");
+    url("/path/to/fonts/example-font.woff") format("woff"),
+    url("/path/to/fonts/example-font.eot") format("embedded-opentype");
   font-weight: 400;
   font-style: normal;
   font-display: fallback;

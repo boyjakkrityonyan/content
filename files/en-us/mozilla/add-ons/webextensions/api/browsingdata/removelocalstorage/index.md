@@ -3,9 +3,8 @@ title: browsingData.removeLocalStorage()
 slug: Mozilla/Add-ons/WebExtensions/API/browsingData/removeLocalStorage
 page-type: webextension-api-function
 browser-compat: webextensions.api.browsingData.removeLocalStorage
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar()}}
 
 Clears any [local storage](/en-US/docs/Web/API/Window/localStorage) created by websites.
 
@@ -49,13 +48,14 @@ function onError(error) {
 browser.browsingData.removeLocalStorage({}).then(onRemoved, onError);
 ```
 
+{{WebExtExamples}}
+
 ## Browser compatibility
 
 {{Compat}}
 
-{{WebExtExamples}}
-
-> **Note:** This API is based on Chromium's [`chrome.browsingData`](https://developer.chrome.com/docs/extensions/reference/browsingData/) API.
+> [!NOTE]
+> This API is based on Chromium's [`chrome.browsingData`](https://developer.chrome.com/docs/extensions/reference/api/browsingData) API.
 
 <!--
 // Copyright 2015 The Chromium Authors. All rights reserved.

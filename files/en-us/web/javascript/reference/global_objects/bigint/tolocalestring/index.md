@@ -1,17 +1,31 @@
 ---
 title: BigInt.prototype.toLocaleString()
+short-title: toLocaleString()
 slug: Web/JavaScript/Reference/Global_Objects/BigInt/toLocaleString
 page-type: javascript-instance-method
 browser-compat: javascript.builtins.BigInt.toLocaleString
+sidebar: jsref
 ---
 
-{{JSRef}}
+The **`toLocaleString()`** method of {{jsxref("BigInt")}} values returns a string with a language-sensitive representation of this BigInt. In implementations with [`Intl.NumberFormat` API](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) support, this method delegates to `Intl.NumberFormat`.
 
-The **`toLocaleString()`** method of {{jsxref("BigInt")}} values returns a string with a language-sensitive representation of this BigInt. In implementations with [`Intl.NumberFormat` API](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) support, this method simply calls `Intl.NumberFormat`.
+Every time `toLocaleString` is called, it has to perform a search in a big database of localization strings, which is potentially inefficient. When the method is called many times with the same arguments, it is better to create a {{jsxref("Intl.NumberFormat")}} object and use its {{jsxref("Intl/NumberFormat/format", "format()")}} method, because a `NumberFormat` object remembers the arguments passed to it and may decide to cache a slice of the database, so future `format` calls can search for localization strings within a more constrained context.
 
-When formatting large numbers of numbers, it is better to create a {{jsxref("Intl.NumberFormat")}} object and use the function provided by its {{jsxref("Intl/NumberFormat/format", "format()")}} method.
+{{InteractiveExample("JavaScript Demo: BigInt.prototype.toLocaleString()")}}
 
-{{EmbedInteractiveExample("pages/js/bigint-tolocalestring.html")}}
+```js interactive-example
+const bigint = 123456789123456789n;
+
+// German uses period for thousands
+console.log(bigint.toLocaleString("de-DE"));
+// Expected output: "123.456.789.123.456.789"
+
+// Request a currency format
+console.log(
+  bigint.toLocaleString("de-DE", { style: "currency", currency: "EUR" }),
+);
+// Expected output: "123.456.789.123.456.789,00 €"
+```
 
 ## Syntax
 
@@ -28,13 +42,11 @@ The `locales` and `options` parameters customize the behavior of the function an
 In implementations that support the [`Intl.NumberFormat` API](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat), these parameters correspond exactly to the [`Intl.NumberFormat()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat) constructor's parameters. Implementations without `Intl.NumberFormat` support are asked to ignore both parameters, making the locale used and the form of the string returned entirely implementation-dependent.
 
 - `locales` {{optional_inline}}
-
-  - : A string with a BCP 47 language tag, or an array of such strings. Corresponds to the [`locales`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales) parameter of the `Intl.NumberFormat()` constructor.
+  - : A string with a {{glossary("BCP 47 language tag")}}, or an array of such strings. Corresponds to the [`locales`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales) parameter of the `Intl.NumberFormat()` constructor.
 
     In implementations without `Intl.NumberFormat` support, this parameter is ignored and the host's locale is usually used.
 
 - `options` {{optional_inline}}
-
   - : An object adjusting the output format. Corresponds to the [`options`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#options) parameter of the `Intl.NumberFormat()` constructor.
 
     In implementations without `Intl.NumberFormat` support, this parameter is ignored.
@@ -43,16 +55,18 @@ See the [`Intl.NumberFormat()` constructor](/en-US/docs/Web/JavaScript/Reference
 
 ### Return value
 
-A string with a language-sensitive representation of the given BigInt.
+A string representing the given BigInt according to language-specific conventions.
 
 In implementations with `Intl.NumberFormat`, this is equivalent to `new Intl.NumberFormat(locales, options).format(number)`.
 
+> [!NOTE]
+> Most of the time, the formatting returned by `toLocaleString()` is consistent. However, the output may vary between implementations, even within the same locale — output variations are by design and allowed by the specification. It may also not be what you expect. For example, the string may use non-breaking spaces or be surrounded by bidirectional control characters. You should not compare the results of `toLocaleString()` to hardcoded constants.
+
 ## Examples
 
-### Using `toLocaleString`
+### Using toLocaleString()
 
-In basic use without specifying a locale, a formatted string in the default locale and
-with default options is returned.
+Basic use of this method without specifying a `locale` returns a formatted string in the default locale and with default options.
 
 ```js
 const bigint = 3500n;
@@ -75,7 +89,7 @@ function toLocaleStringSupportsLocales() {
 }
 ```
 
-### Using `locales`
+### Using locales
 
 This example shows some of the variations in localized number formats. In order to get
 the format of the language used in the user interface of your application, make sure to
@@ -107,10 +121,9 @@ console.log(bigint.toLocaleString(["ban", "id"]));
 // 123.456.789.123.456.789
 ```
 
-### Using `options`
+### Using options
 
-The results provided by `toLocaleString` can be customized using the
-`options` argument:
+The results provided by `toLocaleString()` can be customized using the `options` parameter:
 
 ```js
 const bigint = 123456789123456789n;
@@ -142,4 +155,5 @@ console.log(bigint.toLocaleString("en-IN", { maximumSignificantDigits: 3 }));
 
 ## See also
 
+- {{jsxref("Intl.NumberFormat")}}
 - {{jsxref("BigInt.prototype.toString()")}}

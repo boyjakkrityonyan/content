@@ -12,31 +12,23 @@ browser-compat: api.FeaturePolicy.allowsFeature
 
 The **`allowsFeature()`** method of
 the {{DOMxRef("FeaturePolicy")}} interface enables introspection of individual
-directives of the [Permissions Policy](/en-US/docs/Web/HTTP/Permissions_Policy) it is run on. It returns a {{JSxRef("Boolean")}}
+directives of the [Permissions Policy](/en-US/docs/Web/HTTP/Guides/Permissions_Policy) it is run on. It returns a {{JSxRef("Boolean")}}
 that is `true` if and only if the specified feature is allowed in the
 specified context (or the default context if no context is specified).
 
 ## Syntax
 
 ```js-nolint
-const allowed = FeaturePolicy.allowsFeature(feature)
-```
-
-or
-
-```js
-const allowed = FeaturePolicy.allowsFeature(feature, origin);
+allowsFeature(feature)
+allowsFeature(feature, origin)
 ```
 
 ### Parameters
 
-#### `Feature name`
-
-A specific feature name must be specified.
-
-#### `Origin name` {{Optional_inline}}
-
-An origin URL to check the feature on. If it is omitted the default origin is used.
+- `feature`
+  - : The specific feature name to check its availability.
+- `origin` {{Optional_inline}}
+  - : The specific origin name to check its availability. If not specified, the default origin will be used.
 
 ### Return value
 

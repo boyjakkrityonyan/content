@@ -2,16 +2,72 @@
 title: page-break-inside
 slug: Web/CSS/page-break-inside
 page-type: css-property
+status:
+  - deprecated
 browser-compat: css.properties.page-break-inside
+sidebar: cssref
 ---
 
-{{CSSRef}}
+{{deprecated_header}}
 
-> **Warning:** This property has been replaced by the {{cssxref("break-inside")}} property.
+> [!WARNING]
+> This property has been replaced by the {{cssxref("break-inside")}} property.
 
-The **`page-break-inside`** CSS property adjusts page breaks _inside_ the current element.
+The **`page-break-inside`** [CSS](/en-US/docs/Web/CSS) property adjusts page breaks _inside_ the current element.
 
-{{EmbedInteractiveExample("pages/css/page-break-inside.html")}}
+{{InteractiveExample("CSS Demo: page-break-inside")}}
+
+```css interactive-example-choice
+page-break-inside: auto;
+```
+
+```css interactive-example-choice
+page-break-inside: avoid;
+```
+
+```html interactive-example
+<div>
+  <p>
+    The effect of this property can be noticed when the document is being
+    printed or a preview of a print is displayed.
+  </p>
+  <button id="print-btn">Show Print Preview</button>
+  <div class="box-container">
+    <div class="box">Content before the property</div>
+    <div class="box" id="example-element">Content with 'page-break-inside'</div>
+    <div class="box">Content after the property</div>
+  </div>
+</div>
+```
+
+```css interactive-example
+.box {
+  border: solid #5b6dcd 5px;
+  background-color: #5b6dcd;
+  margin: 10px 0;
+  padding: 5px;
+}
+
+#example-element {
+  border: solid 5px #ffc129;
+  background-color: #ffc129;
+  color: black;
+}
+
+@media print {
+  #example-element {
+    height: 25cm;
+  }
+}
+```
+
+```js interactive-example
+const btn = document.getElementById("print-btn");
+
+btn.addEventListener("click", () => {
+  window.print();
+});
+```
 
 ## Syntax
 

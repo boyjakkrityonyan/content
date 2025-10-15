@@ -3,9 +3,8 @@ title: "Quantifier: *, +, ?, {n}, {n,}, {n,m}"
 slug: Web/JavaScript/Reference/Regular_expressions/Quantifier
 page-type: javascript-language-feature
 browser-compat: javascript.regular_expressions.quantifier
+sidebar: jssidebar
 ---
-
-{{jsSidebar}}
 
 A **quantifier** repeats an [atom](/en-US/docs/Web/JavaScript/Reference/Regular_expressions#atoms) a certain number of times. The quantifier is placed after the atom it applies to.
 
@@ -143,7 +142,8 @@ function stripTags(str) {
 stripTags("<p><em>lorem</em> <strong>ipsum</strong></p>"); // 'lorem ipsum'
 ```
 
-> **Warning:** This is for demonstration only — it doesn't handle `>` in attribute values. Use a proper HTML sanitizer like the [HTML sanitizer API](/en-US/docs/Web/API/HTML_Sanitizer_API) instead.
+> [!WARNING]
+> This is for demonstration only — it doesn't handle `>` in attribute values. Use a proper HTML sanitizer like the [HTML sanitizer API](/en-US/docs/Web/API/HTML_Sanitizer_API) instead.
 
 ### Locating Markdown paragraphs
 
@@ -164,7 +164,8 @@ Another paragraph
 `); // 3
 ```
 
-> **Warning:** This is for demonstration only — it doesn't handle line breaks in code blocks or other Markdown block elements like headings. Use a proper Markdown parser instead.
+> [!WARNING]
+> This is for demonstration only — it doesn't handle line breaks in code blocks or other Markdown block elements like headings. Use a proper Markdown parser instead.
 
 ## Specifications
 

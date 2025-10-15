@@ -16,10 +16,10 @@ This event is not cancelable and does not bubble.
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("seeking", (event) => {});
+```js-nolint
+addEventListener("seeking", (event) => { })
 
-onseeking = (event) => {};
+onseeking = (event) => { }
 ```
 
 ## Event type
@@ -62,7 +62,6 @@ video.onseeking = (event) => {
 
 - The HTMLMediaElement {{domxref("HTMLMediaElement.playing_event", 'playing')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.waiting_event", 'waiting')}} event
-- The HTMLMediaElement {{domxref("HTMLMediaElement.seeking_event", 'seeking')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.seeked_event", 'seeked')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.ended_event", 'ended')}} event
 - The HTMLMediaElement {{domxref("HTMLMediaElement.loadedmetadata_event", 'loadedmetadata')}} event

@@ -2,15 +2,16 @@
 title: JavaScript typed arrays
 slug: Web/JavaScript/Guide/Typed_arrays
 page-type: guide
+sidebar: jssidebar
 ---
 
-{{jsSidebar("JavaScript Guide")}} {{PreviousNext("Web/JavaScript/Guide/Using_promises", "Web/JavaScript/Guide/Iterators_and_generators")}}
+{{PreviousNext("Web/JavaScript/Guide/Using_promises", "Web/JavaScript/Guide/Iterators_and_generators")}}
 
 JavaScript typed arrays are array-like objects that provide a mechanism for reading and writing raw binary data in memory buffers.
 
 Typed arrays are not intended to replace arrays for any kind of functionality. Instead, they provide developers with a familiar interface for manipulating binary data. This is useful when interacting with platform features, such as audio and video manipulation, access to raw data using [WebSockets](/en-US/docs/Web/API/WebSockets_API), and so forth. Each entry in a JavaScript typed array is a raw binary value in one of a number of supported formats, from 8-bit integers to 64-bit floating-point numbers.
 
-Typed array objects share many of the same methods as arrays with similar semantics. However, typed arrays are _not_ to be confused with normal arrays, as calling {{jsxref("Array.isArray()")}} on a typed array returns `false`. Moreover, not all methods available for normal arrays are supported by typed arrays (e.g. push and pop).
+Typed array objects share many of the same methods as arrays with similar semantics. However, typed arrays are _not_ to be confused with normal arrays, as calling {{jsxref("Array.isArray()")}} on a typed array returns `false`. Moreover, not all methods available for normal arrays are supported by typed arrays (e.g., push and pop).
 
 To achieve maximum flexibility and efficiency, JavaScript typed arrays split the implementation into _buffers_ and _views_. A buffer is an object representing a chunk of data; it has no format to speak of, and offers no mechanism for accessing its contents. In order to access the memory contained in a buffer, you need to use a [view](#views). A view provides a _context_ — that is, a data type, starting offset, and number of elements.
 
@@ -57,6 +58,7 @@ Typed array views have self-descriptive names and provide views for all the usua
 | {{jsxref("Uint16Array")}}       | 0 to 65535                            | 2             | `unsigned short`      |
 | {{jsxref("Int32Array")}}        | -2147483648 to 2147483647             | 4             | `long`                |
 | {{jsxref("Uint32Array")}}       | 0 to 4294967295                       | 4             | `unsigned long`       |
+| {{jsxref("Float16Array")}}      | `-65504` to `65504`                   | 2             | N/A                   |
 | {{jsxref("Float32Array")}}      | `-3.4e38` to `3.4e38`                 | 4             | `unrestricted float`  |
 | {{jsxref("Float64Array")}}      | `-1.8e308` to `1.8e308`               | 8             | `unrestricted double` |
 | {{jsxref("BigInt64Array")}}     | -2<sup>63</sup> to 2<sup>63</sup> - 1 | 8             | `bigint`              |
@@ -130,8 +132,8 @@ These are some examples of APIs that make use of typed arrays; there are others,
 
 - [`FileReader.prototype.readAsArrayBuffer()`](/en-US/docs/Web/API/FileReader/readAsArrayBuffer)
   - : The `FileReader.prototype.readAsArrayBuffer()` method starts reading the contents of the specified [`Blob`](/en-US/docs/Web/API/Blob) or [`File`](/en-US/docs/Web/API/File).
-- [`XMLHttpRequest.prototype.send()`](/en-US/docs/Web/API/XMLHttpRequest/send)
-  - : `XMLHttpRequest` instances' `send()` method now supports typed arrays and {{jsxref("ArrayBuffer")}} objects as argument.
+- [`fetch()`](/en-US/docs/Web/API/Window/fetch)
+  - : The [`body`](/en-US/docs/Web/API/RequestInit#body) option to `fetch()` can be a typed array or {{jsxref("ArrayBuffer")}}, enabling you to send these objects as the payload of a {{HTTPMethod("POST")}} request.
 - [`ImageData.data`](/en-US/docs/Web/API/ImageData)
   - : Is a {{jsxref("Uint8ClampedArray")}} representing a one-dimensional array containing the data in the RGBA order, with integer values between `0` and `255` inclusive.
 
@@ -205,7 +207,7 @@ In other words, the two arrays are indeed viewed on the same data buffer, treati
 ```plain
 Int16Array  |  32  |  0   |   2  |  0   |   4  |  0   |   6  |  0   |
 Int32Array  |     32      |      2      |      4      |      6      |
-ArrayBuffer | 00 02 00 00 | 02 00 00 00 | 04 00 00 00 | 06 00 00 00 |
+ArrayBuffer | 20 00 00 00 | 02 00 00 00 | 04 00 00 00 | 06 00 00 00 |
 ```
 
 You can do this with any view type, although if you set an integer and then read it as a floating-point number, you will probably get a strange result because the bits are interpreted differently.
@@ -247,11 +249,11 @@ By combining a single buffer with multiple views of different types, starting at
 
 Consider this C structure:
 
-```cpp
+```c
 struct someStruct {
-  unsigned long id;
-  char username[16];
-  float amountDue;
+    unsigned long id;
+    char username[16];
+    float amountDue;
 };
 ```
 
@@ -260,7 +262,7 @@ You can access a buffer containing data in this format like this:
 ```js
 const buffer = new ArrayBuffer(24);
 
-// ... read the data into the buffer ...
+// … read the data into the buffer …
 
 const idView = new Uint32Array(buffer, 0, 1);
 const usernameView = new Uint8Array(buffer, 4, 16);
@@ -269,7 +271,8 @@ const amountDueView = new Float32Array(buffer, 20, 1);
 
 Then you can access, for example, the amount due with `amountDueView[0]`.
 
-> **Note:** The [data structure alignment](https://en.wikipedia.org/wiki/Data_structure_alignment) in a C structure is platform-dependent. Take precautions and considerations for these padding differences.
+> [!NOTE]
+> The [data structure alignment](https://en.wikipedia.org/wiki/Data_structure_alignment) in a C structure is platform-dependent. Take precautions and considerations for these padding differences.
 
 ### Conversion to normal arrays
 
@@ -290,7 +293,7 @@ const normalArray = [...typedArray];
 ## See also
 
 - [Faster Canvas Pixel Manipulation with Typed Arrays](https://hacks.mozilla.org/2011/12/faster-canvas-pixel-manipulation-with-typed-arrays/) on hacks.mozilla.org (2011)
-- [Typed arrays - Binary data in the browser](https://web.dev/webgl-typed-arrays/) on web.dev (2012)
+- [Typed arrays - Binary data in the browser](https://web.dev/articles/webgl-typed-arrays) on web.dev (2012)
 - [Endianness](/en-US/docs/Glossary/Endianness)
 - {{jsxref("ArrayBuffer")}}
 - {{jsxref("DataView")}}

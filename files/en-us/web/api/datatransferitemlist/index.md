@@ -11,6 +11,8 @@ The **`DataTransferItemList`** object is a list of {{domxref("DataTransferItem")
 
 The individual items can be accessed using the [bracket notation](/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors#bracket_notation) `[]`.
 
+`DataTransferItemList` was primarily designed for the [HTML Drag and Drop API](/en-US/docs/Web/API/HTML_Drag_and_Drop_API), and is still specified in the HTML drag-and-drop section, but it is now also used by other APIs, such as {{domxref("ClipboardEvent.clipboardData")}} and {{domxref("InputEvent.dataTransfer")}}. Documentation of `DataTransferItemList` will primarily discuss its usage in drag-and-drop operations, and you should refer to the other APIs' documentation for usage of `DataTransferItemList` in those contexts.
+
 This interface has no constructor.
 
 ## Instance properties
@@ -26,17 +28,48 @@ This interface has no constructor.
   - : Removes the drag item from the list at the given index.
 - {{domxref("DataTransferItemList.clear()")}}
   - : Removes all of the drag items from the list.
-- {{domxref("DataTransferItemList.operator[]")}}
-  - : Getter that returns a {{domxref("DataTransferItem")}} at the given index.
 
 ## Example
 
 This example shows how to use drag and drop.
 
+### HTML
+
+```html
+<div>
+  <p id="source" draggable="true">
+    Select this element, drag it to the Drop Zone and then release the selection
+    to move the element.
+  </p>
+</div>
+<div id="target">Drop Zone</div>
+```
+
+### CSS
+
+```css
+div {
+  margin: 0em;
+  padding: 2em;
+}
+
+#source {
+  color: blue;
+  border: 1px solid black;
+}
+
+#target {
+  border: 1px solid black;
+}
+```
+
 ### JavaScript
 
 ```js
-function dragstartHandler(ev) {
+const source = document.getElementById("source");
+const target = document.getElementById("target");
+
+source.addEventListener("dragstart", (ev) => {
   console.log("dragStart");
 
   // Add this element's id to the drag payload so the drop handler will
@@ -47,9 +80,17 @@ function dragstartHandler(ev) {
   // Add some other items to the drag payload
   dataList.add("<p>Paragraph…</p>", "text/html");
   dataList.add("http://www.example.org", "text/uri-list");
-}
+});
 
-function dropHandler(ev) {
+source.addEventListener("dragend", (ev) => {
+  console.log("dragEnd");
+  const dataList = ev.dataTransfer.items;
+
+  // Clear any remaining drag data
+  dataList.clear();
+});
+
+target.addEventListener("drop", (ev) => {
   console.log("Drop");
   ev.preventDefault();
 
@@ -72,62 +113,15 @@ function dropHandler(ev) {
       });
     }
   }
-}
+});
 
-function dragoverHandler(ev) {
+target.addEventListener("dragover", (ev) => {
   console.log("dragOver");
   ev.preventDefault();
 
   // Set the dropEffect to move
   ev.dataTransfer.dropEffect = "move";
-}
-
-function dragendHandler(ev) {
-  console.log("dragEnd");
-  const dataList = ev.dataTransfer.items;
-
-  // Clear any remaining drag data
-  dataList.clear();
-}
-```
-
-### HTML
-
-```html
-<div>
-  <p
-    id="source"
-    ondragstart="dragstartHandler(event);"
-    ondragend="dragendHandler(event);"
-    draggable="true">
-    Select this element, drag it to the Drop Zone and then release the selection
-    to move the element.
-  </p>
-</div>
-<div
-  id="target"
-  ondrop="dropHandler(event);"
-  ondragover="dragoverHandler(event);">
-  Drop Zone
-</div>
-```
-
-### CSS
-
-```css
-div {
-  margin: 0em;
-  padding: 2em;
-}
-
-#source {
-  color: blue;
-  border: 1px solid black;
-}
-
-#target {
-  border: 1px solid black;
-}
+});
 ```
 
 ### Result

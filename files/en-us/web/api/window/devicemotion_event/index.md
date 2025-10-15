@@ -6,9 +6,9 @@ page-type: web-api-event
 browser-compat: api.Window.devicemotion_event
 ---
 
-{{APIRef}}
+{{APIRef("Device Orientation Events")}}{{securecontext_header}}
 
-The `devicemotion` event is fired at a regular interval and indicates the amount of physical force of acceleration the device is receiving at that time. It also provides information about the rate of rotation, if available.
+The **`devicemotion`** event is fired at a regular interval and indicates the acceleration rate of the device with/without the contribution of the gravity force at that time. It also provides information about the rate of rotation, if available.
 
 This event is not cancelable and does not bubble.
 
@@ -16,10 +16,10 @@ This event is not cancelable and does not bubble.
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("devicemotion", (event) => {});
+```js-nolint
+addEventListener("devicemotion", (event) => { })
 
-ondevicemotion = (event) => {};
+ondevicemotion = (event) => { }
 ```
 
 ## Event type
@@ -50,7 +50,7 @@ function handleMotionEvent(event) {
   // Do something awesome.
 }
 
-window.addEventListener("devicemotion", handleMotionEvent, true);
+window.addEventListener("devicemotion", handleMotionEvent);
 ```
 
 ## Specifications
@@ -64,4 +64,3 @@ window.addEventListener("devicemotion", handleMotionEvent, true);
 ## See also
 
 - {{domxref("Window.deviceorientation_event", "deviceorientation")}}
-- [DeviceOrientation Event](https://www.w3.org/TR/orientation-event/#devicemotion)

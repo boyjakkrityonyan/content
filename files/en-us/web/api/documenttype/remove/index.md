@@ -9,6 +9,7 @@ browser-compat: api.DocumentType.remove
 {{APIRef("DOM")}}
 
 The **`DocumentType.remove()`** method removes a document's `doctype`.
+If it is already detached from the document, calling `remove()` does nothing.
 
 ## Syntax
 
@@ -29,7 +30,7 @@ None ({{jsxref("undefined")}}).
 ### Using `remove()`
 
 ```js
-document.doctype; // "<!DOCTYPE html>'
+document.doctype; // "<!doctype html>'
 document.doctype.remove();
 document.doctype; // null
 ```
@@ -45,3 +46,5 @@ document.doctype; // null
 ## See also
 
 - {{domxref("Document.doctype")}}
+- {{domxref("CharacterData.remove()")}}
+- {{domxref("Element.remove()")}}

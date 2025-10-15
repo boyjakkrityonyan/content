@@ -8,9 +8,7 @@ browser-compat: api.ScreenOrientation.unlock
 
 {{APIRef("Screen Orientation")}}
 
-The **`unlock()`** property of the
-{{domxref("ScreenOrientation")}} interface unlocks the orientation of the containing
-document from its default orientation.
+The **`unlock()`** method of the {{domxref("ScreenOrientation")}} interface unlocks the orientation of the containing document, effectively locking it to the default screen orientation.
 
 ## Syntax
 
@@ -25,6 +23,13 @@ None.
 ### Return value
 
 None ({{jsxref("undefined")}}).
+
+### Exceptions
+
+- `InvalidStateError` {{domxref("DOMException")}}
+  - : Thrown if the document is not fully active.
+- `SecurityError` {{domxref("DOMException")}}
+  - : Thrown if the document's visibility state is hidden or if the document is forbidden to use the feature (for example, by omitting the keyword `allow-orientation-lock` of the `sandbox` attribute of the `iframe` element).
 
 ## Specifications
 

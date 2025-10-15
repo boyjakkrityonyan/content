@@ -3,9 +3,8 @@ title: web_accessible_resources
 slug: Mozilla/Add-ons/WebExtensions/manifest.json/web_accessible_resources
 page-type: webextension-manifest-key
 browser-compat: webextensions.manifest.web_accessible_resources
+sidebar: addonsidebar
 ---
-
-{{AddonSidebar}}
 
 <table class="fullwidth-table standard-table">
   <tbody>
@@ -38,9 +37,10 @@ browser-compat: webextensions.manifest.web_accessible_resources
 
 Sometimes you want to package resources—for example, images, HTML, CSS, or JavaScript—with your extension and make them available to web pages and other extensions.
 
-> **Note:** Until Firefox 105, extensions could access resources packaged in other extensions by default. From Firefox 105 onwards, to enable other extensions to access an extension's resources they must be included in this key.
+> [!NOTE]
+> Until Firefox 105, extensions could access resources packaged in other extensions by default. From Firefox 105 onwards, to enable other extensions to access an extension's resources they must be included in this key.
 
-For example, the [Beastify example extension](https://github.com/mdn/webextensions-examples/tree/main/beastify) replaces a web page with an image of a beast selected by the user. The beast images are packaged with the extension. To make the selected image visible, the extension adds [`<img>`](/en-US/docs/Web/HTML/Element/img) elements whose `src` attribute points to the beast's image. For the web page to be able to load the images, they must be made web accessible.
+For example, the [Beastify example extension](https://github.com/mdn/webextensions-examples/tree/main/beastify) replaces a web page with an image of a beast selected by the user. The beast images are packaged with the extension. To make the selected image visible, the extension adds [`<img>`](/en-US/docs/Web/HTML/Reference/Elements/img) elements whose `src` attribute points to the beast's image. For the web page to be able to load the images, they must be made web accessible.
 
 With the `web_accessible_resources` key, you list all the packaged resources that you want to make available to web pages. You specify them as paths relative to the manifest.json file.
 
@@ -68,11 +68,11 @@ In Manifest V3, the `web_accessible_resources` key is an array of objects like t
   "web_accessible_resources": [
     {
       "resources": ["test1.png", "test2.png"],
-      "matches": ["https://web-accessible-resources-1.glitch.me/*"]
+      "matches": ["https://web-accessible-resources-1.example.com/*"]
     },
     {
       "resources": ["test3.png", "test4.png"],
-      "matches": ["https://web-accessible-resources-2.glitch.me/*"],
+      "matches": ["https://web-accessible-resources-2.example.com/*"],
       "use_dynamic_url": true
     }
   ]
@@ -109,7 +109,12 @@ Each object must include a `"resources"` property and either a `"matches"` or `"
       <td>
         Optional. Defaults to <code>[]</code>, meaning that other websites cannot access the resource.
         <p>
-        A list of URL <a href="/en-US/docs/Mozilla/Add-ons/WebExtensions/Match_patterns">match patterns</a> specifying the pages that can access the resources. Only the origin is used to match URLs. Origins include subdomain matching. Paths must be set to <code>/*</code>.
+        A list of URL <a href="/en-US/docs/Mozilla/Add-ons/WebExtensions/Match_patterns">match patterns</a> specifying the pages that can access the resources. Only the origin is used to match URLs. However:
+        <ul>
+          <li>In Firefox and Safari, any path can be included.</li>
+          <li>In Chrome, the path must be set to <code>/*</code>.</li>
+        </ul>
+        Origins include subdomain matching.
       </td>
     </tr>
     <tr>
@@ -143,7 +148,7 @@ my-extension-files/
         my-image.png
 ```
 
-To enable a web page to use an [`<img>`](/en-US/docs/Web/HTML/Element/img) element whose `src` attribute points to this image, you would specify `web_accessible_resources` like this:
+To enable a web page to use an [`<img>`](/en-US/docs/Web/HTML/Reference/Elements/img) element whose `src` attribute points to this image, you would specify `web_accessible_resources` like this:
 
 ```json
 "web_accessible_resources": ["images/my-image.png"]
@@ -157,7 +162,8 @@ moz-extension://<extension-UUID>/images/my-image.png"
 
 `<extension-UUID>` is **not** your extension's ID. This ID is randomly generated for every browser instance. This prevents websites from fingerprinting a browser by examining the extensions it has installed.
 
-> **Note:** In Chrome in Manifest V2, an extension's ID is fixed. When a resource is listed in `web_accessible_resources`, it is accessible as `chrome-extension://<your-extension-id>/<path/to/resource>`. In Manifest V3, Chrome can use a dynamic URL by setting `use_dynamic_url` to `true`.
+> [!NOTE]
+> In Chrome in Manifest V2, an extension's ID is fixed. When a resource is listed in `web_accessible_resources`, it is accessible as `chrome-extension://<your-extension-id>/<path/to/resource>`. In Manifest V3, Chrome can use a dynamic URL by setting `use_dynamic_url` to `true`.
 
 The recommended approach to obtaining the URL of the resource is to use [`runtime.getURL`](/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/getURL) passing the path relative to manifest.json, for example:
 
@@ -181,7 +187,7 @@ This approach gives you the correct URL regardless of the browser your extension
 
 If you make a page web-accessible, any website may link or redirect to that page. The page should then treat any input (POST data, for example) as if it came from an untrusted source, just as a normal web page should.
 
-Web-accessible extension resources are not blocked by [CORS](/en-US/docs/Web/HTTP/CORS) or [CSP](/en-US/docs/Web/HTTP/CSP). Because of this ability to bypass security checks, extensions should avoid using web-accessible scripts when possible. A web-accessible extension script can unexpectedly be misused by malicious websites to weaken the security of other websites. Follow the [security best practices](https://extensionworkshop.com/documentation/develop/build-a-secure-extension/) by avoiding injection of moz-extension:-URLs in web pages and ensuring that third-party libraries are up to date.
+Web-accessible extension resources are not blocked by [CORS](/en-US/docs/Web/HTTP/Guides/CORS) or [CSP](/en-US/docs/Web/HTTP/Guides/CSP). Because of this ability to bypass security checks, extensions should avoid using web-accessible scripts when possible. A web-accessible extension script can unexpectedly be misused by malicious websites to weaken the security of other websites. Follow the [security best practices](https://extensionworkshop.com/documentation/develop/build-a-secure-extension/) by avoiding injection of moz-extension:-URLs in web pages and ensuring that third-party libraries are up to date.
 
 ## Example
 

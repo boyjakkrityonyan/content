@@ -3,12 +3,10 @@ title: "Navigator: mimeTypes property"
 short-title: mimeTypes
 slug: Web/API/Navigator/mimeTypes
 page-type: web-api-instance-property
-status:
-  - deprecated
 browser-compat: api.Navigator.mimeTypes
 ---
 
-{{ ApiRef("HTML DOM") }}{{deprecated_header}}
+{{ ApiRef("HTML DOM") }}
 
 Returns a {{domxref("MimeTypeArray")}} object, which contains a list of {{domxref("MimeType")}} objects representing the MIME types recognized and supported by the browser.
 The array can be queried for information about the enabled plugin that is used to handle a file of the specified type.
@@ -18,7 +16,8 @@ Recent versions of the specification hard-code the returned set of MIME types.
 If PDF files can be displayed inline then `application/pdf` and `text/pdf` are listed.
 Otherwise an empty list is returned.
 
-> **Note:** Use {{domxref("Navigator.pdfViewerEnabled")}} to determine if inline viewing of PDF files is supported. Do not infer it from this property.
+> [!NOTE]
+> Use {{domxref("Navigator.pdfViewerEnabled")}} to determine if inline viewing of PDF files is supported. Do not infer it from this property.
 
 Legacy browser versions do not hard-code the list returned by the property, and might return other MIME types.
 

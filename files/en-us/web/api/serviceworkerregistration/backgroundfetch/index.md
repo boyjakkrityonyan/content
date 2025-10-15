@@ -8,9 +8,9 @@ status:
 browser-compat: api.ServiceWorkerRegistration.backgroundFetch
 ---
 
-{{APIRef("Background Fetch API")}}{{SeeCompatTable}}
+{{APIRef("Background Fetch API")}}{{SeeCompatTable}}{{SecureContext_Header}}{{AvailableInWorkers}}
 
-The **`backgroundFetch`** property of the
+The **`backgroundFetch`** read-only property of the
 {{domxref("ServiceWorkerRegistration")}} interface returns a reference to a
 {{domxref("BackgroundFetchManager")}} object, which can be used to initiate background fetch operations.
 
@@ -38,7 +38,7 @@ async function requestBackgroundFetch(movieData) {
       label: "Downloading a show",
     },
   );
-  //...
+  // …
 }
 ```
 

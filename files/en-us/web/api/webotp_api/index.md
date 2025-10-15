@@ -2,10 +2,13 @@
 title: WebOTP API
 slug: Web/API/WebOTP_API
 page-type: web-api-overview
+status:
+  - experimental
+browser-compat: api.OTPCredential
 spec-urls: https://wicg.github.io/web-otp/
 ---
 
-{{securecontext_header}}{{DefaultAPISidebar("WebOTP API")}}
+{{DefaultAPISidebar("WebOTP API")}}{{SeeCompatTable}}{{securecontext_header}}
 
 The **WebOTP API** provides a streamlined user experience for web apps to verify that a phone number belongs to a user when using it as a sign-in factor. WebOTP is an extension of the [Credential Management API](/en-US/docs/Web/API/Credential_Management_API).
 
@@ -14,13 +17,13 @@ The verification is done via a two-step process:
 1. The app client requests a one-time password (OTP), which is obtained from a specially-formatted SMS message sent by the app server.
 2. JavaScript is used to enter the OTP into a validation form on the app client and it is submitted back to the server to verify that it matches what was originally sent in the SMS.
 
-## WebOTP concepts and usage
+## Concepts and usage
 
 Phone numbers are often used as a way to identify the user of an app. An SMS is frequently deployed to verify that the number belongs to the user. The SMS typically contains an OTP that the user is required to copy and paste into a form in the app to verify that they own the number. This is a somewhat clunky user experience.
 
 OTP use cases include:
 
-- Improving sign-in security by using a phone number as an extra factor (i.e. for two-factor authentication (2FA) or multifactor authentication (MFA)).
+- Improving sign-in security by using a phone number as an extra factor as part of a {{glossary("multi-factor authentication")}} system.
 - Verifying sensitive actions such as payments.
 
 The WebOTP API allows web apps to expedite this validation process by copying the OTP from the SMS and passing it to the app automatically after the user has provided consent (most native platforms have an equivalent API).
@@ -40,7 +43,7 @@ You are, therefore, recommended to use a stronger form of authentication if poss
 The process works like so:
 
 1. At the point where phone number verification is required, an app client will ask a user to enter their phone number into a form, which is then submitted to the app server.
-2. The app client then invokes {{domxref("CredentialsContainer.get", "navigator.credentials.get()")}} with an `otp` option specifying a `transport` type of `"sms"`. This triggers a request for an OTP from the underlying system, the source of which will be a [specially-formatted SMS message](#the_sms_message_format) (containing the OTP and the app's domain) received from the app server. The `get()` call is {{jsxref("Promise")}}-based and waits for the SMS message to be received.
+2. The app client then invokes {{domxref("CredentialsContainer.get", "navigator.credentials.get()")}} with an `otp` option specifying a `transport` type of `"sms"`. This triggers a request for an OTP from the underlying system, the source of which will be a [specially-formatted SMS message](#sms_message_format) (containing the OTP and the app's domain) received from the app server. The `get()` call is {{jsxref("Promise")}}-based and waits for the SMS message to be received.
 3. The app server sends the SMS message to the specified phone number. This must be done just after Step 2 has occurred.
 4. When the SMS is received on the device, provided it contains the app's domain, the browser will ask the user if they consent to the OTP being retrieved/used. Chrome, for example, displays a dialog asking them for their permission to retrieve the OTP from the SMS; other browsers may handle it differently. If they do consent, the `get()` call will fulfill with an {{domxref("OTPCredential")}} object containing the OTP.
 5. You can then use the OTP in any way you wish. Typical usage would be to set it as the value of the validation form on the app client and then submit the form, making the process as seamless as possible.
@@ -62,7 +65,8 @@ Your verification code is 123456.
   - Followed by a space.
   - Followed by the OTP, preceded by a pound sign (`#`).
 
-> **Note:** The provided domain value must not include a URL schema, port, or other URL features not shown above.
+> [!NOTE]
+> The provided domain value must not include a URL scheme, port, or other URL features not shown above.
 
 If the `get()` method is invoked by a third-party site embedded in an {{htmlelement("iframe")}}, the SMS structure should be:
 
@@ -82,7 +86,7 @@ In this case, the last line must consist of:
 
 ## Controlling access to the API
 
-The availability of WebOTP can be controlled using a [Permissions Policy](/en-US/docs/Web/HTTP/Permissions_Policy) specifying a {{httpheader("Permissions-Policy/otp-credentials", "otp-credentials")}} directive. This directive has a default allowlist value of `"self"`, meaning that by default, these methods can be used in top-level document contexts.
+The availability of WebOTP can be controlled using a [Permissions Policy](/en-US/docs/Web/HTTP/Guides/Permissions_Policy) specifying a {{httpheader("Permissions-Policy/otp-credentials", "otp-credentials")}} directive. This directive has a default allowlist value of `"self"`, meaning that by default, these methods can be used in top-level document contexts.
 
 You could specify a directive allowing the use of WebOTP in a specific cross-origin domain (i.e., inside an {{htmlelement("iframe")}}) like this:
 
@@ -96,14 +100,15 @@ Or you could specify it directly on the `<iframe>` like this:
 <iframe src="https://embedded.com/..." allow="otp-credentials"> ... </iframe>
 ```
 
-> **Note:** Where a policy forbids use of WebOTP `get()`, {{jsxref("Promise", "promises")}} returned by it will reject with a `SecurityError` {{domxref("DOMException")}}.
+> [!NOTE]
+> Where a policy forbids use of WebOTP `get()`, {{jsxref("Promise", "promises")}} returned by it will reject with a `SecurityError` {{domxref("DOMException")}}.
 
 ## Interfaces
 
 - {{domxref("OTPCredential")}}
   - : Returned when a WebOTP `get()` call fulfills; includes a `code` property that contains the retrieved OTP.
 
-## Extensions to other interfaces
+### Extensions to other interfaces
 
 - {{domxref("CredentialsContainer.get()")}}, the `otp` option
   - : Calling `get()` with an `otp` option instructs the user agent to attempt to retrieve an OTP from the underlying system's SMS app.
@@ -112,9 +117,9 @@ Or you could specify it directly on the `<iframe>` like this:
 
 In this example, when an SMS message arrives and the user grants permission, an {{domxref("OTPCredential")}} object is returned with an OTP. This password is then prefilled into the verification form field, and the form is submitted.
 
-[Try this demo using a phone](https://web-otp.glitch.me/).
+[Try this demo using a phone](https://chrome.dev/web-otp-demo/).
 
-The form field includes an [`autocomplete`](/en-US/docs/Web/HTML/Attributes/autocomplete) attribute with the value of `one-time-code`. This is not needed for the WebOTP API to work, but it is worth including. As a result, Safari will prompt the user to autofill this field with the OTP when a correctly-formatted SMS is received, even though the WebOTP API isn't fully supported in Safari.
+The form field includes an [`autocomplete`](/en-US/docs/Web/HTML/Reference/Attributes/autocomplete) attribute with the value of `one-time-code`. This is not needed for the WebOTP API to work, but it is worth including. As a result, Safari will prompt the user to autofill this field with the OTP when a correctly-formatted SMS is received, even though the WebOTP API isn't fully supported in Safari.
 
 ```html
 <input type="text" autocomplete="one-time-code" inputmode="numeric" />
@@ -125,34 +130,32 @@ The JavaScript is as follows:
 ```js
 // Detect feature support via OTPCredential availability
 if ("OTPCredential" in window) {
-  window.addEventListener("DOMContentLoaded", (e) => {
-    const input = document.querySelector('input[autocomplete="one-time-code"]');
-    if (!input) return;
-    // Set up an AbortController to use with the OTP request
-    const ac = new AbortController();
-    const form = input.closest("form");
-    if (form) {
-      // Abort the OTP request if the user attempts to submit the form manually
-      form.addEventListener("submit", (e) => {
-        ac.abort();
-      });
-    }
-    // Request the OTP via get()
-    navigator.credentials
-      .get({
-        otp: { transport: ["sms"] },
-        signal: ac.signal,
-      })
-      .then((otp) => {
-        // When the OTP is received by the app client, enter it into the form
-        // input and submit the form automatically
-        input.value = otp.code;
-        if (form) form.submit();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  });
+  const input = document.querySelector('input[autocomplete="one-time-code"]');
+  if (!input) return;
+  // Set up an AbortController to use with the OTP request
+  const ac = new AbortController();
+  const form = input.closest("form");
+  if (form) {
+    // Abort the OTP request if the user attempts to submit the form manually
+    form.addEventListener("submit", (e) => {
+      ac.abort();
+    });
+  }
+  // Request the OTP via get()
+  navigator.credentials
+    .get({
+      otp: { transport: ["sms"] },
+      signal: ac.signal,
+    })
+    .then((otp) => {
+      // When the OTP is received by the app client, enter it into the form
+      // input and submit the form automatically
+      input.value = otp.code;
+      if (form) form.submit();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 ```
 
@@ -171,7 +174,11 @@ If the user becomes distracted or navigates somewhere else, it is good to cancel
 
 {{Specifications}}
 
+## Browser compatibility
+
+{{Compat}}
+
 ## See also
 
-- [Verify phone numbers on the web with WebOTP](https://developer.chrome.com/articles/web-otp/) on developer.chrome.com (2023)
-- [Fill OTP forms within cross-origin iframes with WebOTP API](https://web.dev/web-otp-iframe/)
+- [Verify phone numbers on the web with WebOTP](https://developer.chrome.com/docs/identity/web-apis/web-otp) on developer.chrome.com (2023)
+- [Fill OTP forms within cross-origin iframes with WebOTP API](https://web.dev/articles/web-otp-iframe)

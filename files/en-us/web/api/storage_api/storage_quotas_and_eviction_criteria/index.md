@@ -28,7 +28,7 @@ Web developers can use the following web technologies to store data in the brows
 
 | Technology                                                                                          | Description                                                                                                                                                                                                                       |
 | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Cookies](/en-US/docs/Web/HTTP/Cookies)                                                             | An HTTP cookie is a small piece of data that the web server and browser send each other to remember stateful information across page navigation.                                                                                  |
+| [Cookies](/en-US/docs/Web/HTTP/Guides/Cookies)                                                      | An HTTP cookie is a small piece of data that the web server and browser send each other to remember stateful information across page navigation.                                                                                  |
 | [Web Storage](/en-US/docs/Web/API/Web_Storage_API)                                                  | The Web Storage API provides mechanisms for webpages to store string-only key/value pairs, including [`localStorage`](/en-US/docs/Web/API/Window/localStorage) and [`sessionStorage`](/en-US/docs/Web/API/Window/sessionStorage). |
 | [IndexedDB](/en-US/docs/Web/API/IndexedDB_API)                                                      | IndexedDB is a Web API for storing large data structures in the browser and indexing them for high-performance searching.                                                                                                         |
 | [Cache API](/en-US/docs/Web/API/Cache)                                                              | The Cache API provides a persistent storage mechanism for HTTP request and response object pairs that's used to make webpages load faster.                                                                                        |
@@ -51,7 +51,7 @@ In Firefox, when a site chooses to use persistent storage, the user is notified 
 
 Safari and most Chromium-based browsers, such as Chrome or Edge, automatically approve or deny the request based on the user's history of interaction with the site and do not show any prompts to the user.
 
-Note that [research from the Chrome team](https://web.dev/persistent-storage/) shows that data is very rarely deleted by the browser. If a user visits a website regularly, there is very little chance that its stored data, even in best-effort mode, will get evicted by the browser.
+Note that [research from the Chrome team](https://web.dev/articles/persistent-storage) shows that data is very rarely deleted by the browser. If a user visits a website regularly, there is very little chance that its stored data, even in best-effort mode, will get evicted by the browser.
 
 ### Private browsing
 
@@ -107,13 +107,31 @@ Like with Firefox, because this quota is calculated based on the hard drive tota
 
 #### Safari
 
-Starting with macOS 14 and iOS 17, Safari allots up to around 20% of the total disk space for each origin. If the user has saved it as a web app on the Home Screen or the Dock, this limit is increased to up to 60% of the disk size. For privacy reasons, {{Glossary("Same-origin policy", "cross-origin")}} frames have a separate quota, amounting to roughly 1/10 of their parents.
+Webkit imposes different quotas for _browser apps_ and for other applications which can embed web content (for example, apps that use WKWebView). A browser app is an application that can be set as the system's default browser. This includes Safari and some other WebKit-based third-party browsers.
 
-For instance, a macOS device with a 1 TiB drive will limit each origin to around 200 GiB. If the user stores a web app on its Dock, that will be alloted a greater limit of around 600 GiB.
+Starting with macOS 14 and iOS 17:
 
-Like other browsers, the exact limits enforced by the quota may vary as to avoid fingerprinting. Additionally, Safari also enforces an overall quota that stored data across all origins cannot grow beyond: 80% of disk size for each browser and web app, and 15% of disk size for each non-browser app that displays web content. More info on Safari's storage policies can be found on the [Webkit blog](https://www.webkit.org/blog/14403/updates-to-storage-policy/).
+- For Webkit-based browser apps, each origin can store up to around 60% of total disk.
+- For other Webkit-based apps that embed web content, each origin can store up to around 15% of total disk. If the user has saved the site as a web app on the Home Screen or the Dock, it uses the same origin quota as the browser app (around 60% of disk space).
+
+For instance, a macOS device with a 1 TiB drive will limit each origin within the Safari web browser to around 600 GiB. Origins running in another app's embedded WebView will be allotted a lesser limit of around 150 GiB.
+
+For privacy reasons, {{Glossary("Same-origin policy", "cross-origin")}} frames have a separate quota, amounting to roughly 1/10 of their parents.
+
+Like other browsers, the exact limits enforced by the quota may vary so as to avoid fingerprinting.
+
+WebKit also enforces an overall quota that stored data across all origins cannot grow beyond 80% of disk size for browser apps, and 20% of disk size for non-browser apps that display web content.
+
+More information on WebKit's storage policies can be found on the [WebKit blog](https://webkit.org/blog/14403/updates-to-storage-policy/).
 
 In earlier versions of Safari, an origin is given an initial 1 GiB quota. Once the origin reaches this limit, Safari asks the user for permission to let the origin store more data. This happens whether the origin stores data in best-effort mode or persistent mode.
+
+> [!NOTE]
+> On iOS/iPadOS, third-party browsers have historically had to use WebKit, so these WebKit quotas apply to them as well as Safari. In the EU (iOS 17.4+), Apple permits alternative browser engines; in such cases, those browsers' own engine policies apply instead of WebKit's.
+>
+> On macOS, non-WebKit browsers (e.g., Chromium/Firefox) use their own storage policies.
+>
+> More info on the EU-specific information can be found on [Apple Developer Support Page](https://developer.apple.com/support/alternative-browser-engines).
 
 ## How to check the available space?
 
@@ -165,6 +183,6 @@ Only deleting some of the origin's data could cause inconsistency problems.
 
 ## See also
 
-- [Storage for the web on web.dev](https://web.dev/storage-for-the-web/)
-- [Persistent storage on web.dev](https://web.dev/persistent-storage/)
+- [Storage for the web on web.dev](https://web.dev/articles/storage-for-the-web)
+- [Persistent storage on web.dev](https://web.dev/articles/persistent-storage)
 - [Chrome Web Storage and Quota Concepts](https://docs.google.com/document/d/19QemRTdIxYaJ4gkHYf2WWBNPbpuZQDNMpUVf8dQxj4U/edit)

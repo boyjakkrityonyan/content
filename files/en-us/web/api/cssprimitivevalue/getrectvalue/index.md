@@ -16,7 +16,8 @@ value doesn't contain a rect value, a {{domxref("DOMException")}} is raised.
 Modification to the corresponding style property can be achieved using the
 {{domxref("Rect")}} interface.
 
-> **Note:** This method was part of an attempt to create a typed CSS Object Model. This attempt has been abandoned, and most browsers do
+> [!NOTE]
+> This method was part of an attempt to create a typed CSS Object Model. This attempt has been abandoned, and most browsers do
 > not implement it.
 >
 > To achieve your purpose, you can use:
@@ -40,9 +41,9 @@ A {{domxref("Rect")}} object representing the rect value.
 
 ### Exceptions
 
-| **Type**       | **Description**                                                                                                 |
-| -------------- | --------------------------------------------------------------------------------------------------------------- |
-| `DOMException` | An `INVALID_ACCESS_ERR` is raised if the CSS value doesn't contain a Rect value. (i.e. this is not `CSS_RECT`). |
+| **Type**       | **Description**                                                                                                  |
+| -------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `DOMException` | An `INVALID_ACCESS_ERR` is raised if the CSS value doesn't contain a Rect value. (i.e., this is not `CSS_RECT`). |
 
 ## Examples
 

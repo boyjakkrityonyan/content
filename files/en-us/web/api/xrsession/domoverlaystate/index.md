@@ -8,7 +8,7 @@ status:
 browser-compat: api.XRSession.domOverlayState
 ---
 
-{{APIRef("WebXR Device API")}}{{SeeCompatTable}}
+{{APIRef("WebXR Device API")}}{{SeeCompatTable}}{{SecureContext_Header}}
 
 The _read-only_ **`domOverlayState`** property of an `immersive-ar`
 {{DOMxRef("XRSession")}} provides information about the DOM overlay, if the feature is enabled.
@@ -18,7 +18,6 @@ The _read-only_ **`domOverlayState`** property of an `immersive-ar`
 Returns [`null`](/en-US/docs/Web/JavaScript/Reference/Operators/null) if the DOM overlay feature is not supported or not enabled or an object containing information about the DOM overlay state with the following properties:
 
 - `type`
-
   - : A string indicating how the DOM overlay is being displayed. Possible values:
     - `screen`
       - : The overlay is drawn on the entire screen-based device (for handheld AR devices).

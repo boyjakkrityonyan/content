@@ -1,15 +1,16 @@
 ---
-title: "::-webkit-slider-thumb"
+title: ::-webkit-slider-thumb
 slug: Web/CSS/::-webkit-slider-thumb
 page-type: css-pseudo-element
 status:
   - non-standard
 browser-compat: css.selectors.-webkit-slider-thumb
+sidebar: cssref
 ---
 
-{{CSSRef}}{{Non-standard_header}}
+{{non-standard_header}}
 
-The **`::-webkit-slider-thumb`** CSS [pseudo-element](/en-US/docs/Web/CSS/Pseudo-elements) represents the "thumb" that the user can move within the "groove" of an {{HTMLElement("input")}} of `type="range"` to alter its numerical value.
+The **`::-webkit-slider-thumb`** [CSS](/en-US/docs/Web/CSS) [pseudo-element](/en-US/docs/Web/CSS/Pseudo-elements) represents the "thumb" that the user can move within the "groove" of an {{HTMLElement("input")}} of `type="range"` to alter its numerical value.
 
 ## Syntax
 
@@ -31,7 +32,6 @@ Not part of any standard.
 
 - {{cssxref("::-webkit-slider-runnable-track")}}
 - Similar pseudo-elements used by other browsers:
-
   - {{cssxref("::-moz-range-thumb")}}
 
 - [CSS-Tricks: Styling Cross-Browser Compatible Range Inputs with CSS](https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/)

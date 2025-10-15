@@ -3,9 +3,8 @@ title: <display-listitem>
 slug: Web/CSS/display-listitem
 page-type: css-type
 browser-compat: css.properties.display.list-item
+sidebar: cssref
 ---
-
-{{CSSRef}}
 
 The `list-item` keyword causes the element to generate a `::marker` pseudo-element with the content specified by its {{CSSxRef("list-style")}} properties (for example a bullet point) together with a principal box of the specified type for its own contents.
 
@@ -15,7 +14,8 @@ A single value of `list-item` will cause the element to behave like a list item.
 
 `list-item` can also be combined with any {{CSSxRef("&lt;display-outside&gt;")}} keyword and the `flow` or `flow-root` {{CSSxRef("&lt;display-inside&gt;")}} keywords.
 
-> **Note:** In browsers that support the two-value syntax, if no inner value is specified it will default to `flow`. If no outer value is specified, the principal box will have an outer display type of `block`.
+> [!NOTE]
+> In browsers that support the two-value syntax, if no inner value is specified it will default to `flow`. If no outer value is specified, the principal box will have an outer display type of `block`.
 
 ## Formal syntax
 
@@ -53,7 +53,6 @@ A single value of `list-item` will cause the element to behave like a list item.
 ## See also
 
 - {{CSSxRef("display")}}
-
   - {{CSSxRef("&lt;display-outside&gt;")}}
   - {{CSSxRef("&lt;display-inside&gt;")}}
   - {{CSSxRef("&lt;display-internal&gt;")}}

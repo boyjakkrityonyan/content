@@ -8,7 +8,7 @@ status:
 browser-compat: api.NavigatorUAData.mobile
 ---
 
-{{APIRef("User-Agent Client Hints API")}}{{SeeCompatTable}}
+{{APIRef("User-Agent Client Hints API")}}{{SeeCompatTable}}{{AvailableInWorkers}}
 
 The **`mobile`** read-only property of the {{domxref("NavigatorUAData")}} interface returns a value indicating whether the device is a mobile device.
 
@@ -34,4 +34,4 @@ console.log(navigator.userAgentData.mobile);
 
 ## See also
 
-- The {{HTTPHeader("Sec-CH-UA-Mobile")}} header (a [low-entropy client hint](/en-US/docs/Web/HTTP/Client_hints#low_entropy_hints)) contains the same information.
+- The {{HTTPHeader("Sec-CH-UA-Mobile")}} header (a [low-entropy client hint](/en-US/docs/Web/HTTP/Guides/Client_hints#low_entropy_hints)) contains the same information.

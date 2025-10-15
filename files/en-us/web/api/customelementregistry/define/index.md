@@ -24,9 +24,7 @@ define(name, constructor, options)
 - `constructor`
   - : Constructor for the new custom element.
 - `options` {{optional_inline}}
-
   - : Object that controls how the element is defined. One option is currently supported:
-
     - `extends`
       - : String specifying the name of a built-in element to
         extend. Used to create a customized built-in element.
@@ -123,15 +121,19 @@ This element extends the built-in {{htmlelement("p")}} element.
 In this minimal example the element doesn't implement any customization, so it will behave just like a normal `<p>` element. However, it does satisfy the requirements of `define()`, so we can define it like this:
 
 ```js
-customElements.define("my-customized-element", MyCustomizedElement, {
-  extends: "p",
-});
+customElements.define(
+  "my-customized-built-in-element",
+  MyCustomizedBuiltInElement,
+  {
+    extends: "p",
+  },
+);
 ```
 
 We could then use it in an HTML page like this:
 
 ```html
-<p is="my-customized-element"></p>
+<p is="my-customized-built-in-element"></p>
 ```
 
 ## Specifications

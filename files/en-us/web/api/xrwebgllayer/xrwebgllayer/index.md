@@ -8,7 +8,7 @@ status:
 browser-compat: api.XRWebGLLayer.XRWebGLLayer
 ---
 
-{{APIRef("WebXR Device API")}}{{SeeCompatTable}}
+{{APIRef("WebXR Device API")}}{{SeeCompatTable}}{{SecureContext_Header}}
 
 The [WebXR Device API](/en-US/docs/Web/API/WebXR_Device_API) **`XRWebGLLayer()`** constructor creates and
 returns a new {{domxref("XRWebGLLayer")}} object, providing the linkage between the
@@ -31,10 +31,8 @@ new XRWebGLLayer(session, context, options)
     identifying the WebGL drawing context to use for rendering the scene for the specified
     WebXR session.
 - `options` {{optional_inline}}
-
   - : An object providing configuration options for the new `XRWebGLLayer`. The available options
     are:
-
     - `alpha`
       - : The frame buffer's color buffer will be established with an alpha channel if the `alpha` Boolean property is `true`. Otherwise, the color buffer will not have an alpha channel. The default value is `true`.
     - `antialias`
@@ -99,4 +97,4 @@ xrSession.updateRenderState({
 
 - [WebXR Device API](/en-US/docs/Web/API/WebXR_Device_API)
 - [Getting started with WebGL](/en-US/docs/Web/API/WebGL_API/Tutorial/Getting_started_with_WebGL)
-- [Handling lost context in WebGL](https://www.khronos.org/webgl/wiki/HandlingContextLost): Khronos WebGL wiki
+- [Handling lost context in WebGL](https://wikis.khronos.org/webgl/HandlingContextLost): Khronos WebGL wiki

@@ -6,13 +6,14 @@ page-type: web-api-instance-property
 browser-compat: api.CanvasRenderingContext2D.lineCap
 ---
 
-{{APIRef}}
+{{APIRef("Canvas API")}}
 
 The
 **`CanvasRenderingContext2D.lineCap`**
 property of the Canvas 2D API determines the shape used to draw the end points of lines.
 
-> **Note:** Lines can be drawn with the
+> [!NOTE]
+> Lines can be drawn with the
 > {{domxref("CanvasRenderingContext2D.stroke()", "stroke()")}}, {{domxref("CanvasRenderingContext2D.strokeRect()", "strokeRect()")}},
 > and {{domxref("CanvasRenderingContext2D.strokeText()", "strokeText()")}} methods.
 
@@ -79,7 +80,7 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 // Draw guides
-ctx.strokeStyle = "#09f";
+ctx.strokeStyle = "#0099ff";
 ctx.beginPath();
 ctx.moveTo(10, 10);
 ctx.lineTo(140, 10);
@@ -99,8 +100,7 @@ ctx.strokeStyle = "black";
 });
 ```
 
-{{EmbedLiveSample("Comparison_of_line_caps", "180", "180",
-  "canvas_linecap.png")}}
+{{EmbedLiveSample("Comparison_of_line_caps", "180", "180")}}
 
 ## Specifications
 

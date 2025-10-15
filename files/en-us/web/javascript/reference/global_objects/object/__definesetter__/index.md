@@ -1,15 +1,18 @@
 ---
 title: Object.prototype.__defineSetter__()
+short-title: __defineSetter__()
 slug: Web/JavaScript/Reference/Global_Objects/Object/__defineSetter__
 page-type: javascript-instance-method
 status:
   - deprecated
 browser-compat: javascript.builtins.Object.defineSetter
+sidebar: jsref
 ---
 
-{{JSRef}}{{Deprecated_Header}}
+{{Deprecated_Header}}
 
-> **Note:** This feature is deprecated in favor of defining [setters](/en-US/docs/Web/JavaScript/Reference/Functions/set) using the [object initializer syntax](/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer) or the {{jsxref("Object.defineProperty()")}} API. This method's behavior is only specified for web compatibility, and is not required to be implemented in any platform. It may not work everywhere.
+> [!NOTE]
+> This feature is deprecated in favor of defining [setters](/en-US/docs/Web/JavaScript/Reference/Functions/set) using the [object initializer syntax](/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer) or the {{jsxref("Object.defineProperty()")}} API. This method's behavior is only specified for web compatibility, and is not required to be implemented in any platform. It may not work everywhere.
 
 The **`__defineSetter__()`** method of {{jsxref("Object")}} instances binds an object's property to a function to be called when an attempt is made to set that property.
 
@@ -41,7 +44,7 @@ None ({{jsxref("undefined")}}).
 
 All objects that inherit from `Object.prototype` (that is, all except [`null`-prototype objects](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#null-prototype_objects)) inherit the `__defineSetter__()` method. This method allows a [setter](/en-US/docs/Web/JavaScript/Reference/Functions/set) to be defined on a pre-existing object. This is equivalent to [`Object.defineProperty(obj, prop, { set: func, configurable: true, enumerable: true })`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty), which means the property is enumerable and configurable, and any existing getter, if present, is preserved.
 
-`__defineSetter__()` is defined in the spec as "normative optional", which means no implementation is required to implement this. However, all major browsers implement it, and due to its continued usage, it's unlikely to be removed. If a browser implements `__defineSetter__()`, it also needs to implement the [`__lookupGetter__()`](Web/JavaScript/Reference/Global_Objects/Object/__lookupGetter__), [`__lookupSetter__()`](Web/JavaScript/Reference/Global_Objects/Object/__lookupSetter__), and [`__defineGetter__()`](Web/JavaScript/Reference/Global_Objects/Object/__defineGetter__) methods.
+`__defineSetter__()` is defined in the spec as "normative optional", which means no implementation is required to implement this. However, all major browsers implement it, and due to its continued usage, it's unlikely to be removed. If a browser implements `__defineSetter__()`, it also needs to implement the [`__lookupGetter__()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/__lookupGetter__), [`__lookupSetter__()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/__lookupSetter__), and [`__defineGetter__()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/__defineGetter__) methods.
 
 ## Examples
 

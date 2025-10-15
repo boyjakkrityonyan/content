@@ -2,9 +2,8 @@
 title: Audio for Web games
 slug: Games/Techniques/Audio_for_Web_Games
 page-type: guide
+sidebar: games
 ---
-
-{{GamesSidebar}}
 
 Audio is an important part of any game; it adds feedback and atmosphere. Web-based audio is maturing fast, but there are still many browser differences to navigate. We often need to decide which audio parts are essential to our games' experience and which are nice to have but not essential, and devise a strategy accordingly. This article provides a detailed guide to implementing audio for web games, looking at what works currently across as wide a range of platforms as possible.
 
@@ -27,13 +26,19 @@ For more passive audio autoplay, for example background music that starts as soo
 
 To prime audio like this we want to play a part of it; for this reason it is useful to include a moment of silence at the end of your audio sample. Jumping to, playing, and then pausing that silence will mean we can now use JavaScript to play that file at arbitrary points. You can find out more about [best practices with the autoplay policy here](/en-US/docs/Web/API/Web_Audio_API/Best_practices#autoplay_policy).
 
-> **Note:** Playing part of your file at zero volume could also work if the browser allows you to change volume (see below). Also note that playing and immediately pausing your audio does not guarantee that a small piece of audio won't be played.
+> [!NOTE]
+> Playing part of your file at zero volume could also work if the browser allows you to change volume (see below). Also note that playing and immediately pausing your audio does not guarantee that a small piece of audio won't be played.
 
-> **Note:** Adding a web app to your mobile's homescreen may change its capabilities. In the case of autoplay on iOS, this appears to be the case currently. If possible, you should try your code on several devices and platforms to see how it works.
+> [!NOTE]
+> Adding a web app to your mobile's homescreen may change its capabilities. In the case of autoplay on iOS, this appears to be the case currently. If possible, you should try your code on several devices and platforms to see how it works.
+
+For support of autoplay, see [`<audio>`](/en-US/docs/Web/HTML/Reference/Elements/audio#browser_compatibility).
 
 ### Volume
 
 Programmatic volume control may be disabled in mobile browsers. The reason often given is that the user should be in control of the volume at the OS level and this shouldn't be overridden.
+
+For support of volume control, see [`HTMLMediaElement.volume`](/en-US/docs/Web/API/HTMLMediaElement/volume#browser_compatibility).
 
 ### Buffering and preloading
 
@@ -41,89 +46,10 @@ Likely as an attempt to mitigate runaway mobile network data use, we also often 
 
 The {{domxref("HTMLMediaElement")}} interface comes with [lots of properties](/en-US/docs/Web/API/HTMLMediaElement#instance_properties) to help determine whether a track is in a state to be playable.
 
-> **Note:** In many ways the concept of buffering is an outdated one. As long as byte-range requests are accepted (which is the default behavior), we should be able to jump to a specific point in the audio without having to download the preceding content. However, preloading is still useful — without it, there would always need to be some client-server communication required before playing can commence.
-
-### Concurrent audio playback
-
-A requirement of many games is the need to play more than one piece of audio at the same time; for example, there might be background music playing along with sound effects for various things happening in the game. Although the situation is soon going to get better with the adoption of the [Web Audio API](/en-US/docs/Web/API/Web_Audio_API), the current most widely-supported method — using the vanilla {{htmlelement("audio")}} element — leads to patchy results on mobile devices.
-
-### Testing and support
-
-Here's a table that shows what mobile platforms support the features talked about above.
-
-<table class="standard-table">
-  <caption>
-    Mobile support for web audio features
-  </caption>
-  <thead>
-    <tr>
-      <th scope="row">Mobile browser</th>
-      <th scope="col">Version</th>
-      <th scope="col">Concurrent play</th>
-      <th scope="col">Autoplay</th>
-      <th scope="col">Volume adjusting</th>
-      <th scope="col">Preload</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Chrome (Android)</th>
-      <td>69+</td>
-      <td>Y</td>
-      <td>Y</td>
-      <td>Y</td>
-      <td>Y</td>
-    </tr>
-    <tr>
-      <th scope="row">Firefox (Android)</th>
-      <td>62+</td>
-      <td>Y</td>
-      <td>Y</td>
-      <td>Y</td>
-      <td>Y</td>
-    </tr>
-    <tr>
-      <th scope="row">Edge Mobile</th>
-      <td></td>
-      <td>Y</td>
-      <td>Y</td>
-      <td>Y</td>
-      <td>Y</td>
-    </tr>
-    <tr>
-      <th scope="row">Opera Mobile</th>
-      <td>46+</td>
-      <td>Y</td>
-      <td>Y</td>
-      <td>Y</td>
-      <td>Y</td>
-    </tr>
-    <tr>
-      <th scope="row">Safari (iOS)</th>
-      <td>7+</td>
-      <td>Y/N*</td>
-      <td>N</td>
-      <td>N</td>
-      <td>Y</td>
-    </tr>
-    <tr>
-      <th scope="row">Android Browser</th>
-      <td>67+</td>
-      <td>Y</td>
-      <td>Y</td>
-      <td>Y</td>
-      <td>Y</td>
-    </tr>
-  </tbody>
-</table>
+> [!NOTE]
+> In many ways the concept of buffering is an outdated one. As long as byte-range requests are accepted (which is the default behavior), we should be able to jump to a specific point in the audio without having to download the preceding content. However, preloading is still useful — without it, there would always need to be some client-server communication required before playing can commence.
 
 There's a [full compatibility chart for mobile and desktop HTMLMediaElement support here](/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility).
-
-> **Note:** Concurrent audio playback is tested using our [concurrent audio test example](https://jsfiddle.net/dmkyaq0r/), where we attempt to play three pieces of audio at the same time using the standard audio API.
-
-> **Note:** Simple autoplay functionality is tested with our [autoplay test example](https://jsfiddle.net/vpdspp2b/).
-
-> **Note:** Volume changeability is tested with our [volume test example](https://jsfiddle.net/7ta12vw4/).
 
 ## Mobile workarounds
 
@@ -137,7 +63,7 @@ The advantage is that we can prime one piece of audio and have our sprites ready
 
 ```js
 const myAudio = document.createElement("audio");
-myAudio.src = "mysprite.mp3";
+myAudio.src = "my-sprite.mp3";
 myAudio.play();
 myAudio.pause();
 ```
@@ -146,8 +72,8 @@ You'll need to sample the current time to know when to stop. If you space your i
 
 Here's an example of an audio sprite player — first let's set up the user interface in HTML:
 
-```html
-<audio id="myAudio" src="http://jPlayer.org/tmp/countdown.mp3"></audio>
+```html live-sample___audio-sprite
+<audio id="myAudio" src="/shared-assets/audio/countdown.mp3"></audio>
 <button data-start="18" data-stop="19">0</button>
 <button data-start="16" data-stop="17">1</button>
 <button data-start="14" data-stop="15">2</button>
@@ -164,39 +90,33 @@ Now we have buttons with start and stop times in seconds. The "countdown.mp3" MP
 
 Let's add some JavaScript to make this work:
 
-```js
+```js live-sample___audio-sprite
 const myAudio = document.getElementById("myAudio");
 const buttons = document.getElementsByTagName("button");
 let stopTime = 0;
 
 for (const button of buttons) {
-  button.addEventListener(
-    "click",
-    () => {
-      myAudio.currentTime = button.getAttribute("data-start");
-      stopTime = button.getAttribute("data-stop");
-      myAudio.play();
-    },
-    false,
-  );
+  button.addEventListener("click", () => {
+    myAudio.currentTime = button.dataset.start;
+    stopTime = Number(button.dataset.stop);
+    myAudio.play();
+  });
 }
 
-myAudio.addEventListener(
-  "timeupdate",
-  () => {
-    if (myAudio.currentTime > stopTime) {
-      myAudio.pause();
-    }
-  },
-  false,
-);
+myAudio.addEventListener("timeupdate", () => {
+  if (myAudio.currentTime > stopTime) {
+    myAudio.pause();
+  }
+});
 ```
 
-> **Note:** You can [try out our audio sprite player live](https://jsfiddle.net/59vwaame/) on JSFiddle.
+{{EmbedLiveSample("audio-sprite", "", 200)}}
 
-> **Note:** On mobile we may need to trigger this code from a user-initiated event such as a start button being pressed, as described above.
+> [!NOTE]
+> On mobile we may need to trigger this code from a user-initiated event such as a start button being pressed, as described above.
 
-> **Note:** Watch out for bit rates. Encoding your audio at lower bit rates means smaller file sizes but lower seeking accuracy.
+> [!NOTE]
+> Watch out for bit rates. Encoding your audio at lower bit rates means smaller file sizes but lower seeking accuracy.
 
 ### Background music
 
@@ -210,7 +130,8 @@ The Web Audio API is supported across all modern desktop and mobile browsers, ex
 
 A feasible cross-browser strategy would be to provide basic audio using the standard `<audio>` element and, where supported, enhance the experience using the Web Audio API.
 
-> **Note:** Significantly, iOS Safari now supports the Web Audio API, which means it's now possible to write web-based games with native-quality audio for iOS.
+> [!NOTE]
+> Significantly, iOS Safari now supports the Web Audio API, which means it's now possible to write web-based games with native-quality audio for iOS.
 
 As the Web Audio API allows precise timing and control of audio playback, we can use it to play samples at specific moments, which is a crucial immersive aspect of gaming. You want those explosions to be accompanied by a thundering boom, not followed by one, after all.
 
@@ -226,7 +147,7 @@ Let's look at some Web Audio API techniques for dynamically adjusting music from
 
 ### Loading your tracks
 
-With the Web Audio API you can load separate tracks and loops individually using {{domxref("XMLHttpRequest")}} or the [Fetch API](/en-US/docs/Web/API/Fetch_API), which means you can load them synchronously or in parallel. Loading synchronously might mean parts of your music are ready earlier and you can start playing them while others load.
+With the Web Audio API you can load separate tracks and loops individually using the [Fetch API](/en-US/docs/Web/API/Fetch_API) or {{domxref("XMLHttpRequest")}}, which means you can load them synchronously or in parallel. Loading synchronously might mean parts of your music are ready earlier and you can start playing them while others load.
 
 Either way you may want to synchronize tracks or loops. The Web Audio API contains the notion of an internal clock that starts ticking the moment you create an audio context. You'll need to take account of the time between creating an audio context and when the first audio track starts playing. Recording this offset and querying the playing track's current time gives you enough information to synchronize separate pieces of audio.
 
@@ -372,11 +293,13 @@ trackEls.forEach((el, i) => {
 });
 ```
 
-> **Note:** You can [see this demo in action here](https://mdn.github.io/webaudio-examples/multi-track/) and [view the source code here](https://github.com/mdn/webaudio-examples/tree/master/multi-track).
+> [!NOTE]
+> You can [see this demo in action here](https://mdn.github.io/webaudio-examples/multi-track/) and [view the source code here](https://github.com/mdn/webaudio-examples/tree/main/multi-track).
 
 In the context of your game world you may have loops and samples that are played in different circumstances, and it can be useful to be able to synchronize with other tracks for a more seamless experience.
 
-> **Note:** This example does not wait for the beat to end before introducing the next piece; we could do this if we knew the BPM (Beats Per Minute) of the tracks.
+> [!NOTE]
+> This example does not wait for the beat to end before introducing the next piece; we could do this if we knew the BPM (Beats Per Minute) of the tracks.
 
 You may find that the introduction of a new track sounds more natural if it comes in on the beat/bar/phrase or whatever units you want to chunk your background music into.
 
@@ -385,6 +308,8 @@ To do this before playing the track you want to sync, you should calculate how l
 Here's a bit of code that given a tempo (the time in seconds of your beat/bar) will calculate how long to wait until you play the next part — you feed the resulting value to the `start()` function with the first parameter, which takes the absolute time of when that playback should commence. Note the second parameter (where to start playing from in the new track) is relative:
 
 ```js
+const tempo = 3.074074076;
+
 if (offset === 0) {
   source.start();
   offset = context.currentTime;
@@ -397,9 +322,10 @@ if (offset === 0) {
 }
 ```
 
-> **Note:** You can [try our wait calculator code](https://jsfiddle.net/c87z11jj/2/) here, on JSFiddle (I've synched to the bar in this case).
+> [!NOTE]
+> If the first parameter is 0 or less than the context `currentTime`, playback will commence immediately.
 
-> **Note:** If the first parameter is 0 or less than the context `currentTime`, playback will commence immediately.
+To try this, you can take the same multi-track source code as above, but replace the `if` statement in the `playTrack()` function with the code above.
 
 ### Positional audio
 
@@ -418,7 +344,7 @@ This is especially useful in a three-dimensional environment rendered using WebG
 ## See also
 
 - [Web Audio API on MDN](/en-US/docs/Web/API/Web_Audio_API)
-- [`<audio>` on MDN](/en-US/docs/Web/HTML/Element/audio)
+- [`<audio>` on MDN](/en-US/docs/Web/HTML/Reference/Elements/audio)
 - [Songs of Diridum: Pushing the Web Audio API to Its Limits](https://hacks.mozilla.org/2013/10/songs-of-diridum-pushing-the-web-audio-api-to-its-limits/)
 - [Making HTML5 Audio Actually Work on Mobile](https://pupunzi.open-lab.com/2013/03/13/making-html5-audio-actually-work-on-mobile/)
 - [Audio Sprites (and fixes for iOS)](https://remysharp.com/2010/12/23/audio-sprites/)

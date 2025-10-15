@@ -3,9 +3,8 @@ title: Symbol
 slug: Web/JavaScript/Reference/Global_Objects/Symbol
 page-type: javascript-class
 browser-compat: javascript.builtins.Symbol
+sidebar: jsref
 ---
-
-{{JSRef}}
 
 **`Symbol`** is a built-in object whose constructor returns a `symbol` [primitive](/en-US/docs/Glossary/Primitive) — also called a **Symbol value** or just a **Symbol** — that's guaranteed to be unique. Symbols are often used to add unique property keys to an object that won't collide with keys any other code might add to the object, and which are hidden from any mechanisms other code will typically use to access the object. That enables a form of weak {{Glossary("encapsulation")}}, or a weak form of [information hiding](https://en.wikipedia.org/wiki/Information_hiding).
 
@@ -66,7 +65,8 @@ All static properties of the `Symbol` constructor are Symbols themselves, whose 
 
 Prior to well-known Symbols, JavaScript used normal properties to implement certain built-in operations. For example, the [`JSON.stringify`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) function will attempt to call each object's `toJSON()` method, and the [`String`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/String) function will call the object's `toString()` and `valueOf()` methods. However, as more operations are added to the language, designating each operation a "magic property" can break backward compatibility and make the language's behavior harder to reason with. Well-known Symbols allow the customizations to be "invisible" from normal code, which typically only read string properties.
 
-In MDN and other sources, well-known symbol values are stylized by prefixing `@@`. For example, {{jsxref("Symbol.hasInstance")}} is written as `@@hasInstance`. This is because symbols don't have actual literal formats, but using `Symbol.hasInstance` does not reflect the ability of using other aliases to refer to the same symbol. This is like the difference between `Function.name` and `"Function"`.
+> [!NOTE]
+> The spec used to use the notation `@@<symbol-name>` to denote well-known symbols. For example, {{jsxref("Symbol.hasInstance")}} was written as `@@hasInstance`, and the `Array.prototype[Symbol.iterator]()` method would be called `Array.prototype[@@iterator]()`. This notation is no longer used in the spec, but you may still see it in older documentation or discussions.
 
 Well-known symbols do not have the concept of garbage collectability, because they come in a fixed set and are unique throughout the lifetime of the program, similar to intrinsic objects such as `Array.prototype`, so they are also allowed in {{jsxref("WeakMap")}}, {{jsxref("WeakSet")}}, {{jsxref("WeakRef")}}, and {{jsxref("FinalizationRegistry")}} objects.
 
@@ -77,14 +77,18 @@ The method {{jsxref("Object.getOwnPropertySymbols()")}} returns an array of Symb
 ## Constructor
 
 - {{jsxref("Symbol/Symbol", "Symbol()")}}
-  - : Creates a new `Symbol` object. It is not a constructor in the traditional sense, because it can only be called as a function, instead of being constructed with `new Symbol()`.
+  - : Returns primitive values of type Symbol. Throws an error when called with `new`.
 
 ## Static properties
 
 The static properties are all well-known Symbols. In these Symbols' descriptions, we will use language like "`Symbol.hasInstance` is a method determining…", but bear in mind that this is referring to the semantic of an object's method having this Symbol as the method name (because well-known Symbols act as "protocols"), not describing the value of the Symbol itself.
 
+- {{jsxref("Symbol.asyncDispose")}}
+  - : A method that disposes resources of the object asynchronously when the object goes out of scope. Used by the [`await using`](/en-US/docs/Web/JavaScript/Reference/Statements/await_using) declaration.
 - {{jsxref("Symbol.asyncIterator")}}
   - : A method that returns the default AsyncIterator for an object. Used by [`for await...of`](/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of).
+- {{jsxref("Symbol.dispose")}}
+  - : A method that disposes resources of the object when the object goes out of scope. Used by the [`using`](/en-US/docs/Web/JavaScript/Reference/Statements/using) declaration.
 - {{jsxref("Symbol.hasInstance")}}
   - : A method determining if a constructor object recognizes an object as its instance. Used by {{jsxref("Operators/instanceof", "instanceof")}}.
 - {{jsxref("Symbol.isConcatSpreadable")}}
@@ -113,7 +117,7 @@ The static properties are all well-known Symbols. In these Symbols' descriptions
 ## Static methods
 
 - {{jsxref("Symbol.for()")}}
-  - : Searches for existing Symbols with the given `key` and returns it if found. Otherwise a new Symbol gets created in the global Symbol registry with `key`.
+  - : Searches for existing registered Symbols in the global Symbol registry with the given `key` and returns it if found. Otherwise a new Symbol gets created and registered with `key`.
 - {{jsxref("Symbol.keyFor()")}}
   - : Retrieves a shared Symbol key from the global Symbol registry for the given Symbol.
 
@@ -125,8 +129,8 @@ These properties are defined on `Symbol.prototype` and shared by all `Symbol` in
   - : The constructor function that created the instance object. For `Symbol` instances, the initial value is the {{jsxref("Symbol/Symbol", "Symbol")}} constructor.
 - {{jsxref("Symbol.prototype.description")}}
   - : A read-only string containing the description of the Symbol.
-- `Symbol.prototype[@@toStringTag]`
-  - : The initial value of the [`@@toStringTag`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) property is the string `"Symbol"`. This property is used in {{jsxref("Object.prototype.toString()")}}. However, because `Symbol` also has its own [`toString()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toString) method, this property is not used unless you call [`Object.prototype.toString.call()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) with a symbol as `thisArg`.
+- `Symbol.prototype[Symbol.toStringTag]`
+  - : The initial value of the [`[Symbol.toStringTag]`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) property is the string `"Symbol"`. This property is used in {{jsxref("Object.prototype.toString()")}}. However, because `Symbol` also has its own [`toString()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toString) method, this property is not used unless you call [`Object.prototype.toString.call()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) with a symbol as `thisArg`.
 
 ## Instance methods
 
@@ -134,7 +138,7 @@ These properties are defined on `Symbol.prototype` and shared by all `Symbol` in
   - : Returns a string containing the description of the Symbol. Overrides the {{jsxref("Object.prototype.toString()")}} method.
 - {{jsxref("Symbol.prototype.valueOf()")}}
   - : Returns the Symbol. Overrides the {{jsxref("Object.prototype.valueOf()")}} method.
-- [`Symbol.prototype[@@toPrimitive]()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/@@toPrimitive)
+- [`Symbol.prototype[Symbol.toPrimitive]()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/Symbol.toPrimitive)
   - : Returns the Symbol.
 
 ## Examples
@@ -154,7 +158,7 @@ typeof Symbol.iterator === "symbol";
 Some things to note when working with type conversion of Symbols.
 
 - When trying to convert a Symbol to a number, a {{jsxref("TypeError")}} will be thrown
-  (e.g. `+sym` or `sym | 0`).
+  (e.g., `+sym` or `sym | 0`).
 - When using loose equality, `Object(sym) == sym` returns `true`.
 - `Symbol("foo") + "bar"` throws a {{jsxref("TypeError")}} (can't convert Symbol to string). This prevents you from silently creating a new string property name from a Symbol, for example.
 - The ["safer" `String(sym)` conversion](/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#string_conversion) works like a call to {{jsxref("Symbol.prototype.toString()")}} with Symbols, but note that `new String(sym)` will throw.
@@ -211,5 +215,5 @@ obj[Object(sym)]; // still 1
 
 - [Polyfill of `Symbol` in `core-js`](https://github.com/zloirock/core-js#ecmascript-symbol)
 - {{jsxref("Operators/typeof", "typeof")}}
-- [JavaScript data types and data structures](/en-US/docs/Web/JavaScript/Data_structures)
+- [JavaScript data types and data structures](/en-US/docs/Web/JavaScript/Guide/Data_structures)
 - [ES6 In Depth: Symbols](https://hacks.mozilla.org/2015/06/es6-in-depth-symbols/) on hacks.mozilla.org (2015)

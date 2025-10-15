@@ -16,10 +16,10 @@ The **`navigate`** event of the {{domxref("Navigation")}} interface is fired whe
 
 Use the event name in methods like {{domxref("EventTarget.addEventListener", "addEventListener()")}}, or set an event handler property.
 
-```js
-addEventListener("navigate", (event) => {});
+```js-nolint
+addEventListener("navigate", (event) => { })
 
-onnavigate = (event) => {};
+onnavigate = (event) => { }
 ```
 
 ## Event type
@@ -46,7 +46,7 @@ navigation.addEventListener("navigate", (event) => {
     event.intercept({
       async handler() {
         // The URL has already changed, so show a placeholder while
-        //fetching the new content, such as a spinner or loading page
+        // fetching the new content, such as a spinner or loading page
         renderArticlePagePlaceholder();
 
         // Fetch the new content and display when ready
@@ -58,7 +58,8 @@ navigation.addEventListener("navigate", (event) => {
 });
 ```
 
-> **Note:** Before the Navigation API was available, to do something similar you'd have to listen for all click events on links, run `event.preventDefault()`, perform the appropriate {{domxref("History.pushState()")}} call, then set up the page view based on the new URL. And this wouldn't handle all navigations — only user-initiated link clicks.
+> [!NOTE]
+> Before the Navigation API was available, to do something similar you'd have to listen for all click events on links, run `event.preventDefault()`, perform the appropriate {{domxref("History.pushState()")}} call, then set up the page view based on the new URL. And this wouldn't handle all navigations — only user-initiated link clicks.
 
 ### Handling scrolling using `scroll()`
 
@@ -99,4 +100,3 @@ navigation.addEventListener("navigate", (event) => {
 
 - [Modern client-side routing: the Navigation API](https://developer.chrome.com/docs/web-platform/navigation-api/)
 - [Navigation API explainer](https://github.com/WICG/navigation-api/blob/main/README.md)
-- Domenic Denicola's [Navigation API live demo](https://gigantic-honored-octagon.glitch.me/)

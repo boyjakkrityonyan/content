@@ -6,7 +6,7 @@ page-type: web-api-instance-method
 browser-compat: api.Event.stopImmediatePropagation
 ---
 
-{{APIRef("DOM")}}
+{{APIRef("DOM")}}{{AvailableInWorkers}}
 
 The **`stopImmediatePropagation()`** method of the
 {{domxref("Event")}} interface prevents other listeners of the same event from being called.
@@ -16,8 +16,16 @@ If several listeners are attached to the same element for the same event type, t
 ## Syntax
 
 ```js-nolint
-event.stopImmediatePropagation()
+stopImmediatePropagation()
 ```
+
+### Parameters
+
+None.
+
+### Return value
+
+None ({{jsxref("undefined")}}).
 
 ## Examples
 
@@ -54,17 +62,17 @@ The example below has three buttons inside of three nested divs. Each button has
 div {
   display: inline-block;
   padding: 10px;
-  background-color: #fff;
-  border: 2px solid #000;
+  background-color: white;
+  border: 2px solid black;
   margin: 10px;
 }
 
 button {
   width: 100px;
-  color: #008;
+  color: #000088;
   padding: 5px;
-  background-color: #fff;
-  border: 2px solid #000;
+  background-color: white;
+  border: 2px solid black;
   border-radius: 30px;
   margin: 5px;
 }

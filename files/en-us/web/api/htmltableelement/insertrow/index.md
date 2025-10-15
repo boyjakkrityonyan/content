@@ -8,20 +8,16 @@ browser-compat: api.HTMLTableElement.insertRow
 
 {{APIRef("HTML DOM")}}
 
-The **`HTMLTableElement.insertRow()`** method inserts a new row
+The **`insertRow()`** method of the {{domxref("HTMLTableElement")}} interface inserts a new row
 ({{HtmlElement("tr")}}) in a given {{HtmlElement("table")}}, and returns a reference to
 the new row.
 
 If a table has multiple {{HtmlElement("tbody")}} elements, by default, the new row is
-inserted into the last `<tbody>`. To insert the row into a specific
-`<tbody>`:
+inserted into the last `<tbody>`.
+To insert the row into a specific section, use {{domxref("HTMLTableSectionElement.insertRow()")}}
 
-```js
-let specific_tbody = document.getElementById(tbody_id);
-let row = specific_tbody.insertRow(index);
-```
-
-> **Note:** `insertRow()` inserts the row directly into the
+> [!NOTE]
+> `insertRow()` inserts the row directly into the
 > table. The row does not need to be appended separately as would be the case if
 > {{domxref("Document.createElement()")}} had been used to create the new
 > `<tr>` element.
@@ -115,4 +111,4 @@ addRow("my-table");
 ## See also
 
 - {{domxref("HTMLTableRowElement.insertCell()")}}
-- The HTML element representing rows: {{domxref("HTMLTableRowElement")}}
+- {{domxref("HTMLTableSectionElement.insertRow()")}}

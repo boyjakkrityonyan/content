@@ -21,9 +21,7 @@ scan(options)
 ### Parameters
 
 - `options` {{optional_inline}}
-
   - : An object with the following properties:
-
     - `signal`
       - : An {{DOMxRef("AbortSignal")}} that allows cancelling this `scan()` operation.
 
@@ -32,7 +30,7 @@ scan(options)
 A {{JSxRef("Promise")}} that resolves immediately after
 scheduling read operations for the NFC adapter.
 
-## Exceptions
+### Exceptions
 
 This method doesn't throw exceptions; instead, it rejects the returned promise,
 passing a {{domxref("DOMException")}} whose `name` is one of the

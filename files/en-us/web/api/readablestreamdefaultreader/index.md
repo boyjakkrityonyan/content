@@ -5,7 +5,7 @@ page-type: web-api-interface
 browser-compat: api.ReadableStreamDefaultReader
 ---
 
-{{APIRef("Streams")}}
+{{APIRef("Streams")}}{{AvailableInWorkers}}
 
 The **`ReadableStreamDefaultReader`** interface of the [Streams API](/en-US/docs/Web/API/Streams_API) represents a default reader that can be used to read stream data supplied from a network (such as a fetch request).
 
@@ -83,5 +83,4 @@ fetch("https://www.example.org/").then((response) => {
 - [Streams API concepts](/en-US/docs/Web/API/Streams_API)
 - [Using readable streams](/en-US/docs/Web/API/Streams_API/Using_readable_streams)
 - {{domxref("ReadableStream")}}
-- [WHATWG Stream Visualizer](https://whatwg-stream-visualizer.glitch.me/), for a basic visualization of readable, writable, and transform streams.
-- [Web-streams-polyfill](https://github.com/MattiasBuelens/web-streams-polyfill) or [sd-streams](https://github.com/stardazed/sd-streams) - polyfills
+- [Web-streams-polyfill](https://github.com/MattiasBuelens/web-streams-polyfill)

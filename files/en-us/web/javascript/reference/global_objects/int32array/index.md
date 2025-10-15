@@ -3,11 +3,10 @@ title: Int32Array
 slug: Web/JavaScript/Reference/Global_Objects/Int32Array
 page-type: javascript-class
 browser-compat: javascript.builtins.Int32Array
+sidebar: jsref
 ---
 
-{{JSRef}}
-
-The **`Int32Array`** typed array represents an array of 32-bit signed integers in the platform byte order. If control over byte order is needed, use {{jsxref("DataView")}} instead. The contents are initialized to `0`. Once established, you can reference elements in the array using the object's methods, or using standard array index syntax (that is, using bracket notation).
+The **`Int32Array`** typed array represents an array of 32-bit signed integers in the platform byte order. If control over byte order is needed, use {{jsxref("DataView")}} instead. The contents are initialized to `0` unless initialization data is explicitly provided. Once established, you can reference elements in the array using the object's methods, or using standard array index syntax (that is, using bracket notation).
 
 `Int32Array` is a subclass of the hidden {{jsxref("TypedArray")}} class.
 

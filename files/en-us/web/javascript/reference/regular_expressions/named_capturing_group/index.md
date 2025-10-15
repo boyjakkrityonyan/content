@@ -3,9 +3,8 @@ title: "Named capturing group: (?<name>...)"
 slug: Web/JavaScript/Reference/Regular_expressions/Named_capturing_group
 page-type: javascript-language-feature
 browser-compat: javascript.regular_expressions.named_capturing_group
+sidebar: jssidebar
 ---
-
-{{jsSidebar}}
 
 A **named capturing group** is a particular kind of [capturing group](/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Capturing_group) that allows to give a name to the group. The group's matching result can later be identified by this name instead of by its index in the pattern.
 
@@ -69,7 +68,7 @@ function parseLog(entry) {
     entry,
   ).groups;
   return `${author} committed on ${new Date(
-    parseInt(timestamp) * 1000,
+    parseInt(timestamp, 10) * 1000,
   ).toLocaleString()}`;
 }
 
@@ -92,4 +91,4 @@ parseLog("1560979912,Caroline"); // "Caroline committed on 6/19/2019, 5:31:52 PM
 - [Capturing group: `(...)`](/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Capturing_group)
 - [Non-capturing group: `(?:...)`](/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Non-capturing_group)
 - [Named backreference: `\k<name>`](/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Named_backreference)
-- [ESLint rule: `prefer-named-capture-group`](https://eslint.org/docs/rules/prefer-named-capture-group)
+- [ESLint rule: `prefer-named-capture-group`](https://eslint.org/docs/latest/rules/prefer-named-capture-group)

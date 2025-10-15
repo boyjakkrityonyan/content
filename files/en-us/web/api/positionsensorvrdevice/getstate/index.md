@@ -11,7 +11,7 @@ browser-compat: api.PositionSensorVRDevice.getState
 
 {{deprecated_header}}{{APIRef("WebVR API")}}{{Non-standard_header}}
 
-The **`getState()`** method of the {{domxref("PositionSensorVRDevice")}} interface returns the current state of the position sensor for the current frame (e.g. within the current {{domxref("window.requestAnimationFrame")}} callback) or for the previous frame, contained with a {{domxref("VRPose")}} object. This is the method you'd normally want to use, vs. {{domxref("PositionSensorVRDevice.getImmediateState")}}.
+The **`getState()`** method of the {{domxref("PositionSensorVRDevice")}} interface returns the current state of the position sensor for the current frame (e.g., within the current {{domxref("window.requestAnimationFrame")}} callback) or for the previous frame, contained with a {{domxref("VRPose")}} object. This is the method you'd normally want to use, vs. {{domxref("PositionSensorVRDevice.getImmediateState")}}.
 
 ## Syntax
 
@@ -29,7 +29,7 @@ A {{domxref("VRPose")}} object.
 
 ## Examples
 
-The following example uses the WebVR API to update the view of a simple {{domxref("CanvasRenderingContext2D","2D canvas")}} scene on each frame of a {{domxref("window.requestAnimationFrame()","requestAnimationFrame")}} loop.
+The following example uses the WebVR API to update the view of a simple {{domxref("CanvasRenderingContext2D")}} scene on each frame of a {{domxref("window.requestAnimationFrame()","requestAnimationFrame")}} loop.
 
 ```js
 function setView() {
@@ -66,5 +66,4 @@ We then output the x, y and z position and orientation values for informational 
 
 ## See also
 
-- [WebVR API homepage](/en-US/docs/Web/API/WebVR_API).
-- <https://mixedreality.mozilla.org/> — demos, downloads, and other resources from the Mozilla VR team.
+- [WebVR API](/en-US/docs/Web/API/WebVR_API)
